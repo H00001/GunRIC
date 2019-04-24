@@ -44,6 +44,6 @@ class sdd {
     @Test
     void dotest() {
         HelloServices hs = (HelloServices) BootCore.IOCObject(HelloServices.class);
-        System.out.println(hs.sayHello("hello"));
+        System.out.println(hs.sayGoodBay("li ming"));
     }
 }

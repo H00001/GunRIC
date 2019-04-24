@@ -8,7 +8,7 @@ public enum RPCProtoclCode {
     /**
      *
      */
-    SUCCEED(0x00);
+    SUCCEED(0x00),FAIL(0x19);
     int value;
 
     RPCProtoclCode(int i) {
