@@ -4,7 +4,7 @@ public enum RPCProtoclParamType {
     /**
      *
      */
-    INT((byte) 0x01), STRING((byte) 0x02),ERROR((byte)0x1c);
+    INT((byte) 0x01), STRING((byte) 0x02), OBJECT((byte) 0x04), ERROR((byte) 0x1c);
     byte val;
 
     RPCProtoclParamType(byte val) {

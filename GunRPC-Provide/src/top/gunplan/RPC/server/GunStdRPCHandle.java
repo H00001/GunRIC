@@ -8,7 +8,6 @@ import protocol.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.channels.SocketChannel;
-import java.util.ServiceLoader;
 
 /**
  * @author dosdrtt
@@ -22,14 +21,8 @@ public class GunStdRPCHandle implements GunNettyHandle {
         outputprotocl.setType(RPCProtoclType.RESPONSE);
         try {
             Class<?> inst = Class.forName(inoutprotocl.getInterfaceName());
-            ServiceLoader<?> spiLoader = ServiceLoader.load(inst);
-            Object dubboService = null;
-            for (Object loader : spiLoader) {
-                GunUseImpl anno = inst.getAnnotation(GunUseImpl.class);
-                if (anno.impl().equals(loader.getClass().getName())) {
-                    dubboService = loader;
-                }
-            }
+            GunUseImpl anno = inst.getAnnotation(GunUseImpl.class);
+            Object rpcService = Class.forName(anno.impl()).newInstance();
             Method realmd = null;
             for (Method md : inst.getMethods()) {
                 if (md.getName().equals(inoutprotocl.getMethodName())) {
@@ -38,12 +31,15 @@ public class GunStdRPCHandle implements GunNettyHandle {
                 }
             }
             assert realmd != null;
-            Object oc = inoutprotocl.getParamleng() == 0 ? realmd.invoke(dubboService) : realmd.invoke(dubboService, inoutprotocl.getParameters());
+            Object oc = inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters());
             outputprotocl.setCode(RPCProtoclCode.SUCCEED);
             outputprotocl.setReturnValue(oc);
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             outputprotocl.setCode(RPCProtoclCode.FAIL);
+        } catch (InstantiationException e) {
+            outputprotocl.setCode(RPCProtoclCode.FAIL);
+            e.printStackTrace();
         }
 
         return outputprotocl;

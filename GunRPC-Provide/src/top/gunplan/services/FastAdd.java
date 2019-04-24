@@ -7,4 +7,9 @@ public class FastAdd implements CalServicers {
     public int add(int a, int b) {
         return a^b;
     }
+
+    @Override
+    public int sub(int a, int b) {
+        return 0;
+    }
 }

@@ -8,7 +8,7 @@ public enum RPCProtoclType {
     /**
      *
      */
-    REQUEST(0x0001), RESPONSE(0x0002);
+    REQUEST(0x01), RESPONSE(0x02),REGISTER(0x03),REGRESP(0x04);
     int value;
 
     RPCProtoclType(int i) {

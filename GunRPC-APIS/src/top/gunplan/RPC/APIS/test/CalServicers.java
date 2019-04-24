@@ -2,7 +2,8 @@ package top.gunplan.RPC.APIS.test;
 
 import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
 
-@GunUseImpl(impl = "top.gunplan.services.FastAdd")
+@GunUseImpl(impl = "top.gunplan.services.CalCulServicesImpl")
 public interface CalServicers {
-    public int add(int a,int b);
+    int add(int a,int b);
+    int sub(int a,int b);
 }
