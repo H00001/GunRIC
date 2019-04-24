@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GunRPC.iml" filepath="$PROJECT_DIR$/GunRPC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GunRPC-Provide/GunRPC-Provide.iml" filepath="$PROJECT_DIR$/GunRPC-Provide/GunRPC-Provide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GunRPC-User/GunRPC-User.iml" filepath="$PROJECT_DIR$/GunRPC-User/GunRPC-User.iml" />
+    </modules>
+  </component>
+</project>
