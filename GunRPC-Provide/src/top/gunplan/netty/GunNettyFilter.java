@@ -1,8 +1,8 @@
 package top.gunplan.netty;
 
 
-import top.gunplan.netty.impl.example.GunInputFilterChecker;
-import top.gunplan.netty.impl.example.GunOutputFilterChecker;
+import top.gunplan.netty.impl.GunInputFilterChecker;
+import top.gunplan.netty.impl.GunOutputFilterChecker;
 
 /**
  * filter is a type of handle

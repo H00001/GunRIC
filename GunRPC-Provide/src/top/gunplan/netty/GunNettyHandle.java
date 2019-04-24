@@ -1,7 +1,7 @@
 package top.gunplan.netty;
 
-import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.netty.protocol.GunNetOutputInterface;
+import protocol.GunNetInputInterface;
+import protocol.GunNetOutputInterface;
 
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
@@ -17,7 +17,7 @@ public interface GunNettyHandle extends GunHandle {
      * @return GunNetOutputInterface
      * @throws GunException kinds of exception
      */
-    GunNetOutputInterface dealDataEvent(GunNetInputInterface request) throws GunException;
+    GunNetOutputInterface dealDataEvent(GunNetInputInterface request) throws GunException, ClassNotFoundException;
 
     /**
      * dealConnEvent connection event

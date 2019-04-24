@@ -2,9 +2,7 @@ package top.gunplan.netty.impl;
 
 import top.gunplan.netty.GunNettyFilter;
 import top.gunplan.netty.GunPilelineInterface;
-import top.gunplan.netty.impl.example.GunInputFilterChecker;
-import top.gunplan.netty.impl.example.GunOutputFilterChecker;
-import top.gunplan.netty.protocol.GunNetOutputInterface;
+import protocol.GunNetOutputInterface;
 
 import java.nio.channels.SelectionKey;
 import java.util.ListIterator;
