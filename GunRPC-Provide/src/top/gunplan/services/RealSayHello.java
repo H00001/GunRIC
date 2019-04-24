@@ -1,11 +1,11 @@
-package top.gunplan.RPC.server;
+package top.gunplan.services;
 
 import top.gunplan.RPC.APIS.test.HelloServices;
 
 public class RealSayHello implements HelloServices {
     @Override
     public String sayHello(String msg) {
-        return "hi sssss";
+        return "hello "+msg;
     }
 
     @Override

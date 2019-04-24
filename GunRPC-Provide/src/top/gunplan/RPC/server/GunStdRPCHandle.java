@@ -1,5 +1,6 @@
 package top.gunplan.RPC.server;
 
+import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import protocol.*;
@@ -22,9 +23,15 @@ public class GunStdRPCHandle implements GunNettyHandle {
         try {
             Class<?> inst = Class.forName(inoutprotocl.getInterfaceName());
             ServiceLoader<?> spiLoader = ServiceLoader.load(inst);
-            Object dubboService = spiLoader.iterator().next();
+            Object dubboService = null;
+            for (Object loader : spiLoader) {
+                GunUseImpl anno = inst.getAnnotation(GunUseImpl.class);
+                if (anno.impl().equals(loader.getClass().getName())) {
+                    dubboService = loader;
+                }
+            }
             Method realmd = null;
-            for (Method md : dubboService.getClass().getMethods()) {
+            for (Method md : inst.getMethods()) {
                 if (md.getName().equals(inoutprotocl.getMethodName())) {
                     realmd = md;
                     break;

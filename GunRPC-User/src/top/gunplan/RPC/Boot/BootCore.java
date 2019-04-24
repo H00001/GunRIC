@@ -1,7 +1,8 @@
 package top.gunplan.RPC.Boot;
 
 import org.junit.jupiter.api.Test;
-import top.gunplan.RPC.APIS.test.HelloServices;
+import top.gunplan.RPC.APIS.test.CalServicers;
+
 import protocol.GunRPCInputProtocl;
 import protocol.GunRPCOutputProtocl;
 import protocol.RPCProtoclCode;
@@ -28,8 +29,9 @@ public final class BootCore {
                     }
                 }
             }
+             byte[] bc= protocl.serialize();
             Socket so = new Socket("127.0.0.1", 8822);
-            so.getOutputStream().write(protocl.serialize());
+            so.getOutputStream().write(bc);
             byte[] b = new byte[2014];
             Thread.sleep(1000);
             so.getInputStream().read(b);
@@ -43,7 +45,7 @@ public final class BootCore {
 class sdd {
     @Test
     void dotest() {
-        HelloServices hs = (HelloServices) BootCore.IOCObject(HelloServices.class);
-        System.out.println(hs.sayGoodBay("li ming"));
+        CalServicers hs = (CalServicers) BootCore.IOCObject(CalServicers.class);
+        System.out.println(hs.add(1,1));
     }
 }
