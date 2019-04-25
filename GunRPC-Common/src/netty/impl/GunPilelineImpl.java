@@ -9,6 +9,9 @@ import netty.anno.GunNetFilterOrder;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ *
+ */
 final class GunPilelineImpl implements GunPilelineInterface {
     private GunNettyHandle handle;
     private List<GunNettyFilter> filterChain = new CopyOnWriteArrayList<>();
