@@ -3,9 +3,11 @@ package protocol;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
- *
+ * @author dosdrtt
  */
 public final class GunRPCInputProtocl extends AbstractGunRPCProtocl {
+    private Object[] parameters;
+
     private boolean analyizeParams(int paramlen, GunBytesUtil.GunReadByteUtil util) {
         parameters = new Object[paramlen];
         for (int i = 0; i < paramlen; i++) {
@@ -15,6 +17,9 @@ public final class GunRPCInputProtocl extends AbstractGunRPCProtocl {
     }
 
 
+    public Object[] getParameters() {
+        return parameters;
+    }
 
     private boolean writeParam(int paramlen, GunBytesUtil.GunWriteByteUtil util) {
         for (int i = 0; i < paramlen; i++) {

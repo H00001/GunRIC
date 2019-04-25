@@ -3,7 +3,7 @@ package protocol;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
- *
+ * @author dosdrtt
  */
 public class GunRPCOutputProtocl extends AbstractGunRPCProtocl {
     @Override

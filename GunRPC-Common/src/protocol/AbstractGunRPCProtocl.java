@@ -27,11 +27,9 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     // type 2 method 2 interfaceNamelen 1 interfacename ? methodNamelen 1 methodNamel? paramlen 1 end 2
     RPCProtoclType type;
     RPCProtoclCode code;
-    Object[] parameters;
 
-    public Object[] getParameters() {
-        return parameters;
-    }
+
+
 
     Stack<Serializable> param = new Stack<>();
 
@@ -77,6 +75,8 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
             case STRING:
                 byte len = util.readByte();
                 return new String(util.readByte(len));
+            case OBJECT:
+                break;
             default:
                 break;
         }
