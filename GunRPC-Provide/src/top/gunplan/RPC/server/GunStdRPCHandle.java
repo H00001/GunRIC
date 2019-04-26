@@ -4,6 +4,7 @@ import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
 import netty.GunException;
 import netty.GunNettyHandle;
 import protocol.*;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -29,7 +30,12 @@ public class GunStdRPCHandle implements GunNettyHandle {
                     break;
                 }
             }
-            assert realmd != null;
+            if (realmd == null) {
+                outputprotocl.setCode(RPCProtoclCode.FAIL);
+                outputprotocl.setReturnValue("method not found ");
+                AbstractGunBaseLogUtil.error(inoutprotocl.getMethodName(), "method not found", "[PROVIDE]");
+                return outputprotocl;
+            }
             Object oc = inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters());
             outputprotocl.setCode(RPCProtoclCode.SUCCEED);
             outputprotocl.setReturnValue(oc);

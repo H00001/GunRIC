@@ -3,7 +3,7 @@ package protocol;
 import top.gunplan.utils.GunBytesUtil;
 
 public final class GunRPCDividePacketManage {
-    AbstractGunRPCProtocl findPackage(byte[] bytes) {
+    public static <T extends AbstractGunRPCProtocl> T findPackage(byte[] bytes) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(bytes);
         RPCProtoclType retype = RPCProtoclType.valuefrom(util.readInt());
         AbstractGunRPCProtocl protocl = null;
@@ -30,6 +30,6 @@ public final class GunRPCDividePacketManage {
                 break;
         }
         protocl.unSerialize(bytes);
-        return protocl;
+        return (T) (protocl);
     }
 }
