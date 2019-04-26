@@ -1,6 +1,7 @@
 package top.gunplan.RPC.Boot;
 
-import protocol.*;
+
+import top.gunplan.protocol.*;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -42,7 +43,7 @@ public class GunRPCHandleProcy implements InvocationHandler {
         //
         int len = in.read(b);
         GunRPCOutputProtocl rpc = GunRPCDividePacketManage.findPackage(b);
-        if (rpc.getCode()==RPCProtoclCode.FAIL)
+        if (rpc.getCode()== RPCProtoclCode.FAIL)
         {
             return -1;
         }
