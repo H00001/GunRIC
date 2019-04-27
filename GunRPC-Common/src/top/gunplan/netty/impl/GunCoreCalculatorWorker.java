@@ -38,7 +38,6 @@ public final class GunCoreCalculatorWorker extends BaseGunNettyWorker {
             if (result == GunNettyFilter.DealResult.NOTDEALINPUT) {
                 break;
             } else if (result == GunNettyFilter.DealResult.CLOSE) {
-
                 return;
             } else if (result == GunNettyFilter.DealResult.NOTDEALALLNEXT) {
                 return;

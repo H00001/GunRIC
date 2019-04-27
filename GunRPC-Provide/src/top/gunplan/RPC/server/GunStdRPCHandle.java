@@ -17,6 +17,7 @@ public class GunStdRPCHandle implements GunNettyHandle {
 
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) {
+
         AbstractGunRPCExecuteProtocol.ParamHelper help = new AbstractGunRPCExecuteProtocol.ParamHelper();
         final GunRPCOutputProtocl outputprotocl = new GunRPCOutputProtocl();
         final GunRPCInputProtocl inoutprotocl = ((GunRPCInputProtocl) gunNetInputInterface);
@@ -42,7 +43,9 @@ public class GunStdRPCHandle implements GunNettyHandle {
             outputprotocl.setCode(RPCProtoclCode.FAIL);
             this.dealExceptionEvent(e);
         }
+
         return outputprotocl;
+
     }
 
     @Override

@@ -56,11 +56,11 @@ public class CunCoreDataEventLoop extends AbstractGunCoreEventLoop {
             nowRun = Thread.currentThread();
             nowRun.setName(this.getClass().getSimpleName());
             while (runState) {
+
                 if (listionSize.get() == 0) {
                     LockSupport.park();
                 }
-                long time = System.currentTimeMillis();
-                int val = bootSelector.select(GunNettyPropertyManager.getCore().getClientWaitTime());
+                int val = GunNettyPropertyManager.getCore().getClientWaitTime() == -1 ? bootSelector.select() : bootSelector.select(GunNettyPropertyManager.getCore().getClientWaitTime());
                 if (val > 0) {
                     Iterator<SelectionKey> keyIterator = bootSelector.selectedKeys().iterator();
                     while (keyIterator.hasNext()) {
@@ -69,8 +69,7 @@ public class CunCoreDataEventLoop extends AbstractGunCoreEventLoop {
                         keyIterator.remove();
                     }
                 }
-                long timeend = System.currentTimeMillis();
-                AbstractGunBaseLogUtil.info(String.valueOf(timeend - time), "time used ", "std" + String.valueOf(time), " end:" + timeend);
+
             }
         } catch (Exception exp) {
             throw new GunException(exp);

@@ -43,7 +43,6 @@ public class GunNettyStdFirstFilter implements GunNettyFilter {
                 filterDto.setSrc(readbata);
             } catch (IOException e) {
                 dealCloseEvent(key);
-                e.printStackTrace();
                 return DealResult.CLOSE;
             }
             if (readbata == null) {

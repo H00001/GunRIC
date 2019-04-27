@@ -22,6 +22,7 @@ public class GunRPCHandleProcy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
         GunRPCInputProtocl protocl = new GunRPCInputProtocl();
         protocl.setType(RPCProtoclType.REQUEST);
         protocl.setCode(RPCProtoclCode.SUCCEED);
@@ -34,13 +35,18 @@ public class GunRPCHandleProcy implements InvocationHandler {
             }
         }
         out.write(protocl.serialize());
+
         byte[] b = new byte[2014];
+
         //
+        long tim1 = System.currentTimeMillis();
         int len = in.read(b);
+
         GunRPCOutputProtocl rpc = GunRPCDividePacketManage.findPackage(b);
         if (rpc.getCode() == RPCProtoclCode.FAIL) {
             return -1;
         }
+        System.out.println("timeused" + (tim1 - System.currentTimeMillis()));
         return rpc.getReturnValue().obj;
     }
 }
