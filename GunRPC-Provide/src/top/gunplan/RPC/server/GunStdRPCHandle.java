@@ -24,13 +24,7 @@ public class GunStdRPCHandle implements GunNettyHandle {
         try {
             Class<?> inst = Class.forName(inoutprotocl.getInterfaceName());
             Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).newInstance();
-            Method realmd = null;
-            for (Method md : inst.getMethods()) {
-                if (md.getName().equals(inoutprotocl.getMethodName())) {
-                    realmd = md;
-                    break;
-                }
-            }
+            Method realmd = inst.getMethod(inoutprotocl.getMethodName(), inoutprotocl.getParaclazz());
             if (realmd == null) {
                 outputprotocl.setCode(RPCProtoclCode.FAIL);
 
@@ -42,9 +36,9 @@ public class GunStdRPCHandle implements GunNettyHandle {
             Object oc = inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters());
             outputprotocl.setCode(RPCProtoclCode.SUCCEED);
             help.obj = oc;
-            help.clazz= oc.getClass();
+            help.clazz = oc.getClass();
             outputprotocl.setReturnValue(help);
-        } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
             outputprotocl.setCode(RPCProtoclCode.FAIL);
             this.dealExceptionEvent(e);
         }

@@ -8,15 +8,20 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     private Object[] parameters;
-
+    private Class<?>[] paraclazz;
     private int paramlen = 0;
 
+    public Class<?>[] getParaclazz() {
+        return paraclazz;
+    }
 
     private boolean analyizeParams(int paramlen, GunBytesUtil.GunReadByteUtil util) {
         parameters = new Object[paramlen];
+        paraclazz = new Class<?>[paramlen];
         for (int i = 0; i < paramlen; i++) {
             ParamHelper help = readOnceParam(util);
             parameters[i] = help.obj;
+            paraclazz[i] = help.clazz;
         }
         return true;
     }

@@ -26,7 +26,7 @@ class sdd {
     @Test
     void dotest() throws IOException {
         CalServicers hs = BootCore.IOCObject(CalServicers.class);
-        System.out.println(hs.concat("12e3", "dsdsd"));
+        System.out.println(hs.add(1024, 6));
         //   System.out.println(hs.sub(1024, 5));
         //   System.out.println(hs.multiplication(1024, 5));
 
