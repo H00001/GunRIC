@@ -1,10 +1,12 @@
 package top.gunplan.protocol;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import top.gunplan.utils.GunBytesUtil;
 
-import java.io.Serializable;
-import java.util.Stack;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 
 /**
  *
@@ -49,42 +51,54 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     final byte[] endFlage = {0x0a, 0x05};
 
 
-    void writeOnceParam(GunBytesUtil.GunWriteByteUtil util, Object parama) {
-        if (parama instanceof Integer) {
+    static class Helper {
+        private final GunBytesUtil.GunWriteByteUtil util;
+
+        public Helper(GunBytesUtil.GunWriteByteUtil util) {
+            this.util = util;
+        }
+
+        void write(Object obj) {
+            final String name = obj.getClass().getSimpleName();
+            Method md;
+            try {
+                md = this.getClass().getDeclaredMethod("write" + name, obj.getClass());
+                md.invoke(this, obj);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        private void writeInteger(Integer parama) {
             util.writeByte(RPCProtoclParamType.INT.val);
-            util.write64((Integer) parama);
-        } else if (parama instanceof String) {
+            util.write64(parama);
+        }
+
+        private void writeString(String string) {
             util.writeByte(RPCProtoclParamType.STRING.val);
-            util.writeByte((byte) ((String) parama).length());
-            util.write((String) parama);
-        } else if (parama instanceof Boolean) {
+            util.writeByte((byte) string.length());
+            util.write(string);
+        }
+
+        private void writeBoolean(Boolean bool) {
             util.writeByte(RPCProtoclParamType.BOOLEAN.val);
-            util.write((Boolean) parama);
-        } else if (parama instanceof Byte) {
+            util.write(bool);
+        }
+
+        private void writeByte(Byte b) {
             util.writeByte(RPCProtoclParamType.BYTE.val);
-            util.writeByte((Byte) parama);
+            util.writeByte(b);
         }
+    }
+
+    void writeOnceParam(GunBytesUtil.GunWriteByteUtil util, Object parama) {
+        Helper help = new Helper(util);
+        help.write(parama);
 
     }
 
-    Object readOnceParam(GunBytesUtil.GunReadByteUtil util) {
-        RPCProtoclParamType ptypei = RPCProtoclParamType.valuefrom(util.readByte());
-        switch (ptypei) {
-            case INT:
-                return util.readInt64();
-            case STRING:
-                byte data = util.readByte();
-                return new String(util.readByte(data));
-            case BOOLEAN:
-                return util.readBool();
-            case BYTE:
-                return util.readByte();
-            default:
-                break;
-        }
-        return null;
-
-    }
 
     void publicSet(GunBytesUtil.GunWriteByteUtil util) {
         util.write(type.value);

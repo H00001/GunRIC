@@ -35,4 +35,9 @@ public class CalCulServicesImpl implements CalServicers {
     public int intByteTest(byte a, int b) {
         return a+b;
     }
+
+    @Override
+    public String concat(String a, String b) {
+        return a+b;
+    }
 }

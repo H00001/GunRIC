@@ -22,13 +22,11 @@ public class GunRPCHandleProcy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println(method.getName());
         GunRPCInputProtocl protocl = new GunRPCInputProtocl();
         protocl.setType(RPCProtoclType.REQUEST);
         protocl.setCode(RPCProtoclCode.SUCCEED);
         protocl.setInterfaceName(interfaceName);
         protocl.setMethodName(method.getName());
-
         if (args != null) {
             protocl.setParamLen((byte) args.length);
             for (Object arg : args) {
@@ -43,6 +41,6 @@ public class GunRPCHandleProcy implements InvocationHandler {
         if (rpc.getCode() == RPCProtoclCode.FAIL) {
             return -1;
         }
-        return rpc.getReturnValue();
+        return rpc.getReturnValue().obj;
     }
 }

@@ -15,4 +15,6 @@ public interface CalServicers {
     boolean getResult(boolean b);
 
     int intByteTest(byte a,int b);
+
+    String concat(String a,String b);
 }

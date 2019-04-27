@@ -3,7 +3,6 @@ package top.gunplan.RPC.server;
 import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
-
 import top.gunplan.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -18,6 +17,7 @@ public class GunStdRPCHandle implements GunNettyHandle {
 
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) {
+        AbstractGunRPCExecuteProtocol.ParamHelper help = new AbstractGunRPCExecuteProtocol.ParamHelper();
         final GunRPCOutputProtocl outputprotocl = new GunRPCOutputProtocl();
         final GunRPCInputProtocl inoutprotocl = ((GunRPCInputProtocl) gunNetInputInterface);
         outputprotocl.setType(RPCProtoclType.RESPONSE);
@@ -33,13 +33,17 @@ public class GunStdRPCHandle implements GunNettyHandle {
             }
             if (realmd == null) {
                 outputprotocl.setCode(RPCProtoclCode.FAIL);
-                outputprotocl.setReturnValue("method not found ");
+
+                help.obj = "method not found ";
+                outputprotocl.setReturnValue(help);
                 AbstractGunBaseLogUtil.error(inoutprotocl.getMethodName(), "method not found", "[PROVIDE]");
                 return outputprotocl;
             }
             Object oc = inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters());
             outputprotocl.setCode(RPCProtoclCode.SUCCEED);
-            outputprotocl.setReturnValue(oc);
+            help.obj = oc;
+            help.clazz= oc.getClass();
+            outputprotocl.setReturnValue(help);
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             outputprotocl.setCode(RPCProtoclCode.FAIL);
             this.dealExceptionEvent(e);
