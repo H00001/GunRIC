@@ -25,4 +25,14 @@ public class CalCulServicesImpl implements CalServicers {
     public int division(int a, int b) {
         return b != 0 ? a / b : 0;
     }
+
+    @Override
+    public boolean getResult(boolean b) {
+        return b;
+    }
+
+    @Override
+    public int intByteTest(byte a, int b) {
+        return a+b;
+    }
 }

@@ -14,6 +14,7 @@ final class BootCore {
     static <T> T IOCObject(Class<?> clazz) throws IOException {
 
         Socket so = new Socket("127.0.0.1", 8822);
+    //    Socket so = null;
         Class[] clazzs = {clazz};
         GunRPCHandleProcy procy = new GunRPCHandleProcy(clazz.getName(), so.getInputStream(), so.getOutputStream());
         // so.close();
@@ -25,7 +26,7 @@ class sdd {
     @Test
     void dotest() throws IOException {
         CalServicers hs = BootCore.IOCObject(CalServicers.class);
-        System.out.println(hs.division(1024, 6));
+        System.out.println(hs.intByteTest((byte) 2, 1));
         //   System.out.println(hs.sub(1024, 5));
         //   System.out.println(hs.multiplication(1024, 5));
 

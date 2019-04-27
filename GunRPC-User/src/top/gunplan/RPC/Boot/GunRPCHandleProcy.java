@@ -28,23 +28,19 @@ public class GunRPCHandleProcy implements InvocationHandler {
         protocl.setCode(RPCProtoclCode.SUCCEED);
         protocl.setInterfaceName(interfaceName);
         protocl.setMethodName(method.getName());
+
         if (args != null) {
+            protocl.setParamLen((byte) args.length);
             for (Object arg : args) {
-                if (arg instanceof Integer) {
-                    protocl.poshParam((Integer) arg);
-                } else if (arg instanceof String) {
-                    protocl.poshParam((String) arg);
-                }
+                protocl.pushParam(arg);
             }
         }
-        byte[] bc = protocl.serialize();
-        out.write(bc);
+        out.write(protocl.serialize());
         byte[] b = new byte[2014];
         //
         int len = in.read(b);
         GunRPCOutputProtocl rpc = GunRPCDividePacketManage.findPackage(b);
-        if (rpc.getCode()== RPCProtoclCode.FAIL)
-        {
+        if (rpc.getCode() == RPCProtoclCode.FAIL) {
             return -1;
         }
         return rpc.getReturnValue();

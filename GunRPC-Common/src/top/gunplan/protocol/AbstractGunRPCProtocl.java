@@ -1,5 +1,6 @@
 package top.gunplan.protocol;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 //        it.setMethodName("rpc");
 //        it.setType(RPCProtoclType.REQUEST);
 //        it.setCode(RPCProtoclCode.SUCCEED);
-//        it.poshParam("1234");
+//        it.pushParam("1234");
 //
 //        byte[] bom = it.serialize();
 //        AbstractGunRPCProtocl it2 = new AbstractGunRPCProtocl();
@@ -27,9 +28,6 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     // type 2 method 2 interfaceNamelen 1 interfacename ? methodNamelen 1 methodNamel? paramlen 1 end 2
     RPCProtoclType type;
     RPCProtoclCode code;
-
-
-    Stack<Serializable> param = new Stack<>();
 
 
     public RPCProtoclType getType() {
@@ -48,19 +46,23 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         this.code = code;
     }
 
-
-    byte[] endFlage = {0x0a, 0x05};
+    final byte[] endFlage = {0x0a, 0x05};
 
 
     void writeOnceParam(GunBytesUtil.GunWriteByteUtil util, Object parama) {
         if (parama instanceof Integer) {
             util.writeByte(RPCProtoclParamType.INT.val);
             util.write64((Integer) parama);
-
         } else if (parama instanceof String) {
             util.writeByte(RPCProtoclParamType.STRING.val);
             util.writeByte((byte) ((String) parama).length());
             util.write((String) parama);
+        } else if (parama instanceof Boolean) {
+            util.writeByte(RPCProtoclParamType.BOOLEAN.val);
+            util.write((Boolean) parama);
+        } else if (parama instanceof Byte) {
+            util.writeByte(RPCProtoclParamType.BYTE.val);
+            util.writeByte((Byte) parama);
         }
 
     }
@@ -71,10 +73,12 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
             case INT:
                 return util.readInt64();
             case STRING:
-                byte len = util.readByte();
-                return new String(util.readByte(len));
-            case OBJECT:
-                break;
+                byte data = util.readByte();
+                return new String(util.readByte(data));
+            case BOOLEAN:
+                return util.readBool();
+            case BYTE:
+                return util.readByte();
             default:
                 break;
         }

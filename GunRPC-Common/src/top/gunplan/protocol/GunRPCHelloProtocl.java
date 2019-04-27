@@ -3,7 +3,7 @@ package top.gunplan.protocol;
 import top.gunplan.utils.GunBytesUtil;
 
 public class GunRPCHelloProtocl extends AbstractGunRPCProtocl {
-    public GunRPCHelloProtocl(boolean type) {
+    GunRPCHelloProtocl(boolean type) {
         this.type = type ? RPCProtoclType.PING : RPCProtoclType.PONG;
     }
 

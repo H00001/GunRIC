@@ -1,12 +1,11 @@
 package top.gunplan.protocol;
 
-import top.gunplan.protocol.AbstractGunRPCProtocl;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
  * @author dosdrtt
  */
-public class GunRPCOutputProtocl extends AbstractGunRPCProtocl {
+public class GunRPCOutputProtocl extends AbstractGunRPCExecuteProtocol {
     @Override
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
@@ -28,7 +27,8 @@ public class GunRPCOutputProtocl extends AbstractGunRPCProtocl {
 
     @Override
     public byte[] serialize() {
-        int len = returnValue instanceof Integer ? 6 + 5 : 6 + ((String) returnValue).length() + 2;
+        int len = 6 + 1;
+        len = addLenByParam(len, returnValue);
         byte[] serize = new byte[len];
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serize);
         publicSet(serizUtil);
