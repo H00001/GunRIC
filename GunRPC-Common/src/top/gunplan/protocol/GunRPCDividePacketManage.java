@@ -1,7 +1,6 @@
 package top.gunplan.protocol;
 
 
-
 import top.gunplan.utils.GunBytesUtil;
 
 public final class GunRPCDividePacketManage {
@@ -24,7 +23,7 @@ public final class GunRPCDividePacketManage {
                 protocl = new GunRPCInputProtocl();
                 break;
             case REGISTER:
-                protocl = new GunRPCOutputProtocl();
+                protocl = new GunRPCRegisterProtocl();
                 break;
             case RESPONSE:
                 protocl = new GunRPCOutputProtocl();
