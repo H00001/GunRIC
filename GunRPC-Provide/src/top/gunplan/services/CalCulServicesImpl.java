@@ -40,4 +40,13 @@ public class CalCulServicesImpl implements CalServicers {
     public String concat(String a, String b) {
         return a+b;
     }
+
+    @Override
+    public int Madd(int[] list) {
+        int num = 0;
+        for (int value : list) {
+            num += value;
+        }
+        return num;
+    }
 }

@@ -17,4 +17,6 @@ public interface CalServicers {
     int intByteTest(byte a,int b);
 
     String concat(String a,String b);
+
+    int Madd(int [] list);
 }

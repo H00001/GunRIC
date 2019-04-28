@@ -59,21 +59,31 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         }
 
         void write(Object obj) {
-            final String name = obj.getClass().getSimpleName();
+            String name = obj.getClass().getSimpleName();
             Method md;
             try {
+                if (name.contains("[]")) {
+                    name = name.replace("[]", "");
+                    name = "L" + name;
+                }
                 md = this.getClass().getDeclaredMethod("write" + name, obj.getClass());
                 md.invoke(this, obj);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
 
         private void writeInteger(Integer parama) {
             util.writeByte(RPCProtoclParamType.INT.val);
             util.write64(parama);
+        }
+
+        private void writeLint(int[] list) {
+            util.writeByte(RPCProtoclParamType.LINT.val);
+            util.writeByte((byte) list.length);
+            for (int val : list) {
+                util.write64(val);
+            }
         }
 
         private void writeString(String string) {

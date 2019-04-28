@@ -8,7 +8,10 @@ public enum RPCProtoclParamType {
     /**
      *
      */
-    INT((byte) 0x01, int.class, 4, 0), STRING((byte) 0x02, String.class, -1, 1), BOOLEAN((byte) 0x03, boolean.class, 1, 0), BYTE((byte) 0x05, byte.class, 1, 0), OBJECT((byte) 0x04, Object.class, -1, 0), ERROR((byte) 0x1c, Object.class, 0, 0);
+    INT((byte) 0x01, int.class, 4, 0), STRING((byte) 0x02, String.class, -1, 1),
+    BOOLEAN((byte) 0x03, boolean.class, 1, 0),
+    BYTE((byte) 0x05, byte.class, 1, 0), LINT((byte) 0x06, int[].class, -1, 1), OBJECT((byte) 0x04, Object.class, -1, 0),
+    ERROR((byte) 0x1c, String.class, -1, 1);
 
 
     RPCProtoclParamType(byte val, Class<?> clazz, int stdlen, int deslen) {
@@ -66,5 +69,6 @@ class Mmap {
         mmap.put(Integer.class, RPCProtoclParamType.INT);
         mmap.put(Boolean.class, RPCProtoclParamType.BOOLEAN);
         mmap.put(Byte.class, RPCProtoclParamType.BYTE);
+        mmap.put(Integer[].class, RPCProtoclParamType.LINT);
     }
 }

@@ -10,7 +10,13 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
         if (type.stdlen != -1) {
             len += type.deslen + type.stdlen;
         } else {
-            len += type.deslen + ((String) data).length();
+            if (data instanceof String) {
+                len += type.deslen + ((String) data).length();
+            } else if (data instanceof int[]) {
+                len += type.deslen + ((int[]) data).length * 4;
+            } else {
+
+            }
         }
         return len;
     }
@@ -18,6 +24,15 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
     public static class ParamHelper {
         public Object obj;
         public Class<?> clazz;
+
+        public ParamHelper(Object obj, Class<?> clazz) {
+            this.obj = obj;
+            this.clazz = clazz;
+        }
+
+        public ParamHelper() {
+
+        }
     }
 
     ParamHelper readOnceParam(GunBytesUtil.GunReadByteUtil util) {
@@ -29,14 +44,21 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
                 help.obj = util.readInt64();
                 break;
             case STRING:
-                byte data = util.readByte();
-                help.obj = new String(util.readByte(data));
+                byte datal = util.readByte();
+                help.obj = new String(util.readByte(datal));
                 break;
             case BOOLEAN:
                 help.obj = util.readBool();
                 break;
             case BYTE:
                 help.obj = util.readByte();
+            case LINT:
+                byte ldata = util.readByte();
+                int[] list = new int[ldata];
+                for (int i = 0; i < ldata; i++) {
+                    list[i] = util.readInt64();
+                }
+                help.obj = list;
             default:
                 break;
         }
