@@ -39,14 +39,12 @@ public class GunRPCHandleProcy implements InvocationHandler {
         byte[] b = new byte[2014];
 
         //
-        long tim1 = System.currentTimeMillis();
         int len = in.read(b);
 
         GunRPCOutputProtocl rpc = GunRPCDividePacketManage.findPackage(b);
         if (rpc.getCode() == RPCProtoclCode.FAIL) {
             return -1;
         }
-        System.out.println("timeused" + (tim1 - System.currentTimeMillis()));
         return rpc.getReturnValue().obj;
     }
 }
