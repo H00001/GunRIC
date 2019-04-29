@@ -4,7 +4,9 @@ package top.gunplan.protocol;
 import top.gunplan.utils.GunBytesUtil;
 
 
-
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 
 
@@ -54,12 +56,13 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     static class Helper {
         private final GunBytesUtil.GunWriteByteUtil util;
 
-        public Helper(GunBytesUtil.GunWriteByteUtil util) {
+        Helper(GunBytesUtil.GunWriteByteUtil util) {
             this.util = util;
         }
 
         void write(Object obj) {
             String name = obj.getClass().getSimpleName();
+            // RPCProtoclParamType type = RPCProtoclParamType.valuefrom(obj.getClass());
             Method md;
             try {
                 if (name.contains("[]")) {
@@ -69,7 +72,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
                 md = this.getClass().getDeclaredMethod("write" + name, obj.getClass());
                 md.invoke(this, obj);
             } catch (Exception e) {
-                e.printStackTrace();
+                writeObject0(obj);
             }
         }
 
@@ -100,6 +103,19 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         private void writeByte(Byte b) {
             util.writeByte(RPCProtoclParamType.BYTE.val);
             util.writeByte(b);
+        }
+
+        private void writeObject0(Object b) {
+            util.writeByte(RPCProtoclParamType.OBJECT.val);
+            try {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
+                ObjectOutputStream os = new ObjectOutputStream(bos);
+                os.writeObject(b);
+                util.writeByte((byte) bos.size());
+                util.write(bos.toByteArray());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

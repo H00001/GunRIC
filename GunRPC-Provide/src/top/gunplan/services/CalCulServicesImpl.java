@@ -1,6 +1,9 @@
 package top.gunplan.services;
 
 import top.gunplan.RPC.APIS.test.CalServicers;
+import top.gunplan.RPC.APIS.test.TestObject;
+
+
 
 /**
  * @author dosdrtt
@@ -33,12 +36,12 @@ public class CalCulServicesImpl implements CalServicers {
 
     @Override
     public int intByteTest(byte a, int b) {
-        return a+b;
+        return a + b;
     }
 
     @Override
     public String concat(String a, String b) {
-        return a+b;
+        return a + b;
     }
 
     @Override
@@ -48,5 +51,11 @@ public class CalCulServicesImpl implements CalServicers {
             num += value;
         }
         return num;
+    }
+
+    @Override
+    public int addObject(TestObject obj) {
+        TestObject objc =  obj;
+        return objc.x + objc.y;
     }
 }

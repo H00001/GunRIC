@@ -8,10 +8,12 @@ public enum RPCProtoclParamType {
     /**
      *
      */
-    INT((byte) 0x01, int.class, 4, 0), STRING((byte) 0x02, String.class, -1, 1),
+    INT((byte) 0x01, int.class, 4, 0),
+    STRING((byte) 0x02, String.class, -1, 1),
     BOOLEAN((byte) 0x03, boolean.class, 1, 0),
-    BYTE((byte) 0x05, byte.class, 1, 0), LINT((byte) 0x06, int[].class, -1, 1), OBJECT((byte) 0x04, Object.class, -1, 0),
-    ERROR((byte) 0x1c, String.class, -1, 1);
+    BYTE((byte) 0x05, byte.class, 1, 0),
+    LINT((byte) 0x06, int[].class, -1, 1),
+    OBJECT((byte) 0x04, Object.class, -1, 1);
 
 
     RPCProtoclParamType(byte val, Class<?> clazz, int stdlen, int deslen) {
@@ -42,7 +44,7 @@ public enum RPCProtoclParamType {
                 return tp;
             }
         }
-        return ERROR;
+        return OBJECT;
     }
 
     public static RPCProtoclParamType valuefrom(Class<?> val) {
@@ -58,7 +60,7 @@ public enum RPCProtoclParamType {
             return tp;
         }
 
-        return ERROR;
+        return OBJECT;
     }
 }
 

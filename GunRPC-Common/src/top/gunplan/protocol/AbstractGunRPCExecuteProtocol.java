@@ -3,6 +3,8 @@ package top.gunplan.protocol;
 
 import top.gunplan.utils.GunBytesUtil;
 
+import java.io.*;
+
 public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtocl {
 
     int addLenByParam(int len, Object data) {
@@ -10,11 +12,19 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
         if (type.stdlen != -1) {
             len += type.deslen + type.stdlen;
         } else {
-            if (data instanceof String) {
+            if (type == RPCProtoclParamType.STRING) {
                 len += type.deslen + ((String) data).length();
-            } else if (data instanceof int[]) {
+            } else if (type == RPCProtoclParamType.LINT) {
                 len += type.deslen + ((int[]) data).length * 4;
             } else {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                try {
+                    ObjectOutputStream oos = new ObjectOutputStream(bos);
+                    oos.writeObject(data);
+                    len += bos.size() + type.deslen;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         }
@@ -52,6 +62,7 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
                 break;
             case BYTE:
                 help.obj = util.readByte();
+                break;
             case LINT:
                 byte ldata = util.readByte();
                 int[] list = new int[ldata];
@@ -59,6 +70,18 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
                     list[i] = util.readInt64();
                 }
                 help.obj = list;
+                break;
+            case OBJECT:
+                int datalen = util.readUByte();
+                final byte[] objsav = util.readByte(datalen);
+                try {
+                    ObjectInputStream os = new ObjectInputStream(new ByteArrayInputStream(objsav));
+                    help.obj = os.readObject();
+                    help.clazz = help.obj.getClass();
+                } catch (Exception e) {
+                    help.obj = null;
+                }
+                break;
             default:
                 break;
         }
