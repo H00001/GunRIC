@@ -1,13 +1,14 @@
 package top.gunplan.protocol;
 
 
+import top.gunplan.RPC.exp.GunRPCException;
 import top.gunplan.utils.GunBytesUtil;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
+import java.util.concurrent.locks.LockSupport;
 
 
 /**
@@ -62,7 +63,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
         void write(Object obj) {
             String name = obj.getClass().getSimpleName();
-            // RPCProtoclParamType type = RPCProtoclParamType.valuefrom(obj.getClass());
+            RPCProtoclParamType type = RPCProtoclParamType.valuefrom(obj.getClass());
             Method md;
             try {
                 if (name.contains("[]")) {
@@ -70,51 +71,64 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
                     name = "L" + name;
                 }
                 md = this.getClass().getDeclaredMethod("write" + name, obj.getClass());
+                util.writeByte(type.val);
                 md.invoke(this, obj);
             } catch (Exception e) {
-                writeObject0(obj);
+                util.writeByte(type.val);
+                if (writeObject0(obj) == -1) {
+                    throw new GunRPCException("write Object Fail");
+                }
             }
         }
 
         private void writeInteger(Integer parama) {
-            util.writeByte(RPCProtoclParamType.INT.val);
-            util.write64(parama);
+            util.write32(parama);
         }
 
+
+        private void writeShort(Short parama) {
+            util.write(parama);
+        }
+
+
+        private void writeLong(Long parama) {
+            util.writeLong(parama);
+        }
+
+
         private void writeLint(int[] list) {
-            util.writeByte(RPCProtoclParamType.LINT.val);
             util.writeByte((byte) list.length);
             for (int val : list) {
-                util.write64(val);
+                util.write32(val);
             }
         }
 
         private void writeString(String string) {
-            util.writeByte(RPCProtoclParamType.STRING.val);
             util.writeByte((byte) string.length());
             util.write(string);
         }
 
         private void writeBoolean(Boolean bool) {
-            util.writeByte(RPCProtoclParamType.BOOLEAN.val);
             util.write(bool);
         }
 
         private void writeByte(Byte b) {
-            util.writeByte(RPCProtoclParamType.BYTE.val);
+
             util.writeByte(b);
         }
 
-        private void writeObject0(Object b) {
-            util.writeByte(RPCProtoclParamType.OBJECT.val);
+        private int writeObject0(Object b) {
+
             try {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
                 ObjectOutputStream os = new ObjectOutputStream(bos);
                 os.writeObject(b);
                 util.writeByte((byte) bos.size());
                 util.write(bos.toByteArray());
+                return 0;
             } catch (IOException e) {
-                e.printStackTrace();
+                //  throw new GunRPCException("object write error");
+                return -1;
             }
         }
     }

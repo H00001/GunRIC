@@ -51,7 +51,13 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
         help.clazz = ptypei.clazz;
         switch (ptypei) {
             case INT:
-                help.obj = util.readInt64();
+                help.obj = util.readInt32();
+                break;
+            case SHORT:
+                help.obj = util.readInt();
+                break;
+            case LONG:
+                help.obj = util.readLong();
                 break;
             case STRING:
                 byte datal = util.readByte();
@@ -67,7 +73,7 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
                 byte ldata = util.readByte();
                 int[] list = new int[ldata];
                 for (int i = 0; i < ldata; i++) {
-                    list[i] = util.readInt64();
+                    list[i] = util.readInt32();
                 }
                 help.obj = list;
                 break;

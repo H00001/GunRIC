@@ -3,12 +3,17 @@ package top.gunplan.protocol;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public enum RPCProtoclParamType {
 
     /**
      *
      */
     INT((byte) 0x01, int.class, 4, 0),
+    SHORT((byte) 0x09, short.class, 2, 0),
+    LONG((byte) 0x10, short.class, 8, 0),
     STRING((byte) 0x02, String.class, -1, 1),
     BOOLEAN((byte) 0x03, boolean.class, 1, 0),
     BYTE((byte) 0x05, byte.class, 1, 0),
@@ -62,15 +67,18 @@ public enum RPCProtoclParamType {
 
         return OBJECT;
     }
-}
 
-class Mmap {
-    public static Map<Class<?>, RPCProtoclParamType> mmap = new HashMap<>();
+    static class Mmap {
+        static Map<Class<?>, RPCProtoclParamType> mmap = new HashMap<>();
 
-    static {
-        mmap.put(Integer.class, RPCProtoclParamType.INT);
-        mmap.put(Boolean.class, RPCProtoclParamType.BOOLEAN);
-        mmap.put(Byte.class, RPCProtoclParamType.BYTE);
-        mmap.put(Integer[].class, RPCProtoclParamType.LINT);
+        static {
+            mmap.put(Integer.class, RPCProtoclParamType.INT);
+            mmap.put(Boolean.class, RPCProtoclParamType.BOOLEAN);
+            mmap.put(Byte.class, RPCProtoclParamType.BYTE);
+            mmap.put(Integer[].class, RPCProtoclParamType.LINT);
+            mmap.put(Short[].class, RPCProtoclParamType.SHORT);
+        }
     }
 }
+
+

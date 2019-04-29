@@ -96,7 +96,7 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteUtil unserizutil = new GunBytesUtil.GunReadByteUtil(in);
         publicUnSet(unserizutil);
-        int interlen = unserizutil.readByte();
+        final int interlen = unserizutil.readByte();
         this.interfaceName = new String(unserizutil.readByte(interlen));
         int methodlen = unserizutil.readByte();
         this.methodName = new String(unserizutil.readByte(methodlen));
