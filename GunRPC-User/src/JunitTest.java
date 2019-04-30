@@ -18,19 +18,19 @@ public class JunitTest {
          * string ?
          */
         CalServicers servicers = BootCore.IOCObject(CalServicers.class);
-//        System.out.printf("3 + 8 = %d\n", servicers.add(3, 8));
-//        System.out.printf("8 - 3 = %d\n", servicers.sub(8, 3));
+//        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
+//        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
 //        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
 //        System.out.printf("8 / 3 = %d\n", servicers.division(8, 3));
         TestObject o = new TestObject();
         o.x = 1;
         o.y = 2;
         int[] list = {1, 2, 3, 4};
-        System.out.println(servicers.addObject(o));
+        System.out.println(servicers.longAdd(1l, 2l));
 //        System.out.printf("aaa + zzz = %s\n", servicers.concat("aaa", "zzz"));
 //        for (int i = 0; i < 20000; i++) {
 //            for (int j = 0; j < 20000; j++) {
-//                if (servicers.add(i, j) != i + j) {
+//                if (servicers.intAdd(i, j) != i + j) {
 //                    System.err.println(i + "+" + j + "!=" + (i + j));
 //                } else {
 //                    System.out.println(i + "+" + j + "==" + (i + j));

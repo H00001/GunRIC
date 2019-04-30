@@ -4,9 +4,9 @@ import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
 
 @GunUseImpl(impl = "top.gunplan.services.CalCulServicesImpl")
 public interface CalServicers {
-    int add(int a, int b);
+    int intAdd(int a, int b);
 
-    int sub(int a, int b);
+    int intSub(int a, int b);
 
     int multiplication(int a, int b);
 
@@ -14,11 +14,14 @@ public interface CalServicers {
 
     boolean getResult(boolean b);
 
-    int intByteTest(byte a,int b);
+    long longAdd(long a, long b);
 
-    String concat(String a,String b);
+    int intByteTest(byte a, int b);
 
-    int Madd(int [] list);
+    String concat(String a, String b);
+
+    int Madd(int[] list);
 
     int addObject(TestObject obj);
+
 }

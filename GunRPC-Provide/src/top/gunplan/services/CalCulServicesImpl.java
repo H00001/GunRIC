@@ -10,12 +10,12 @@ import top.gunplan.RPC.APIS.test.TestObject;
  */
 public class CalCulServicesImpl implements CalServicers {
     @Override
-    public int add(int a, int b) {
+    public int intAdd(int a, int b) {
         return a + b;
     }
 
     @Override
-    public int sub(int a, int b) {
+    public int intSub(int a, int b) {
         return a - b;
     }
 
@@ -32,6 +32,11 @@ public class CalCulServicesImpl implements CalServicers {
     @Override
     public boolean getResult(boolean b) {
         return b;
+    }
+
+    @Override
+    public long longAdd(long a, long b) {
+        return a+b;
     }
 
     @Override
