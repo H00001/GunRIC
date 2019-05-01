@@ -3,17 +3,22 @@ package top.gunplan.protocol;
 
 import top.gunplan.utils.GunBytesUtil;
 
-public class GunRPCRegisterProtocl extends AbstractGunRPCProtocl {
+/**
+ * @author dosdrtt
+ * @version 0.0.0.0
+ * @since 0.0.0.0
+ */
+public class GunRPCRegisterProtocol extends AbstractGunRPCProtocl {
     private int paramlen = 0;
     private int port;
     private Class<?>[] types = null;
     private int now = 0;
 
-    public GunRPCRegisterProtocl() {
+    public GunRPCRegisterProtocol() {
 
     }
 
-    public GunRPCRegisterProtocl(int port) {
+    public GunRPCRegisterProtocol(int port) {
         this.port = port;
     }
 

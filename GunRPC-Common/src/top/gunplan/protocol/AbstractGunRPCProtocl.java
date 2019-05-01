@@ -12,7 +12,9 @@ import java.lang.reflect.Method;
 
 
 /**
- *
+ * @author dosdrtt
+ * @version 0.0.0.0
+ * @date
  */
 public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, GunNetOutputInterface {
 //    @Test

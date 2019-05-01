@@ -5,6 +5,7 @@ import top.gunplan.utils.GunBytesUtil;
 
 import java.io.*;
 
+
 public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtocl {
 
     int addLenByParam(int len, Object data) {

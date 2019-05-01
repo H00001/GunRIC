@@ -18,20 +18,16 @@ import java.util.regex.Pattern;
  * @author dosdrtt
  */
 public final class GunNettyPropertyManager {
-    public static String unusefulchars = "#";
-    public static String assignmentchars = "=";
-    public static String[] openandclodechildpropertys = {"{", "}"};
+    private static String unusefulchars = "#";
+    private static String assignmentchars = "=";
+    private static String[] openandclodechildpropertys = {"{", "}"};
 
     public static GunLogProperty getLog() {
         return log;
     }
 
-    public static GunHttpProperty getHttp() {
-        return http;
-    }
-
     private static GunCoreProperty core = null;
-    private static GunHttpProperty http = null;
+
     private static GunLogProperty log = null;
 
     public static GunCoreProperty getCore() {
@@ -83,7 +79,7 @@ public final class GunNettyPropertyManager {
         return true;
     }
 
-    public static boolean isInteger(String str) {
+    private static boolean isInteger(String str) {
         if (str.startsWith("0x")) {
             return true;
         }

@@ -8,6 +8,10 @@ import java.io.OutputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+/**
+ * @version 0.0.0.0
+ * @since 0.0.0.0
+ */
 
 public class GunRPCHandleProcy implements InvocationHandler {
     private final String interfaceName;

@@ -1,11 +1,13 @@
 package top.gunplan.RCP.center;
 
 import top.gunplan.netty.GunNettyFilter;
+import top.gunplan.netty.anno.GunNetFilterOrder;
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
 import top.gunplan.protocol.AbstractGunRPCProtocl;
 import top.gunplan.protocol.GunRPCDividePacketManage;
 
+@GunNetFilterOrder(index = 1)
 public class GunDubboCenterStdFilter implements GunNettyFilter {
     @Override
     public DealResult doInputFilter(GunInputFilterChecker filterDto) throws Exception {
