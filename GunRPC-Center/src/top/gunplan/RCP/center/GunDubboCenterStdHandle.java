@@ -2,14 +2,14 @@ package top.gunplan.RCP.center;
 
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
-import top.gunplan.protocol.GunNetInputInterface;
-import top.gunplan.protocol.GunNetOutputInterface;
+import top.gunplan.netty.protocol.GunNetInputInterface;
+import top.gunplan.netty.protocol.GunNetOutputInterface;
 
 import java.nio.channels.SocketChannel;
 
 public class GunDubboCenterStdHandle implements GunNettyHandle {
     @Override
-    public GunNetOutputInterface dealDataEvent(GunNetInputInterface request) throws GunException, ClassNotFoundException {
+    public GunNetOutputInterface dealDataEvent(GunNetInputInterface request) throws GunException {
         return null;
     }
 

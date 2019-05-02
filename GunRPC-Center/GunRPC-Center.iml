@@ -8,6 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="GunRPC-Common" />
+    <orderEntry type="module" module-name="GunRIC-Common" />
+    <orderEntry type="library" name="GunNetty" level="project" />
   </component>
 </module>

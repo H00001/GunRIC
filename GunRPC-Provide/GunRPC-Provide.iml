@@ -10,6 +10,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="GunNioUtil" level="project" />
     <orderEntry type="module" module-name="GunRPC-APIS" />
-    <orderEntry type="module" module-name="GunRPC-Common" />
+    <orderEntry type="library" name="GunNetty" level="project" />
+    <orderEntry type="module" module-name="GunRIC-Common" />
   </component>
 </module>
