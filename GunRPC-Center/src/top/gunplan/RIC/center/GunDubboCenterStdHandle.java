@@ -13,6 +13,7 @@ import top.gunplan.protocol.util.DictonaryUtil;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.channels.SocketChannel;
 
 public class GunDubboCenterStdHandle implements GunNettyHandle {
@@ -24,24 +25,31 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
         boolean exi = file.mkdirs();
         File md = new File(file.getPath() + "/" + protocol.getMethodName() + "_" + interHash(protocol.getTypes()));
         try {
-            BufferedOutputStream bof = new BufferedOutputStream(new FileOutputStream(md, true));
+            BufferedOutputStream bof;
             if (md.exists()) {
-                bof.write('\n');
-                bof.write(protocol.getPort());
+                bof = new BufferedOutputStream(new FileOutputStream(md, true));
+                writeProvider(protocol, bof);
             } else {
+                bof = new BufferedOutputStream(new FileOutputStream(md, true));
                 for (int i = 0; i < protocol.getParamlen(); i++) {
                     RPCProtoclParamType tp = RPCProtoclParamType.valuefrom(protocol.getTypes()[i]);
                     bof.write(tp.val);
                 }
-                bof.write('\n');
-                bof.write(protocol.getPort());
+                writeProvider(protocol, bof);
+
             }
-            bof.close();
+
         } catch (Exception exp) {
             exp.printStackTrace();
             throw new GunException(exp);
         }
         return null;
+    }
+
+    private void writeProvider(GunRICRegisterProtocol protocol, BufferedOutputStream bof) throws IOException {
+        bof.write('\n');
+        bof.write(String.valueOf(protocol.getPort()).getBytes());
+        bof.close();
     }
 
 
