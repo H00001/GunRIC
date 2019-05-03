@@ -1,41 +1,52 @@
 package top.gunplan.RPC.server;
 
-import top.gunplan.RPC.APIS.test.CalServicers;
+
 import top.gunplan.RPC.server.property.GunRICProperty;
-import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.protocol.GunRICRegisterProtocol;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.net.Socket;
 
-public class GunRPCPublishManage {
-    public static void publishInterface() {
-
-        GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
-        final String packet = ppt.getScanPacket();
+class GunRPCPublishManage {
+    static void publishInterface(final GunRICProperty ppt) throws IOException {
+        Socket ss = new Socket(ppt.getCenterAddr(), ppt.getCenterPort());
+        InputStream is = GunRICRegisterProtocol.class.getClassLoader().getResourceAsStream("publishInterface");
+        assert is != null;
         GunRICRegisterProtocol protocol = new GunRICRegisterProtocol();
-        Package pk =  Package.getPackage("top.gunplan.RPC.APIS.test");
-
-        protocol.setPort(8822);
-        Method[] mds = CalServicers.class.getMethods();
+        protocol.setPort(ppt.getServerLocalPort());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line;
         try {
-            Socket ss = new Socket(ppt.getCenter(), ppt.getPort());
-            for (Method md : mds) {
-                protocol.setMethodName(md.getName());
-                protocol.setParamlen(md.getParameterCount());
-                for (Class<?> tp : md.getParameterTypes()) {
-                    protocol.pushParamType(tp);
+            while ((line = reader.readLine()) != null) {
+                Class<?> clazz = Class.forName(line);
+                for (Method md : clazz.getMethods()) {
+                    constructProtoclo(clazz, md, protocol);
+                    ss.getOutputStream().write(protocol.serialize());
+                    protocol.clearParames();
+                    Thread.sleep(1200);
                 }
 
-                ss.getOutputStream().write(protocol.serialize());
-                Thread.sleep(1000);
-                protocol.clearParames();
             }
-            ss.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }
+
+
+
+    private static void constructProtoclo(Class<?> clazz, Method md, GunRICRegisterProtocol protocol) {
+        protocol.setInterfaceName(clazz.getName());
+        protocol.setMethodName(md.getName());
+        protocol.setParamlen(md.getParameterCount());
+        for (Class<?> tp : md.getParameterTypes()) {
+            protocol.pushParamType(tp);
+        }
+    }
+
 }

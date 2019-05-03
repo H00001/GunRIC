@@ -1,4 +1,4 @@
-package top.gunplan.RCP.center;
+package top.gunplan.RIC.center;
 
 import top.gunplan.netty.GunBootServer;
 

@@ -49,6 +49,9 @@ public class GunRPCHandleProcy implements InvocationHandler {
         if (rpc.getCode() == RPCProtoclCode.FAIL) {
             return -1;
         }
-        return rpc.getReturnValue().obj;
+        if (rpc.getCode() ==RPCProtoclCode.SUCCEED) {
+            return rpc.getReturnValue().obj;
+        }
+        return null;
     }
 }

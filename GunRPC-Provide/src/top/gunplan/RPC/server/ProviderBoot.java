@@ -7,6 +7,8 @@ import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.filter.GunNettyStdFirstFilter;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.netty.impl.propertys.GunProPerty;
+
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -20,7 +22,12 @@ public class ProviderBoot {
         server.registerObserve(new GunNettyObserve() {
             @Override
             public void onBoot(GunProPerty gunProPerty) {
-            //    GunRPCPublishManage.publishInterface();
+                GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
+                try {
+                    GunRPCPublishManage.publishInterface(ppt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
 

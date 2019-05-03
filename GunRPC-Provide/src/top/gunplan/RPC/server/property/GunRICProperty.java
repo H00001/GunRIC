@@ -4,23 +4,24 @@ import top.gunplan.netty.impl.propertys.GunProPerty;
 
 public class GunRICProperty implements GunProPerty {
     private String scanPacket;
-    private int port;
-    private String center;
+    private int centerPort;
+    private int localServerPort;
+    private String centerAddr;
 
     public String getScanPacket() {
         return scanPacket;
     }
 
-    public int getPort() {
-        return port;
+    public int getCenterPort() {
+        return centerPort;
     }
 
-    public String getCenter() {
-        return center;
+    public int getServerLocalPort() {
+        return localServerPort;
     }
 
-    public void setScanPacket(String scanPacket) {
-        this.scanPacket = scanPacket;
+    public String getCenterAddr() {
+        return centerAddr;
     }
 
     public GunRICProperty() {

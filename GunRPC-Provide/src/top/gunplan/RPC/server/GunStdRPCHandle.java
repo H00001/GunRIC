@@ -33,7 +33,6 @@ public class GunStdRPCHandle implements GunNettyHandle {
             this.dealExceptionEvent(exp);
         }
         return outputprotocl;
-
     }
 
     private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputprotocl, GunRPCInputProtocl inoutprotocl) throws Exception {
@@ -44,11 +43,11 @@ public class GunStdRPCHandle implements GunNettyHandle {
             outputprotocl.setCode(RPCProtoclCode.FAIL);
             help.setObj("method not found ");
             AbstractGunBaseLogUtil.error(inoutprotocl.getMethodName(), "method not found", "[PROVIDE]");
-            return true;
+            return false;
         }
         help.setObj(inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters()));
         outputprotocl.setCode(RPCProtoclCode.SUCCEED);
-        return false;
+        return true;
     }
 
 

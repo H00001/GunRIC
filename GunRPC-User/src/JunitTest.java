@@ -18,10 +18,10 @@ public class JunitTest {
          * string ?
          */
         CalServicers servicers = BootCore.IOCObject(CalServicers.class);
-//        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
-//        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
-//        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
-//        System.out.printf("8 / 3 = %d\n", servicers.division(8, 3));
+        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
+        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
+        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
+        System.out.printf("8 / 3 = %d\n", servicers.division(8, 3));
         TestObject o = new TestObject();
         o.x = 1;
         o.y = 2;

@@ -30,7 +30,7 @@ public enum RPCProtoclParamType {
     int stdlen;
     int deslen;
     public byte val;
-    Class<?> clazz;
+    public Class<?> clazz;
 
 
 //    RPCProtoclParamType(byte val) {
