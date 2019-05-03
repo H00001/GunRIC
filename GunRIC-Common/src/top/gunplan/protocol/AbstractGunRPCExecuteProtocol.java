@@ -67,6 +67,11 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
     }
 
     public static class ParamHelper {
+        public void setObj(Object obj) {
+            this.clazz = obj.getClass();
+            this.obj = obj;
+        }
+
         public Object obj;
         public Class<?> clazz;
 

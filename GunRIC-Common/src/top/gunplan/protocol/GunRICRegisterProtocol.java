@@ -27,6 +27,11 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
     private Class<?>[] types = null;
     private int now = 0;
 
+    public void clearParames() {
+        now = 0;
+        types = null;
+    }
+
     public GunRICRegisterProtocol() {
         this.type = RPCProtoclType.REGISTER;
     }
@@ -70,7 +75,7 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 7 + paramlen+2+interfaceName.length()+methodName.length();
+        int len = 7 + paramlen + 2 + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(save);
         util.write(RPCProtoclType.REGISTER.value);

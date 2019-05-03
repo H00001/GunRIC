@@ -30,15 +30,13 @@ public class GunStdRPCHandle implements GunNettyHandle {
             Method realmd = inst.getMethod(inoutprotocl.getMethodName(), inoutprotocl.getParamTypeList());
             if (realmd == null) {
                 outputprotocl.setCode(RPCProtoclCode.FAIL);
-                help.obj = "method not found ";
+                help.setObj("method not found ");
                 outputprotocl.setReturnValue(help);
                 AbstractGunBaseLogUtil.error(inoutprotocl.getMethodName(), "method not found", "[PROVIDE]");
                 return outputprotocl;
             }
-            Object oc = inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters());
+            help.setObj(inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters()));
             outputprotocl.setCode(RPCProtoclCode.SUCCEED);
-            help.obj = oc;
-            help.clazz = oc.getClass();
             outputprotocl.setReturnValue(help);
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
             outputprotocl.setCode(RPCProtoclCode.FAIL);

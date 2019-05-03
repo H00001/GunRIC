@@ -1,29 +1,37 @@
 package top.gunplan.RPC.server;
 
+import top.gunplan.RPC.APIS.test.CalServicers;
 import top.gunplan.RPC.server.property.GunRICProperty;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.protocol.GunRICRegisterProtocol;
 
-import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.Socket;
 
 public class GunRPCPublishManage {
     public static void publishInterface() {
-       final String packet = ((GunRICProperty) GunNettyPropertyManagerImpl.getProperty("ric-provide")).getScanPacket();
+        GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
+        final String packet = ppt.getScanPacket();
         GunRICRegisterProtocol protocol = new GunRICRegisterProtocol();
         protocol.setInterfaceName("top.gunplan.RPC.APIS.test.Cal.CalServicers");
-        protocol.setMethodName("intAdd");
 
-        protocol.setParamlen(2);
-        protocol.pushParamType(int.class);
-        protocol.pushParamType(int.class);
         protocol.setPort(8822);
-        System.out.println("dd");
+        Method[] mds = CalServicers.class.getMethods();
         try {
-            Socket ss = new Socket("127.0.0.1",8855);
-            ss.getOutputStream().write(protocol.serialize());
+            Socket ss = new Socket(ppt.getCenter(), ppt.getPort());
+            for (Method md : mds) {
+                protocol.setMethodName(md.getName());
+                protocol.setParamlen(md.getParameterCount());
+                for (Class<?> tp : md.getParameterTypes()) {
+                    protocol.pushParamType(tp);
+                }
 
-        } catch (IOException e) {
+                ss.getOutputStream().write(protocol.serialize());
+                Thread.sleep(1000);
+                protocol.clearParames();
+            }
+            ss.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
