@@ -11,7 +11,7 @@ import top.gunplan.protocol.GunRPCDividePacketManage;
 @GunNetFilterOrder(index = 1)
 public class GunDubboCenterStdFilter implements GunNettyFilter {
     @Override
-    public DealResult doInputFilter(GunInputFilterChecker filterDto) throws Exception {
+    public DealResult doInputFilter(GunInputFilterChecker filterDto) {
         AbstractGunRPCProtocl protocol = GunRPCDividePacketManage.findPackage(filterDto.getSrc());
         filterDto.setObject(protocol);
         return DealResult.NEXT;

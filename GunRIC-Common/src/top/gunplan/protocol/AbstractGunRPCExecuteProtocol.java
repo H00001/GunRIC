@@ -7,6 +7,25 @@ import java.io.*;
 
 
 public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtocl {
+    String methodName;
+    String interfaceName;
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public String getInterfaceName() {
+        return interfaceName;
+    }
+
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
+    }
+
 
     int addLenByParam(int len, Object data) {
         final RPCProtoclParamType type = RPCProtoclParamType.valuefrom(data.getClass());
@@ -30,6 +49,21 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
             }
         }
         return len;
+    }
+
+    void stdHeadAnaly(GunBytesUtil.GunReadByteUtil unserizutil) {
+        final int interlen = unserizutil.readByte();
+        this.interfaceName = new String(unserizutil.readByte(interlen));
+        int methodlen = unserizutil.readByte();
+        this.methodName = new String(unserizutil.readByte(methodlen));
+
+    }
+
+    void stdHeadWrite(GunBytesUtil.GunWriteByteUtil serizUtil) {
+        serizUtil.writeByte((byte) interfaceName.length());
+        serizUtil.write(interfaceName);
+        serizUtil.writeByte((byte) methodName.length());
+        serizUtil.write(methodName);
     }
 
     public static class ParamHelper {

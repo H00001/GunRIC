@@ -44,10 +44,7 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
         byte[] serize = new byte[len];
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serize);
         publicSet(serizUtil);
-        serizUtil.writeByte((byte) interfaceName.length());
-        serizUtil.write(interfaceName);
-        serizUtil.writeByte((byte) methodName.length());
-        serizUtil.write(methodName);
+        super.stdHeadWrite(serizUtil);
         serizUtil.writeByte((byte) paramlen);
         if (!writeParam(serizUtil)) {
             throw new GunException("write Param error");
@@ -67,25 +64,8 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     private int now;
 
     private int otherCount = 0;
-    private String methodName;
-    private String interfaceName;
 
 
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public String getInterfaceName() {
-        return interfaceName;
-    }
-
-    public void setInterfaceName(String interfaceName) {
-        this.interfaceName = interfaceName;
-    }
 
     public byte getParamleng() {
         return (byte) paramlen;
@@ -96,14 +76,9 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteUtil unserizutil = new GunBytesUtil.GunReadByteUtil(in);
         publicUnSet(unserizutil);
-        final int interlen = unserizutil.readByte();
-        this.interfaceName = new String(unserizutil.readByte(interlen));
-        int methodlen = unserizutil.readByte();
-        this.methodName = new String(unserizutil.readByte(methodlen));
+        super.stdHeadAnaly(unserizutil);
         this.paramlen = unserizutil.readByte();
         return paramlen == 0 ? checkEnd(unserizutil) : analyizeParams(paramlen, unserizutil);
-
-
     }
 
 

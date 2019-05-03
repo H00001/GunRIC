@@ -45,7 +45,7 @@ public class GunRPCHandleProcy implements InvocationHandler {
         //
         int len = in.read(b);
 
-        GunRPCOutputProtocl rpc = GunRPCDividePacketManage.findPackage(b);
+        GunRPCOutputProtocl rpc = (GunRPCOutputProtocl) GunRPCDividePacketManage.findPackage(b);
         if (rpc.getCode() == RPCProtoclCode.FAIL) {
             return -1;
         }
