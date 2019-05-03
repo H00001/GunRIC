@@ -20,7 +20,7 @@ public class ProviderBoot {
         server.registerObserve(new GunNettyObserve() {
             @Override
             public void onBoot(GunProPerty gunProPerty) {
-                GunRPCPublishManage.publishInterface();
+            //    GunRPCPublishManage.publishInterface();
 
             }
 

@@ -10,10 +10,11 @@ import java.net.Socket;
 
 public class GunRPCPublishManage {
     public static void publishInterface() {
+
         GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
         final String packet = ppt.getScanPacket();
         GunRICRegisterProtocol protocol = new GunRICRegisterProtocol();
-        protocol.setInterfaceName("top.gunplan.RPC.APIS.test.Cal.CalServicers");
+        Package pk =  Package.getPackage("top.gunplan.RPC.APIS.test");
 
         protocol.setPort(8822);
         Method[] mds = CalServicers.class.getMethods();
