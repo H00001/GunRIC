@@ -19,9 +19,10 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 
 public class GunDubboCenterStdHandle implements GunNettyHandle {
-    private final static String P = "services/";
+
     private final static String L = "/";
     private final static String D = "_";
+    private final static String DT = ".";
     private final static String SFN = "services" + L;
 
 
@@ -35,22 +36,23 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
         final Class<?>[] t = pt.getTypes();
         final long hh = h(pt.getTypes());
         InetSocketAddress is = new InetSocketAddress(a.getAddress(), pt.getPort());
-        File f = new File(r + SFN + in.replace(P, L));
+        File f = new File(r + SFN + in.replace(DT, L));
         boolean exi = f.mkdirs();
         f = new File(f.getPath() + L + mn + D + hh);
         try {
             BufferedOutputStream bf;
             if (f.exists()) {
                 bf = new BufferedOutputStream(new FileOutputStream(f, true));
-                fa(is, mn, in, t, hh);
+                GunRICInterfaceBuffer.intermapping.get(new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn)).add(is);
+                //
                 wP(pt, a.getHostString(), bf);
             } else {
                 bf = new BufferedOutputStream(new FileOutputStream(f, true));
-                for (int i = 0; i < pt.getParamlen(); i++) {
+                for (int i = 0; i < t.length; i++) {
                     RPCProtoclParamType tp = RPCProtoclParamType.valuefrom(t[i]);
-                    GunRICInterfaceBuffer.intermapping.get(new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn)).add(is);
                     bf.write(tp.val);
                 }
+                fa(is, mn, in, t, hh);
                 wP(pt, a.getHostString(), bf);
             }
 
@@ -63,7 +65,7 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
 
     private void fa(InetSocketAddress is, String mn, String in, Class<?>[] t, long hh) {
         ArrayList<InetSocketAddress> al = new ArrayList<>(1);
-        GunRICInterfaceBuffer.GunRICInterface gg =new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn);
+        GunRICInterfaceBuffer.GunRICInterface gg = new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn);
         al.add(is);
         GunRICInterfaceBuffer.intermapping.put(gg, al);
     }

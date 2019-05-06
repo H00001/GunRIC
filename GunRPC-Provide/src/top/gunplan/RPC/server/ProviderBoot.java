@@ -16,19 +16,23 @@ import java.util.concurrent.TimeUnit;
 
 public class ProviderBoot {
     public static void main(String[] args) {
-
-
         GunBootServer server = GunBootServerFactory.getInstance();
         server.registerObserve(new GunNettyObserve() {
             @Override
-            public void onBoot(GunProPerty gunProPerty) {
-//                GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
-//                try {
-//                    GunRPCPublishManage.publishInterface(ppt);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+            public void onBooted(GunProPerty gunProPerty) {
 
+            }
+
+            @Override
+            public boolean onBooting(GunProPerty gunProPerty) {
+                                GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
+                try {
+                    GunRPCPublishManage.publishInterface(ppt);
+                } catch (IOException e) {
+                   e.printStackTrace();
+                   return false;
+                }
+                return true;
             }
 
             @Override
