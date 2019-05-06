@@ -20,19 +20,20 @@ public class GunStdRPCHandle implements GunNettyHandle {
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) {
         AbstractGunRPCExecuteProtocol.ParamHelper help = new AbstractGunRPCExecuteProtocol.ParamHelper();
-        final GunRPCOutputProtocl outputprotocl = new GunRPCOutputProtocl();
-        final GunRPCInputProtocl inputprotocl = ((GunRPCInputProtocl) gunNetInputInterface);
-        outputprotocl.setReturnValue(help);
-        outputprotocl.setType(RPCProtoclType.RESPONSE);
+        final GunRPCOutputProtocl o = new GunRPCOutputProtocl();
+        final GunRPCInputProtocl i = ((GunRPCInputProtocl) gunNetInputInterface);
+        o.setReturnValue(help);
+        o.setType(RPCProtoclType.RESPONSE);
         try {
-            if (invokeMethod(help, outputprotocl, inputprotocl)) return outputprotocl;
-        } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
-            help.setObj(e.getMessage());
-            this.dealExceptionEvent(e);
+            if (invokeMethod(help, o, i)) return o;
+        } catch (ReflectiveOperationException e) {
+
+            help.setObj(e.getClass().getSimpleName()+":" + e.getLocalizedMessage());
+            o.setCode(RPCProtoclCode.FAIL);
         } catch (Exception exp) {
             this.dealExceptionEvent(exp);
         }
-        return outputprotocl;
+        return o;
     }
 
     private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputprotocl, GunRPCInputProtocl inoutprotocl) throws Exception {
@@ -63,6 +64,6 @@ public class GunStdRPCHandle implements GunNettyHandle {
 
     @Override
     public void dealExceptionEvent(Exception e) {
-        e.printStackTrace();
+        AbstractGunBaseLogUtil.error(e.getMessage());
     }
 }

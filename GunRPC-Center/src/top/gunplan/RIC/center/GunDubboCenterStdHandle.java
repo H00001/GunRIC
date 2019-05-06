@@ -18,6 +18,12 @@ import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 
+/**
+ * @version 0.0.0.1
+ * @author dosdrtt
+ * @date 1557152414
+ * Concurrent class
+ */
 public class GunDubboCenterStdHandle implements GunNettyHandle {
 
     private final static String L = "/";
@@ -48,8 +54,8 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
                 wP(pt, a.getHostString(), bf);
             } else {
                 bf = new BufferedOutputStream(new FileOutputStream(f, true));
-                for (int i = 0; i < t.length; i++) {
-                    RPCProtoclParamType tp = RPCProtoclParamType.valuefrom(t[i]);
+                for (Class<?> aClass : t) {
+                    RPCProtoclParamType tp = RPCProtoclParamType.valuefrom(aClass);
                     bf.write(tp.val);
                 }
                 fa(is, mn, in, t, hh);

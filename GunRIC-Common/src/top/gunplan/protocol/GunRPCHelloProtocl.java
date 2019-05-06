@@ -18,7 +18,7 @@ public class GunRPCHelloProtocl extends AbstractGunRPCProtocl {
         byte[] seriz = new byte[4];
         GunBytesUtil.GunWriteByteUtil unserizutil = new GunBytesUtil.GunWriteByteUtil(seriz);
         unserizutil.write(this.type.value);
-        unserizutil.write(endFlage);
+        unserizutil.write(END_FLAGE);
         return seriz;
     }
 }

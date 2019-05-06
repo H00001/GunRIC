@@ -30,7 +30,7 @@ public class GunRICRegisterStatusProtocol extends AbstractGunRPCProtocl {
         byte[] sv = new byte[6];
         GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(sv);
         publicSet(util);
-        util.write(endFlage);
+        util.write(END_FLAGE);
         return sv;
     }
 }

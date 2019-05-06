@@ -49,7 +49,7 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
         if (!writeParam(serizUtil)) {
             throw new GunException("write Param error");
         }
-        serizUtil.write(endFlage);
+        serizUtil.write(END_FLAGE);
         return serize;
     }
 

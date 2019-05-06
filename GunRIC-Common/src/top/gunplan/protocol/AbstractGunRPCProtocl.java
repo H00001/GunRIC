@@ -54,7 +54,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         this.code = code;
     }
 
-    final byte[] endFlage = {0x0a, 0x05};
+    public final static byte[] END_FLAGE = {0x0a, 0x05};
 
 
     static class Helper {
@@ -164,7 +164,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
     boolean checkEnd(GunBytesUtil.GunReadByteUtil unserizutil) {
         byte[] end = unserizutil.readByte(2);
-        return GunBytesUtil.compareBytesFromEnd(end, endFlage[0], endFlage[1]);
+        return GunBytesUtil.compareBytesFromEnd(end, END_FLAGE[0], END_FLAGE[1]);
     }
 
     void publicUnSet(GunBytesUtil.GunReadByteUtil unserizutil) {

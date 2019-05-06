@@ -33,7 +33,7 @@ public class GunRPCOutputProtocl extends AbstractGunRPCExecuteProtocol {
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serize);
         publicSet(serizUtil);
         writeOnceParam(serizUtil, returnValue.obj);
-        serizUtil.write(endFlage);
+        serizUtil.write(END_FLAGE);
         return serize;
     }
 }

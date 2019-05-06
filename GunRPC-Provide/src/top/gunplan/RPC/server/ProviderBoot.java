@@ -30,7 +30,7 @@ public class ProviderBoot {
                     GunRPCPublishManage.publishInterface(ppt);
                 } catch (IOException e) {
                    e.printStackTrace();
-                   return false;
+                 //  return false;
                 }
                 return true;
             }

@@ -83,7 +83,7 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
         super.stdHeadWrite(util);
         util.writeByte((byte) paramlen);
         writeParamTypes(util);
-        util.write(endFlage);
+        util.write(END_FLAGE);
         return save;
     }
 
