@@ -22,12 +22,12 @@ public class ProviderBoot {
         server.registerObserve(new GunNettyObserve() {
             @Override
             public void onBoot(GunProPerty gunProPerty) {
-                GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
-                try {
-                    GunRPCPublishManage.publishInterface(ppt);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
+//                try {
+//                    GunRPCPublishManage.publishInterface(ppt);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
             }
 

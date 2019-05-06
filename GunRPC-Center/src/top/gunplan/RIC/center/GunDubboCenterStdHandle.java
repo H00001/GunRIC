@@ -14,29 +14,44 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 
 public class GunDubboCenterStdHandle implements GunNettyHandle {
+    private final static String P = "services/";
+    private final static String L = "/";
+    private final static String D = "_";
+    private final static String SFN = "services" + L;
+
+
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface request) throws GunException {
-        final String rootpath = DictonaryUtil.getRes();
-        final GunRICRegisterProtocol protocol = (GunRICRegisterProtocol) request;
-        File file = new File(rootpath + "services/" + protocol.getInterfaceName().replace(".", "/"));
-        boolean exi = file.mkdirs();
-        File md = new File(file.getPath() + "/" + protocol.getMethodName() + "_" + interHash(protocol.getTypes()));
+        final String r = DictonaryUtil.getRes();
+        final GunRICRegisterProtocol pt = (GunRICRegisterProtocol) ((GunRICCenterDto) request).getObj();
+        final InetSocketAddress a = ((GunRICCenterDto) request).getAddress();
+        final String mn = pt.gMN();
+        final String in = pt.gIN();
+        final Class<?>[] t = pt.getTypes();
+        final long hh = h(pt.getTypes());
+        InetSocketAddress is = new InetSocketAddress(a.getAddress(), pt.getPort());
+        File f = new File(r + SFN + in.replace(P, L));
+        boolean exi = f.mkdirs();
+        f = new File(f.getPath() + L + mn + D + hh);
         try {
-            BufferedOutputStream bof;
-            if (md.exists()) {
-                bof = new BufferedOutputStream(new FileOutputStream(md, true));
-                writeProvider(protocol, bof);
+            BufferedOutputStream bf;
+            if (f.exists()) {
+                bf = new BufferedOutputStream(new FileOutputStream(f, true));
+                fa(is, mn, in, t, hh);
+                wP(pt, a.getHostString(), bf);
             } else {
-                bof = new BufferedOutputStream(new FileOutputStream(md, true));
-                for (int i = 0; i < protocol.getParamlen(); i++) {
-                    RPCProtoclParamType tp = RPCProtoclParamType.valuefrom(protocol.getTypes()[i]);
-                    bof.write(tp.val);
+                bf = new BufferedOutputStream(new FileOutputStream(f, true));
+                for (int i = 0; i < pt.getParamlen(); i++) {
+                    RPCProtoclParamType tp = RPCProtoclParamType.valuefrom(t[i]);
+                    GunRICInterfaceBuffer.intermapping.get(new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn)).add(is);
+                    bf.write(tp.val);
                 }
-                writeProvider(protocol, bof);
-
+                wP(pt, a.getHostString(), bf);
             }
 
         } catch (Exception exp) {
@@ -46,9 +61,16 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
         return null;
     }
 
-    private void writeProvider(GunRICRegisterProtocol protocol, BufferedOutputStream bof) throws IOException {
+    private void fa(InetSocketAddress is, String mn, String in, Class<?>[] t, long hh) {
+        ArrayList<InetSocketAddress> al = new ArrayList<>(1);
+        GunRICInterfaceBuffer.GunRICInterface gg =new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn);
+        al.add(is);
+        GunRICInterfaceBuffer.intermapping.put(gg, al);
+    }
+
+    private void wP(GunRICRegisterProtocol protocol, String addr, BufferedOutputStream bof) throws IOException {
         bof.write('\n');
-        bof.write(String.valueOf(protocol.getPort()).getBytes());
+        bof.write((protocol.getPort() + D + addr).getBytes());
         bof.close();
     }
 
@@ -68,12 +90,13 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
 
     }
 
-    private static long interHash(Class<?>[] paramtypes) {
+    private static long h(Class<?>[] paramtypes) {
         long hashh;
         hashh = paramtypes.length;
         int hashl = 0;
         for (Class<?> paramtype : paramtypes) {
-            hashl += paramtype.hashCode();
+            RPCProtoclParamType tp = RPCProtoclParamType.valuefrom(paramtype);
+            hashl += tp.val;
         }
         return (hashh << 32) | hashl;
 

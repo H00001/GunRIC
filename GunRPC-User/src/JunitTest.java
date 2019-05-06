@@ -1,6 +1,7 @@
 
 import org.junit.jupiter.api.Test;
 import top.gunplan.RPC.APIS.test.CalServicers;
+import top.gunplan.RPC.APIS.test.HighMath;
 import top.gunplan.RPC.APIS.test.TestObject;
 import top.gunplan.RPC.Boot.BootCore;
 
@@ -17,16 +18,17 @@ public class JunitTest {
          * byte 8
          * string ?
          */
-        CalServicers servicers = BootCore.IOCObject(CalServicers.class);
-        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
-        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
-        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
-        System.out.printf("8 / 3 = %d\n", servicers.division(8, 3));
+        HighMath servicers = BootCore.IOCObject(HighMath.class);
+//        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
+//        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
+//        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
+//        System.out.printf("8 / 3 = %d\n", servicers.division(8, 3));
+        int[][] a = {{1,7,3,4}, {1,2,3,4}};
         TestObject o = new TestObject();
         o.x = 1;
         o.y = 2;
         int[] list = {1, 2, 3, 4};
-        System.out.println(servicers.longAdd(1l, 2l));
+        System.out.println(servicers.fourierFormat(a));
 //        System.out.printf("aaa + zzz = %s\n", servicers.concat("aaa", "zzz"));
 //        for (int i = 0; i < 20000; i++) {
 //            for (int j = 0; j < 20000; j++) {

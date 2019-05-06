@@ -17,7 +17,8 @@ public enum RPCProtoclParamType {
     BYTE((byte) 0x05, byte.class, 1, 0),
     STRING((byte) 0x02, String.class, -1, 1),
     LINT((byte) 0x06, int[].class, -1, 1),
-    OBJECT((byte) 0x04, Object.class, -1, 1);
+    OBJECT((byte) 0x04, Object.class, -1, 1),
+    LLINT((byte) 0x0b, int[][].class, -1, 2);
 
 
     RPCProtoclParamType(byte val, Class<?> clazz, int stdlen, int deslen) {
@@ -77,6 +78,7 @@ public enum RPCProtoclParamType {
             mmap.put(Integer[].class, RPCProtoclParamType.LINT);
             mmap.put(Short.class, RPCProtoclParamType.SHORT);
             mmap.put(Long.class, RPCProtoclParamType.LONG);
+            mmap.put(Integer[][].class, RPCProtoclParamType.LLINT);
         }
     }
 }

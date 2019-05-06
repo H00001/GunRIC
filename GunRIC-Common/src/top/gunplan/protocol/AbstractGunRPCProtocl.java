@@ -72,6 +72,9 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
                 if (name.contains("[]")) {
                     name = name.replace("[]", "");
                     name = "L" + name;
+                    if (obj instanceof int[][]) {
+                        name ="L"+name;
+                    }
                 }
                 md = this.getClass().getDeclaredMethod("write" + name, obj.getClass());
                 util.writeByte(type.val);
@@ -103,6 +106,16 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
             util.writeByte((byte) list.length);
             for (int val : list) {
                 util.write32(val);
+            }
+        }
+
+        private void writeLLint(int[][] list) {
+            util.writeByte((byte) list.length);
+            util.writeByte((byte) list[0].length);
+            for (int[] var0 : list) {
+                for (int val1 : var0) {
+                    util.write32(val1);
+                }
             }
         }
 

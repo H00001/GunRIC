@@ -14,6 +14,14 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
         return methodName;
     }
 
+    public String gIN() {
+        return interfaceName;
+    }
+
+    public String gMN() {
+        return methodName;
+    }
+
     public void setMethodName(String methodName) {
         this.methodName = methodName;
     }
@@ -36,6 +44,8 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
                 len += type.deslen + ((String) data).length();
             } else if (type == RPCProtoclParamType.LINT) {
                 len += type.deslen + ((int[]) data).length * 4;
+            } else if (type == RPCProtoclParamType.LLINT) {
+                len += type.deslen + ((int[][]) data).length * ((int[][]) data)[0].length * 4;
             } else {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 try {
@@ -99,24 +109,38 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
             case LONG:
                 help.obj = util.readLong();
                 break;
-            case STRING:
-                byte datal = util.readByte();
-                help.obj = new String(util.readByte(datal));
-                break;
+            case STRING: {
+                byte l = util.readByte();
+                help.obj = new String(util.readByte(l));
+            }
+            break;
             case BOOLEAN:
                 help.obj = util.readBool();
                 break;
             case BYTE:
                 help.obj = util.readByte();
                 break;
-            case LINT:
-                byte ldata = util.readByte();
-                int[] list = new int[ldata];
-                for (int i = 0; i < ldata; i++) {
+            case LINT: {
+                byte l = util.readByte();
+                int[] list = new int[l];
+                for (int i = 0; i < l; i++) {
                     list[i] = util.readInt32();
                 }
                 help.obj = list;
-                break;
+            }
+            break;
+            case LLINT: {
+                byte l = util.readByte();
+                byte l1 = util.readByte();
+                int[][] list = new int[l][l1];
+                for (int i = 0; i < l; i++) {
+                    for (int j = 0; j < l1; j++) {
+                        list[i][j] = util.readInt32();
+                    }
+                }
+                help.obj = list;
+            }
+            break;
             case OBJECT:
                 int datalen = util.readUByte();
                 final byte[] objsav = util.readByte(datalen);
