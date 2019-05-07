@@ -53,8 +53,8 @@ public class ProviderBoot {
                 new LinkedBlockingQueue<>());
         GunNettyPropertyManagerImpl.registerProperty("ric-provide", new GunRICProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
-                addFilter(new GunStdRPCServerFilter()).
-                setHandle(new GunStdRPCHandle());
+                addFilter(new GunStdRicServerFilter()).
+                setHandle(new GunStdRicHandle());
         try {
             server.sync();
         } catch (Exception e) {

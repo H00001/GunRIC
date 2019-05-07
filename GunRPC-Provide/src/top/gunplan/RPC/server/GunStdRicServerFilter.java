@@ -12,7 +12,7 @@ import top.gunplan.protocol.GunRPCInputProtocl;
  * @author dosdrtt
  */
 @GunNetFilterOrder(index = 1)
-public class GunStdRPCServerFilter implements GunNettyFilter {
+public class GunStdRicServerFilter implements GunNettyFilter {
     @Override
     public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) {
         GunRPCInputProtocl protocl = new GunRPCInputProtocl();

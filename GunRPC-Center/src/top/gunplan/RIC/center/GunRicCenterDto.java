@@ -4,11 +4,15 @@ import top.gunplan.netty.protocol.GunNetInputInterface;
 
 import java.net.InetSocketAddress;
 
-public final class GunRICCenterDto implements GunNetInputInterface {
+/**
+ * @author dosdrtt
+ * @date 1557231535
+ */
+public final class GunRicCenterDto implements GunNetInputInterface {
     private final InetSocketAddress address;
     private final GunNetInputInterface obj;
 
-    public GunRICCenterDto(InetSocketAddress address, GunNetInputInterface obj) {
+    public GunRicCenterDto(InetSocketAddress address, GunNetInputInterface obj) {
         this.address = address;
         this.obj = obj;
     }

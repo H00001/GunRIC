@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 
+/**
+ * @date 1557231535
+ */
 @GunNetFilterOrder(index = 1)
 public class GunDubboCenterStdFilter implements GunNettyFilter {
     @Override
@@ -25,7 +28,7 @@ public class GunDubboCenterStdFilter implements GunNettyFilter {
         AbstractGunRPCProtocl protocol = GunRPCDividePacketManage.findPackage(filterDto.getSrc());
         if (protocol != null) {
 
-            GunRICCenterDto dto = new GunRICCenterDto(address, protocol);
+            GunRicCenterDto dto = new GunRicCenterDto(address, protocol);
             filterDto.setObject(dto);
             return DealResult.NEXT;
         }

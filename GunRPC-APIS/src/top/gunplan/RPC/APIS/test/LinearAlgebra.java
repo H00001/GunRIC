@@ -4,11 +4,23 @@ import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
 
 import java.io.Serializable;
 
-@GunUseImpl(impl = "top.gunplan.services.HighMathImpl0")
+/**
+ * @author dosdrtt
+ * @date 1557231535
+ */
+@GunUseImpl(impl = "top.gunplan.services.LinearAlgebraImpl")
 public interface LinearAlgebra {
-    CalRes calDet(int[][] a);
+    /**
+     *
+     * @param a det
+     * @param size det's size
+     * @return calres
+     */
+    CalRes calDet(int[][] a, int size);
+
 
     class CalRes implements Serializable {
+        private static final long serialVersionUID = -8759739552340900011L;
         boolean isTrueCal;
         int calResult;
 

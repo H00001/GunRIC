@@ -8,14 +8,13 @@ import top.gunplan.protocol.*;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.channels.SocketChannel;
 
 /**
  * @author dosdrtt
  */
-public class GunStdRPCHandle implements GunNettyHandle {
+public class GunStdRicHandle implements GunNettyHandle {
 
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) {
@@ -25,10 +24,11 @@ public class GunStdRPCHandle implements GunNettyHandle {
         o.setReturnValue(help);
         o.setType(RPCProtoclType.RESPONSE);
         try {
-            if (invokeMethod(help, o, i)) return o;
+            if (invokeMethod(help, o, i)) {
+                return o;
+            }
         } catch (ReflectiveOperationException e) {
-
-            help.setObj(e.getClass().getSimpleName()+":" + e.getLocalizedMessage());
+            help.setObj(e.getClass().getSimpleName() + ":" + e.getLocalizedMessage());
             o.setCode(RPCProtoclCode.FAIL);
         } catch (Exception exp) {
             this.dealExceptionEvent(exp);
@@ -36,18 +36,18 @@ public class GunStdRPCHandle implements GunNettyHandle {
         return o;
     }
 
-    private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputprotocl, GunRPCInputProtocl inoutprotocl) throws Exception {
-        Class<?> inst = Class.forName(inoutprotocl.getInterfaceName());
+    private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputpol, GunRPCInputProtocl inputpol) throws Exception {
+        Class<?> inst = Class.forName(inputpol.getInterfaceName());
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).newInstance();
-        Method realmd = inst.getMethod(inoutprotocl.getMethodName(), inoutprotocl.getParamTypeList());
+        Method realmd = inst.getMethod(inputpol.getMethodName(), inputpol.getParamTypeList());
         if (realmd == null) {
-            outputprotocl.setCode(RPCProtoclCode.FAIL);
+            outputpol.setCode(RPCProtoclCode.FAIL);
             help.setObj("method not found ");
-            AbstractGunBaseLogUtil.error(inoutprotocl.getMethodName(), "method not found", "[PROVIDE]");
+            AbstractGunBaseLogUtil.error(inputpol.getMethodName(), "method not found", "[PROVIDE]");
             return false;
         }
-        help.setObj(inoutprotocl.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inoutprotocl.getParameters()));
-        outputprotocl.setCode(RPCProtoclCode.SUCCEED);
+        help.setObj(inputpol.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inputpol.getParameters()));
+        outputpol.setCode(RPCProtoclCode.SUCCEED);
         return true;
     }
 
