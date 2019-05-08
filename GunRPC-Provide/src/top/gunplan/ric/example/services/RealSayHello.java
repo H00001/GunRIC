@@ -12,7 +12,7 @@ public class RealSayHello implements HelloServices {
     }
 
     @Override
-    public String sayGoodBay(String msg) {
+    public String sayGoodBye(String msg) {
         return "good bye " + msg;
     }
 }

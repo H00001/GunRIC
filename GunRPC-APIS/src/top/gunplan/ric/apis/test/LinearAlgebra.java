@@ -5,6 +5,7 @@ import top.gunplan.ric.apis.test.anno.GunUseImpl;
 import java.io.Serializable;
 
 /**
+ * LinearAlgebra calculator class
  * @author dosdrtt
  * @date 1557231535
  */
