@@ -14,7 +14,7 @@ import java.net.Socket;
 /**
  *
  */
-class GunRPCPublishManage {
+class GunRicPublishManage {
     static void publishInterface(final GunRICProperty ppt) throws IOException {
         Socket ss = new Socket(ppt.getCenterAddr(), ppt.getCenterPort());
         InputStream is = GunRicRegisterProtocol.class.getClassLoader().getResourceAsStream("publishInterface");

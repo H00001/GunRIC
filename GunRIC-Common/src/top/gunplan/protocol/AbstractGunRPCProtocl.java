@@ -38,9 +38,20 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
     RicProtocolType type;
     RicProtoclCode code;
+    int serialnumber;
+
+
+    public int getSerialnumber() {
+        return serialnumber;
+    }
+
+    public void setSerialnumber(int serialnumber) {
+        this.serialnumber = serialnumber;
+    }
 
     final static byte TYPE_LEN = 2;
     final static byte CODE_LEN = 2;
+    final static byte SERIZNUM_LEN = 2;
 
 
     public RicProtocolType getType() {
@@ -163,6 +174,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     void publicSet(GunBytesUtil.GunWriteByteUtil util) {
         util.write(type.value);
         util.write(code.value);
+        util.write(serialnumber);
     }
 
 
@@ -174,6 +186,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     void publicUnSet(GunBytesUtil.GunReadByteUtil unserizutil) {
         this.type = RicProtocolType.valuefrom(unserizutil.readInt());
         this.code = RicProtoclCode.valuefrom(unserizutil.readInt());
+        this.serialnumber = unserizutil.readInt();
     }
 
 }

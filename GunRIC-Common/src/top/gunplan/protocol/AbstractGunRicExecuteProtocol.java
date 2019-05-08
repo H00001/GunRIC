@@ -1,6 +1,7 @@
 package top.gunplan.protocol;
 
 
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.io.*;
@@ -51,11 +52,15 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtoc
             } else {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 try {
-                    ObjectOutputStream oos = new ObjectOutputStream(bos);
-                    oos.writeObject(data);
-                    len += bos.size() + type.deslen;
+                    if (data instanceof Serializable) {
+                        ObjectOutputStream oos = new ObjectOutputStream(bos);
+                        oos.writeObject(data);
+                        len += bos.size() + type.deslen;
+                    } else {
+                        throw new GunObjectCannotSerizableException(data.getClass().getName() + " can not been serializable");
+                    }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    AbstractGunBaseLogUtil.error(e);
                 }
 
             }
@@ -68,6 +73,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtoc
         this.interfaceName = new String(unserizutil.readByte(ilen));
         int methodlen = unserizutil.readByte();
         this.methodName = new String(unserizutil.readByte(methodlen));
+
 
     }
 

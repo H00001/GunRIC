@@ -50,7 +50,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 2 + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAG.length;
+        int len = 2 + SERIZNUM_LEN + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAG.length;
         byte[] serizea = new byte[len];
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serizea);
         publicSet(serizUtil);
@@ -64,11 +64,15 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
     }
 
 
-    public void pushParam(Object obj) {
+    public boolean pushParam(Object obj) {
         otherCount += 1;
-        otherCount = addLenByParam(otherCount, obj);
+        try {
+            otherCount = addLenByParam(otherCount, obj);
+        } catch (Exception exp) {
+            return false;
+        }
         helpers[now++] = new ParamHelper(obj, RicProtocolParamType.valuefrom(obj.getClass()).clazz);
-
+        return true;
     }
 
     private int now;

@@ -4,7 +4,6 @@ import top.gunplan.ric.apis.test.CalServicers;
 import top.gunplan.ric.apis.test.TestObject;
 
 
-
 /**
  * @author dosdrtt
  */
@@ -30,13 +29,8 @@ public class CalCulServicesImpl implements CalServicers {
     }
 
     @Override
-    public boolean getResult(boolean b) {
-        return b;
-    }
-
-    @Override
     public long longAdd(long a, long b) {
-        return a+b;
+        return a + b;
     }
 
     @Override
@@ -49,18 +43,10 @@ public class CalCulServicesImpl implements CalServicers {
         return a + b;
     }
 
-    @Override
-    public int mAdd(int[] list) {
-        int num = 0;
-        for (int value : list) {
-            num += value;
-        }
-        return num;
-    }
 
     @Override
     public int addObject(TestObject obj) {
-        TestObject objc =  obj;
+        TestObject objc = obj;
         return objc.x + objc.y;
     }
 }

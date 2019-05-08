@@ -30,7 +30,7 @@ public class ProviderBoot {
             public boolean onBooting(GunProPerty gunProPerty) {
                                 GunRICProperty ppt = GunNettyPropertyManagerImpl.getProperty("ric-provide");
                 try {
-                    GunRPCPublishManage.publishInterface(ppt);
+                    GunRicPublishManage.publishInterface(ppt);
                 } catch (IOException e) {
                    e.printStackTrace();
                  //  return false;

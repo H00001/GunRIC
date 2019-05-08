@@ -23,6 +23,7 @@ public class GunStdRicHandle implements GunNettyHandle {
         final GunRicInputProtocol i = ((GunRicInputProtocol) gunNetInputInterface);
         o.setReturnValue(help);
         o.setType(RicProtocolType.RESPONSE);
+        o.setSerialnumber(i.getSerialnumber());
         try {
             if (invokeMethod(help, o, i)) {
                 return o;
