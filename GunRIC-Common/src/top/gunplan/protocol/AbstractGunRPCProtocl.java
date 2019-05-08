@@ -23,7 +23,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 //        AbstractGunRPCProtocl it = new AbstractGunRPCProtocl();
 //        it.setInterfaceName("hello");
 //        it.setMethodName("rpc");
-//        it.setType(RicProtoclType.REQUEST);
+//        it.setType(RicProtocolType.REQUEST);
 //        it.setCode(RicProtoclCode.SUCCEED);
 //        it.pushParam("1234");
 //
@@ -34,18 +34,20 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 //    }
 
     // type 2 method 2 interfaceNamelen 1 interfacename ? methodNamelen 1 methodNamel? paramlen 1 end 2
-    RicProtoclType type;
+
+
+    RicProtocolType type;
     RicProtoclCode code;
 
-    public final static byte TYPE_LEN = 2;
-    public final static byte CODE_LEN = 2;
+    final static byte TYPE_LEN = 2;
+    final static byte CODE_LEN = 2;
 
 
-    public RicProtoclType getType() {
+    public RicProtocolType getType() {
         return type;
     }
 
-    public void setType(RicProtoclType type) {
+    public void setType(RicProtocolType type) {
         this.type = type;
     }
 
@@ -57,7 +59,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         this.code = code;
     }
 
-    public final static byte[] END_FLAGE = {0x7a, 0x7a};
+    public final static byte[] END_FLAG = {0x7a, 0x7a};
 
 
     static class Helper {
@@ -69,7 +71,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
         void write(Object obj) {
             String name = obj.getClass().getSimpleName();
-            RicProtoclParamType type = RicProtoclParamType.valuefrom(obj.getClass());
+            RicProtocolParamType type = RicProtocolParamType.valuefrom(obj.getClass());
             Method md;
             try {
                 if (name.contains("[]")) {
@@ -137,12 +139,11 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         }
 
         private int writeObject0(Object b) {
-
             try {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
                 ObjectOutputStream os = new ObjectOutputStream(bos);
                 os.writeObject(b);
-                util.writeByte((byte) bos.size());
+                util.write(bos.size());
                 util.write(bos.toByteArray());
                 return 0;
             } catch (IOException e) {
@@ -166,12 +167,12 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
 
     boolean checkEnd(GunBytesUtil.GunReadByteUtil unserizutil) {
-        byte[] end = unserizutil.readByte(END_FLAGE.length);
-        return GunBytesUtil.compareBytesFromEnd(end, END_FLAGE);
+        byte[] end = unserizutil.readByte(END_FLAG.length);
+        return GunBytesUtil.compareBytesFromEnd(end, END_FLAG);
     }
 
     void publicUnSet(GunBytesUtil.GunReadByteUtil unserizutil) {
-        this.type = RicProtoclType.valuefrom(unserizutil.readInt());
+        this.type = RicProtocolType.valuefrom(unserizutil.readInt());
         this.code = RicProtoclCode.valuefrom(unserizutil.readInt());
     }
 

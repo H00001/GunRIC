@@ -4,6 +4,7 @@ import top.gunplan.netty.GunException;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
+ * no concurrent class
  * @author dosdrtt
  * @date
  */
@@ -11,7 +12,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
     private ParamHelper[] helpers;
 
     private int paramlen = 0;
-    public static final byte PARAM_LEN = 1;
+    private static final byte PARAM_LEN = 1;
 
     public ParamHelper[] getParaHelpers() {
         return helpers;
@@ -22,7 +23,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
         for (int i = 0; i < paramlen; i++) {
             helpers[i] = readOnceParam(util);
         }
-        return true;
+        return checkEnd(util);
     }
 
     public void setParamLen(int len) {
@@ -42,8 +43,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-
-        int len = 2 + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAGE.length;
+        int len = 2 + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAG.length;
         byte[] serizea = new byte[len];
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serizea);
         publicSet(serizUtil);
@@ -52,7 +52,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
         if (!writeParam(serizUtil)) {
             throw new GunException("write Param error");
         }
-        serizUtil.write(END_FLAGE);
+        serizUtil.write(END_FLAG);
         return serizea;
     }
 
@@ -60,7 +60,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
     public void pushParam(Object obj) {
         otherCount += 1;
         otherCount = addLenByParam(otherCount, obj);
-        helpers[now++] = new ParamHelper(obj, RicProtoclParamType.valuefrom(obj.getClass()).clazz);
+        helpers[now++] = new ParamHelper(obj, RicProtocolParamType.valuefrom(obj.getClass()).clazz);
 
     }
 
@@ -76,11 +76,11 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
 
     @Override
     public boolean unSerialize(byte[] in) {
-        GunBytesUtil.GunReadByteUtil unserizutil = new GunBytesUtil.GunReadByteUtil(in);
-        publicUnSet(unserizutil);
-        super.stdHeadAnaly(unserizutil);
-        this.paramlen = unserizutil.readByte();
-        return paramlen == 0 ? checkEnd(unserizutil) : analyizeParams(paramlen, unserizutil);
+        GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
+        publicUnSet(util);
+        super.stdHeadAnaly(util);
+        this.paramlen = util.readByte();
+        return paramlen == 0 ? checkEnd(util) : analyizeParams(paramlen, util);
     }
 
 

@@ -68,8 +68,8 @@ public class GunRICDividePacketFilter implements GunNettyFilter {
         ArrayList<byte[]> saved = new ArrayList<>(1);
         int last = 0;
         for (int i = 0; i < src.length - 1; i++) {
-            if (src[i] == AbstractGunRPCProtocl.END_FLAGE[0] &&
-                    src[i + 1] == AbstractGunRPCProtocl.END_FLAGE[1]
+            if (src[i] == AbstractGunRPCProtocl.END_FLAG[0] &&
+                    src[i + 1] == AbstractGunRPCProtocl.END_FLAG[1]
             ) {
                 byte[] sbt = new byte[i - last + 1];
                 System.arraycopy(src, last, sbt, 0, i - last + 1);

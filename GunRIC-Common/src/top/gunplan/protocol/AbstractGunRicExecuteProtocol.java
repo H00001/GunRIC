@@ -6,7 +6,6 @@ import top.gunplan.utils.GunBytesUtil;
 import java.io.*;
 
 /**
- *
  * @author dosdrtt
  */
 public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtocl {
@@ -39,15 +38,15 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtoc
 
 
     int addLenByParam(int len, Object data) {
-        final RicProtoclParamType type = RicProtoclParamType.valuefrom(data.getClass());
+        final RicProtocolParamType type = RicProtocolParamType.valuefrom(data.getClass());
         if (type.stdlen != -1) {
             len += type.deslen + type.stdlen;
         } else {
-            if (type == RicProtoclParamType.STRING) {
+            if (type == RicProtocolParamType.STRING) {
                 len += type.deslen + ((String) data).length();
-            } else if (type == RicProtoclParamType.LINT) {
+            } else if (type == RicProtocolParamType.LINT) {
                 len += type.deslen + ((int[]) data).length * 4;
-            } else if (type == RicProtoclParamType.LLINT) {
+            } else if (type == RicProtocolParamType.LLINT) {
                 len += type.deslen + ((int[][]) data).length * ((int[][]) data)[0].length * 4;
             } else {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -86,9 +85,9 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtoc
         }
 
         public Object obj;
-        public Class<?> clazz;
+        Class<?> clazz;
 
-        public ParamHelper(Object obj, Class<?> clazz) {
+        ParamHelper(Object obj, Class<?> clazz) {
             this.obj = obj;
             this.clazz = clazz;
         }
@@ -99,7 +98,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtoc
     }
 
     ParamHelper readOnceParam(GunBytesUtil.GunReadByteUtil util) {
-        RicProtoclParamType ptypei = RicProtoclParamType.valuefrom(util.readByte());
+        RicProtocolParamType ptypei = RicProtocolParamType.valuefrom(util.readByte());
         ParamHelper help = new ParamHelper();
         help.clazz = ptypei.clazz;
         switch (ptypei) {
@@ -145,7 +144,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtoc
             }
             break;
             case OBJECT: {
-                int l = util.readUByte();
+                int l = util.readInt();
                 final byte[] o = util.readByte(l);
                 try {
                     ObjectInputStream os = new ObjectInputStream(new ByteArrayInputStream(o));

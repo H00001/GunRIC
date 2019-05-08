@@ -33,7 +33,7 @@ public class GunRicRegisterProtocol extends AbstractGunRicExecuteProtocol {
     }
 
     public GunRicRegisterProtocol() {
-        this.type = RicProtoclType.REGISTER;
+        this.type = RicProtocolType.REGISTER;
     }
 
     public GunRicRegisterProtocol(int port) {
@@ -56,7 +56,7 @@ public class GunRicRegisterProtocol extends AbstractGunRicExecuteProtocol {
     private void readParam(int paramlen0, GunBytesUtil.GunReadByteUtil util) {
         if (paramlen0 != 0) {
             for (int i = 0; i < paramlen0; i++) {
-                types[i] = RicProtoclParamType.valuefrom(util.readByte()).clazz;
+                types[i] = RicProtocolParamType.valuefrom(util.readByte()).clazz;
             }
         }
     }
@@ -64,7 +64,7 @@ public class GunRicRegisterProtocol extends AbstractGunRicExecuteProtocol {
     @Override
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
-        this.type = RicProtoclType.valuefrom(util.readInt());
+        this.type = RicProtocolType.valuefrom(util.readInt());
         this.port = util.readInt();
         super.stdHeadAnaly(util);
         this.paramlen = util.readByte();
@@ -75,21 +75,21 @@ public class GunRicRegisterProtocol extends AbstractGunRicExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 3 + CODE_LEN + TYPE_LEN + paramlen + END_FLAGE.length + interfaceName.length() + methodName.length();
+        int len = 3 + CODE_LEN + TYPE_LEN + paramlen + END_FLAG.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(save);
-        util.write(RicProtoclType.REGISTER.value);
+        util.write(RicProtocolType.REGISTER.value);
         util.write(port);
         super.stdHeadWrite(util);
         util.writeByte((byte) paramlen);
         writeParamTypes(util);
-        util.write(END_FLAGE);
+        util.write(END_FLAG);
         return save;
     }
 
     private void writeParamTypes(GunBytesUtil.GunWriteByteUtil util) {
         for (int i = 0; i < paramlen; i++) {
-            util.writeByte(RicProtoclParamType.valuefrom(types[i]).val);
+            util.writeByte(RicProtocolParamType.valuefrom(types[i]).val);
         }
     }
 }

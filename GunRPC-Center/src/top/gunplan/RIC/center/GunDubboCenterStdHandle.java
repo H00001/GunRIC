@@ -6,7 +6,7 @@ import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.protocol.GunRicRegisterProtocol;
 
-import top.gunplan.protocol.RicProtoclParamType;
+import top.gunplan.protocol.RicProtocolParamType;
 import top.gunplan.protocol.util.DictonaryUtil;
 
 
@@ -55,7 +55,7 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
             } else {
                 bf = new BufferedOutputStream(new FileOutputStream(f, true));
                 for (Class<?> aClass : t) {
-                    RicProtoclParamType tp = RicProtoclParamType.valuefrom(aClass);
+                    RicProtocolParamType tp = RicProtocolParamType.valuefrom(aClass);
                     bf.write(tp.val);
                 }
                 fa(is, mn, in, t, hh);
@@ -103,7 +103,7 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
         hashh = paramtypes.length;
         int hashl = 0;
         for (Class<?> paramtype : paramtypes) {
-            RicProtoclParamType tp = RicProtoclParamType.valuefrom(paramtype);
+            RicProtocolParamType tp = RicProtocolParamType.valuefrom(paramtype);
             hashl += tp.val;
         }
         return (hashh << 32) | hashl;

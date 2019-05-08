@@ -5,7 +5,7 @@ import top.gunplan.utils.GunBytesUtil;
 /**
  * @author dosdrtt
  */
-public class GunRicOutputProtocl extends AbstractGunRicExecuteProtocol {
+public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol {
     @Override
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
@@ -27,13 +27,13 @@ public class GunRicOutputProtocl extends AbstractGunRicExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = TYPE_LEN + CODE_LEN + 1 + END_FLAGE.length;
+        int len = TYPE_LEN + CODE_LEN + 1 + END_FLAG.length;
         len = addLenByParam(len, returnValue.obj);
         byte[] serize = new byte[len];
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serize);
         publicSet(serizUtil);
         writeOnceParam(serizUtil, returnValue.obj);
-        serizUtil.write(END_FLAGE);
+        serizUtil.write(END_FLAG);
         return serize;
     }
 }

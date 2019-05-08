@@ -7,7 +7,7 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public class GunRicHelloProtocol extends AbstractGunRPCProtocl {
     GunRicHelloProtocol(boolean type) {
-        this.type = RicProtoclType.HELLO;
+        this.type = RicProtocolType.HELLO;
         this.code = type ? RicProtoclCode.HELLO_REQ : RicProtoclCode.HELLO_RES;
     }
 
@@ -22,10 +22,10 @@ public class GunRicHelloProtocol extends AbstractGunRPCProtocl {
 
     @Override
     public byte[] serialize() {
-        byte[] seriz = new byte[CODE_LEN + TYPE_LEN + END_FLAGE.length];
+        byte[] seriz = new byte[CODE_LEN + TYPE_LEN + END_FLAG.length];
         GunBytesUtil.GunWriteByteUtil unserizutil = new GunBytesUtil.GunWriteByteUtil(seriz);
         publicSet(unserizutil);
-        unserizutil.write(END_FLAGE);
+        unserizutil.write(END_FLAG);
         return seriz;
     }
 }

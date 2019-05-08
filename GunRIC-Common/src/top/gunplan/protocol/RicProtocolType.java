@@ -4,7 +4,7 @@ package top.gunplan.protocol;
  * @author dosdrtt
  */
 
-public enum RicProtoclType {
+public enum RicProtocolType {
     /**
      * REQUEST request packet (interface invoke request)
      * RESPONSE
@@ -18,13 +18,13 @@ public enum RicProtoclType {
     REGRESP(0x04),GET(0x08), HELLO(0x09);
     int value;
 
-    RicProtoclType(int i) {
+    RicProtocolType(int i) {
         this.value = i;
     }
 
-    public static RicProtoclType valuefrom(int val) {
-        RicProtoclType[] types = values();
-        for (RicProtoclType tp : types) {
+    public static RicProtocolType valuefrom(int val) {
+        RicProtocolType[] types = values();
+        for (RicProtocolType tp : types) {
             if (tp.value == val) {
                 return tp;
             }

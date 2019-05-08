@@ -7,7 +7,7 @@ import java.util.Map;
  * @author dosdrtt
  * @date 1557304134
  */
-public enum RicProtoclParamType {
+public enum RicProtocolParamType {
     /**
      *
      */
@@ -18,11 +18,11 @@ public enum RicProtoclParamType {
     BYTE((byte) 0x05, byte.class, 1, 0),
     STRING((byte) 0x02, String.class, -1, 1),
     LINT((byte) 0x06, int[].class, -1, 1),
-    OBJECT((byte) 0x04, Object.class, -1, 1),
+    OBJECT((byte) 0x04, Object.class, -1, 2),
     LLINT((byte) 0x0b, int[][].class, -1, 2);
 
 
-    RicProtoclParamType(byte val, Class<?> clazz, int stdlen, int deslen) {
+    RicProtocolParamType(byte val, Class<?> clazz, int stdlen, int deslen) {
         this.val = val;
         this.clazz = clazz;
         this.stdlen = stdlen;
@@ -35,7 +35,7 @@ public enum RicProtoclParamType {
     public Class<?> clazz;
 
 
-//    RicProtoclParamType(byte val) {
+//    RicProtocolParamType(byte val) {
 //        this.val = val;
 //    }
 
@@ -43,9 +43,9 @@ public enum RicProtoclParamType {
         return this.clazz;
     }
 
-    public static RicProtoclParamType valuefrom(byte val) {
-        RicProtoclParamType[] types = values();
-        for (RicProtoclParamType tp : types) {
+    public static RicProtocolParamType valuefrom(byte val) {
+        RicProtocolParamType[] types = values();
+        for (RicProtocolParamType tp : types) {
             if (tp.val == val) {
                 return tp;
             }
@@ -53,11 +53,11 @@ public enum RicProtoclParamType {
         return OBJECT;
     }
 
-    public static RicProtoclParamType valuefrom(Class<?> val) {
-        RicProtoclParamType tp = Mmap.mmap.get(val);
+    public static RicProtocolParamType valuefrom(Class<?> val) {
+        RicProtocolParamType tp = Mmap.mmap.get(val);
         if (tp == null) {
-            RicProtoclParamType[] types = values();
-            for (RicProtoclParamType tp1 : types) {
+            RicProtocolParamType[] types = values();
+            for (RicProtocolParamType tp1 : types) {
                 if (tp1.clazz == val) {
                     return tp1;
                 }
@@ -65,21 +65,20 @@ public enum RicProtoclParamType {
         } else {
             return tp;
         }
-
         return OBJECT;
     }
 
     static class Mmap {
-        static Map<Class<?>, RicProtoclParamType> mmap = new HashMap<>();
+        static Map<Class<?>, RicProtocolParamType> mmap = new HashMap<>();
 
         static {
-            mmap.put(Integer.class, RicProtoclParamType.INT);
-            mmap.put(Boolean.class, RicProtoclParamType.BOOLEAN);
-            mmap.put(Byte.class, RicProtoclParamType.BYTE);
-            mmap.put(Integer[].class, RicProtoclParamType.LINT);
-            mmap.put(Short.class, RicProtoclParamType.SHORT);
-            mmap.put(Long.class, RicProtoclParamType.LONG);
-            mmap.put(Integer[][].class, RicProtoclParamType.LLINT);
+            mmap.put(Integer.class, RicProtocolParamType.INT);
+            mmap.put(Boolean.class, RicProtocolParamType.BOOLEAN);
+            mmap.put(Byte.class, RicProtocolParamType.BYTE);
+            mmap.put(Integer[].class, RicProtocolParamType.LINT);
+            mmap.put(Short.class, RicProtocolParamType.SHORT);
+            mmap.put(Long.class, RicProtocolParamType.LONG);
+            mmap.put(Integer[][].class, RicProtocolParamType.LLINT);
         }
     }
 }

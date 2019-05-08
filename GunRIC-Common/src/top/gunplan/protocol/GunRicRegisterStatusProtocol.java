@@ -13,7 +13,7 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRPCProtocl {
     }
 
     public GunRicRegisterStatusProtocol(RicProtoclCode status) {
-        this.type = RicProtoclType.REGRESP;
+        this.type = RicProtocolType.REGRESP;
         this.code = status;
 
     }
@@ -30,7 +30,7 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRPCProtocl {
         byte[] sv = new byte[6];
         GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(sv);
         publicSet(util);
-        util.write(END_FLAGE);
+        util.write(END_FLAG);
         return sv;
     }
 }
