@@ -7,7 +7,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @author dosdrtt
  * @date
  */
-public final class GunRicInputProtocol extends AbstractGunRPCExecuteProtocol {
+public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
     private ParamHelper[] helpers;
 
     private int paramlen = 0;

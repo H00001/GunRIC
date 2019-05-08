@@ -1,8 +1,9 @@
 package top.gunplan.protocol;
 
-public class GunRICGetProcotol extends GunRICRegisterProtocol {
+public class GunRICGetProcotol extends GunRicRegisterProtocol {
+    //todo
     public GunRICGetProcotol() {
-        this.type = RPCProtoclType.GET;
+        this.type = RicProtoclType.GET;
         this.setPort(0x0);
     }
 }

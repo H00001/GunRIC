@@ -12,8 +12,8 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRPCProtocl {
 
     }
 
-    public GunRicRegisterStatusProtocol(RPCProtoclCode status) {
-        this.type = RPCProtoclType.REGRESP;
+    public GunRicRegisterStatusProtocol(RicProtoclCode status) {
+        this.type = RicProtoclType.REGRESP;
         this.code = status;
 
     }

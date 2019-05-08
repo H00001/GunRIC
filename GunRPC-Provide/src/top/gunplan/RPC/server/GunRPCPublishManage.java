@@ -2,7 +2,7 @@ package top.gunplan.RPC.server;
 
 
 import top.gunplan.RPC.server.property.GunRICProperty;
-import top.gunplan.protocol.GunRICRegisterProtocol;
+import top.gunplan.protocol.GunRicRegisterProtocol;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,9 +17,9 @@ import java.net.Socket;
 class GunRPCPublishManage {
     static void publishInterface(final GunRICProperty ppt) throws IOException {
         Socket ss = new Socket(ppt.getCenterAddr(), ppt.getCenterPort());
-        InputStream is = GunRICRegisterProtocol.class.getClassLoader().getResourceAsStream("publishInterface");
+        InputStream is = GunRicRegisterProtocol.class.getClassLoader().getResourceAsStream("publishInterface");
         assert is != null;
-        GunRICRegisterProtocol protocol = new GunRICRegisterProtocol();
+        GunRicRegisterProtocol protocol = new GunRicRegisterProtocol();
         protocol.setPort(ppt.getServerLocalPort());
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String line;
@@ -43,7 +43,7 @@ class GunRPCPublishManage {
 
 
 
-    private static void constructProtoclo(Class<?> clazz, Method md, GunRICRegisterProtocol protocol) {
+    private static void constructProtoclo(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
         protocol.setInterfaceName(clazz.getName());
         protocol.setMethodName(md.getName());
         protocol.setParamlen(md.getParameterCount());

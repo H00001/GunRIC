@@ -23,8 +23,8 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 //        AbstractGunRPCProtocl it = new AbstractGunRPCProtocl();
 //        it.setInterfaceName("hello");
 //        it.setMethodName("rpc");
-//        it.setType(RPCProtoclType.REQUEST);
-//        it.setCode(RPCProtoclCode.SUCCEED);
+//        it.setType(RicProtoclType.REQUEST);
+//        it.setCode(RicProtoclCode.SUCCEED);
 //        it.pushParam("1234");
 //
 //        byte[] bom = it.serialize();
@@ -34,26 +34,26 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 //    }
 
     // type 2 method 2 interfaceNamelen 1 interfacename ? methodNamelen 1 methodNamel? paramlen 1 end 2
-    RPCProtoclType type;
-    RPCProtoclCode code;
+    RicProtoclType type;
+    RicProtoclCode code;
 
     public final static byte TYPE_LEN = 2;
     public final static byte CODE_LEN = 2;
 
 
-    public RPCProtoclType getType() {
+    public RicProtoclType getType() {
         return type;
     }
 
-    public void setType(RPCProtoclType type) {
+    public void setType(RicProtoclType type) {
         this.type = type;
     }
 
-    public RPCProtoclCode getCode() {
+    public RicProtoclCode getCode() {
         return code;
     }
 
-    public void setCode(RPCProtoclCode code) {
+    public void setCode(RicProtoclCode code) {
         this.code = code;
     }
 
@@ -171,8 +171,8 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     }
 
     void publicUnSet(GunBytesUtil.GunReadByteUtil unserizutil) {
-        this.type = RPCProtoclType.valuefrom(unserizutil.readInt());
-        this.code = RPCProtoclCode.valuefrom(unserizutil.readInt());
+        this.type = RicProtoclType.valuefrom(unserizutil.readInt());
+        this.code = RicProtoclCode.valuefrom(unserizutil.readInt());
     }
 
 }

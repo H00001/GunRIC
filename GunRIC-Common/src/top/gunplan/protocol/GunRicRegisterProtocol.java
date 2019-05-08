@@ -8,7 +8,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @version 0.0.0.0
  * @since 0.0.0.0
  */
-public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
+public class GunRicRegisterProtocol extends AbstractGunRicExecuteProtocol {
     private int paramlen = 0;
 
     public int getPort() {
@@ -32,11 +32,11 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
         types = null;
     }
 
-    public GunRICRegisterProtocol() {
-        this.type = RPCProtoclType.REGISTER;
+    public GunRicRegisterProtocol() {
+        this.type = RicProtoclType.REGISTER;
     }
 
-    public GunRICRegisterProtocol(int port) {
+    public GunRicRegisterProtocol(int port) {
         this.port = port;
     }
 
@@ -64,7 +64,7 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
     @Override
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
-        this.type = RPCProtoclType.valuefrom(util.readInt());
+        this.type = RicProtoclType.valuefrom(util.readInt());
         this.port = util.readInt();
         super.stdHeadAnaly(util);
         this.paramlen = util.readByte();
@@ -75,10 +75,10 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 7 + paramlen + 2 + interfaceName.length() + methodName.length();
+        int len = 3 + CODE_LEN + TYPE_LEN + paramlen + END_FLAGE.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(save);
-        util.write(RPCProtoclType.REGISTER.value);
+        util.write(RicProtoclType.REGISTER.value);
         util.write(port);
         super.stdHeadWrite(util);
         util.writeByte((byte) paramlen);

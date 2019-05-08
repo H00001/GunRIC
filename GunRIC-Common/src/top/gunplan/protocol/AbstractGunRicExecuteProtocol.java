@@ -9,7 +9,7 @@ import java.io.*;
  *
  * @author dosdrtt
  */
-public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtocl {
+public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtocl {
     String methodName;
     String interfaceName;
 
@@ -65,8 +65,8 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
     }
 
     void stdHeadAnaly(GunBytesUtil.GunReadByteUtil unserizutil) {
-        final int interlen = unserizutil.readByte();
-        this.interfaceName = new String(unserizutil.readByte(interlen));
+        final int ilen = unserizutil.readByte();
+        this.interfaceName = new String(unserizutil.readByte(ilen));
         int methodlen = unserizutil.readByte();
         this.methodName = new String(unserizutil.readByte(methodlen));
 

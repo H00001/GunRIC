@@ -4,7 +4,7 @@ import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
-import top.gunplan.protocol.GunRICRegisterProtocol;
+import top.gunplan.protocol.GunRicRegisterProtocol;
 
 import top.gunplan.protocol.RicProtoclParamType;
 import top.gunplan.protocol.util.DictonaryUtil;
@@ -35,7 +35,7 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface request) throws GunException {
         final String r = DictonaryUtil.getRes();
-        final GunRICRegisterProtocol pt = (GunRICRegisterProtocol) ((GunRicCenterDto) request).getObji();
+        final GunRicRegisterProtocol pt = (GunRicRegisterProtocol) ((GunRicCenterDto) request).getObji();
         final InetSocketAddress a = ((GunRicCenterDto) request).getAddress();
         final String mn = pt.gMN();
         final String in = pt.gIN();
@@ -76,7 +76,7 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
         GunRICInterfaceBuffer.intermapping.put(gg, al);
     }
 
-    private void wP(GunRICRegisterProtocol protocol, String addr, BufferedOutputStream bof) throws IOException {
+    private void wP(GunRicRegisterProtocol protocol, String addr, BufferedOutputStream bof) throws IOException {
         bof.write('\n');
         bof.write((protocol.getPort() + D + addr).getBytes());
         bof.close();

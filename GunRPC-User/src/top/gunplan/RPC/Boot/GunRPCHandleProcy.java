@@ -28,8 +28,8 @@ public class GunRPCHandleProcy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         GunRicInputProtocol protocl = new GunRicInputProtocol();
-        protocl.setType(RPCProtoclType.REQUEST);
-        protocl.setCode(RPCProtoclCode.SUCCEED);
+        protocl.setType(RicProtoclType.REQUEST);
+        protocl.setCode(RicProtoclCode.SUCCEED);
         protocl.setInterfaceName(interfaceName);
         protocl.setMethodName(method.getName());
         if (args != null) {
@@ -45,12 +45,12 @@ public class GunRPCHandleProcy implements InvocationHandler {
         //
         int len = in.read(b);
 
-        GunRPCOutputProtocl rpc = (GunRPCOutputProtocl) GunRPCDividePacketManage.findPackage(b);
-        if (rpc.getCode() == RPCProtoclCode.FAIL) {
+        GunRicOutputProtocl rpc = (GunRicOutputProtocl) GunRicDividePacketManage.findPackage(b);
+        if (rpc.getCode() == RicProtoclCode.FAIL) {
             System.out.println(rpc.getReturnValue().obj);
             return null;
         }
-        if (rpc.getCode() == RPCProtoclCode.SUCCEED) {
+        if (rpc.getCode() == RicProtoclCode.SUCCEED) {
             return rpc.getReturnValue().obj;
         }
         return null;

@@ -18,36 +18,36 @@ public class GunStdRicHandle implements GunNettyHandle {
 
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) {
-        AbstractGunRPCExecuteProtocol.ParamHelper help = new AbstractGunRPCExecuteProtocol.ParamHelper();
-        final GunRPCOutputProtocl o = new GunRPCOutputProtocl();
+        AbstractGunRicExecuteProtocol.ParamHelper help = new AbstractGunRicExecuteProtocol.ParamHelper();
+        final GunRicOutputProtocl o = new GunRicOutputProtocl();
         final GunRicInputProtocol i = ((GunRicInputProtocol) gunNetInputInterface);
         o.setReturnValue(help);
-        o.setType(RPCProtoclType.RESPONSE);
+        o.setType(RicProtoclType.RESPONSE);
         try {
             if (invokeMethod(help, o, i)) {
                 return o;
             }
         } catch (ReflectiveOperationException e) {
             help.setObj(e.getClass().getSimpleName() + ":" + e.getLocalizedMessage());
-            o.setCode(RPCProtoclCode.FAIL);
+            o.setCode(RicProtoclCode.FAIL);
         } catch (Exception exp) {
             this.dealExceptionEvent(exp);
         }
         return o;
     }
 
-    private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputpol, GunRicInputProtocol inputpol) throws Exception {
+    private boolean invokeMethod(AbstractGunRicExecuteProtocol.ParamHelper help, GunRicOutputProtocl outputpol, GunRicInputProtocol inputpol) throws Exception {
         Class<?> inst = Class.forName(inputpol.gIN());
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).newInstance();
         Method realmd = inst.getMethod(inputpol.gMN(), inputpol.getParamTypeList());
         if (realmd == null) {
-            outputpol.setCode(RPCProtoclCode.FAIL);
+            outputpol.setCode(RicProtoclCode.FAIL);
             help.setObj("method not found ");
             AbstractGunBaseLogUtil.error(inputpol.gMN(), "method not found", "[PROVIDE]");
             return false;
         }
         help.setObj(inputpol.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inputpol.getParameters()));
-        outputpol.setCode(RPCProtoclCode.SUCCEED);
+        outputpol.setCode(RicProtoclCode.SUCCEED);
         return true;
     }
 

@@ -3,7 +3,7 @@ package top.gunplan.protocol;
 /**
  * @author dosdrtt
  */
-public interface GunProtoclContorl {
+public interface GunProtocolContorl {
     /**
      * get is or not return
      *
