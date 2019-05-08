@@ -56,7 +56,7 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
     private void readParam(int paramlen0, GunBytesUtil.GunReadByteUtil util) {
         if (paramlen0 != 0) {
             for (int i = 0; i < paramlen0; i++) {
-                types[i] = RPCProtoclParamType.valuefrom(util.readByte()).clazz;
+                types[i] = RicProtoclParamType.valuefrom(util.readByte()).clazz;
             }
         }
     }
@@ -89,7 +89,7 @@ public class GunRICRegisterProtocol extends AbstractGunRPCExecuteProtocol {
 
     private void writeParamTypes(GunBytesUtil.GunWriteByteUtil util) {
         for (int i = 0; i < paramlen; i++) {
-            util.writeByte(RPCProtoclParamType.valuefrom(types[i]).val);
+            util.writeByte(RicProtoclParamType.valuefrom(types[i]).val);
         }
     }
 }

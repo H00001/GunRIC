@@ -39,15 +39,15 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
 
 
     int addLenByParam(int len, Object data) {
-        final RPCProtoclParamType type = RPCProtoclParamType.valuefrom(data.getClass());
+        final RicProtoclParamType type = RicProtoclParamType.valuefrom(data.getClass());
         if (type.stdlen != -1) {
             len += type.deslen + type.stdlen;
         } else {
-            if (type == RPCProtoclParamType.STRING) {
+            if (type == RicProtoclParamType.STRING) {
                 len += type.deslen + ((String) data).length();
-            } else if (type == RPCProtoclParamType.LINT) {
+            } else if (type == RicProtoclParamType.LINT) {
                 len += type.deslen + ((int[]) data).length * 4;
-            } else if (type == RPCProtoclParamType.LLINT) {
+            } else if (type == RicProtoclParamType.LLINT) {
                 len += type.deslen + ((int[][]) data).length * ((int[][]) data)[0].length * 4;
             } else {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -99,7 +99,7 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
     }
 
     ParamHelper readOnceParam(GunBytesUtil.GunReadByteUtil util) {
-        RPCProtoclParamType ptypei = RPCProtoclParamType.valuefrom(util.readByte());
+        RicProtoclParamType ptypei = RicProtoclParamType.valuefrom(util.readByte());
         ParamHelper help = new ParamHelper();
         help.clazz = ptypei.clazz;
         switch (ptypei) {

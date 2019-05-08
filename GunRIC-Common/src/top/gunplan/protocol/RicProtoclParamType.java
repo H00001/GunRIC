@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  *
  */
-public enum RPCProtoclParamType {
+public enum RicProtoclParamType {
     /**
      *
      */
@@ -21,7 +21,7 @@ public enum RPCProtoclParamType {
     LLINT((byte) 0x0b, int[][].class, -1, 2);
 
 
-    RPCProtoclParamType(byte val, Class<?> clazz, int stdlen, int deslen) {
+    RicProtoclParamType(byte val, Class<?> clazz, int stdlen, int deslen) {
         this.val = val;
         this.clazz = clazz;
         this.stdlen = stdlen;
@@ -34,7 +34,7 @@ public enum RPCProtoclParamType {
     public Class<?> clazz;
 
 
-//    RPCProtoclParamType(byte val) {
+//    RicProtoclParamType(byte val) {
 //        this.val = val;
 //    }
 
@@ -42,9 +42,9 @@ public enum RPCProtoclParamType {
         return this.clazz;
     }
 
-    public static RPCProtoclParamType valuefrom(byte val) {
-        RPCProtoclParamType[] types = values();
-        for (RPCProtoclParamType tp : types) {
+    public static RicProtoclParamType valuefrom(byte val) {
+        RicProtoclParamType[] types = values();
+        for (RicProtoclParamType tp : types) {
             if (tp.val == val) {
                 return tp;
             }
@@ -52,11 +52,11 @@ public enum RPCProtoclParamType {
         return OBJECT;
     }
 
-    public static RPCProtoclParamType valuefrom(Class<?> val) {
-        RPCProtoclParamType tp = Mmap.mmap.get(val);
+    public static RicProtoclParamType valuefrom(Class<?> val) {
+        RicProtoclParamType tp = Mmap.mmap.get(val);
         if (tp == null) {
-            RPCProtoclParamType[] types = values();
-            for (RPCProtoclParamType tp1 : types) {
+            RicProtoclParamType[] types = values();
+            for (RicProtoclParamType tp1 : types) {
                 if (tp1.clazz == val) {
                     return tp1;
                 }
@@ -69,16 +69,16 @@ public enum RPCProtoclParamType {
     }
 
     static class Mmap {
-        static Map<Class<?>, RPCProtoclParamType> mmap = new HashMap<>();
+        static Map<Class<?>, RicProtoclParamType> mmap = new HashMap<>();
 
         static {
-            mmap.put(Integer.class, RPCProtoclParamType.INT);
-            mmap.put(Boolean.class, RPCProtoclParamType.BOOLEAN);
-            mmap.put(Byte.class, RPCProtoclParamType.BYTE);
-            mmap.put(Integer[].class, RPCProtoclParamType.LINT);
-            mmap.put(Short.class, RPCProtoclParamType.SHORT);
-            mmap.put(Long.class, RPCProtoclParamType.LONG);
-            mmap.put(Integer[][].class, RPCProtoclParamType.LLINT);
+            mmap.put(Integer.class, RicProtoclParamType.INT);
+            mmap.put(Boolean.class, RicProtoclParamType.BOOLEAN);
+            mmap.put(Byte.class, RicProtoclParamType.BYTE);
+            mmap.put(Integer[].class, RicProtoclParamType.LINT);
+            mmap.put(Short.class, RicProtoclParamType.SHORT);
+            mmap.put(Long.class, RicProtoclParamType.LONG);
+            mmap.put(Integer[][].class, RicProtoclParamType.LLINT);
         }
     }
 }

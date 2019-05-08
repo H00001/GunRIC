@@ -20,7 +20,7 @@ public class GunStdRicHandle implements GunNettyHandle {
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) {
         AbstractGunRPCExecuteProtocol.ParamHelper help = new AbstractGunRPCExecuteProtocol.ParamHelper();
         final GunRPCOutputProtocl o = new GunRPCOutputProtocl();
-        final GunRPCInputProtocl i = ((GunRPCInputProtocl) gunNetInputInterface);
+        final GunRicInputProtocol i = ((GunRicInputProtocol) gunNetInputInterface);
         o.setReturnValue(help);
         o.setType(RPCProtoclType.RESPONSE);
         try {
@@ -36,7 +36,7 @@ public class GunStdRicHandle implements GunNettyHandle {
         return o;
     }
 
-    private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputpol, GunRPCInputProtocl inputpol) throws Exception {
+    private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputpol, GunRicInputProtocol inputpol) throws Exception {
         Class<?> inst = Class.forName(inputpol.gIN());
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).newInstance();
         Method realmd = inst.getMethod(inputpol.gMN(), inputpol.getParamTypeList());

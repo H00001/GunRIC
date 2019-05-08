@@ -5,7 +5,7 @@ import top.gunplan.netty.anno.GunNetFilterOrder;
 
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
-import top.gunplan.protocol.GunRPCInputProtocl;
+import top.gunplan.protocol.GunRicInputProtocol;
 
 
 /**
@@ -15,7 +15,7 @@ import top.gunplan.protocol.GunRPCInputProtocl;
 public class GunStdRicServerFilter implements GunNettyFilter {
     @Override
     public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) {
-        GunRPCInputProtocl protocl = new GunRPCInputProtocl();
+        GunRicInputProtocol protocl = new GunRicInputProtocol();
         if (protocl.unSerialize(gunInputFilterChecker.getSrc())) {
             gunInputFilterChecker.setObject(protocl);
             return DealResult.NEXT;

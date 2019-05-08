@@ -27,7 +27,7 @@ public class GunRPCHandleProcy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        GunRPCInputProtocl protocl = new GunRPCInputProtocl();
+        GunRicInputProtocol protocl = new GunRicInputProtocol();
         protocl.setType(RPCProtoclType.REQUEST);
         protocl.setCode(RPCProtoclCode.SUCCEED);
         protocl.setInterfaceName(interfaceName);

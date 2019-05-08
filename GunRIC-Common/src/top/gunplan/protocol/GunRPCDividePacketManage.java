@@ -17,10 +17,10 @@ public final class GunRPCDividePacketManage {
                 protocl = new GunRPCHelloProtocl(false);
                 break;
             case REGRESP:
-                protocl = new GunRICRegisterStatusProtocol();
+                protocl = new GunRicRegisterStatusProtocol();
                 break;
             case REQUEST:
-                protocl = new GunRPCInputProtocl();
+                protocl = new GunRicInputProtocol();
                 break;
             case REGISTER:
                 protocl = new GunRICRegisterProtocol();

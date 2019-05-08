@@ -5,8 +5,9 @@ import top.gunplan.utils.GunBytesUtil;
 
 /**
  * @author dosdrtt
+ * @date
  */
-public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
+public final class GunRicInputProtocol extends AbstractGunRPCExecuteProtocol {
     private ParamHelper[] helpers;
 
     private int paramlen = 0;
@@ -59,7 +60,7 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     public void pushParam(Object obj) {
         otherCount += 1;
         otherCount = addLenByParam(otherCount, obj);
-        helpers[now++] = new ParamHelper(obj, RPCProtoclParamType.valuefrom(obj.getClass()).clazz);
+        helpers[now++] = new ParamHelper(obj, RicProtoclParamType.valuefrom(obj.getClass()).clazz);
 
     }
 

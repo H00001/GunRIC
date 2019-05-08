@@ -50,7 +50,7 @@ public class CalCulServicesImpl implements CalServicers {
     }
 
     @Override
-    public int Madd(int[] list) {
+    public int mAdd(int[] list) {
         int num = 0;
         for (int value : list) {
             num += value;

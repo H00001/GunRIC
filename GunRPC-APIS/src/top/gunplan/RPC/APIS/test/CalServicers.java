@@ -20,7 +20,7 @@ public interface CalServicers {
 
     String concat(String a, String b);
 
-    int Madd(int[] list);
+    int mAdd(int[] list);
 
     int addObject(TestObject obj);
 

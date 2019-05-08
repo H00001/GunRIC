@@ -1,5 +1,8 @@
 package top.gunplan.protocol;
 
+/**
+ * @author dosdrtt
+ */
 public interface GunProtoclContorl {
     /**
      * get is or not return
