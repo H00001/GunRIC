@@ -1,6 +1,6 @@
-package top.gunplan.RPC.server;
+package top.gunplan.ric.server;
 
-import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
+import top.gunplan.ric.apis.test.anno.GunUseImpl;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.protocol.GunNetInputInterface;

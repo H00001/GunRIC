@@ -1,4 +1,4 @@
-package top.gunplan.RPC.APIS.test;
+package top.gunplan.ric.apis.test;
 
 /**
  * @author dosdrtt

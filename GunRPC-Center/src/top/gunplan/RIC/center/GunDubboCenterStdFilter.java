@@ -28,7 +28,7 @@ public class GunDubboCenterStdFilter implements GunNettyFilter {
         } catch (IOException e) {
             return DealResult.NOTDEALALLNEXT;
         }
-        final GunRICDividePacketFilter.GunDividePacketDto dto = (GunRICDividePacketFilter.GunDividePacketDto) filterDto.getObject();
+        final GunRicDividePacketFilter.GunDividePacketDto dto = (GunRicDividePacketFilter.GunDividePacketDto) filterDto.getObject();
         if (dto.size != 0) {
             List<GunNetInputInterface> gnii = new ArrayList<>(1);
             for (int i = 0; i < dto.size; i++) {

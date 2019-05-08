@@ -1,4 +1,4 @@
-package top.gunplan.RPC.server.property;
+package top.gunplan.ric.server.property;
 
 import top.gunplan.netty.impl.propertys.GunProPerty;
 

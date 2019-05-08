@@ -1,6 +1,6 @@
-package top.gunplan.services;
+package top.gunplan.ric.example.services;
 
-import top.gunplan.RPC.APIS.test.LinearAlgebra;
+import top.gunplan.ric.apis.test.LinearAlgebra;
 
 /**
  * LinearAlgebra function lib

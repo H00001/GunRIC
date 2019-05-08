@@ -1,7 +1,7 @@
-package top.gunplan.RPC.server;
+package top.gunplan.ric.server;
 
 
-import top.gunplan.RPC.server.property.GunRICProperty;
+import top.gunplan.ric.server.property.GunRICProperty;
 import top.gunplan.protocol.GunRicRegisterProtocol;
 
 import java.io.BufferedReader;

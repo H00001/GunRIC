@@ -1,6 +1,6 @@
-package top.gunplan.RPC.APIS.test;
+package top.gunplan.ric.apis.test;
 
-import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
+import top.gunplan.ric.apis.test.anno.GunUseImpl;
 
 import java.io.Serializable;
 
@@ -8,11 +8,12 @@ import java.io.Serializable;
  * @author dosdrtt
  * @date 1557231535
  */
-@GunUseImpl(impl = "top.gunplan.services.LinearAlgebraImpl")
+@GunUseImpl(impl = "top.gunplan.ric.example.services.LinearAlgebraImpl")
 public interface LinearAlgebra {
     /**
      * calculator the det value
-     * @param a det
+     *
+     * @param a    det
      * @param size det's size
      * @return calres
      */

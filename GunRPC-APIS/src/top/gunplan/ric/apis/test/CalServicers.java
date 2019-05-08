@@ -1,8 +1,8 @@
-package top.gunplan.RPC.APIS.test;
+package top.gunplan.ric.apis.test;
 
-import top.gunplan.RPC.APIS.test.anno.GunUseImpl;
+import top.gunplan.ric.apis.test.anno.GunUseImpl;
 
-@GunUseImpl(impl = "top.gunplan.services.CalCulServicesImpl")
+@GunUseImpl(impl = "top.gunplan.ric.example.services.CalCulServicesImpl")
 public interface CalServicers {
     int intAdd(int a, int b);
 

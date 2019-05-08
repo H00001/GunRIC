@@ -4,13 +4,15 @@ import top.gunplan.netty.GunBootServer;
 
 import top.gunplan.netty.filter.GunNettyStdFirstFilter;
 import top.gunplan.netty.impl.GunBootServerFactory;
-import top.gunplan.netty.protocol.GunNetOutputInterface;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author dosdrtt
+ */
 public class CenterBoot {
     public static void main(String[] args) {
         GunBootServer server = GunBootServerFactory.getInstance();
@@ -21,6 +23,7 @@ public class CenterBoot {
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
+                addFilter(new GunRicDividePacketFilter()).
                 addFilter(new GunDubboCenterStdFilter()).
                 setHandle(new GunDubboCenterNewHandle());
         try {

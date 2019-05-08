@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author dosdrtt
  */
 @GunNetFilterOrder(index = 1)
-public class GunRICDividePacketFilter implements GunNettyFilter {
+public class GunRicDividePacketFilter implements GunNettyFilter {
     @Override
     public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) throws Exception {
         final ArrayList<byte[]> pb = divide(gunInputFilterChecker.getSrc());

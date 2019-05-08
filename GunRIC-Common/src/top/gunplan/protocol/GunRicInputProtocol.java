@@ -1,10 +1,12 @@
 package top.gunplan.protocol;
 
 import top.gunplan.netty.GunException;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
  * no concurrent class
+ *
  * @author dosdrtt
  * @date
  */
@@ -35,7 +37,12 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
     private boolean writeParam(GunBytesUtil.GunWriteByteUtil util) {
         for (int i = 0; i < paramlen; i++) {
             Object fil = helpers[i].obj;
-            writeOnceParam(util, fil);
+            try {
+                writeOnceParam(util, fil);
+            } catch (Exception exp) {
+                AbstractGunBaseLogUtil.error(exp);
+                return false;
+            }
         }
         return true;
     }

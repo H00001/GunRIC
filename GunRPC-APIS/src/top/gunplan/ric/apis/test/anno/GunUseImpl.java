@@ -1,4 +1,4 @@
-package top.gunplan.RPC.APIS.test.anno;
+package top.gunplan.ric.apis.test.anno;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GunRIC-Common/GunRIC-Common.iml" filepath="$PROJECT_DIR$/GunRIC-Common/GunRIC-Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GunRIC-Store/GunRIC-Store.iml" filepath="$PROJECT_DIR$/GunRIC-Store/GunRIC-Store.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRPC.iml" filepath="$PROJECT_DIR$/GunRPC.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRPC-APIS/GunRPC-APIS.iml" filepath="$PROJECT_DIR$/GunRPC-APIS/GunRPC-APIS.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRPC-Center/GunRPC-Center.iml" filepath="$PROJECT_DIR$/GunRPC-Center/GunRPC-Center.iml" />

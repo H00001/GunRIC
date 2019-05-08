@@ -1,6 +1,6 @@
-package top.gunplan.RPC.server;
+package top.gunplan.ric.server;
 
-import top.gunplan.RPC.server.property.GunRICProperty;
+import top.gunplan.ric.server.property.GunRICProperty;
 import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunNettyObserve;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
@@ -14,6 +14,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ */
 public class ProviderBoot {
     public static void main(String[] args) {
         GunBootServer server = GunBootServerFactory.getInstance();

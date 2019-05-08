@@ -1,7 +1,10 @@
-package top.gunplan.RPC.APIS.test;
+package top.gunplan.ric.apis.test;
 
 import java.io.Serializable;
 
+/**
+ * @author dosdrtt
+ */
 public class TestObject implements Serializable {
     private static final long serialVersionUID = -7070111165165709488L;
     public int x = 0;

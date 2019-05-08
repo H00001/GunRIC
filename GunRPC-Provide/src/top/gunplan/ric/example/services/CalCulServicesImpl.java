@@ -1,7 +1,7 @@
-package top.gunplan.services;
+package top.gunplan.ric.example.services;
 
-import top.gunplan.RPC.APIS.test.CalServicers;
-import top.gunplan.RPC.APIS.test.TestObject;
+import top.gunplan.ric.apis.test.CalServicers;
+import top.gunplan.ric.apis.test.TestObject;
 
 
 

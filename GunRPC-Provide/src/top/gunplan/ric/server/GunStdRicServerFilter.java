@@ -1,4 +1,4 @@
-package top.gunplan.RPC.server;
+package top.gunplan.ric.server;
 
 import top.gunplan.netty.GunNettyFilter;
 import top.gunplan.netty.anno.GunNetFilterOrder;
