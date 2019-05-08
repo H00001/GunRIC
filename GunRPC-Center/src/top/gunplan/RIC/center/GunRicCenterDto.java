@@ -1,24 +1,35 @@
 package top.gunplan.RIC.center;
 
 import top.gunplan.netty.protocol.GunNetInputInterface;
+import top.gunplan.netty.protocol.GunNetOutputInterface;
 
 import java.net.InetSocketAddress;
+import java.util.List;
 
 /**
  * @author dosdrtt
  * @date 1557231535
  */
-public final class GunRicCenterDto implements GunNetInputInterface {
+public final class GunRicCenterDto implements GunNetInputInterface, GunNetOutputInterface {
     private final InetSocketAddress address;
-    private final GunNetInputInterface obj;
+    private final List<GunNetInputInterface> obji;
+    private GunNetOutputInterface[] objo;
 
-    public GunRicCenterDto(InetSocketAddress address, GunNetInputInterface obj) {
+    public GunRicCenterDto(InetSocketAddress address, List<GunNetInputInterface> obj) {
         this.address = address;
-        this.obj = obj;
+        this.obji = obj;
     }
 
-    public GunNetInputInterface getObj() {
-        return obj;
+    public GunNetOutputInterface[] getObjo() {
+        return objo;
+    }
+
+    public void setObjo(GunNetOutputInterface[] objo) {
+        this.objo = objo;
+    }
+
+    public List<GunNetInputInterface> getObji() {
+        return obji;
     }
 
     public InetSocketAddress getAddress() {
@@ -27,6 +38,25 @@ public final class GunRicCenterDto implements GunNetInputInterface {
 
     @Override
     public boolean unSerialize(byte[] bytes) {
-        return obj.unSerialize(bytes);
+        return false;
+    }
+
+    @Override
+    public byte[] serialize() {
+        int len = 0;
+        int listlen = objo.length;
+        byte[][] lists = new byte[listlen][];
+        for (int i = 0; i < listlen; i++) {
+            byte[] seri = objo[i].serialize();
+            lists[i] = seri;
+            len += seri.length;
+        }
+        byte[] sv = new byte[len];
+        int now = 0;
+        for (int i = 0; i < listlen; i++) {
+            System.arraycopy(lists[i], 0, sv, now, lists[i].length);
+            now += lists[i].length;
+        }
+        return sv;
     }
 }

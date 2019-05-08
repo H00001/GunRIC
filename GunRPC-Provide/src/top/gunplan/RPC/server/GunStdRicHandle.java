@@ -37,13 +37,13 @@ public class GunStdRicHandle implements GunNettyHandle {
     }
 
     private boolean invokeMethod(AbstractGunRPCExecuteProtocol.ParamHelper help, GunRPCOutputProtocl outputpol, GunRPCInputProtocl inputpol) throws Exception {
-        Class<?> inst = Class.forName(inputpol.getInterfaceName());
+        Class<?> inst = Class.forName(inputpol.gIN());
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).newInstance();
-        Method realmd = inst.getMethod(inputpol.getMethodName(), inputpol.getParamTypeList());
+        Method realmd = inst.getMethod(inputpol.gMN(), inputpol.getParamTypeList());
         if (realmd == null) {
             outputpol.setCode(RPCProtoclCode.FAIL);
             help.setObj("method not found ");
-            AbstractGunBaseLogUtil.error(inputpol.getMethodName(), "method not found", "[PROVIDE]");
+            AbstractGunBaseLogUtil.error(inputpol.gMN(), "method not found", "[PROVIDE]");
             return false;
         }
         help.setObj(inputpol.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inputpol.getParameters()));

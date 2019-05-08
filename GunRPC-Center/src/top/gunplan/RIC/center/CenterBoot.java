@@ -4,6 +4,7 @@ import top.gunplan.netty.GunBootServer;
 
 import top.gunplan.netty.filter.GunNettyStdFirstFilter;
 import top.gunplan.netty.impl.GunBootServerFactory;
+import top.gunplan.netty.protocol.GunNetOutputInterface;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -21,7 +22,7 @@ public class CenterBoot {
                 new LinkedBlockingQueue<>());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunDubboCenterStdFilter()).
-                setHandle(new GunDubboCenterStdHandle());
+                setHandle(new GunDubboCenterNewHandle());
         try {
             server.sync();
         } catch (Exception e) {

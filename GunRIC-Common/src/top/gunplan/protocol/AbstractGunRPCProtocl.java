@@ -37,6 +37,9 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
     RPCProtoclType type;
     RPCProtoclCode code;
 
+    public final static byte TYPE_LEN = 2;
+    public final static byte CODE_LEN = 2;
+
 
     public RPCProtoclType getType() {
         return type;
@@ -54,7 +57,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         this.code = code;
     }
 
-    public final static byte[] END_FLAGE = {0x0a, 0x05};
+    public final static byte[] END_FLAGE = {0x7a, 0x7a};
 
 
     static class Helper {
@@ -73,7 +76,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
                     name = name.replace("[]", "");
                     name = "L" + name;
                     if (obj instanceof int[][]) {
-                        name ="L"+name;
+                        name = "L" + name;
                     }
                 }
                 md = this.getClass().getDeclaredMethod("write" + name, obj.getClass());
@@ -163,8 +166,8 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
 
     boolean checkEnd(GunBytesUtil.GunReadByteUtil unserizutil) {
-        byte[] end = unserizutil.readByte(2);
-        return GunBytesUtil.compareBytesFromEnd(end, END_FLAGE[0], END_FLAGE[1]);
+        byte[] end = unserizutil.readByte(END_FLAGE.length);
+        return GunBytesUtil.compareBytesFromEnd(end, END_FLAGE);
     }
 
     void publicUnSet(GunBytesUtil.GunReadByteUtil unserizutil) {

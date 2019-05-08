@@ -8,16 +8,18 @@ import top.gunplan.RPC.Boot.BootCore;
 import java.io.IOException;
 
 /**
- *
+ * RIC Test
  */
-public class JunitTest {
+class JunitTest {
     @Test
     void dotest() throws IOException {
         /**
          * the framework support data type
-         * int 64
+         * int 32
          * boolean 8
          * byte 8
+         * long 64
+         * short 16
          * string ?
          */
         LinearAlgebra servicers = BootCore.IOCObject(LinearAlgebra.class);
@@ -25,7 +27,7 @@ public class JunitTest {
 //        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
 //        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
 //        System.out.printf("8 / 3 = %d\n", servicers.division(8, 3));
-        int[][] a = {{1, 2, -4}, {-2, 2, 1}, {-3, 4, -2}};
+        int[][] a = {{1, 3 ,- 4}, {-2, 2, 1}, {-3, 4, -2}, {8, 8, 8}};
         TestObject o = new TestObject();
         o.x = 1;
         o.y = 2;

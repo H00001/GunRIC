@@ -11,7 +11,7 @@ import java.io.Serializable;
 @GunUseImpl(impl = "top.gunplan.services.LinearAlgebraImpl")
 public interface LinearAlgebra {
     /**
-     *
+     * calculator the det value
      * @param a det
      * @param size det's size
      * @return calres

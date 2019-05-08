@@ -27,7 +27,7 @@ public class GunRPCOutputProtocl extends AbstractGunRPCExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 6 + 1;
+        int len = TYPE_LEN + CODE_LEN + 1 + END_FLAGE.length;
         len = addLenByParam(len, returnValue.obj);
         byte[] serize = new byte[len];
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serize);

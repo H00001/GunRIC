@@ -10,6 +10,7 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     private ParamHelper[] helpers;
 
     private int paramlen = 0;
+    public static final byte PARAM_LEN = 1;
 
     public ParamHelper[] getParaHelpers() {
         return helpers;
@@ -38,11 +39,12 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     }
 
 
+    @Override
     public byte[] serialize() {
 
-        int len = 9 + methodName.length() + interfaceName.length() + otherCount;
-        byte[] serize = new byte[len];
-        GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serize);
+        int len = 2 + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAGE.length;
+        byte[] serizea = new byte[len];
+        GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serizea);
         publicSet(serizUtil);
         super.stdHeadWrite(serizUtil);
         serizUtil.writeByte((byte) paramlen);
@@ -50,7 +52,7 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
             throw new GunException("write Param error");
         }
         serizUtil.write(END_FLAGE);
-        return serize;
+        return serizea;
     }
 
 
@@ -64,7 +66,6 @@ public final class GunRPCInputProtocl extends AbstractGunRPCExecuteProtocol {
     private int now;
 
     private int otherCount = 0;
-
 
 
     public byte getParamleng() {

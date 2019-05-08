@@ -5,7 +5,10 @@ import top.gunplan.utils.GunBytesUtil;
 
 import java.io.*;
 
-
+/**
+ *
+ * @author dosdrtt
+ */
 public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtocl {
     String methodName;
     String interfaceName;
@@ -141,17 +144,18 @@ public abstract class AbstractGunRPCExecuteProtocol extends AbstractGunRPCProtoc
                 help.obj = list;
             }
             break;
-            case OBJECT:
-                int datalen = util.readUByte();
-                final byte[] objsav = util.readByte(datalen);
+            case OBJECT: {
+                int l = util.readUByte();
+                final byte[] o = util.readByte(l);
                 try {
-                    ObjectInputStream os = new ObjectInputStream(new ByteArrayInputStream(objsav));
+                    ObjectInputStream os = new ObjectInputStream(new ByteArrayInputStream(o));
                     help.obj = os.readObject();
                     help.clazz = help.obj.getClass();
                 } catch (Exception e) {
                     help.obj = null;
                 }
-                break;
+            }
+            break;
             default:
                 break;
         }

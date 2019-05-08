@@ -35,7 +35,7 @@ public class GunDubboCenterStdHandle implements GunNettyHandle {
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface request) throws GunException {
         final String r = DictonaryUtil.getRes();
-        final GunRICRegisterProtocol pt = (GunRICRegisterProtocol) ((GunRicCenterDto) request).getObj();
+        final GunRICRegisterProtocol pt = (GunRICRegisterProtocol) ((GunRicCenterDto) request).getObji();
         final InetSocketAddress a = ((GunRicCenterDto) request).getAddress();
         final String mn = pt.gMN();
         final String in = pt.gIN();
