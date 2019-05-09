@@ -1,8 +1,12 @@
 package top.gunplan.ric.server.property;
 
-import top.gunplan.netty.impl.propertys.GunProPerty;
 
-public class GunRICProperty implements GunProPerty {
+import top.gunplan.netty.impl.propertys.GunProperty;
+
+/**
+ * @author dosdrtt
+ */
+public class GunRICProperty implements GunProperty {
     private String scanPacket;
     private int centerPort;
     private int localServerPort;
@@ -25,5 +29,10 @@ public class GunRICProperty implements GunProPerty {
     }
 
     public GunRICProperty() {
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
     }
 }
