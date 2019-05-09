@@ -9,7 +9,7 @@ import java.io.*;
 /**
  * @author dosdrtt
  */
-public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtocol {
+public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtocol {
     String methodName;
     String interfaceName;
 
@@ -57,7 +57,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtoc
                         oos.writeObject(data);
                         len += bos.size() + type.deslen;
                     } else {
-                        throw new GunObjectCannotSerizableException(data.getClass().getName() + " can not been serializable");
+                        throw new GunObjectCannotSerializableException(data.getClass().getName() + " can not been serializable");
                     }
                 } catch (IOException e) {
                     AbstractGunBaseLogUtil.error(e);

@@ -1,6 +1,7 @@
 package top.gunplan.protocol;
 
 import top.gunplan.netty.GunException;
+import top.gunplan.protocol.exp.GunRPCException;
 
 /**
  * @author dosdrtt
@@ -8,10 +9,10 @@ import top.gunplan.netty.GunException;
  * @see GunException
  * @since 0.0.1.5
  */
-class GunObjectCannotSerizableException extends GunException {
+class GunObjectCannotSerializableException extends GunRPCException {
     private static final long serialVersionUID = -3559997432609348176L;
 
-    GunObjectCannotSerizableException(String why) {
+    GunObjectCannotSerializableException(String why) {
         super(why);
     }
 }

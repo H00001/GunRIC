@@ -31,7 +31,7 @@ class GunRicPublishManage {
                 for (Method md : clazz.getMethods()) {
                     constructProtoclo(clazz, md, protocol);
                     ss.getOutputStream().write(protocol.serialize());
-                    protocol.clearParames();
+                    protocol.clearParams();
                 }
             }
             byte[] bt = new byte[1024];
@@ -63,7 +63,7 @@ class GunRicPublishManage {
         final int serialnum = (int) (System.currentTimeMillis() + (int) (Math.random() * 1000));
         protocol.setSerialnumber(serialnum);
         AbstractGunBaseLogUtil.debug(serialnum + " register");
-        protocol.setParamlen(md.getParameterCount());
+        protocol.setParamount(md.getParameterCount());
         for (Class<?> tp : md.getParameterTypes()) {
             protocol.pushParamType(tp);
         }

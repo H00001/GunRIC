@@ -7,10 +7,10 @@ package top.gunplan.protocol;
 public enum RicProtocolType {
     /**
      * REQUEST request packet (interface invoke request)
-     * RESPONSE
-     * REGISTER
-     * REGRESP
-     * GET
+     * RESPONSE response packet (send invoke function result)
+     * REGISTER register provider
+     * REGRESP response the provider
+     * GET user send it to center to get interface provider
      * PING hello message
      * PONG reply PING (hello message)
      */

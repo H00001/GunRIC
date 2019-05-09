@@ -46,7 +46,7 @@ public class GunRPCHandleProcy implements InvocationHandler {
         byte[] b = new byte[2014];
         int len = in.read(b);
 
-        GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicDividePacketManage.findPackage(b);
+        GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicTypeDividePacketManage.findPackage(b);
         if (output.getCode() == RicProtocolCode.FAIL) {
             System.out.println(output.getReturnValue().obj);
             return null;

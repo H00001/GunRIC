@@ -4,14 +4,16 @@ package top.gunplan.protocol;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
+ * this class is used do divide different package
+ *
  * @author dosdrtt
  * @date 1557303969
  */
-public final class GunRicDividePacketManage {
-    public static AbstractGunRPCProtocol findPackage(byte[] bytes) {
+public final class GunRicTypeDividePacketManage {
+    public static AbstractGunRicProtocol findPackage(byte[] bytes) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(bytes);
         RicProtocolType retype = RicProtocolType.valuefrom(util.readInt());
-        AbstractGunRPCProtocol protocol = null;
+        AbstractGunRicProtocol protocol = null;
         assert retype != null;
         switch (retype) {
             case HELLO:

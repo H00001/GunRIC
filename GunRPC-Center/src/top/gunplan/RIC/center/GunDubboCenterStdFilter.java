@@ -6,7 +6,7 @@ import top.gunplan.netty.anno.GunNetFilterOrder;
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
 import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.protocol.GunRicDividePacketManage;
+import top.gunplan.protocol.GunRicTypeDividePacketManage;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -32,7 +32,7 @@ public class GunDubboCenterStdFilter implements GunNettyFilter {
         if (dto.size != 0) {
             List<GunNetInputInterface> gnii = new ArrayList<>(1);
             for (int i = 0; i < dto.size; i++) {
-                gnii.add(GunRicDividePacketManage.findPackage(dto.getPackets().get(i)));
+                gnii.add(GunRicTypeDividePacketManage.findPackage(dto.getPackets().get(i)));
             }
             GunRicCenterDto rdto = new GunRicCenterDto(address, gnii);
             //   GunRicCenterDto dto = new GunRicCenterDto(address, protocol);

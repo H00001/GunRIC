@@ -7,7 +7,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @version 0.0.0.0
  * @since 0.0.0.0
  */
-public class GunRicRegisterStatusProtocol extends AbstractGunRPCProtocol {
+public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol {
     public GunRicRegisterStatusProtocol() {
         this.type = RicProtocolType.REGRESP;
     }
@@ -22,17 +22,9 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRPCProtocol {
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
         publicUnSet(util);
-        boolean isTrueSeria = checkEnd(util);
-        boolean nextTrueSeria = true;
-        if (in.length - util.getNowflag() > 8) {
-            byte[] nextp = new byte[in.length - util.getNowflag()];
-            System.arraycopy(in, util.getNowflag(), nextp, 0, nextp.length);
-            AbstractGunRPCProtocol protocol = GunRicDividePacketManage.findPackage(nextp);
-            nextTrueSeria = protocol.unSerialize(nextp);
-            setNext(protocol);
-        }
-        return isTrueSeria && nextTrueSeria;
+        return checkEnd(util) && checKNext(in, util);
     }
+
 
     @Override
     public byte[] serialize() {

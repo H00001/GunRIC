@@ -17,38 +17,34 @@ import java.lang.reflect.Method;
  * @version 0.0.0.0
  * @date
  */
-public abstract class AbstractGunRPCProtocol implements GunNetInputInterface, GunNetOutputInterface {
-//    @Test
-//    public void test() {
-//        AbstractGunRPCProtocol it = new AbstractGunRPCProtocol();
-//        it.setInterfaceName("hello");
-//        it.setMethodName("rpc");
-//        it.setType(RicProtocolType.REQUEST);
-//        it.setCode(RicProtocolCode.SUCCEED);
-//        it.pushParam("1234");
-//
-//        byte[] bom = it.serialize();
-//        AbstractGunRPCProtocol it2 = new AbstractGunRPCProtocol();
-//        it2.unSerialize(bom);
-//        System.out.println("dd");
-//    }
+public abstract class AbstractGunRicProtocol implements GunNetInputInterface, GunNetOutputInterface {
 
-    // type 2 method 2 interfaceNamelen 1 interfacename ? methodNamelen 1 methodNamel? paramlen 1 end 2
 
+    boolean checKNext(byte[] in, GunBytesUtil.GunReadByteUtil util) {
+        boolean thTrueSeria = true;
+        if (in.length - util.getNowflag() > 8) {
+            byte[] nextp = new byte[in.length - util.getNowflag()];
+            System.arraycopy(in, util.getNowflag(), nextp, 0, nextp.length);
+            AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(nextp);
+            thTrueSeria = protocol.unSerialize(nextp);
+            setNext(protocol);
+        }
+        return thTrueSeria;
+    }
 
     RicProtocolType type;
     RicProtocolCode code;
     /**
      * chain style to divide pacjet
      */
-    private AbstractGunRPCProtocol next;
+    private AbstractGunRicProtocol next;
     private int serialnumber = 0;
 
-    public AbstractGunRPCProtocol getNext() {
+    public AbstractGunRicProtocol getNext() {
         return next;
     }
 
-    public void setNext(AbstractGunRPCProtocol next) {
+    private void setNext(AbstractGunRicProtocol next) {
         this.next = next;
     }
 

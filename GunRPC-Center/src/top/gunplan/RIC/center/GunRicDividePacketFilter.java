@@ -6,7 +6,7 @@ import top.gunplan.netty.anno.GunNetFilterOrder;
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
 import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.protocol.AbstractGunRPCProtocol;
+import top.gunplan.protocol.AbstractGunRicProtocol;
 
 import java.util.ArrayList;
 
@@ -30,23 +30,11 @@ public class GunRicDividePacketFilter implements GunNettyFilter {
         return null;
     }
 
-    //    @Override
-//    public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) throws Exception {
-//        ArrayList<byte[]> bytelist = divide(gunInputFilterChecker.getSrc());
-//        gunInputFilterChecker.setObject(bytelist);
-//        return null;
-//    }
-//
-//    @Override
-//    public DealResult doOutputFilter(GunOutputFilterChecker gunOutputFilterChecker) throws Exception {
-//        return null;
-//    }
-//
     public static class GunDividePacketDto implements GunNetInputInterface {
         final ArrayList<byte[]> packets;
         final int size;
 
-        public GunDividePacketDto(ArrayList<byte[]> packets, int size) {
+        GunDividePacketDto(ArrayList<byte[]> packets, int size) {
             this.packets = packets;
             this.size = size;
         }
@@ -55,7 +43,7 @@ public class GunRicDividePacketFilter implements GunNettyFilter {
             return size;
         }
 
-        public ArrayList<byte[]> getPackets() {
+        ArrayList<byte[]> getPackets() {
             return packets;
         }
 
@@ -69,8 +57,8 @@ public class GunRicDividePacketFilter implements GunNettyFilter {
         ArrayList<byte[]> saved = new ArrayList<>(1);
         int last = 0;
         for (int i = 0; i < src.length - 1; i++) {
-            if (src[i] == AbstractGunRPCProtocol.END_FLAG[0] &&
-                    src[i + 1] == AbstractGunRPCProtocol.END_FLAG[1]
+            if (src[i] == AbstractGunRicProtocol.END_FLAG[0] &&
+                    src[i + 1] == AbstractGunRicProtocol.END_FLAG[1]
             ) {
                 byte[] sbt = new byte[i - last + 2];
                 System.arraycopy(src, last, sbt, 0, i - last + 2);

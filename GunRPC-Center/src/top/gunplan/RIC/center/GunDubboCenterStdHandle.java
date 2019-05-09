@@ -1,7 +1,6 @@
 package top.gunplan.RIC.center;
 
 import top.gunplan.netty.GunException;
-import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.protocol.GunRicRegisterProtocol;
@@ -9,7 +8,7 @@ import top.gunplan.protocol.GunRicRegisterProtocol;
 import top.gunplan.protocol.GunRicRegisterStatusProtocol;
 import top.gunplan.protocol.RicProtocolCode;
 import top.gunplan.protocol.RicProtocolParamType;
-import top.gunplan.protocol.util.DictonaryUtil;
+import top.gunplan.protocol.util.PathUtil;
 
 
 import java.io.BufferedOutputStream;
@@ -34,7 +33,7 @@ public class GunDubboCenterStdHandle {
 
 
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface request, InetSocketAddress a) throws GunException {
-        final String r = DictonaryUtil.getRes();
+        final String r = PathUtil.getRes();
         final GunRicRegisterProtocol pt = ((GunRicRegisterProtocol) request);
         final String mn = pt.gMN();
         final String in = pt.gIN();
