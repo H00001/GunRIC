@@ -11,6 +11,10 @@ import top.gunplan.utils.AbstractGunBaseLogUtil;
 import java.lang.reflect.Method;
 import java.nio.channels.SocketChannel;
 
+import static top.gunplan.protocol.RicProtocolCode.FAIL;
+import static top.gunplan.protocol.RicProtocolType.RESPONSE;
+
+
 /**
  * @author dosdrtt
  */
@@ -22,7 +26,7 @@ public class GunStdRicHandle implements GunNettyHandle {
         final GunRicOutputProtocol o = new GunRicOutputProtocol();
         final GunRicInputProtocol i = ((GunRicInputProtocol) gunNetInputInterface);
         o.setReturnValue(help);
-        o.setType(RicProtocolType.RESPONSE);
+        o.setType(RESPONSE);
         o.setSerialnumber(i.getSerialnumber());
         try {
             if (invokeMethod(help, o, i)) {
@@ -30,7 +34,7 @@ public class GunStdRicHandle implements GunNettyHandle {
             }
         } catch (ReflectiveOperationException e) {
             help.setObj(e.getClass().getSimpleName() + ":" + e.getLocalizedMessage());
-            o.setCode(RicProtoclCode.FAIL);
+            o.setCode(FAIL);
         } catch (Exception exp) {
             this.dealExceptionEvent(exp);
         }
@@ -42,13 +46,13 @@ public class GunStdRicHandle implements GunNettyHandle {
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).newInstance();
         Method realmd = inst.getMethod(inputpol.gMN(), inputpol.getParamTypeList());
         if (realmd == null) {
-            outputpol.setCode(RicProtoclCode.FAIL);
+            outputpol.setCode(FAIL);
             help.setObj("method not found ");
             AbstractGunBaseLogUtil.error(inputpol.gMN(), "method not found", "[PROVIDE]");
             return false;
         }
         help.setObj(inputpol.getParamleng() == 0 ? realmd.invoke(rpcService) : realmd.invoke(rpcService, inputpol.getParameters()));
-        outputpol.setCode(RicProtoclCode.SUCCEED);
+        outputpol.setCode(RicProtocolCode.SUCCEED);
         return true;
     }
 

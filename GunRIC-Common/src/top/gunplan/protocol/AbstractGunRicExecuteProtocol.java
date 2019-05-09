@@ -9,7 +9,7 @@ import java.io.*;
 /**
  * @author dosdrtt
  */
-public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtocl {
+public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRPCProtocol {
     String methodName;
     String interfaceName;
 

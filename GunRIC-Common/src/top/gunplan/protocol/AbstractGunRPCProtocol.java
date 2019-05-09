@@ -17,18 +17,18 @@ import java.lang.reflect.Method;
  * @version 0.0.0.0
  * @date
  */
-public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, GunNetOutputInterface {
+public abstract class AbstractGunRPCProtocol implements GunNetInputInterface, GunNetOutputInterface {
 //    @Test
 //    public void test() {
-//        AbstractGunRPCProtocl it = new AbstractGunRPCProtocl();
+//        AbstractGunRPCProtocol it = new AbstractGunRPCProtocol();
 //        it.setInterfaceName("hello");
 //        it.setMethodName("rpc");
 //        it.setType(RicProtocolType.REQUEST);
-//        it.setCode(RicProtoclCode.SUCCEED);
+//        it.setCode(RicProtocolCode.SUCCEED);
 //        it.pushParam("1234");
 //
 //        byte[] bom = it.serialize();
-//        AbstractGunRPCProtocl it2 = new AbstractGunRPCProtocl();
+//        AbstractGunRPCProtocol it2 = new AbstractGunRPCProtocol();
 //        it2.unSerialize(bom);
 //        System.out.println("dd");
 //    }
@@ -37,8 +37,8 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
 
     RicProtocolType type;
-    RicProtoclCode code;
-    int serialnumber;
+    RicProtocolCode code;
+    private int serialnumber;
 
 
     public int getSerialnumber() {
@@ -51,7 +51,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
     final static byte TYPE_LEN = 2;
     final static byte CODE_LEN = 2;
-    final static byte SERIZNUM_LEN = 2;
+    final static byte SERIALNUM_LEN = 2;
 
 
     public RicProtocolType getType() {
@@ -62,11 +62,11 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
         this.type = type;
     }
 
-    public RicProtoclCode getCode() {
+    public RicProtocolCode getCode() {
         return code;
     }
 
-    public void setCode(RicProtoclCode code) {
+    public void setCode(RicProtocolCode code) {
         this.code = code;
     }
 
@@ -185,7 +185,7 @@ public abstract class AbstractGunRPCProtocl implements GunNetInputInterface, Gun
 
     void publicUnSet(GunBytesUtil.GunReadByteUtil unserizutil) {
         this.type = RicProtocolType.valuefrom(unserizutil.readInt());
-        this.code = RicProtoclCode.valuefrom(unserizutil.readInt());
+        this.code = RicProtocolCode.valuefrom(unserizutil.readInt());
         this.serialnumber = unserizutil.readInt();
     }
 

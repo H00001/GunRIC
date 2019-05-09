@@ -5,10 +5,10 @@ import top.gunplan.utils.GunBytesUtil;
 /**
  * @author dosdrtt
  */
-public class GunRicHelloProtocol extends AbstractGunRPCProtocl {
+public class GunRicHelloProtocol extends AbstractGunRPCProtocol {
     GunRicHelloProtocol(boolean type) {
         this.type = RicProtocolType.HELLO;
-        this.code = type ? RicProtoclCode.HELLO_REQ : RicProtoclCode.HELLO_RES;
+        this.code = type ? RicProtocolCode.HELLO_REQ : RicProtocolCode.HELLO_RES;
     }
 
     GunRicHelloProtocol() {

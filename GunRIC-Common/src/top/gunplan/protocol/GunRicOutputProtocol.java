@@ -27,7 +27,7 @@ public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = TYPE_LEN + SERIZNUM_LEN + CODE_LEN + 1 + END_FLAG.length;
+        int len = TYPE_LEN + SERIALNUM_LEN + CODE_LEN + 1 + END_FLAG.length;
         len = addLenByParam(len, returnValue.obj);
         byte[] serize = new byte[len];
         GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serize);

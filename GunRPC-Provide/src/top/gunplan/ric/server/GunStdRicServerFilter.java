@@ -6,7 +6,7 @@ import top.gunplan.netty.anno.GunNetFilterOrder;
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
 import top.gunplan.protocol.GunRicInputProtocol;
-
+import static top.gunplan.netty.GunNettyFilter.DealResult.*;
 
 /**
  * @author dosdrtt
@@ -18,14 +18,14 @@ public class GunStdRicServerFilter implements GunNettyFilter {
         GunRicInputProtocol protocl = new GunRicInputProtocol();
         if (protocl.unSerialize(gunInputFilterChecker.getSrc())) {
             gunInputFilterChecker.setObject(protocl);
-            return DealResult.NEXT;
+            return NEXT;
         } else {
-            return DealResult.NOTDEALALLNEXT;
+            return NOTDEALALLNEXT;
         }
     }
 
     @Override
     public DealResult doOutputFilter(GunOutputFilterChecker gunOutputFilterChecker) {
-        return DealResult.NEXT;
+        return NEXT;
     }
 }

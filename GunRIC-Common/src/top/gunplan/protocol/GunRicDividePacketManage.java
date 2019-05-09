@@ -8,10 +8,10 @@ import top.gunplan.utils.GunBytesUtil;
  * @date 1557303969
  */
 public final class GunRicDividePacketManage {
-    public static AbstractGunRPCProtocl findPackage(byte[] bytes) {
+    public static AbstractGunRPCProtocol findPackage(byte[] bytes) {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(bytes);
         RicProtocolType retype = RicProtocolType.valuefrom(util.readInt());
-        AbstractGunRPCProtocl protocol = null;
+        AbstractGunRPCProtocol protocol = null;
         assert retype != null;
         switch (retype) {
             case HELLO:

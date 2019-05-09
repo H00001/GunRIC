@@ -1,5 +1,8 @@
 package top.gunplan.protocol;
 
+/**
+ * @author dosdrtt
+ */
 public class GunRICGetProcotol extends GunRicRegisterProtocol {
     //todo
     public GunRICGetProcotol() {

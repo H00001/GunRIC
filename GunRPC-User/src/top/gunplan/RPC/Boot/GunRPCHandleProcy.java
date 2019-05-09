@@ -29,7 +29,7 @@ public class GunRPCHandleProcy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         GunRicInputProtocol input = new GunRicInputProtocol();
         input.setType(RicProtocolType.REQUEST);
-        input.setCode(RicProtoclCode.SUCCEED);
+        input.setCode(RicProtocolCode.SUCCEED);
         input.setInterfaceName(interfaceName);
         input.setSerialnumber((int) System.currentTimeMillis());
         input.setMethodName(method.getName());
@@ -47,11 +47,11 @@ public class GunRPCHandleProcy implements InvocationHandler {
         int len = in.read(b);
 
         GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicDividePacketManage.findPackage(b);
-        if (output.getCode() == RicProtoclCode.FAIL) {
+        if (output.getCode() == RicProtocolCode.FAIL) {
             System.out.println(output.getReturnValue().obj);
             return null;
         }
-        if (output.getCode() == RicProtoclCode.SUCCEED) {
+        if (output.getCode() == RicProtocolCode.SUCCEED) {
             if (output.getSerialnumber() == input.getSerialnumber()) {
                 return output.getReturnValue().obj;
             }

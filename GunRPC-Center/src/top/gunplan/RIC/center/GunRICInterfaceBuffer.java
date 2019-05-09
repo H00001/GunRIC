@@ -4,6 +4,9 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author dosdrtt
+ */
 public class GunRICInterfaceBuffer {
     public static HashMap<GunRICInterface, ArrayList<InetSocketAddress>> intermapping = new HashMap<>();
 

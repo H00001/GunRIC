@@ -7,12 +7,12 @@ import top.gunplan.utils.GunBytesUtil;
  * @version 0.0.0.0
  * @since 0.0.0.0
  */
-public class GunRicRegisterStatusProtocol extends AbstractGunRPCProtocl {
+public class GunRicRegisterStatusProtocol extends AbstractGunRPCProtocol {
     GunRicRegisterStatusProtocol() {
 
     }
 
-    public GunRicRegisterStatusProtocol(RicProtoclCode status) {
+    public GunRicRegisterStatusProtocol(RicProtocolCode status) {
         this.type = RicProtocolType.REGRESP;
         this.code = status;
 
