@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * concurrent class
+ *
  * @author dosdrtt
  */
 @GunNetFilterOrder(index = 1)
@@ -71,8 +72,9 @@ public class GunRicDividePacketFilter implements GunNettyFilter {
             if (src[i] == AbstractGunRPCProtocol.END_FLAG[0] &&
                     src[i + 1] == AbstractGunRPCProtocol.END_FLAG[1]
             ) {
-                byte[] sbt = new byte[i - last + 1];
-                System.arraycopy(src, last, sbt, 0, i - last + 1);
+                byte[] sbt = new byte[i - last + 2];
+                System.arraycopy(src, last, sbt, 0, i - last + 2);
+                last = i + 2;
                 saved.add(sbt);
             }
         }

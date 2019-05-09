@@ -19,7 +19,7 @@ public class GunDubboCenterNewHandle implements GunNettyHandle {
         GunNetOutputInterface[] gol = new GunNetOutputInterface[lgii.size()];
         GunDubboCenterStdHandle exec = new GunDubboCenterStdHandle();
         for (int i = 0; i < lgii.size(); i++) {
-            gol[i] = exec.dealDataEvent(lgii.get(i));
+            gol[i] = exec.dealDataEvent(lgii.get(i),cdto.getAddress());
         }
         cdto.setObjo(gol);
         return cdto;

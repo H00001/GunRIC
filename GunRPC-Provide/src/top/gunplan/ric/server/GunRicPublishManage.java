@@ -1,8 +1,10 @@
 package top.gunplan.ric.server;
 
 
+import top.gunplan.protocol.GunRicRegisterStatusProtocol;
 import top.gunplan.ric.server.property.GunRICProperty;
 import top.gunplan.protocol.GunRicRegisterProtocol;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,10 +32,23 @@ class GunRicPublishManage {
                     constructProtoclo(clazz, md, protocol);
                     ss.getOutputStream().write(protocol.serialize());
                     protocol.clearParames();
-                    Thread.sleep(1200);
                 }
-
             }
+            byte[] bt = new byte[1024];
+
+            int readle;
+            GunRicRegisterStatusProtocol gp = new GunRicRegisterStatusProtocol();
+            while ((readle = ss.getInputStream().read(bt)) >= 0) {
+                byte[] bts = new byte[readle];
+                System.arraycopy(bt, 0, bts, 0, readle);
+                gp.unSerialize(bts);
+                do {
+                    AbstractGunBaseLogUtil.debug(gp.getSerialnumber() + " register succeed");
+                    gp = (GunRicRegisterStatusProtocol) gp.getNext();
+                }
+                while (gp.getNext() != null);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,10 +57,12 @@ class GunRicPublishManage {
     }
 
 
-
     private static void constructProtoclo(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
         protocol.setInterfaceName(clazz.getName());
         protocol.setMethodName(md.getName());
+        final int serialnum = (int) (System.currentTimeMillis() + (int) (Math.random() * 1000));
+        protocol.setSerialnumber(serialnum);
+        AbstractGunBaseLogUtil.debug(serialnum + " register");
         protocol.setParamlen(md.getParameterCount());
         for (Class<?> tp : md.getParameterTypes()) {
             protocol.pushParamType(tp);

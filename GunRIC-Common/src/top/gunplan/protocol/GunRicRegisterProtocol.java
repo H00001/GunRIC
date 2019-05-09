@@ -66,6 +66,7 @@ public class GunRicRegisterProtocol extends AbstractGunRicExecuteProtocol {
         GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
         this.type = RicProtocolType.valuefrom(util.readInt());
         this.port = util.readInt();
+        this.setSerialnumber(util.readInt());
         super.stdHeadAnaly(util);
         this.paramlen = util.readByte();
         types = new Class<?>[paramlen];
@@ -75,11 +76,12 @@ public class GunRicRegisterProtocol extends AbstractGunRicExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 3 + CODE_LEN + TYPE_LEN + paramlen + END_FLAG.length + interfaceName.length() + methodName.length();
+        int len = 3 + CODE_LEN + TYPE_LEN + SERIALNUM_LEN + paramlen + END_FLAG.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(save);
         util.write(RicProtocolType.REGISTER.value);
         util.write(port);
+        util.write(getSerialnumber());
         super.stdHeadWrite(util);
         util.writeByte((byte) paramlen);
         writeParamTypes(util);

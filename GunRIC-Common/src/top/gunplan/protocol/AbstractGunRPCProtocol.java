@@ -38,8 +38,19 @@ public abstract class AbstractGunRPCProtocol implements GunNetInputInterface, Gu
 
     RicProtocolType type;
     RicProtocolCode code;
-    private int serialnumber;
+    /**
+     * chain style to divide pacjet
+     */
+    private AbstractGunRPCProtocol next;
+    private int serialnumber = 0;
 
+    public AbstractGunRPCProtocol getNext() {
+        return next;
+    }
+
+    public void setNext(AbstractGunRPCProtocol next) {
+        this.next = next;
+    }
 
     public int getSerialnumber() {
         return serialnumber;
