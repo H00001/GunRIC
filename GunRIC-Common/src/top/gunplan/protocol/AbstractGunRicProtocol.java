@@ -22,7 +22,7 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
     boolean checKNext(byte[] in, GunBytesUtil.GunReadByteUtil util) {
         boolean thTrueSeria = true;
-        if (in.length - util.getNowflag() > 8) {
+        if (in.length - util.getNowflag() > 3) {
             byte[] nextp = new byte[in.length - util.getNowflag()];
             System.arraycopy(in, util.getNowflag(), nextp, 0, nextp.length);
             AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(nextp);
@@ -110,21 +110,36 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
             }
         }
 
+        /**
+         * reflect execute
+         * @param parama write param
+         */
         private void writeInteger(Integer parama) {
             util.write32(parama);
         }
 
-
+        /**
+         * reflect execute
+         * @param parama write param
+         */
         private void writeShort(Short parama) {
             util.write(parama);
         }
 
 
+        /**
+         * reflect execute
+         * @param parama write param
+         */
         private void writeLong(Long parama) {
             util.writeLong(parama);
         }
 
 
+        /**
+         * reflect execute
+         * @param list write param
+         */
         private void writeLint(int[] list) {
             util.writeByte((byte) list.length);
             for (int val : list) {
@@ -132,6 +147,11 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
             }
         }
 
+
+        /**
+         * reflect execute
+         * @param list write param
+         */
         private void writeLLint(int[][] list) {
             util.writeByte((byte) list.length);
             util.writeByte((byte) list[0].length);
@@ -142,6 +162,11 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
             }
         }
 
+
+        /**
+         * reflect execute
+         * @param string write param
+         */
         private void writeString(String string) {
             util.writeByte((byte) string.length());
             util.write(string);

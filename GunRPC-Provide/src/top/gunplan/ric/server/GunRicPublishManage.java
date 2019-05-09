@@ -17,56 +17,61 @@ import java.net.Socket;
  *
  */
 class GunRicPublishManage {
-    static void publishInterface(final GunRICProperty ppt) throws IOException {
+    static boolean publishInterface(final GunRICProperty ppt) throws IOException {
         Socket ss = new Socket(ppt.getCenterAddr(), ppt.getCenterPort());
         InputStream is = GunRicRegisterProtocol.class.getClassLoader().getResourceAsStream("publishInterface");
         assert is != null;
         GunRicRegisterProtocol protocol = new GunRicRegisterProtocol();
         protocol.setPort(ppt.getServerLocalPort());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String line;
         try {
-            while ((line = reader.readLine()) != null) {
-                Class<?> clazz = Class.forName(line);
-                for (Method md : clazz.getMethods()) {
-                    constructProtoclo(clazz, md, protocol);
-                    ss.getOutputStream().write(protocol.serialize());
-                    protocol.clearParams();
+            {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                while ((line = reader.readLine()) != null) {
+                    Class<?> clazz = Class.forName(line);
+                    for (Method md : clazz.getMethods()) {
+                        constructProtocol(clazz, md, protocol);
+                        ss.getOutputStream().write(protocol.serialize());
+                        protocol.clearParams();
+                    }
                 }
             }
-            byte[] bt = new byte[1024];
-
-            int readle;
-            GunRicRegisterStatusProtocol gp = new GunRicRegisterStatusProtocol();
-            while ((readle = ss.getInputStream().read(bt)) >= 0) {
-                byte[] bts = new byte[readle];
-                System.arraycopy(bt, 0, bts, 0, readle);
+            byte[] bt = new byte[BUFFER_LEN];
+            int readied;
+            GunRicRegisterStatusProtocol gp;
+            while ((readied = ss.getInputStream().read(bt)) > 0) {
+                gp = new GunRicRegisterStatusProtocol();
+                byte[] bts = new byte[readied];
+                System.arraycopy(bt, 0, bts, 0, readied);
                 gp.unSerialize(bts);
                 do {
                     AbstractGunBaseLogUtil.debug(gp.getSerialnumber() + " register succeed");
                     gp = (GunRicRegisterStatusProtocol) gp.getNext();
                 }
-                while (gp.getNext() != null);
+                while (gp != null);
+                if (readied < BUFFER_LEN) {
+                    break;
+                }
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
-
-
+        return true;
     }
 
 
-    private static void constructProtoclo(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
+    private static void constructProtocol(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
         protocol.setInterfaceName(clazz.getName());
         protocol.setMethodName(md.getName());
-        final int serialnum = (int) (System.currentTimeMillis() + (int) (Math.random() * 1000));
-        protocol.setSerialnumber(serialnum);
-        AbstractGunBaseLogUtil.debug(serialnum + " register");
+        final int v = ((clazz.hashCode() + md.hashCode()) & 12768) + (int) (Math.random() * 1000);
+        protocol.setSerialnumber(v);
+        AbstractGunBaseLogUtil.debug(clazz.getName() + "." + md.getName() + ":" + v + " register");
         protocol.setParamount(md.getParameterCount());
         for (Class<?> tp : md.getParameterTypes()) {
             protocol.pushParamType(tp);
         }
     }
+
+    private static final int BUFFER_LEN = 1024;
 
 }

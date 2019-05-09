@@ -12,9 +12,8 @@ public final class BootCore {
         // Socket so = new Socket();
         Class[] clazzs = {clazz};
         GunRPCHandleProcy procy = new GunRPCHandleProcy(clazz.getName(), so.getInputStream(), so.getOutputStream());
-        // so.close();
-        //     GunRPCHandleProcy procy = new GunRPCHandleProcy(clazz.getName(), null, null);
-        return clazz.cast(Proxy.newProxyInstance(BootCore.class.getClassLoader(), clazzs, procy));
+        Object oc = Proxy.newProxyInstance(BootCore.class.getClassLoader(), clazzs, procy);
+       return clazz.cast(oc);
     }
 }
 

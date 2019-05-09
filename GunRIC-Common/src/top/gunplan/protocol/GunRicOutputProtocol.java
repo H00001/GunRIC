@@ -3,6 +3,7 @@ package top.gunplan.protocol;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
+ * GunRicOutputProtocol
  * @author dosdrtt
  */
 public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol {

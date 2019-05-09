@@ -43,7 +43,7 @@ public class GunStdRicHandle implements GunNettyHandle {
 
     private boolean invokeMethod(AbstractGunRicExecuteProtocol.ParamHelper help, GunRicOutputProtocol outputpol, GunRicInputProtocol inputpol) throws Exception {
         Class<?> inst = Class.forName(inputpol.gIN());
-        Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).newInstance();
+        Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).getDeclaredConstructor().newInstance();
         Method realmd = inst.getMethod(inputpol.gMN(), inputpol.getParamTypeList());
         if (realmd == null) {
             outputpol.setCode(FAIL);

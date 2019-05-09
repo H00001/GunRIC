@@ -23,9 +23,9 @@ public class GunRicHelloProtocol extends AbstractGunRicProtocol {
     @Override
     public byte[] serialize() {
         byte[] seriz = new byte[CODE_LEN + TYPE_LEN + END_FLAG.length];
-        GunBytesUtil.GunWriteByteUtil unserizutil = new GunBytesUtil.GunWriteByteUtil(seriz);
-        publicSet(unserizutil);
-        unserizutil.write(END_FLAG);
+        GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(seriz);
+        publicSet(util);
+        util.write(END_FLAG);
         return seriz;
     }
 }

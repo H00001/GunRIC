@@ -39,11 +39,11 @@ public class ProviderBoot implements GunBootServerBase {
 
             @Override
             public boolean onBooting(GunProperty gunProperty) {
+//
                 try {
-                    GunRicPublishManage.publishInterface(GunNettyPropertyManagerImpl.getProperty("ric-provide"));
+                    return GunRicPublishManage.publishInterface(GunNettyPropertyManagerImpl.getProperty("ric-provide"));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    //  return false;
                 }
                 return true;
             }

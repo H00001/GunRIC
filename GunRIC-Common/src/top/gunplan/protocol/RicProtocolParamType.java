@@ -68,6 +68,9 @@ public enum RicProtocolParamType {
         return OBJECT;
     }
 
+    /**
+     * Mmap
+     */
     static class Mmap {
         static Map<Class<?>, RicProtocolParamType> mmap = new HashMap<>();
 
