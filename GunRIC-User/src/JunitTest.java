@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import top.gunplan.ric.apis.test.CalServicers;
 import top.gunplan.RPC.Boot.BootCore;
 import top.gunplan.ric.apis.test.LinearAlgebra;
+import top.gunplan.ric.apis.test.NatureMath;
 
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ class JunitTest {
          * short 16
          * string ?
          */
-        LinearAlgebra servicers = BootCore.IOCObject(LinearAlgebra.class);
+        NatureMath servicers = BootCore.IOCObject(NatureMath.class);
 //        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
 //        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
 //        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
@@ -33,7 +34,11 @@ class JunitTest {
 //        o.x = 1;
 //        o.y = 2;
 //        int[] list = {1, 2, 3, 4};
-        System.out.println(servicers.calDet(a, 3).getCalResult());
+        long ab = 1;
+        for (int i = 0; i < 10; i++) {
+            ab *= 10;
+            System.out.println("样本" + ab + "\t:" + servicers.calNapierianLogarithm(ab));
+        }
 //        System.out.printf("aaa + zzz = %s\n", servicers.concat("aaa", "zzz"));
 //        for (int i = 0; i < 20000; i++) {
 //            for (int j = 0; j < 20000; j++) {
