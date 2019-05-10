@@ -45,8 +45,10 @@ public class CalCulServicesImpl implements CalServicers {
 
 
     @Override
-    public int addObject(TestObject obj) {
-        TestObject objc = obj;
-        return objc.x + objc.y;
+    public TestObject addObject(TestObject obj,TestObject obj2) {
+        TestObject objc = new TestObject();
+        objc.x=obj.x+obj2.x;
+        objc.y=obj.y+obj2.y;
+        return objc;
     }
 }
