@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/GunRIC-Common/GunRIC-Common.iml" filepath="$PROJECT_DIR$/GunRIC-Common/GunRIC-Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRIC-Monitor/GunRIC-Monitor.iml" filepath="$PROJECT_DIR$/GunRIC-Monitor/GunRIC-Monitor.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRIC-Provide/GunRIC-Provide.iml" filepath="$PROJECT_DIR$/GunRIC-Provide/GunRIC-Provide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GunRIC-Provide-Lib/GunRIC-Provide-Lib.iml" filepath="$PROJECT_DIR$/GunRIC-Provide-Lib/GunRIC-Provide-Lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRIC-Store/GunRIC-Store.iml" filepath="$PROJECT_DIR$/GunRIC-Store/GunRIC-Store.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRIC-User/GunRIC-User.iml" filepath="$PROJECT_DIR$/GunRIC-User/GunRIC-User.iml" />
       <module fileurl="file://$PROJECT_DIR$/GunRPC.iml" filepath="$PROJECT_DIR$/GunRPC.iml" />

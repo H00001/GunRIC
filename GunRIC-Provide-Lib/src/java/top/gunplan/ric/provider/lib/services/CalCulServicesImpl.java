@@ -1,4 +1,4 @@
-package top.gunplan.ric.example.services;
+package top.gunplan.ric.provider.lib.services;
 
 import top.gunplan.ric.apis.test.CalServicers;
 import top.gunplan.ric.apis.test.TestObject;

@@ -1,8 +1,8 @@
-package top.gunplan.ric.server;
+package top.gunplan.ric.provider;
 
 
 import top.gunplan.protocol.GunRicRegisterStatusProtocol;
-import top.gunplan.ric.server.property.GunRICProperty;
+import top.gunplan.ric.provider.property.GunRICProperty;
 import top.gunplan.protocol.GunRicRegisterProtocol;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 

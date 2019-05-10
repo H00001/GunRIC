@@ -1,8 +1,8 @@
-package top.gunplan.ric.server;
+package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.impl.propertys.GunProperty;
-import top.gunplan.ric.server.property.GunRICProperty;
+import top.gunplan.ric.provider.property.GunRICProperty;
 import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunNettyObserve;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;

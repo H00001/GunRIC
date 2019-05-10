@@ -9,7 +9,7 @@ import top.gunplan.ric.apis.test.anno.GunUseImpl;
  * this interface must have {@link GunUseImpl} anno
  * @see GunUseImpl
  */
-@GunUseImpl(impl = "top.gunplan.ric.example.services.CalCulServicesImpl")
+@GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.CalCulServicesImpl")
 public interface CalServicers {
     /**
      * add calculator method test
@@ -83,6 +83,6 @@ public interface CalServicers {
      * @return TestObject.x + TestObject.y
      * @see TestObject
      */
-    int addObject(TestObject obj);
+    TestObject addObject(TestObject obj, TestObject o);
 
 }

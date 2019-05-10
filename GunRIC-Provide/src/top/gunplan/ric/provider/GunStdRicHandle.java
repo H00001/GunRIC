@@ -1,4 +1,4 @@
-package top.gunplan.ric.server;
+package top.gunplan.ric.provider;
 
 import top.gunplan.ric.apis.test.anno.GunUseImpl;
 import top.gunplan.netty.GunException;
