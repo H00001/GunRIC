@@ -5,11 +5,11 @@ import top.gunplan.utils.GunBytesUtil;
 /**
  * @author dosdrtt
  */
-public class GunRicGetProcotol extends AbstractCenterHelperProtocol implements GunRicOutputHelper {
+public class GunRicGetAddressProcotol extends AbstractCenterHelperProtocol implements GunRicOutputHelper {
     //todo
-    public GunRicGetProcotol() {
+    public GunRicGetAddressProcotol() {
         this.type = RicProtocolType.GET;
-        this.code = RicProtocolCode.NONE;
+        this.code = RicProtocolCode.GET_REQ;
         //    this.setPort(0x0);
     }
 

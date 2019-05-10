@@ -9,6 +9,7 @@ public enum RicProtocolCode {
      *
      */
     SUCCEED(0x00), WARNING(0x02), NONE(0x05),
+    GET_REQ(0x0b), GET_RES(0x0c),
     HELLO_REQ(0x06), HELLO_RES(0x07), FAIL(0x0a);
 
     public int value;
