@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.net.Socket;
 
+/**
+ * @author dosdrtt
+ */
 public final class BootCore {
 
     public static <T> T IOCObject(Class<T> clazz) throws IOException {
@@ -12,8 +15,13 @@ public final class BootCore {
         // Socket so = new Socket();
         Class[] clazzs = {clazz};
         GunRPCHandleProcy procy = new GunRPCHandleProcy(clazz.getName(), so.getInputStream(), so.getOutputStream());
-        Object oc = Proxy.newProxyInstance(BootCore.class.getClassLoader(), clazzs, procy);
-       return clazz.cast(oc);
+        Object oc = null;
+        try {
+            oc = Proxy.newProxyInstance(BootCore.class.getClassLoader(), clazzs, procy);
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        }
+        return clazz.cast(oc);
     }
 }
 

@@ -10,7 +10,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @author dosdrtt
  * @date
  */
-public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
+public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper {
     private ParamHelper[] helpers;
 
     private int paramlen = 0;
@@ -50,9 +50,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 2 + SERIALNUM_LEN + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAG.length;
-        byte[] serizea = new byte[len];
-        GunBytesUtil.GunWriteByteUtil serizUtil = new GunBytesUtil.GunWriteByteUtil(serizea);
+        GunBytesUtil.GunWriteByteUtil serizUtil = createSpace();
         publicSet(serizUtil);
         super.stdHeadWrite(serizUtil);
         serizUtil.writeByte((byte) paramlen);
@@ -60,7 +58,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
             throw new GunException("write Param error");
         }
         serizUtil.write(END_FLAG);
-        return serizea;
+        return serizUtil.getInput();
     }
 
 
@@ -109,5 +107,11 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol {
             var2[i] = helpers[i].obj;
         }
         return var2;
+    }
+
+    @Override
+    public GunBytesUtil.GunWriteByteUtil createSpace() {
+        int len = 2 + SERIALNUM_LEN + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAG.length;
+        return new GunBytesUtil.GunWriteByteUtil(new byte[len]);
     }
 }

@@ -45,17 +45,17 @@ public class GunRPCHandleProcy implements InvocationHandler {
         out.write(input.serialize());
         byte[] b = new byte[2014];
         int len = in.read(b);
-
-        GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicTypeDividePacketManage.findPackage(b);
+        byte[] newb = new byte[len];
+        System.arraycopy(b, 0, newb, 0, len);
+        GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicTypeDividePacketManage.findPackage(newb);
         if (output.getCode() == RicProtocolCode.FAIL) {
             System.out.println(output.getReturnValue().obj);
             return null;
-        }
-        if (output.getCode() == RicProtocolCode.SUCCEED) {
+        } else if (output.getCode() == RicProtocolCode.SUCCEED) {
             if (output.getSerialnumber() == input.getSerialnumber()) {
                 return output.getReturnValue().obj;
             }
         }
-        return null;
+        return output.getReturnValue().obj;
     }
 }

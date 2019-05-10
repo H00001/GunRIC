@@ -7,7 +7,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @version 0.0.0.1
  * @since 0.0.0.1
  */
-public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol {
+public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper {
     public GunRicRegisterStatusProtocol() {
         this.type = RicProtocolType.REGRESP;
     }
@@ -28,10 +28,15 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol {
 
     @Override
     public byte[] serialize() {
-        byte[] sv = new byte[TYPE_LEN + CODE_LEN + SERIALNUM_LEN + END_FLAG.length];
-        GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(sv);
+        GunBytesUtil.GunWriteByteUtil util = createSpace();
         publicSet(util);
         util.write(END_FLAG);
-        return sv;
+        return util.getInput();
+    }
+
+    @Override
+    public GunBytesUtil.GunWriteByteUtil createSpace() {
+        byte[] sv = new byte[TYPE_LEN + CODE_LEN + SERIALNUM_LEN + END_FLAG.length];
+        return new GunBytesUtil.GunWriteByteUtil(sv);
     }
 }

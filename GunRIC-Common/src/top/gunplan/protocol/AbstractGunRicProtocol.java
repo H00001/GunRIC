@@ -221,4 +221,5 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
         this.serialnumber = unserizutil.readInt();
     }
 
+
 }
