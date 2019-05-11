@@ -2,12 +2,13 @@ package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.impl.propertys.GunProperty;
-import top.gunplan.ric.provider.property.GunRICProperty;
+import top.gunplan.ric.provider.property.GunRICProvideProperty;
 import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunNettyObserve;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.filter.GunNettyStdFirstFilter;
 import top.gunplan.netty.impl.GunBootServerFactory;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -39,13 +40,13 @@ public class ProviderBoot implements GunBootServerBase {
 
             @Override
             public boolean onBooting(GunProperty gunProperty) {
-//
                 try {
-                    return GunRicPublishManage.publishInterface(GunNettyPropertyManagerImpl.getProperty("ric-provide"));
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    GunRicPublishManage manage = new GunRicPublishManage(GunNettyPropertyManagerImpl.getProperty("ric-provide"));
+                    return manage.publishInterface();
+                } catch (Exception e) {
+                    AbstractGunBaseLogUtil.error(e);
+                    return false;
                 }
-                return true;
             }
 
             @Override
@@ -64,7 +65,7 @@ public class ProviderBoot implements GunBootServerBase {
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>());
-        GunNettyPropertyManagerImpl.registerProperty("ric-provide", new GunRICProperty());
+        GunNettyPropertyManagerImpl.registerProperty("ric-provide", new GunRICProvideProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunStdRicServerFilter()).
                 setHandle(new GunRicProvideHandle());
