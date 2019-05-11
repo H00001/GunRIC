@@ -12,5 +12,5 @@ public interface GunRicOutputHelper {
      *
      * @return serial needed space;
      */
-    GunBytesUtil.GunWriteByteUtil createSpace();
+    GunBytesUtil.GunWriteByteStream createSpace();
 }

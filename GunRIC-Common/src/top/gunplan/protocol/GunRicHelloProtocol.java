@@ -16,21 +16,21 @@ public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRi
     }
 
     @Override
-    public boolean unSerialize(byte[] in) {
-        return false;
-    }
-
-    @Override
     public byte[] serialize() {
-        GunBytesUtil.GunWriteByteUtil util = createSpace();
+        GunBytesUtil.GunWriteByteStream util = createSpace();
         publicSet(util);
         util.write(END_FLAG);
         return util.getInput();
     }
 
     @Override
-    public GunBytesUtil.GunWriteByteUtil createSpace() {
+    public GunBytesUtil.GunWriteByteStream createSpace() {
         byte[] seriz = new byte[CODE_LEN + SERIALNUM_LEN + TYPE_LEN + END_FLAG.length];
-        return new GunBytesUtil.GunWriteByteUtil(seriz);
+        return new GunBytesUtil.GunWriteByteStream(seriz);
+    }
+
+    @Override
+    public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
+        return false;
     }
 }

@@ -18,25 +18,24 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol impleme
 
     }
 
-    @Override
-    public boolean unSerialize(byte[] in) {
-        GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
-        publicUnSet(util);
-        return checkEnd(util) && checKNext(in, util);
-    }
-
 
     @Override
     public byte[] serialize() {
-        GunBytesUtil.GunWriteByteUtil util = createSpace();
+        GunBytesUtil.GunWriteByteStream util = createSpace();
         publicSet(util);
         util.write(END_FLAG);
         return util.getInput();
     }
 
     @Override
-    public GunBytesUtil.GunWriteByteUtil createSpace() {
+    public GunBytesUtil.GunWriteByteStream createSpace() {
         byte[] sv = new byte[TYPE_LEN + CODE_LEN + SERIALNUM_LEN + END_FLAG.length];
-        return new GunBytesUtil.GunWriteByteUtil(sv);
+        return new GunBytesUtil.GunWriteByteStream(sv);
+    }
+
+    @Override
+    public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
+        publicUnSet(util);
+        return checkEnd(util) && checKNext(util);
     }
 }

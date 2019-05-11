@@ -10,7 +10,7 @@ import java.net.Socket;
  */
 public final class BootCore {
 
-    public static <T> T IOCObject(Class<T> clazz) throws IOException {
+    public static <T> T iocobject(Class<T> clazz) throws IOException {
         Socket so = new Socket("127.0.0.1", 8822);
         // Socket so = new Socket();
         Class[] clazzs = {clazz};

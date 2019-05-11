@@ -69,7 +69,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
         return len;
     }
 
-    void stdHeadAnaly(GunBytesUtil.GunReadByteUtil unserizutil) {
+    void stdHeadAnaly(GunBytesUtil.GunReadByteStream unserizutil) {
         final int ilen = unserizutil.readByte();
         this.interfaceName = new String(unserizutil.readByte(ilen));
         int methodlen = unserizutil.readByte();
@@ -78,7 +78,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
 
     }
 
-    void stdHeadWrite(GunBytesUtil.GunWriteByteUtil serizUtil) {
+    void stdHeadWrite(GunBytesUtil.GunWriteByteStream serizUtil) {
         serizUtil.writeByte((byte) interfaceName.length());
         serizUtil.write(interfaceName);
         serizUtil.writeByte((byte) methodName.length());
@@ -104,7 +104,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
         }
     }
 
-    ParamHelper readOnceParam(GunBytesUtil.GunReadByteUtil util) {
+    ParamHelper readOnceParam(GunBytesUtil.GunReadByteStream util) {
         RicProtocolParamType ptypei = RicProtocolParamType.valuefrom(util.readByte());
         ParamHelper help = new ParamHelper();
         help.clazz = ptypei.clazz;

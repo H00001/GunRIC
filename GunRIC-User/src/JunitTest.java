@@ -1,8 +1,6 @@
 
 import org.junit.jupiter.api.Test;
-import top.gunplan.ric.apis.test.CalServicers;
 import top.gunplan.RPC.Boot.BootCore;
-import top.gunplan.ric.apis.test.LinearAlgebra;
 import top.gunplan.ric.apis.test.NatureMath;
 
 
@@ -13,7 +11,7 @@ import java.io.IOException;
  */
 class JunitTest {
     @Test
-    void dotest() throws IOException {
+    void dotest() throws IOException, InterruptedException {
         /**
          * the framework support data type
          * int 32
@@ -23,7 +21,7 @@ class JunitTest {
          * short 16
          * string ?
          */
-        NatureMath servicers = BootCore.IOCObject(NatureMath.class);
+        NatureMath servicers = BootCore.iocobject(NatureMath.class);
 //        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
 //        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
 //        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
@@ -35,8 +33,9 @@ class JunitTest {
 //        o.y = 2;
 //        int[] list = {1, 2, 3, 4};
         long ab = 1;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             ab *= 10;
+            Thread.sleep(2000);
             System.out.println("样本" + ab + "\t:" + servicers.calNapierianLogarithm(ab));
         }
 //        System.out.printf("aaa + zzz = %s\n", servicers.concat("aaa", "zzz"));

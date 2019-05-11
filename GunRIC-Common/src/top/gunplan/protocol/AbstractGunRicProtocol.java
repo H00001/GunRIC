@@ -17,19 +17,23 @@ import java.lang.reflect.Method;
  * @version 0.0.0.0
  * @date
  */
-public abstract class AbstractGunRicProtocol implements GunNetInputInterface, GunNetOutputInterface {
+public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetInputInterface, GunNetOutputInterface {
 
 
-    boolean checKNext(byte[] in, GunBytesUtil.GunReadByteUtil util) {
+    boolean checKNext(GunBytesUtil.GunReadByteStream util) {
         boolean thTrueSeria = true;
-        if (in.length - util.getNowflag() > 3) {
-            byte[] nextp = new byte[in.length - util.getNowflag()];
-            System.arraycopy(in, util.getNowflag(), nextp, 0, nextp.length);
-            AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(nextp);
-            thTrueSeria = protocol.unSerialize(nextp);
+        if (util.getLenSum() - util.getNowflag() > 3) {
+            AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(util);
+            thTrueSeria = protocol.unSerialize(util);
             setNext(protocol);
         }
         return thTrueSeria;
+    }
+
+    @Override
+    public boolean unSerialize(byte[] in) {
+        GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(in);
+        return unSerialize(util);
     }
 
     RicProtocolType type;
@@ -79,11 +83,33 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
     public final static byte[] END_FLAG = {0x7a, 0x7a};
 
+    void writeOnceParam(GunBytesUtil.GunWriteByteStream util, Object parama) {
+        Helper help = new Helper(util);
+        help.write(parama);
+
+    }
+
+    void publicSet(GunBytesUtil.GunWriteByteStream util) {
+        util.write(type.value);
+        util.write(code.value);
+        util.write(serialnumber);
+    }
+
+    boolean checkEnd(GunBytesUtil.GunReadByteStream unserizutil) {
+        byte[] end = unserizutil.readByte(END_FLAG.length);
+        return GunBytesUtil.compareBytesFromEnd(end, END_FLAG);
+    }
+
+    void publicUnSet(GunBytesUtil.GunReadByteStream unserizutil) {
+        this.type = RicProtocolType.valuefrom(unserizutil.readInt());
+        this.code = RicProtocolCode.valuefrom(unserizutil.readInt());
+        this.serialnumber = unserizutil.readInt();
+    }
 
     static class Helper {
-        private final GunBytesUtil.GunWriteByteUtil util;
+        private final GunBytesUtil.GunWriteByteStream util;
 
-        Helper(GunBytesUtil.GunWriteByteUtil util) {
+        Helper(GunBytesUtil.GunWriteByteStream util) {
             this.util = util;
         }
 
@@ -112,6 +138,7 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
         /**
          * reflect execute
+         *
          * @param parama write param
          */
         private void writeInteger(Integer parama) {
@@ -120,6 +147,7 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
         /**
          * reflect execute
+         *
          * @param parama write param
          */
         private void writeShort(Short parama) {
@@ -129,6 +157,7 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
         /**
          * reflect execute
+         *
          * @param parama write param
          */
         private void writeLong(Long parama) {
@@ -138,6 +167,7 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
         /**
          * reflect execute
+         *
          * @param list write param
          */
         private void writeLint(int[] list) {
@@ -150,6 +180,7 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
         /**
          * reflect execute
+         *
          * @param list write param
          */
         private void writeLLint(int[][] list) {
@@ -165,6 +196,7 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
 
         /**
          * reflect execute
+         *
          * @param string write param
          */
         private void writeString(String string) {
@@ -194,31 +226,6 @@ public abstract class AbstractGunRicProtocol implements GunNetInputInterface, Gu
                 return -1;
             }
         }
-    }
-
-    void writeOnceParam(GunBytesUtil.GunWriteByteUtil util, Object parama) {
-        Helper help = new Helper(util);
-        help.write(parama);
-
-    }
-
-
-    void publicSet(GunBytesUtil.GunWriteByteUtil util) {
-        util.write(type.value);
-        util.write(code.value);
-        util.write(serialnumber);
-    }
-
-
-    boolean checkEnd(GunBytesUtil.GunReadByteUtil unserizutil) {
-        byte[] end = unserizutil.readByte(END_FLAG.length);
-        return GunBytesUtil.compareBytesFromEnd(end, END_FLAG);
-    }
-
-    void publicUnSet(GunBytesUtil.GunReadByteUtil unserizutil) {
-        this.type = RicProtocolType.valuefrom(unserizutil.readInt());
-        this.code = RicProtocolCode.valuefrom(unserizutil.readInt());
-        this.serialnumber = unserizutil.readInt();
     }
 
 

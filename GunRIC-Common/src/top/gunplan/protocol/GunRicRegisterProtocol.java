@@ -37,22 +37,13 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
     }
 
 
-    @Override
-    public boolean unSerialize(byte[] in) {
-        GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
-        this.type = RicProtocolType.valuefrom(util.readInt());
-        this.port = util.readInt();
-        this.setSerialnumber(util.readInt());
-        super.stdHeadAnaly(util);
-        readParam(util);
-        return checkEnd(util);
-    }
+
 
     @Override
     public byte[] serialize() {
         int len = 3 + CODE_LEN + TYPE_LEN + SERIALNUM_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
-        GunBytesUtil.GunWriteByteUtil util = new GunBytesUtil.GunWriteByteUtil(save);
+        GunBytesUtil.GunWriteByteStream util = new GunBytesUtil.GunWriteByteStream(save);
         util.write(RicProtocolType.REGISTER.value);
         util.write(port);
         util.write(getSerialnumber());
@@ -63,4 +54,13 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
     }
 
 
+    @Override
+    public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
+        this.type = RicProtocolType.valuefrom(util.readInt());
+        this.port = util.readInt();
+        this.setSerialnumber(util.readInt());
+        super.stdHeadAnaly(util);
+        readParam(util);
+        return checkEnd(util);
+    }
 }

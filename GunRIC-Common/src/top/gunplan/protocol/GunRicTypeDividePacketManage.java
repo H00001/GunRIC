@@ -11,30 +11,43 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public final class GunRicTypeDividePacketManage {
     public static AbstractGunRicProtocol findPackage(byte[] bytes) {
-        GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(bytes);
+        GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(bytes);
+        return findPackage(util);
+    }
+
+    public static AbstractGunRicProtocol findPackage(GunBytesUtil.GunReadByteStream util) {
         RicProtocolType retype = RicProtocolType.valuefrom(util.readInt());
         AbstractGunRicProtocol protocol = null;
         assert retype != null;
         switch (retype) {
-            case HELLO:
-                protocol = new GunRicHelloProtocol();
-                break;
+            case HELLO: {
+                RicProtocolCode code = RicProtocolCode.valuefrom(util.readInt());
+                protocol = code == RicProtocolCode.HELLO_REQ ? new GunRicHelloProtocol(true) : new GunRicHelloProtocol(false);
+            }
+            util.pSub2();
+            break;
             case REGRESP:
                 protocol = new GunRicRegisterStatusProtocol();
                 break;
             case REQUEST:
                 protocol = new GunRicInputProtocol();
                 break;
-            case REGISTER:
+            case REGISTER: {
                 protocol = new GunRicRegisterProtocol();
-                break;
+            }
+            break;
+            case GET: {
+                RicProtocolCode code = RicProtocolCode.valuefrom(util.readInt());
+                protocol = code == RicProtocolCode.HELLO_REQ ? new GunRicGetAddressProcotol() : new GunRicRespAddressProtocol();
+            }
+            util.pSub2();
+            break;
             case RESPONSE:
                 protocol = new GunRicOutputProtocol();
             default:
                 break;
         }
-        assert protocol != null;
-        protocol.unSerialize(bytes);
+        util.pSub2();
         return protocol;
     }
 }

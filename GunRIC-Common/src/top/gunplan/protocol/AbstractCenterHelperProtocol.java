@@ -25,7 +25,7 @@ abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecuteProtoco
         this.types[now++] = type;
     }
 
-    void writeParamTypes(GunBytesUtil.GunWriteByteUtil util) {
+    void writeParamTypes(GunBytesUtil.GunWriteByteStream util) {
         util.writeByte((byte) paramcount);
         for (int i = 0; i < paramcount; i++) {
             util.writeByte(RicProtocolParamType.valuefrom(types[i]).val);
@@ -37,7 +37,7 @@ abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecuteProtoco
         types = null;
     }
 
-    void readParam(GunBytesUtil.GunReadByteUtil util) {
+    void readParam(GunBytesUtil.GunReadByteStream util) {
         this.paramcount = util.readByte();
         if (this.paramcount != 0) {
             types = new Class<?>[paramcount];

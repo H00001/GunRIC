@@ -20,7 +20,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         return helpers;
     }
 
-    private boolean analyizeParams(int paramlen, GunBytesUtil.GunReadByteUtil util) {
+    private boolean analyizeParams(int paramlen, GunBytesUtil.GunReadByteStream util) {
         helpers = new ParamHelper[paramlen];
         for (int i = 0; i < paramlen; i++) {
             helpers[i] = readOnceParam(util);
@@ -34,7 +34,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     }
 
 
-    private boolean writeParam(GunBytesUtil.GunWriteByteUtil util) {
+    private boolean writeParam(GunBytesUtil.GunWriteByteStream util) {
         for (int i = 0; i < paramlen; i++) {
             Object fil = helpers[i].obj;
             try {
@@ -50,7 +50,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
 
     @Override
     public byte[] serialize() {
-        GunBytesUtil.GunWriteByteUtil serizUtil = createSpace();
+        GunBytesUtil.GunWriteByteStream serizUtil = createSpace();
         publicSet(serizUtil);
         super.stdHeadWrite(serizUtil);
         serizUtil.writeByte((byte) paramlen);
@@ -83,16 +83,6 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     }
 
 
-    @Override
-    public boolean unSerialize(byte[] in) {
-        GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(in);
-        publicUnSet(util);
-        super.stdHeadAnaly(util);
-        this.paramlen = util.readByte();
-        return paramlen == 0 ? checkEnd(util) : analyizeParams(paramlen, util);
-    }
-
-
     public Class<?>[] getParamTypeList() {
         Class<?>[] var2 = new Class<?>[paramlen];
         for (int i = 0; i < paramlen; i++) {
@@ -110,8 +100,17 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     }
 
     @Override
-    public GunBytesUtil.GunWriteByteUtil createSpace() {
+    public GunBytesUtil.GunWriteByteStream createSpace() {
         int len = 2 + SERIALNUM_LEN + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAG.length;
-        return new GunBytesUtil.GunWriteByteUtil(new byte[len]);
+        return new GunBytesUtil.GunWriteByteStream(new byte[len]);
+    }
+
+    @Override
+    public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
+        publicUnSet(util);
+        super.stdHeadAnaly(util);
+        this.paramlen = util.readByte();
+        boolean b = paramlen == 0 ? checkEnd(util) : analyizeParams(paramlen, util);
+        return b && checKNext(util);
     }
 }

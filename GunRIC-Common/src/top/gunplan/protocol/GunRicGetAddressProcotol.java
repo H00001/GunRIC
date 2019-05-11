@@ -13,18 +13,10 @@ public class GunRicGetAddressProcotol extends AbstractCenterHelperProtocol imple
         //    this.setPort(0x0);
     }
 
-    @Override
-    public boolean unSerialize(byte[] bytes) {
-        GunBytesUtil.GunReadByteUtil util = new GunBytesUtil.GunReadByteUtil(bytes);
-        publicUnSet(util);
-        stdHeadAnaly(util);
-        readParam(util);
-        return checkEnd(util) && checKNext(bytes, util);
-    }
 
     @Override
     public byte[] serialize() {
-        GunBytesUtil.GunWriteByteUtil util = createSpace();
+        GunBytesUtil.GunWriteByteStream util = createSpace();
         publicSet(util);
         stdHeadWrite(util);
         writeParamTypes(util);
@@ -33,8 +25,16 @@ public class GunRicGetAddressProcotol extends AbstractCenterHelperProtocol imple
     }
 
     @Override
-    public GunBytesUtil.GunWriteByteUtil createSpace() {
+    public GunBytesUtil.GunWriteByteStream createSpace() {
         int len = TYPE_LEN + CODE_LEN + SERIALNUM_LEN + 3 + interfaceName.length() + methodName.length() + paramcount + END_FLAG.length;
-        return new GunBytesUtil.GunWriteByteUtil(new byte[len]);
+        return new GunBytesUtil.GunWriteByteStream(new byte[len]);
+    }
+
+    @Override
+    public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
+        publicUnSet(util);
+        stdHeadAnaly(util);
+        readParam(util);
+        return checkEnd(util) && checKNext(util);
     }
 }
