@@ -1,4 +1,4 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 import top.gunplan.utils.GunBytesUtil;
 
@@ -31,6 +31,7 @@ public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRi
 
     @Override
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
-        return false;
+        publicUnSet(util);
+        return checkEnd(util) && checKNext(util);
     }
 }

@@ -1,9 +1,9 @@
 package top.gunplan.ric.provider;
 
 
-import top.gunplan.protocol.GunRicRegisterStatusProtocol;
+import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
 import top.gunplan.ric.provider.property.GunRICProperty;
-import top.gunplan.protocol.GunRicRegisterProtocol;
+import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 import java.util.HashMap;
 import java.util.Map;

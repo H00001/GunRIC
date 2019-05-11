@@ -1,4 +1,4 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 import top.gunplan.utils.GunBytesUtil;
 

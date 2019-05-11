@@ -1,4 +1,4 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 
 import top.gunplan.utils.AbstractGunBaseLogUtil;
@@ -166,7 +166,5 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
                 break;
         }
         return help;
-
     }
-
 }

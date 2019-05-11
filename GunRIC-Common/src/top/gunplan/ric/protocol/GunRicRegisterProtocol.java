@@ -1,4 +1,4 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 
 import top.gunplan.utils.GunBytesUtil;
@@ -61,6 +61,6 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
         this.setSerialnumber(util.readInt());
         super.stdHeadAnaly(util);
         readParam(util);
-        return checkEnd(util);
+        return checkEnd(util) && checKNext(util);
     }
 }

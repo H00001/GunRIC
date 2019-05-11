@@ -2,6 +2,8 @@ package top.gunplan.RPC.Boot;
 
 
 import top.gunplan.protocol.*;
+import top.gunplan.ric.protocol.*;
+import top.gunplan.riv.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 import top.gunplan.utils.GunBytesUtil;
 
@@ -7,7 +7,7 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public class GunRicGetAddressProcotol extends AbstractCenterHelperProtocol implements GunRicOutputHelper {
     //todo
-    public GunRicGetAddressProcotol() {
+    GunRicGetAddressProcotol() {
         this.type = RicProtocolType.GET;
         this.code = RicProtocolCode.GET_REQ;
         //    this.setPort(0x0);

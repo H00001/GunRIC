@@ -1,7 +1,7 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 import top.gunplan.netty.GunException;
-import top.gunplan.protocol.exp.GunRPCException;
+import top.gunplan.ric.protocol.exp.GunRPCException;
 
 /**
  * @author dosdrtt

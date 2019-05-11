@@ -6,8 +6,8 @@ import top.gunplan.netty.anno.GunNetFilterOrder;
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
 import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.protocol.AbstractGunRicProtocol;
-import top.gunplan.protocol.GunRicTypeDividePacketManage;
+import top.gunplan.ric.protocol.AbstractGunRicProtocol;
+import top.gunplan.ric.protocol.GunRicTypeDividePacketManage;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

@@ -1,9 +1,9 @@
-package top.gunplan.protocol;
+package top.gunplan.ric.protocol;
 
 
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
-import top.gunplan.protocol.exp.GunRPCException;
+import top.gunplan.ric.protocol.exp.GunRPCException;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.io.ByteArrayOutputStream;

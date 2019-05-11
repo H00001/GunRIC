@@ -5,7 +5,7 @@ import top.gunplan.netty.anno.GunNetFilterOrder;
 
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
-import top.gunplan.protocol.GunRicInputProtocol;
+import top.gunplan.ric.protocol.GunRicInputProtocol;
 import static top.gunplan.netty.GunNettyFilter.DealResult.*;
 
 /**

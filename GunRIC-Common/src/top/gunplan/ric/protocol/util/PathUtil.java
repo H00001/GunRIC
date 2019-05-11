@@ -1,4 +1,4 @@
-package top.gunplan.protocol.util;
+package top.gunplan.ric.protocol.util;
 
 /**
  * @author dosdrtt

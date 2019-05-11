@@ -1,4 +1,4 @@
-package top.gunplan.protocol.exp;
+package top.gunplan.ric.protocol.exp;
 
 import top.gunplan.netty.GunException;
 
