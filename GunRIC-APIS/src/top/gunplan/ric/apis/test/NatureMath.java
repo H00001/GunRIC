@@ -9,8 +9,8 @@ import top.gunplan.ric.apis.test.anno.GunUseImpl;
 @GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.NatureMathImpl")
 public interface NatureMath {
     /**
-     * @param i
-     * @return
+     * @param i value
+     * @return result
      */
     String calNapierianLogarithm(long i);
 }

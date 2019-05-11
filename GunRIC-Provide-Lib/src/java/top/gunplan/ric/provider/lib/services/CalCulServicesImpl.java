@@ -1,13 +1,13 @@
 package top.gunplan.ric.provider.lib.services;
 
-import top.gunplan.ric.apis.test.CalServicers;
+import top.gunplan.ric.apis.test.CalServices;
 import top.gunplan.ric.apis.test.TestObject;
 
 
 /**
  * @author dosdrtt
  */
-public class CalCulServicesImpl implements CalServicers {
+public class CalCulServicesImpl implements CalServices {
     @Override
     public int intAdd(int a, int b) {
         return a + b;

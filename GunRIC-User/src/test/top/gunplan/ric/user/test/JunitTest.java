@@ -1,7 +1,9 @@
+package top.gunplan.ric.user.test;
 
 import org.junit.jupiter.api.Test;
-import top.gunplan.RPC.Boot.BootCore;
-import top.gunplan.ric.apis.test.NatureMath;
+import top.gunplan.ric.apis.test.CalServices;
+import top.gunplan.ric.apis.test.LinearAlgebra;
+import top.gunplan.ric.user.BootCore;
 
 
 import java.io.IOException;
@@ -21,23 +23,26 @@ class JunitTest {
          * short 16
          * string ?
          */
-        NatureMath servicers = BootCore.iocobject(NatureMath.class);
-//        System.out.printf("3 + 8 = %d\n", servicers.intAdd(3, 8));
-//        System.out.printf("8 - 3 = %d\n", servicers.intSub(8, 3));
-//        System.out.printf("8 * 3 = %d\n", servicers.multiplication(8, 3));
-//        System.out.printf("8 / 3 = %d\n", servicers.division(8, 3));
+        CalServices services = BootCore.iocobject(CalServices.class);
+        System.out.printf("3 + 8 = %d\n", services.intAdd(3, 8));
+        System.out.printf("8 - 3 = %d\n", services.intSub(8, 3));
+        System.out.printf("8 * 3 = %d\n", services.multiplication(8, 3));
+        System.out.printf("8 / 3 = %d\n", services.division(8, 3));
+
         int[][] a = {{1, 3, -4}, {-2, 2, 1}, {-3, 4, -2}};
 //
+        LinearAlgebra services1 = BootCore.iocobject(LinearAlgebra.class);
+        System.out.println(services1.calDet(a, a.length).getCalResult());
 //        TestObject o = new TestObject();
 //        o.x = 1;
 //        o.y = 2;
 //        int[] list = {1, 2, 3, 4};
-        long ab = 1;
-        for (int i = 0; i < 100; i++) {
-            ab *= 10;
-            Thread.sleep(2000);
-            System.out.println("样本" + ab + "\t:" + servicers.calNapierianLogarithm(ab));
-        }
+//        long ab = 1;
+//        for (int i = 0; i < 100; i++) {
+//            ab *= 10;
+//            Thread.sleep(2000);
+//            System.out.println("样本" + ab + "\t:" + servicers.calNapierianLogarithm(ab));
+//        }
 //        System.out.printf("aaa + zzz = %s\n", servicers.concat("aaa", "zzz"));
 //        for (int i = 0; i < 20000; i++) {
 //            for (int j = 0; j < 20000; j++) {

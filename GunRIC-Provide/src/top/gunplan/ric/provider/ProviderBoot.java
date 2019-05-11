@@ -45,6 +45,7 @@ public class ProviderBoot implements GunBootServerBase {
                     return manage.publishInterface();
                 } catch (Exception e) {
                     AbstractGunBaseLogUtil.error(e);
+                    AbstractGunBaseLogUtil.error("register fail", "[PROVIDER]");
                     return false;
                 }
             }

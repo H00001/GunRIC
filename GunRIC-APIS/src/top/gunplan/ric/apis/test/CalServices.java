@@ -3,14 +3,14 @@ package top.gunplan.ric.apis.test;
 import top.gunplan.ric.apis.test.anno.GunUseImpl;
 
 /**
- * CalServicers (Test)
+ * CalServices (Test)
  * @date 2019/04/22
  * @author dosdrtt
  * this interface must have {@link GunUseImpl} anno
  * @see GunUseImpl
  */
 @GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.CalCulServicesImpl")
-public interface CalServicers {
+public interface CalServices {
     /**
      * add calculator method test
      *

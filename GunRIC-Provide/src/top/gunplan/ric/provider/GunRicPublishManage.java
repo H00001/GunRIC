@@ -78,6 +78,7 @@ class GunRicPublishManage {
                 }
             }
         } catch (Exception e) {
+            AbstractGunBaseLogUtil.error(e);
             return false;
         }
         return true;

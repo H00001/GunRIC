@@ -1,9 +1,9 @@
-package top.gunplan.RPC.Boot;
+package top.gunplan.ric.user;
 
 
-import top.gunplan.protocol.*;
+
 import top.gunplan.ric.protocol.*;
-import top.gunplan.riv.protocol.*;
+
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.InputStream;
@@ -12,16 +12,17 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
+ * @author dosdrtt
  * @version 0.0.0.0
  * @since 0.0.0.0
  */
 
-public class GunRPCHandleProcy implements InvocationHandler {
+public class GunRicUserHandleProcy implements InvocationHandler {
     private final String interfaceName;
     private final InputStream in;
     private final OutputStream out;
 
-    GunRPCHandleProcy(String interfaceName, InputStream address, OutputStream port) {
+    GunRicUserHandleProcy(String interfaceName, InputStream address, OutputStream port) {
         this.interfaceName = interfaceName;
         this.in = address;
         this.out = port;

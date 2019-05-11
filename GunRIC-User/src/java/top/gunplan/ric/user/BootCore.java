@@ -1,4 +1,4 @@
-package top.gunplan.RPC.Boot;
+package top.gunplan.ric.user;
 
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ public final class BootCore {
         Socket so = new Socket("127.0.0.1", 8822);
         // Socket so = new Socket();
         Class[] clazzs = {clazz};
-        GunRPCHandleProcy procy = new GunRPCHandleProcy(clazz.getName(), so.getInputStream(), so.getOutputStream());
+        GunRicUserHandleProcy procy = new GunRicUserHandleProcy(clazz.getName(), so.getInputStream(), so.getOutputStream());
         Object oc = null;
         try {
             oc = Proxy.newProxyInstance(BootCore.class.getClassLoader(), clazzs, procy);
