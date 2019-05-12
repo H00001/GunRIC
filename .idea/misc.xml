@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/GunRIC-User/pom.xml" />
+        <option value="$PROJECT_DIR$/GunRIC-Provide/pom.xml" />
+        <option value="$PROJECT_DIR$/GunRIC-Monitor/pom.xml" />
+        <option value="$PROJECT_DIR$/GunRIC-Provide-Lib/pom.xml" />
+        <option value="$PROJECT_DIR$/GunRIC-Center/pom.xml" />
+        <option value="$PROJECT_DIR$/GunRIC-Common/pom.xml" />
+        <option value="$PROJECT_DIR$/GunRIC-APIS/pom.xml" />
+        <option value="$PROJECT_DIR$/GunRIC-Store/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>top.gunplan</groupId>
-    <artifactId>ric-user</artifactId>
+    <artifactId>ric-store</artifactId>
     <version>Init-1.0.0.1</version>
 
 </project>

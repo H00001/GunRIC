@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="GunRIC-APIS" />
+        <module name="GunRIC-Provide-Lib" />
+        <module name="GunRIC-Common" />
+        <module name="GunRIC-Provide" />
+        <module name="GunRIC-User" />
+        <module name="GunRIC-Store" />
+        <module name="GunRIC-Center" />
+        <module name="GunRIC-Monitor" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="GunRIC-APIS" target="1.5" />
+      <module name="GunRIC-Center" target="1.5" />
+      <module name="GunRIC-Common" target="1.5" />
+      <module name="GunRIC-Monitor" target="1.5" />
+      <module name="GunRIC-Provide" target="1.5" />
+      <module name="GunRIC-Provide-Lib" target="1.5" />
+      <module name="GunRIC-Store" target="1.5" />
+      <module name="GunRIC-User" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
