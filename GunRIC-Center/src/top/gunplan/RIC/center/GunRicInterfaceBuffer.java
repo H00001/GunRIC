@@ -7,11 +7,14 @@ import java.util.HashMap;
 /**
  * @author dosdrtt
  */
-public class GunRICInterfaceBuffer {
-    public static HashMap<GunRICInterface, ArrayList<InetSocketAddress>> intermapping = new HashMap<>();
+public class GunRicInterfaceBuffer {
+    public static HashMap<GunRicCdtInterface, ArrayList<InetSocketAddress>> intermapping = new HashMap<>();
 
-    public static class GunRICInterface {
-        public GunRICInterface(long id, Class<?>[] params, String interFaceName, String methodName) {
+    /**
+     *
+     */
+    public static class GunRicCdtInterface {
+        public GunRicCdtInterface(long id, Class<?>[] params, String interFaceName, String methodName) {
             this.id = id;
             this.params = params;
             this.interFaceName = interFaceName;
@@ -44,7 +47,7 @@ public class GunRICInterfaceBuffer {
             return (int) id;
         }
 
-        private boolean equals1(GunRICInterface objc) {
+        private boolean equals1(GunRicCdtInterface objc) {
             if (interFaceName.equals(objc.interFaceName) &&
                     methodName.equals(objc.methodName) &&
                     objc.params.length == params.length) {
@@ -59,13 +62,13 @@ public class GunRICInterfaceBuffer {
             }
         }
 
-        private boolean equals0(GunRICInterface objc) {
+        private boolean equals0(GunRicCdtInterface objc) {
             return id == objc.id && equals1(objc);
         }
 
         @Override
         public boolean equals(Object obj) {
-            return super.equals(obj) || equals0((GunRICInterface) obj);
+            return super.equals(obj) || equals0((GunRicCdtInterface) obj);
         }
     }
 

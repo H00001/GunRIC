@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * @date 1557152414
  * Concurrent class
  */
-public class GunDubboCenterStdHandle {
+public class GunRicCenterStdHandle {
 
     private final static String L = "/";
     private final static String D = "_";
@@ -49,7 +49,7 @@ public class GunDubboCenterStdHandle {
             BufferedOutputStream bf;
             if (f.exists()) {
                 bf = new BufferedOutputStream(new FileOutputStream(f, true));
-                //      GunRICInterfaceBuffer.intermapping.get(new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn)).add(is);
+                //      GunRicInterfaceBuffer.intermapping.get(new GunRicInterfaceBuffer.GunRicCdtInterface(hh, t, in, mn)).add(is);
                 //
                 wP(pt, a.getHostString(), bf);
             } else {
@@ -73,9 +73,9 @@ public class GunDubboCenterStdHandle {
 
     private void fa(InetSocketAddress is, String mn, String in, Class<?>[] t, long hh) {
         ArrayList<InetSocketAddress> al = new ArrayList<>(1);
-        GunRICInterfaceBuffer.GunRICInterface gg = new GunRICInterfaceBuffer.GunRICInterface(hh, t, in, mn);
+        GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface(hh, t, in, mn);
         al.add(is);
-        GunRICInterfaceBuffer.intermapping.put(gg, al);
+        GunRicInterfaceBuffer.intermapping.put(gg, al);
     }
 
     private void wP(GunRicRegisterProtocol protocol, String addr, BufferedOutputStream bof) throws IOException {

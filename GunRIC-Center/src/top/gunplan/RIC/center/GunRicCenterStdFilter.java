@@ -20,7 +20,7 @@ import java.util.List;
  * @date 1557231535
  */
 @GunNetFilterOrder(index = 2)
-public class GunDubboCenterStdFilter implements GunNettyFilter {
+public class GunRicCenterStdFilter implements GunNettyFilter {
     @Override
     public DealResult doInputFilter(GunInputFilterChecker filterDto) {
         InetSocketAddress address;

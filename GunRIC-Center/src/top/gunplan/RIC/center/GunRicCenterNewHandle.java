@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * @author dosdrtt
  */
-public class GunDubboCenterNewHandle implements GunNettyHandle {
+public class GunRicCenterNewHandle implements GunNettyHandle {
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) throws GunException {
         final GunRicCenterDto cdto = (GunRicCenterDto) gunNetInputInterface;
         final List<GunNetInputInterface> lgii = cdto.getObji();
         GunNetOutputInterface[] gol = new GunNetOutputInterface[lgii.size()];
-        GunDubboCenterStdHandle exec = new GunDubboCenterStdHandle();
+        GunRicCenterStdHandle exec = new GunRicCenterStdHandle();
         for (int i = 0; i < lgii.size(); i++) {
             gol[i] = exec.dealDataEvent(lgii.get(i),cdto.getAddress());
         }

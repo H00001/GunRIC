@@ -1,12 +1,13 @@
 package top.gunplan.ric.user.test;
 
 import org.junit.jupiter.api.Test;
-import top.gunplan.ric.apis.test.CalServices;
+
 import top.gunplan.ric.apis.test.LinearAlgebra;
 import top.gunplan.ric.user.BootCore;
 
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * RIC Test
@@ -23,16 +24,19 @@ class JunitTest {
          * short 16
          * string ?
          */
-        CalServices services = BootCore.iocobject(CalServices.class);
-        System.out.printf("3 + 8 = %d\n", services.intAdd(3, 8));
-        System.out.printf("8 - 3 = %d\n", services.intSub(8, 3));
-        System.out.printf("8 * 3 = %d\n", services.multiplication(8, 3));
-        System.out.printf("8 / 3 = %d\n", services.division(8, 3));
+//        CalServices services = BootCore.iocobject(CalServices.class);
+//        System.out.printf("3 + 8 = %d\n", services.intAdd(3, 8));
+//        System.out.printf("8 - 3 = %d\n", services.intSub(8, 3));
+//        System.out.printf("8 * 3 = %d\n", services.multiplication(8, 3));
+//        System.out.printf("8 / 3 = %d\n", services.division(8, 3));
 
         int[][] a = {{1, 3, -4}, {-2, 2, 1}, {-3, 4, -2}};
+
+        int[] x = {1, 0, 2};
+        int[] y = {0, 1, -3};
 //
         LinearAlgebra services1 = BootCore.iocobject(LinearAlgebra.class);
-        System.out.println(services1.calDet(a, a.length).getCalResult());
+        System.out.println(Arrays.toString(services1.verticalVector(x, y)));
 //        TestObject o = new TestObject();
 //        o.x = 1;
 //        o.y = 2;

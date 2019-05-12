@@ -38,6 +38,15 @@ public class LinearAlgebraImpl implements LinearAlgebra {
         }
     }
 
+    @Override
+    public int[] verticalVector(int[] a, int[] b) {
+        int[] sv = new int[3];
+        sv[0] = a[1] * b[2] - b[1] * a[2];
+        sv[1] = b[0] * a[2] - a[0] * b[2];
+        sv[2] = a[0] * b[1] - a[1] * b[0];
+        return sv;
+    }
+
     private boolean c(int[][] a, int size) {
         if (a.length != size) {
             return false;

@@ -3,12 +3,13 @@ package top.gunplan.ric.provider;
 
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
 import top.gunplan.ric.protocol.util.GunCLassPathUtil;
-import top.gunplan.ric.provider.property.GunRICProvideProperty;
+import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.*;
 import java.lang.reflect.Method;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.HashMap;
 
@@ -16,7 +17,7 @@ import java.util.HashMap;
  * @nonconcurrent
  */
 class GunRicPublishManage {
-    private final GunRICProvideProperty ppt;
+    private final GunRicProvideProperty ppt;
     /**
      *
      */
@@ -24,7 +25,7 @@ class GunRicPublishManage {
     private HashMap<Short, String> registerMapping = new HashMap<>();
     private BufferedReader reader;
 
-    GunRicPublishManage(final GunRICProvideProperty ppt) {
+    GunRicPublishManage(final GunRicProvideProperty ppt) {
         this.ppt = ppt;
         InputStream is = GunCLassPathUtil.getResFileAsStream(ppt.getPublishFileName());
         this.reader = new BufferedReader(new InputStreamReader(is));
@@ -32,14 +33,15 @@ class GunRicPublishManage {
     }
 
     boolean publishInterface() throws Exception {
-        Socket ss = new Socket(ppt.getCenterAddr(), ppt.getCenterPort());
-        final OutputStream os = ss.getOutputStream();
-        final InputStream is = ss.getInputStream();
-        if (publishRegister(ppt, os)) {
-            return resolveResult(is);
-        } else {
-            return false;
+        InetSocketAddress[] addrs = ppt.getAddress();
+        int succeedsum = 0;
+        for (InetSocketAddress addr : addrs) {
+            Socket ss = new Socket(addr.getHostString(), addr.getPort());
+            if (publishRegister(ppt, ss.getOutputStream()) && resolveResult(ss.getInputStream())) {
+                succeedsum++;
+            }
         }
+        return succeedsum >= 1;
     }
 
     private boolean resolveResult(InputStream is) throws Exception {
@@ -54,7 +56,7 @@ class GunRicPublishManage {
             poto.unSerialize(bts);
             do {
                 nowcount++;
-                AbstractGunBaseLogUtil.debug(registerMapping.get((short) poto.getSerialnumber()) + " register succeed");
+                AbstractGunBaseLogUtil.debug(registerMapping.get((short) poto.getSerialnumber()) + " register succeed", "[REGISTER]");
                 poto = (GunRicRegisterStatusProtocol) poto.getNext();
             }
             while (poto != null);
@@ -65,7 +67,7 @@ class GunRicPublishManage {
         return true;
     }
 
-    private boolean publishRegister(GunRICProvideProperty ppt, OutputStream os) {
+    private boolean publishRegister(GunRicProvideProperty ppt, OutputStream os) {
         GunRicRegisterProtocol protocol = new GunRicRegisterProtocol();
         protocol.setPort(ppt.getServerLocalPort());
         Class<?> clazz;

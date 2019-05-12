@@ -20,6 +20,8 @@ public interface LinearAlgebra {
      */
     CalRes calDet(int[][] a, int size);
 
+    int[] verticalVector(int[] a, int[] b);
+
 
     class CalRes implements Serializable {
         private static final long serialVersionUID = -8759739552340900011L;
