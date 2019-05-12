@@ -3,7 +3,7 @@ package top.gunplan.ric.user.test;
 import org.junit.jupiter.api.Test;
 
 import top.gunplan.ric.apis.test.LinearAlgebra;
-import top.gunplan.ric.user.BootCore;
+import top.gunplan.ric.user.UserBoot;
 
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ class JunitTest {
          * short 16
          * string ?
          */
-//        CalServices services = BootCore.iocobject(CalServices.class);
+//        CalServices services = UserBoot.iocobject(CalServices.class);
 //        System.out.printf("3 + 8 = %d\n", services.intAdd(3, 8));
 //        System.out.printf("8 - 3 = %d\n", services.intSub(8, 3));
 //        System.out.printf("8 * 3 = %d\n", services.multiplication(8, 3));
@@ -35,7 +35,7 @@ class JunitTest {
         int[] x = {1, 0, 2};
         int[] y = {0, 1, -3};
 //
-        LinearAlgebra services1 = BootCore.iocobject(LinearAlgebra.class);
+        LinearAlgebra services1 = UserBoot.iocobject(LinearAlgebra.class);
         System.out.println(Arrays.toString(services1.verticalVector(x, y)));
 //        TestObject o = new TestObject();
 //        o.x = 1;

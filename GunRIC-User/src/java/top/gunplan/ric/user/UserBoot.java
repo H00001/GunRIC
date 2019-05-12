@@ -8,20 +8,25 @@ import java.net.Socket;
 /**
  * @author dosdrtt
  */
-public final class BootCore {
+public final class UserBoot {
+
+    static {
+        GunRicUserPropertyManageImpl.initProperty();
+
+    }
 
     public static <T> T iocobject(Class<T> clazz) throws IOException {
-        Socket so = new Socket("127.0.0.1", 8822);
-        // Socket so = new Socket();
+        GunRicUserProperty property = GunRicUserPropertyManageImpl.getProPerty();
+        Socket so = new Socket(property.getAddress()[0].getHostString(), property.getAddress()[0].getPort());
         Class[] clazzs = {clazz};
         GunRicUserHandleProcy procy = new GunRicUserHandleProcy(clazz.getName(), so.getInputStream(), so.getOutputStream());
-        Object oc = null;
+        T oc = null;
         try {
-            oc = Proxy.newProxyInstance(BootCore.class.getClassLoader(), clazzs, procy);
+            oc = clazz.cast(Proxy.newProxyInstance(UserBoot.class.getClassLoader(), clazzs, procy));
         } catch (Exception exp) {
             exp.printStackTrace();
         }
-        return clazz.cast(oc);
+        return oc;
     }
 }
 
