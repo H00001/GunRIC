@@ -7,4 +7,26 @@
     <artifactId>ric-provider</artifactId>
     <version>Init-1.0.0.1</version>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>top.gunplan</groupId>
+            <artifactId>ric-provider-lib</artifactId>
+            <version>Init-1.0.0.1</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>12</source>
+                    <target>12</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>

@@ -17,14 +17,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="GunRIC-APIS" target="1.5" />
-      <module name="GunRIC-Center" target="1.5" />
-      <module name="GunRIC-Common" target="1.5" />
-      <module name="GunRIC-Monitor" target="1.5" />
-      <module name="GunRIC-Provide" target="1.5" />
-      <module name="GunRIC-Provide-Lib" target="1.5" />
-      <module name="GunRIC-Store" target="1.5" />
-      <module name="GunRIC-User" target="1.5" />
+      <module name="GunRIC-APIS" target="12" />
+      <module name="GunRIC-Center" target="12" />
+      <module name="GunRIC-Common" target="12" />
+      <module name="GunRIC-Monitor" target="12" />
+      <module name="GunRIC-Provide" target="12" />
+      <module name="GunRIC-Provide-Lib" target="12" />
+      <module name="GunRIC-Store" target="12" />
+      <module name="GunRIC-User" target="12" />
     </bytecodeTargetLevel>
   </component>
 </project>
