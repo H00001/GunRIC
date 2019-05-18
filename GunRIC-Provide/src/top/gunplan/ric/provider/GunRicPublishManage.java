@@ -2,7 +2,7 @@ package top.gunplan.ric.provider;
 
 
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
-import top.gunplan.ric.protocol.util.GunCLassPathUtil;
+import top.gunplan.ric.protocol.util.GunClassPathUtil;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
@@ -27,7 +27,7 @@ class GunRicPublishManage {
 
     GunRicPublishManage(final GunRicProvideProperty ppt) {
         this.ppt = ppt;
-        InputStream is = GunCLassPathUtil.getResFileAsStream(ppt.getPublishFileName());
+        InputStream is = GunClassPathUtil.getResFileAsStream(ppt.getPublishFileName());
         this.reader = new BufferedReader(new InputStreamReader(is));
 
     }

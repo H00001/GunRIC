@@ -5,8 +5,12 @@ import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author dosdrtt
+ */
 public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper {
     public GunRicRespAddressProtocol() {
         this.type = RicProtocolType.GET;
@@ -25,10 +29,11 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         publicUnSet(util);
         int len = util.readByte();
         for (int i = 0; i < len; i++) {
+            AddressItem item = new AddressItem();
+            item.unSerialize(util);
+            addressItems.add(item);
             //addressItems.get(i).unSerialize()
         }
-
-
         return checkEnd(util) && checKNext(util);
     }
 
@@ -41,7 +46,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
             util.write(item.serialize());
         }
         util.write(END_FLAG);
-        return new byte[0];
+        return util.getInput();
     }
 
     @Override
@@ -60,11 +65,10 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
             //addressItems.get(i).unSerialize()
         }
 
-
         return checkEnd(util) && checKNext(util);
     }
 
-    public static class AddressItem implements GunNetOutputInterface, GunNetInputInterface {
+    public static class AddressItem implements GunNetOutputInterface, GunNetInputInterface, GunRicOutputHelper {
 
         static final int FLAG_LEN = 8;
         static final int ADD_LEN = 8;
@@ -73,6 +77,19 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         private byte[] flag = new byte[FLAG_LEN];
         private int port;
         private String address;
+
+        private void readFlag(GunBytesUtil.GunReadByteStream stream) {
+            this.flag = stream.readByte(FLAG_LEN);
+        }
+
+        private void readAddress(GunBytesUtil.GunReadByteStream stream) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                int v = stream.readInt();
+                sb.append(v).append(".");
+            }
+            this.address = sb.toString().substring(0, sb.length() - 1);
+        }
 
         public int getPort() {
             return port;
@@ -94,12 +111,36 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
 
         @Override
         public byte[] serialize() {
-            return new byte[0];
+            GunBytesUtil.GunWriteByteStream util = createSpace();
+            util.write(flag);
+            String[] list = address.split("\\.");
+            Arrays.stream(list).forEach((var) -> {
+                int v = Integer.parseInt(var);
+                util.write(v);
+            });
+            util.write(port);
+            return util.getInput();
         }
+
 
         @Override
         public boolean unSerialize(byte[] bytes) {
-            return false;
+            GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(bytes);
+            unSerialize(util);
+            return true;
+        }
+
+
+        public boolean unSerialize(GunBytesUtil.GunReadByteStream stream) {
+            readFlag(stream);
+            readAddress(stream);
+            this.port = stream.readInt();
+            return true;
+        }
+
+        @Override
+        public GunBytesUtil.GunWriteByteStream createSpace() {
+            return new GunBytesUtil.GunWriteByteStream(new byte[NEED_SPACE]);
         }
     }
 }

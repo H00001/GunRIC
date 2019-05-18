@@ -6,6 +6,6 @@ package top.gunplan.RIC.center;
 class GunRicRegisterManage {
     static boolean loadRegister() {
 
-        return false;
+        return true;
     }
 }

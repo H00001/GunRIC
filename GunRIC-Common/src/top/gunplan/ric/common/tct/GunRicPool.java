@@ -1,4 +1,4 @@
-package top.gunplan.ric.common;
+package top.gunplan.ric.common.tct;
 
 /**
  * @author dosdrtt

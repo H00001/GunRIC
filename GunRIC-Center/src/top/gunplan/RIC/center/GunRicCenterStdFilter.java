@@ -34,8 +34,9 @@ public class GunRicCenterStdFilter implements GunNettyFilter {
             List<GunNetInputInterface> gnii = new ArrayList<>(1);
             for (int i = 0; i < dto.size; i++) {
                 AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(dto.getPackets().get(i));
-                protocol.unSerialize(dto.getPackets().get(i));
-                gnii.add(protocol);
+                if (protocol.unSerialize(dto.getPackets().get(i))) {
+                    gnii.add(protocol);
+                }
             }
             GunRicCenterDto rdto = new GunRicCenterDto(address, gnii);
             //   GunRicCenterDto dto = new GunRicCenterDto(address, protocol);
