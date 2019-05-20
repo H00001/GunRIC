@@ -11,4 +11,9 @@ public final class GunClassPathUtil {
     public static InputStream getResFileAsStream(String filename) {
         return GunRicRegisterProtocol.class.getClassLoader().getResourceAsStream(filename);
     }
+
+    public static String getBasePath() {
+        return GunRicRegisterProtocol.class.getClassLoader().getResource("").getPath();
+
+    }
 }

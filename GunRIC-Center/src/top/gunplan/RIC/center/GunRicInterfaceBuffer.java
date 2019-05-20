@@ -3,12 +3,13 @@ package top.gunplan.RIC.center;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author dosdrtt
  */
 public class GunRicInterfaceBuffer {
-    public static HashMap<GunRicCdtInterface, ArrayList<InetSocketAddress>> intermapping = new HashMap<>();
+    public static HashMap<GunRicCdtInterface, List<InetSocketAddress>> intermapping = new HashMap<>();
 
     /**
      *

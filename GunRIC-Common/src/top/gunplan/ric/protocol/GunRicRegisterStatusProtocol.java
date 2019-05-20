@@ -12,6 +12,11 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol impleme
         this.type = RicProtocolType.REGRESP;
     }
 
+    public GunRicRegisterStatusProtocol(int sericoode) {
+        this();
+        this.setSerialnumber(sericoode);
+    }
+
     public GunRicRegisterStatusProtocol(RicProtocolCode status) {
         this();
         this.code = status;

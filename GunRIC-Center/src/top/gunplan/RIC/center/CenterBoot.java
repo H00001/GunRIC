@@ -36,7 +36,8 @@ public class CenterBoot implements GunBootServerBase {
 
             @Override
             public boolean onBooting(GunProperty gunProperty) {
-                return GunRicRegisterManage.loadRegister();
+                //       return GunRicRegisterManage.loadRegister();
+                return true;
             }
 
             @Override

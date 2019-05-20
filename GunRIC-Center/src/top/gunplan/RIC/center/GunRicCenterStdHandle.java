@@ -11,7 +11,6 @@ import top.gunplan.ric.protocol.RicProtocolParamType;
 import top.gunplan.ric.protocol.util.PathUtil;
 
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,6 +24,8 @@ import java.util.ArrayList;
  * Concurrent class
  */
 public class GunRicCenterStdHandle {
+    private GunRicCenterRecordManage manage = new GunRicCenterStdRecordManageImpl();
+
 
     private final static String L = "/";
     private final static String D = "_";
@@ -32,9 +33,8 @@ public class GunRicCenterStdHandle {
     private final static String SFN = "services" + L;
 
 
-    public GunNetOutputInterface dealDataEvent(GunNetInputInterface request, InetSocketAddress a) throws GunException {
+    public GunNetOutputInterface dealDataEvent(GunRicRegisterProtocol pt, InetSocketAddress a) throws GunException {
         final String r = PathUtil.getRes();
-        final GunRicRegisterProtocol pt = ((GunRicRegisterProtocol) request);
         final String mn = pt.gMN();
         final String in = pt.gIN();
         final Class<?>[] t = pt.getTypes();
@@ -42,26 +42,13 @@ public class GunRicCenterStdHandle {
         InetSocketAddress is = new InetSocketAddress(a.getAddress(), pt.getPort());
         File f = new File(r + SFN + in.replace(DT, L));
         boolean exi = f.mkdirs();
-        f = new File(f.getPath() + L + mn + D + hh);
-        GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol();
-        o.setSerialnumber(pt.getSerialnumber());
-        try {
-            BufferedOutputStream bf;
-            if (f.exists()) {
-                bf = new BufferedOutputStream(new FileOutputStream(f, true));
-                //      GunRicInterfaceBuffer.intermapping.get(new GunRicInterfaceBuffer.GunRicCdtInterface(hh, t, in, mn)).add(is);
-                //
-                wP(pt, a.getHostString(), bf);
-            } else {
-                bf = new BufferedOutputStream(new FileOutputStream(f, true));
-                for (Class<?> aClass : t) {
-                    RicProtocolParamType tp = RicProtocolParamType.valuefrom(aClass);
-                    bf.write(tp.val);
-                }
-                //fa(is, mn, in, t, hh);
-                wP(pt, a.getHostString(), bf);
-            }
+        GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface(hh, t, in, mn);
 
+
+        f = new File(f.getPath() + L + mn + D + hh);
+        GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(pt.getSerialnumber());
+        try {
+            manage.addRecord(f, gg, is);
         } catch (Exception exp) {
             exp.printStackTrace();
             o.setCode(RicProtocolCode.FAIL);
@@ -69,19 +56,6 @@ public class GunRicCenterStdHandle {
         }
         o.setCode(RicProtocolCode.SUCCEED);
         return o;
-    }
-
-    private void fa(InetSocketAddress is, String mn, String in, Class<?>[] t, long hh) {
-        ArrayList<InetSocketAddress> al = new ArrayList<>(1);
-        GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface(hh, t, in, mn);
-        al.add(is);
-        GunRicInterfaceBuffer.intermapping.put(gg, al);
-    }
-
-    private void wP(GunRicRegisterProtocol protocol, String addr, BufferedOutputStream bof) throws IOException {
-        bof.write('\n');
-        bof.write((protocol.getPort() + D + addr).getBytes());
-        bof.close();
     }
 
 
