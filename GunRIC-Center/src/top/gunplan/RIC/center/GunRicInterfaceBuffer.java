@@ -1,7 +1,9 @@
 package top.gunplan.RIC.center;
 
+import top.gunplan.RIC.center.common.GunRicMethodHash;
+import top.gunplan.ric.protocol.RicProtocolParamType;
+
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,15 +17,28 @@ public class GunRicInterfaceBuffer {
      *
      */
     public static class GunRicCdtInterface {
-        public GunRicCdtInterface(long id, Class<?>[] params, String interFaceName, String methodName) {
-            this.id = id;
+        private long id;
+        private Class<?>[] params;
+
+        public GunRicCdtInterface(Class<?>[] params, String interFaceName, String methodName) {
+            this(interFaceName, methodName);
             this.params = params;
+            id = GunRicMethodHash.Instance.getHashInstance().h(interFaceName, methodName, params);
+        }
+
+        private GunRicCdtInterface(String interFaceName, String methodName) {
             this.interFaceName = interFaceName;
             this.methodName = methodName;
         }
 
-        private final long id;
-        private final Class<?>[] params;
+        public GunRicCdtInterface(RicProtocolParamType[] params, String interFaceName, String methodName) {
+            this(interFaceName, methodName);
+            this.params = new Class<?>[params.length];
+            for (int i = 0; i < params.length; i++) {
+                this.params[i] = params[i].clazz;
+            }
+            id = GunRicMethodHash.Instance.getHashInstance().h(interFaceName, methodName, this.params);
+        }
         private final String interFaceName;
         private final String methodName;
 
@@ -47,6 +62,7 @@ public class GunRicInterfaceBuffer {
         public int hashCode() {
             return (int) id;
         }
+
 
         private boolean equals1(GunRicCdtInterface objc) {
             if (interFaceName.equals(objc.interFaceName) &&

@@ -5,8 +5,7 @@ import top.gunplan.netty.GunNettyFilter;
 import top.gunplan.netty.anno.GunNetFilterOrder;
 import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
-import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.ric.protocol.AbstractGunRicProtocol;
+import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.ric.protocol.GunRicTypeDividePacketManage;
 
 import java.io.IOException;
@@ -31,9 +30,9 @@ public class GunRicCenterStdFilter implements GunNettyFilter {
         }
         final GunRicDividePacketFilter.GunDividePacketDto dto = (GunRicDividePacketFilter.GunDividePacketDto) filterDto.getObject();
         if (dto.size != 0) {
-            List<GunNetInputInterface> gnii = new ArrayList<>(1);
+            List<GunRicRegisterProtocol> gnii = new ArrayList<>(1);
             for (int i = 0; i < dto.size; i++) {
-                AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(dto.getPackets().get(i));
+                GunRicRegisterProtocol protocol = (GunRicRegisterProtocol) GunRicTypeDividePacketManage.findPackage(dto.getPackets().get(i));
                 if (protocol.unSerialize(dto.getPackets().get(i))) {
                     gnii.add(protocol);
                 }

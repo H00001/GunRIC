@@ -2,6 +2,7 @@ package top.gunplan.RIC.center;
 
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
+import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -12,10 +13,10 @@ import java.util.List;
  */
 public final class GunRicCenterDto implements GunNetInputInterface, GunNetOutputInterface {
     private final InetSocketAddress address;
-    private final List<GunNetInputInterface> obji;
+    private final List<GunRicRegisterProtocol> obji;
     private GunNetOutputInterface[] objo;
 
-    public GunRicCenterDto(InetSocketAddress address, List<GunNetInputInterface> obj) {
+    public GunRicCenterDto(InetSocketAddress address, List<GunRicRegisterProtocol> obj) {
         this.address = address;
         this.obji = obj;
     }
@@ -28,7 +29,7 @@ public final class GunRicCenterDto implements GunNetInputInterface, GunNetOutput
         this.objo = objo;
     }
 
-    List<GunNetInputInterface> getObji() {
+    List<GunRicRegisterProtocol> getObji() {
         return obji;
     }
 

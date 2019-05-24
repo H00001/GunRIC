@@ -1,5 +1,6 @@
 package top.gunplan.RIC.center;
 
+import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
 import java.io.*;
@@ -9,6 +10,8 @@ import java.util.List;
 
 
 /**
+ * GunRicCenterStdRecordManageImpl
+ *
  * @author dosdrtt
  */
 public class GunRicCenterStdRecordManageImpl implements GunRicCenterRecordManage {
@@ -35,6 +38,7 @@ public class GunRicCenterStdRecordManageImpl implements GunRicCenterRecordManage
             RicProtocolParamType tp = RicProtocolParamType.valuefrom(aClass);
             bf.write(tp.val);
         }
+        bf.write('\n');
     }
 
     private void close(Closeable... closeable) throws IOException {
@@ -43,9 +47,11 @@ public class GunRicCenterStdRecordManageImpl implements GunRicCenterRecordManage
         }
     }
 
-    private void writeFileAddress(BufferedOutputStream os, final InetSocketAddress address) throws IOException {
-        os.write('\n');
-        os.write((address.getHostString() + "-" + address.getPort()).getBytes());
+    private void writeFileAddress(BufferedOutputStream bf, final InetSocketAddress address) throws IOException {
+        GunRicCenterServiceUtilProperty property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
+        assert property != null;
+        bf.write((address.getHostString() + property.getDivideflag() + address.getPort()).getBytes());
+        bf.write('\n');
     }
 
     private void writeBufferAddress(GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address, boolean firstWrite) {

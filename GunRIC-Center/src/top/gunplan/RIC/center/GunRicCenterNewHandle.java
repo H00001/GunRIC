@@ -4,6 +4,7 @@ import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
+import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 
 import java.nio.channels.SocketChannel;
 import java.util.List;
@@ -17,7 +18,7 @@ public class GunRicCenterNewHandle implements GunNettyHandle {
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) throws GunException {
         final GunRicCenterDto cdto = (GunRicCenterDto) gunNetInputInterface;
-        final List<GunNetInputInterface> lgii = cdto.getObji();
+        final List<GunRicRegisterProtocol> lgii = cdto.getObji();
         GunNetOutputInterface[] gol = new GunNetOutputInterface[lgii.size()];
 
         for (int i = 0; i < lgii.size(); i++) {

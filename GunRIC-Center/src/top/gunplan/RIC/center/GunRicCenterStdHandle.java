@@ -1,21 +1,16 @@
 package top.gunplan.RIC.center;
 
 import top.gunplan.netty.GunException;
-import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
 import top.gunplan.ric.protocol.RicProtocolCode;
-import top.gunplan.ric.protocol.RicProtocolParamType;
 import top.gunplan.ric.protocol.util.PathUtil;
 
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
 
 /**
  * @author dosdrtt
@@ -38,14 +33,13 @@ public class GunRicCenterStdHandle {
         final String mn = pt.gMN();
         final String in = pt.gIN();
         final Class<?>[] t = pt.getTypes();
-        final long hh = h(pt.getTypes());
         InetSocketAddress is = new InetSocketAddress(a.getAddress(), pt.getPort());
         File f = new File(r + SFN + in.replace(DT, L));
         boolean exi = f.mkdirs();
-        GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface(hh, t, in, mn);
+        GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface(t, in, mn);
 
 
-        f = new File(f.getPath() + L + mn + D + hh);
+        f = new File(f.getPath() + L + mn + D + gg.hashCode());
         GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(pt.getSerialnumber());
         try {
             manage.addRecord(f, gg, is);
@@ -59,15 +53,4 @@ public class GunRicCenterStdHandle {
     }
 
 
-    private static long h(Class<?>[] paramtypes) {
-        long hashh;
-        hashh = paramtypes.length;
-        int hashl = 0;
-        for (Class<?> paramtype : paramtypes) {
-            RicProtocolParamType tp = RicProtocolParamType.valuefrom(paramtype);
-            hashl += tp.val;
-        }
-        return (hashh << 32) | hashl;
-
-    }
 }
