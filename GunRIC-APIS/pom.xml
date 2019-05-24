@@ -20,4 +20,6 @@
             </plugin>
         </plugins>
     </build>
+    <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+
 </project>

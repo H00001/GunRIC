@@ -1,13 +1,17 @@
 package top.gunplan.RIC.center;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-
 /**
+ * this class is used to record manage
  *
+ * @author dosdrtt
+ * @date 1558736561
  */
 public interface GunRicCenterRecordManage {
-    void addRecord(File file, GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) throws FileNotFoundException, IOException;
+    /**
+     * check it is first record
+     *
+     * @param g record object
+     * @return is or not
+     */
+    boolean isFirst(GunRicInterfaceBuffer.GunRicCdtInterface g);
 }

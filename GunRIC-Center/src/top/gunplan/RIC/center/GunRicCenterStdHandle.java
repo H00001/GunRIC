@@ -1,5 +1,7 @@
 package top.gunplan.RIC.center;
 
+import top.gunplan.RIC.center.record.GunRicCenterFileRecord;
+import top.gunplan.RIC.center.record.GunRicCenterInlineBufferRecord;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
@@ -19,7 +21,7 @@ import java.net.InetSocketAddress;
  * Concurrent class
  */
 public class GunRicCenterStdHandle {
-    private GunRicCenterRecordManage manage = new GunRicCenterStdRecordManageImpl();
+    private GunRicCenterStdRecordManage manage = new GunRicCenterStdRecordManage();
 
 
     private final static String L = "/";
@@ -27,6 +29,11 @@ public class GunRicCenterStdHandle {
     private final static String DT = ".";
     private final static String SFN = "services" + L;
 
+
+    public void init() {
+        manage.register(new GunRicCenterInlineBufferRecord());
+        manage.register(new GunRicCenterFileRecord());
+    }
 
     public GunNetOutputInterface dealDataEvent(GunRicRegisterProtocol pt, InetSocketAddress a) throws GunException {
         final String r = PathUtil.getRes();
@@ -37,12 +44,9 @@ public class GunRicCenterStdHandle {
         File f = new File(r + SFN + in.replace(DT, L));
         boolean exi = f.mkdirs();
         GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface(t, in, mn);
-
-
-        f = new File(f.getPath() + L + mn + D + gg.hashCode());
         GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(pt.getSerialnumber());
         try {
-            manage.addRecord(f, gg, is);
+            manage.doRegex(gg, is);
         } catch (Exception exp) {
             exp.printStackTrace();
             o.setCode(RicProtocolCode.FAIL);

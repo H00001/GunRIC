@@ -20,4 +20,13 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+    <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>3.1.0-m1</version>
+    </dependency>
+
 </project>

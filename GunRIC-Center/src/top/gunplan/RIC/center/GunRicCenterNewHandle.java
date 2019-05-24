@@ -15,6 +15,10 @@ import java.util.List;
 public class GunRicCenterNewHandle implements GunNettyHandle {
     private final GunRicCenterStdHandle exec = new GunRicCenterStdHandle();
 
+    {
+        exec.init();
+    }
+
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) throws GunException {
         final GunRicCenterDto cdto = (GunRicCenterDto) gunNetInputInterface;

@@ -1,5 +1,7 @@
 package top.gunplan.RIC.center;
 
+import top.gunplan.RIC.center.property.GunRicCenterServicesProperty;
+import top.gunplan.RIC.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.GunBootServer;
 
 import top.gunplan.netty.GunBootServerBase;
@@ -65,6 +67,7 @@ public class CenterBoot implements GunBootServerBase {
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>());
+        GunNettyPropertyManagerImpl.registerProperty("ric-center-services", new GunRicCenterServicesProperty());
         GunNettyPropertyManagerImpl.registerProperty("ric-center-services-util", new GunRicCenterServiceUtilProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunRicDividePacketFilter()).

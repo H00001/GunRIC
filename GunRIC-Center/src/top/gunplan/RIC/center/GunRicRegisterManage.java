@@ -1,5 +1,6 @@
 package top.gunplan.RIC.center;
 
+import top.gunplan.RIC.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 import top.gunplan.ric.protocol.util.PathUtil;

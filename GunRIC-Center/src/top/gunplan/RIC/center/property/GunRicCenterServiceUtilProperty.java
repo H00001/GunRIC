@@ -1,4 +1,4 @@
-package top.gunplan.RIC.center;
+package top.gunplan.RIC.center.property;
 
 import top.gunplan.netty.impl.propertys.GunProperty;
 
@@ -13,6 +13,11 @@ import top.gunplan.netty.impl.propertys.GunProperty;
 public class GunRicCenterServiceUtilProperty implements GunProperty {
     private String divideflag;
     private String servicespath;
+    private String redisaddr;
+
+    public String getRedisaddr() {
+        return redisaddr;
+    }
 
     public String getServicespath() {
         return servicespath;
