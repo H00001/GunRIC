@@ -1,9 +1,12 @@
 package top.gunplan.RIC.center;
 
 
+import top.gunplan.RIC.center.anno.GunRicRegisterOrder;
+
 import java.io.*;
 
 import java.net.InetSocketAddress;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -15,15 +18,30 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
 
     private List<GunRicCenterRecord> regexList = new CopyOnWriteArrayList<>();
+    private List<GunRicCenterRecord> firstList = new LinkedList<>();
 
-    void register(GunRicCenterRecord registerRegex) {
+    @Override
+    public void registerFirst(GunRicCenterRecord registerRegex) {
+        GunRicRegisterOrder order = registerRegex.getClass().getAnnotation(GunRicRegisterOrder.class);
+        if (order != null) {
+            firstList.add(order.index(), registerRegex);
+        } else {
+            firstList.add(registerRegex);
+        }
+    }
+
+    @Override
+    public void register(GunRicCenterRecord registerRegex) {
         regexList.add(registerRegex);
     }
 
-    void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address) {
+    @Override
+    public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address) {
         if (isFirst(g)) {
+            firstList.forEach(reg -> reg.firstAdd(g, address));
             regexList.parallelStream().forEach(reg -> reg.firstAdd(g, address));
         } else {
+            firstList.forEach(reg -> reg.nextAdd(g, address));
             regexList.parallelStream().forEach(reg -> reg.nextAdd(g, address));
         }
     }

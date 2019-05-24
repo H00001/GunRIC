@@ -1,5 +1,7 @@
 package top.gunplan.RIC.center;
 
+import java.net.InetSocketAddress;
+
 /**
  * this class is used to record manage
  *
@@ -14,4 +16,17 @@ public interface GunRicCenterRecordManage {
      * @return is or not
      */
     boolean isFirst(GunRicInterfaceBuffer.GunRicCdtInterface g);
+
+    /**
+     * @param registerRegex GunRicCenterRecord
+     */
+    void register(GunRicCenterRecord registerRegex);
+
+    /**
+     * @param registerRegex GunRicCenterRecord
+     */
+    void registerFirst(GunRicCenterRecord registerRegex);
+
+
+    void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address);
 }

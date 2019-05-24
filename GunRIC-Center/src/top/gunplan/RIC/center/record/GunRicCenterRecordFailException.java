@@ -5,10 +5,10 @@ import top.gunplan.netty.GunException;
 /**
  * @author dosdrtt
  */
-public class GunRicCenterRecordFailException extends GunException {
+class GunRicCenterRecordFailException extends GunException {
     private static final long serialVersionUID = 3158361294733465033L;
 
-    public GunRicCenterRecordFailException(String why) {
+    GunRicCenterRecordFailException(String why) {
         super(why);
     }
 }

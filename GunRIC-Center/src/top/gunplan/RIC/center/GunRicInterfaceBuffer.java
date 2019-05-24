@@ -1,6 +1,7 @@
 package top.gunplan.RIC.center;
 
 import top.gunplan.RIC.center.common.GunRicMethodHash;
+import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
 import java.net.InetSocketAddress;
@@ -19,6 +20,10 @@ public class GunRicInterfaceBuffer {
     public static class GunRicCdtInterface {
         private long id;
         private Class<?>[] params;
+
+        public GunRicCdtInterface(GunRicRegisterProtocol protocol) {
+            this(protocol.getTypes(), protocol.getInterfaceName(), protocol.getMethodName());
+        }
 
         public GunRicCdtInterface(Class<?>[] params, String interFaceName, String methodName) {
             this(interFaceName, methodName);
@@ -39,6 +44,7 @@ public class GunRicInterfaceBuffer {
             }
             id = GunRicMethodHash.Instance.getHashInstance().h(interFaceName, methodName, this.params);
         }
+
         private final String interFaceName;
         private final String methodName;
 
