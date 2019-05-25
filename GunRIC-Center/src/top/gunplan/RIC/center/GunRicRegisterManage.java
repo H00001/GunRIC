@@ -1,5 +1,6 @@
 package top.gunplan.RIC.center;
 
+import top.gunplan.RIC.center.common.GunRicCenterStaticPath;
 import top.gunplan.RIC.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.protocol.RicProtocolParamType;
@@ -26,7 +27,7 @@ public final class GunRicRegisterManage {
     public static boolean loadRegister() throws IOException {
         property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
         assert property != null;
-        PARFOL = PathUtil.getRes() + property.getServicespath();
+        PARFOL = GunRicCenterStaticPath.SERVICES_PATH;
         findServices(Paths.get(PARFOL));
         return true;
     }

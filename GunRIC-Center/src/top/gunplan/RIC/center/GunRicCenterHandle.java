@@ -11,13 +11,14 @@ import java.util.List;
  *
  * @author dosdrtt
  */
-public class GunRicCenterHandle extends AbstractGunRicBaseCenterHandle {
+public class GunRicCenterHandle extends AbstractGunRicBaseCenterHandle implements GunRicCommonRealDeal {
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol) {
         return null;
     }
 
-    private AbstractGunRicProtocol realDealEvent(AbstractGunRicProtocol protocol) {
+    @Override
+    public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol protocol) {
         List<InetSocketAddress> addresses = GunRicInterfaceBuffer.intermapping.get(new GunRicInterfaceBuffer.GunRicCdtInterface((AbstractCenterHelperProtocol) protocol));
         GunRicRespAddressProtocol respprotocol = new GunRicRespAddressProtocol();
         respprotocol.pushAddressList(addresses);
@@ -26,11 +27,7 @@ public class GunRicCenterHandle extends AbstractGunRicBaseCenterHandle {
 
     @Override
     public GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol) {
-        if (protocol.getNext() == null) {
-            return realDealEvent(protocol);
-        } else {
-            return dealMuchEvent(this::realDealEvent, protocol);
-        }
+        return dealMuchEvent(this::dealDataEvent, protocol);
     }
 
 

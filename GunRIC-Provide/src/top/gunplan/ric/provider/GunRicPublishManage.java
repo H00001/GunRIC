@@ -40,6 +40,7 @@ class GunRicPublishManage {
             if (publishRegister(ppt, ss.getOutputStream()) && resolveResult(ss.getInputStream())) {
                 succeedsum++;
             }
+            ss.close();
         }
         return succeedsum >= 1;
     }

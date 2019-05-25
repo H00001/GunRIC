@@ -19,11 +19,7 @@ public class GunRicProvideHandle extends AbstractGunRicBaseProviderHandle {
 
     @Override
     public GunNetOutputInterface dealEvent(GunRicInputProtocol protocol) {
-        if (protocol.getNext() == null) {
-            return handle.dealDataEvent(protocol);
-        } else {
-            return dealMuchEvent(handle::dealDataEvent, protocol);
-        }
+        return dealMuchEvent(handle::dealDataEvent, protocol);
     }
 
 }

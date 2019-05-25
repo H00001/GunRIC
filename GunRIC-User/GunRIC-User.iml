@@ -27,5 +27,7 @@
     </orderEntry>
     <orderEntry type="library" name="GunNioUtil" level="project" />
     <orderEntry type="library" name="GunNetty" level="project" />
+    <orderEntry type="module" module-name="GunRIC-APIS" scope="TEST" />
+    <orderEntry type="module" module-name="GunRIC-Common" />
   </component>
 </module>

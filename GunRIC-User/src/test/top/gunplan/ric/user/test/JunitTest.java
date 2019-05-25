@@ -2,7 +2,9 @@ package top.gunplan.ric.user.test;
 
 import org.junit.jupiter.api.Test;
 
+import top.gunplan.ric.apis.test.Find;
 import top.gunplan.ric.apis.test.LinearAlgebra;
+import top.gunplan.ric.apis.test.ListQuestion;
 import top.gunplan.ric.user.UserBoot;
 
 
@@ -31,12 +33,13 @@ class JunitTest {
 //        System.out.printf("8 / 3 = %d\n", services.division(8, 3));
 
         int[][] a = {{1, 3, -4}, {-2, 2, 1}, {-3, 4, -2}};
-
+        int[] lss = {0, 1, 2, 0, 4, 5, 0};
+        int[] lisg = {1, 2, 3, 4, 5, 6, 7, 9, 10, 20, 80, 90, 100, 200};
         int[] x = {1, 0, 2};
         int[] y = {0, 1, -3};
 //
-        LinearAlgebra services1 = UserBoot.iocobject(LinearAlgebra.class);
-        System.out.println(Arrays.toString(services1.verticalVector(x, y)));
+        ListQuestion services1 = UserBoot.iocobject(ListQuestion.class);
+        System.out.println(Arrays.toString(services1.removeVal(lisg, 3).getList()));
 //        TestObject o = new TestObject();
 //        o.x = 1;
 //        o.y = 2;

@@ -1,6 +1,7 @@
 package top.gunplan.RIC.center.record;
 
 import top.gunplan.RIC.center.GunRicCenterRecord;
+import top.gunplan.RIC.center.common.GunRicCenterStaticPath;
 import top.gunplan.RIC.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.RIC.center.GunRicInterfaceBuffer;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
@@ -22,14 +23,11 @@ public class GunRicCenterFileRecord implements GunRicCenterRecord {
     private GunRicCenterServiceUtilProperty property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
 
     private File initFile(final GunRicInterfaceBuffer.GunRicCdtInterface g) {
-        File fused = new File(PathUtil.getRes() + property.getServicespath() + "/" + g.getInterFaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideflag() + g.getId());
-        assert fused != null;
-        return fused;
+        return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterFaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideflag() + g.getId());
     }
 
     @Override
     public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
-
         try {
             BufferedOutputStream bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
             writeFileFirst(g, bf);
