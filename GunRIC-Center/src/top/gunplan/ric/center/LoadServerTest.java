@@ -1,7 +1,5 @@
-package top.gunplan.ric.center.test;
+package top.gunplan.ric.center;
 
-import org.junit.jupiter.api.Test;
-import top.gunplan.ric.center.GunRicRegisterManage;
 
 import java.io.IOException;
 
@@ -14,7 +12,6 @@ public class LoadServerTest {
         }
     }
 
-    @Test
     void loadServer() {
         try {
             GunRicRegisterManage.loadRegister();
