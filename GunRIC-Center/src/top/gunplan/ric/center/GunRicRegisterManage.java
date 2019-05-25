@@ -23,12 +23,11 @@ public final class GunRicRegisterManage {
     private static GunRicCenterServiceUtilProperty property = null;
     private static String PARFOL;
 
-    public static boolean loadRegister() throws IOException {
+    public static boolean loadRegister() {
         property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
         assert property != null;
         PARFOL = GunRicCenterStaticPath.SERVICES_PATH;
         try {
-
 
             findServices(Paths.get(PARFOL));
         } catch (IOException exp) {

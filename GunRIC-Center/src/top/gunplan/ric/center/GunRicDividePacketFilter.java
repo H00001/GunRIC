@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 /**
  * concurrent class
- * @date 2019/04/27
+ *
  * @author dosdrtt
+ * @date 2019/04/27
  */
 @GunNetFilterOrder(index = 1)
 public class GunRicDividePacketFilter implements GunNettyFilter {

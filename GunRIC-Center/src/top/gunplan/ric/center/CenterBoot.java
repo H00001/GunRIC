@@ -43,7 +43,7 @@ public class CenterBoot implements GunBootServerBase {
             public boolean onBooting(GunProperty gunProperty) {
                 try {
                     return GunRicRegisterManage.loadRegister();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     AbstractGunBaseLogUtil.error(e);
                     return false;
                 }
@@ -67,8 +67,8 @@ public class CenterBoot implements GunBootServerBase {
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>());
-        GunNettyPropertyManagerImpl.registerProperty("ric-center-services", new GunRicCenterServicesProperty());
-        GunNettyPropertyManagerImpl.registerProperty("ric-center-services-util", new GunRicCenterServiceUtilProperty());
+        GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServicesProperty());
+        GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServiceUtilProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunRicDividePacketFilter()).
                 addFilter(new GunRicCenterStdFilter()).
