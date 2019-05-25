@@ -1,6 +1,7 @@
 package top.gunplan.RIC.center;
 
 import top.gunplan.RIC.center.common.GunRicMethodHash;
+import top.gunplan.ric.protocol.AbstractCenterHelperProtocol;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
@@ -21,7 +22,7 @@ public class GunRicInterfaceBuffer {
         private long id;
         private Class<?>[] params;
 
-        public GunRicCdtInterface(GunRicRegisterProtocol protocol) {
+        public GunRicCdtInterface(AbstractCenterHelperProtocol protocol) {
             this(protocol.getTypes(), protocol.getInterfaceName(), protocol.getMethodName());
         }
 

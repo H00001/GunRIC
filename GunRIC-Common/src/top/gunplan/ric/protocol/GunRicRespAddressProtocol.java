@@ -4,6 +4,7 @@ import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.utils.GunBytesUtil;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
  * @author dosdrtt
  */
 public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper {
+
+
     public GunRicRespAddressProtocol() {
         this.type = RicProtocolType.GET;
         this.code = RicProtocolCode.GET_RES;
@@ -21,6 +24,12 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
 
     public void pushAddress(AddressItem ad) {
         this.addressItems.add(ad);
+    }
+
+    public void pushAddressList(List<InetSocketAddress> addresses) {
+
+        addresses.forEach(addr -> pushAddress(new AddressItem(addr)));
+
     }
 
     @Override
@@ -82,6 +91,14 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
             this.flag = stream.readByte(FLAG_LEN);
         }
 
+        public AddressItem(InetSocketAddress address) {
+            this.port = address.getPort();
+            this.address = address.getHostString();
+        }
+
+        public AddressItem() {
+
+        }
         private void readAddress(GunBytesUtil.GunReadByteStream stream) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 4; i++) {

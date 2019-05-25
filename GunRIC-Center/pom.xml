@@ -6,7 +6,7 @@
 
     <groupId>top.gunplan</groupId>
     <artifactId>ric-center</artifactId>
-    <version>Init-1.0.0.1</version>
+    <version>Init-1.0.0.2</version>
 
     <build>
         <plugins>

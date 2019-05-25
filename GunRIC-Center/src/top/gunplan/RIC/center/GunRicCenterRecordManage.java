@@ -18,11 +18,14 @@ public interface GunRicCenterRecordManage {
     boolean isFirst(GunRicInterfaceBuffer.GunRicCdtInterface g);
 
     /**
+     * register the recorder
+     *
      * @param registerRegex GunRicCenterRecord
      */
     void register(GunRicCenterRecord registerRegex);
 
     /**
+     * registerFirst first execute to register
      * @param registerRegex GunRicCenterRecord
      */
     void registerFirst(GunRicCenterRecord registerRegex);

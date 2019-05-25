@@ -1,5 +1,7 @@
 package top.gunplan.RIC.center;
 
+import top.gunplan.netty.GunHandle;
+
 import java.net.InetSocketAddress;
 
 /**
@@ -7,7 +9,7 @@ import java.net.InetSocketAddress;
  *
  * @author dosdrtt
  */
-public interface GunRicCenterRecord {
+public interface GunRicCenterRecord extends GunHandle {
     /**
      * when record first request
      *

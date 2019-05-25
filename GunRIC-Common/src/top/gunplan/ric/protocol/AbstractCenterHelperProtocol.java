@@ -8,7 +8,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @author dosdrtt
  * @see AbstractGunRicExecuteProtocol
  */
-abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecuteProtocol {
+public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecuteProtocol {
     int paramcount = 0;
     Class<?>[] types = null;
     private int now = 0;

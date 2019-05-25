@@ -43,7 +43,6 @@ public final class GunRicRegisterManage {
             if (file.toFile().isFile()) {
                 final String interfacename = file.getParent().toString().replace(PARFOL + "/", "").replace("/", ".");
                 final String methodname = file.toFile().getName().split("_")[0];
-                final long id = Long.parseLong(file.toFile().getName().split("_")[1]);
                 GunBytesUtil.GunReadByteStream stream = new GunBytesUtil.GunReadByteStream(Files.readAllBytes(file));
                 int paramlen = stream.readByte();
                 RicProtocolParamType[] type = new RicProtocolParamType[paramlen];

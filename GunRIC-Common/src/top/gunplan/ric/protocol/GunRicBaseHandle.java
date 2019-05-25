@@ -11,7 +11,7 @@ import java.nio.channels.SocketChannel;
 /**
  * @author dosdrtt
  */
-public interface GunDubboBaseHandle extends GunNettyHandle {
+public interface GunRicBaseHandle extends GunNettyHandle {
     /**
      * @param protocol GunRicHelloProtocol
      * @return AbstractGunRicProtocol
@@ -24,6 +24,20 @@ public interface GunDubboBaseHandle extends GunNettyHandle {
         } else {
             return null;
         }
+    }
+
+    /**
+     * @param dealhandle hanle to real deal event
+     * @param protocol   prorocol
+     * @return GunNetOutputInterface
+     */
+    default GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<AbstractGunRicProtocol, AbstractGunRicProtocol> dealhandle, AbstractGunRicProtocol protocol) {
+        GunCombineOutput capt = new GunCombineOutput();
+        for (; protocol != null; ) {
+            capt.push(dealhandle.dealEvent(protocol));
+            protocol = protocol.getNext();
+        }
+        return capt;
     }
 
     /**
@@ -40,7 +54,7 @@ public interface GunDubboBaseHandle extends GunNettyHandle {
      * @param protocol GunRicRegisterProtocol
      * @return AbstractGunRicProtocol
      */
-    AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol);
+    GunNetOutputInterface dealEvent(GunRicRegisterProtocol protocol);
 
     /**
      * GunRicGetAddressProcotol center used
@@ -48,7 +62,7 @@ public interface GunDubboBaseHandle extends GunNettyHandle {
      * @param protocol dealEvent
      * @return AbstractGunRicProtocol
      */
-    AbstractGunRicProtocol dealEvent(GunRicGetAddressProcotol protocol);
+    GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol);
 
     /**
      * @param var1 GunNetInputInterface

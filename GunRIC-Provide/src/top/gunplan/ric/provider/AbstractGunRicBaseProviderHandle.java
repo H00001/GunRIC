@@ -9,7 +9,7 @@ import top.gunplan.ric.protocol.*;
  * @author dosdrtt
  * @concurrent AbstractGunRicBaseProviderHandle
  */
-public abstract class AbstractGunRicBaseProviderHandle implements GunDubboBaseHandle {
+public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHandle {
     /**
      * @param protocol GunRicInputProtocol
      * @return AbstractGunRicProtocol

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * @author dosdrtt
  */
 public final class GunCombineOutput implements GunNetOutputInterface {
     private List<GunNetOutputInterface> protocollist = new ArrayList<>(1);

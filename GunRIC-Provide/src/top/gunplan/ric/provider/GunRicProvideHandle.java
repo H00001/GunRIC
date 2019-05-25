@@ -3,6 +3,7 @@ package top.gunplan.ric.provider;
 
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.GunCombineOutput;
+import top.gunplan.ric.protocol.GunRicCommonRealDeal;
 import top.gunplan.ric.protocol.GunRicInputProtocol;
 
 
@@ -14,19 +15,14 @@ import top.gunplan.ric.protocol.GunRicInputProtocol;
 public class GunRicProvideHandle extends AbstractGunRicBaseProviderHandle {
 
 
-    private GunStdRicHandle handle = new GunStdRicHandle();
+    private GunRicCommonRealDeal handle = new GunStdRicHandle();
 
     @Override
     public GunNetOutputInterface dealEvent(GunRicInputProtocol protocol) {
         if (protocol.getNext() == null) {
             return handle.dealDataEvent(protocol);
         } else {
-            GunCombineOutput capt = new GunCombineOutput();
-            for (; protocol != null; ) {
-                capt.push(handle.dealDataEvent(protocol));
-                protocol = (GunRicInputProtocol) protocol.getNext();
-            }
-            return capt;
+            return dealMuchEvent(handle::dealDataEvent, protocol);
         }
     }
 

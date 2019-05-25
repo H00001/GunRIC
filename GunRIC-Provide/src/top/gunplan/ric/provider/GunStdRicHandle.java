@@ -2,14 +2,9 @@ package top.gunplan.ric.provider;
 
 import top.gunplan.ric.apis.test.anno.GunUseImpl;
 import top.gunplan.netty.GunException;
-import top.gunplan.netty.GunNettyHandle;
-import top.gunplan.netty.protocol.GunNetInputInterface;
 
 import top.gunplan.netty.protocol.GunNetOutputInterface;
-import top.gunplan.ric.protocol.AbstractGunRicExecuteProtocol;
-import top.gunplan.ric.protocol.GunRicInputProtocol;
-import top.gunplan.ric.protocol.GunRicOutputProtocol;
-import top.gunplan.ric.protocol.RicProtocolCode;
+import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.lang.reflect.Method;
@@ -22,10 +17,10 @@ import static top.gunplan.ric.protocol.RicProtocolType.RESPONSE;
 /**
  * @author dosdrtt
  */
-public class GunStdRicHandle implements GunNettyHandle {
+public class GunStdRicHandle implements GunRicCommonRealDeal {
 
     @Override
-    public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) {
+    public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol gunNetInputInterface) {
         AbstractGunRicExecuteProtocol.ParamHelper help = new AbstractGunRicExecuteProtocol.ParamHelper();
         final GunRicOutputProtocol o = new GunRicOutputProtocol();
         final GunRicInputProtocol i = ((GunRicInputProtocol) gunNetInputInterface);
@@ -40,7 +35,7 @@ public class GunStdRicHandle implements GunNettyHandle {
             help.setObj(e.getClass().getSimpleName() + ":" + e.getLocalizedMessage());
             o.setCode(FAIL);
         } catch (Exception exp) {
-            this.dealExceptionEvent(exp);
+            AbstractGunBaseLogUtil.error(exp);
         }
         return o;
     }
@@ -61,18 +56,4 @@ public class GunStdRicHandle implements GunNettyHandle {
     }
 
 
-    @Override
-    public GunNetOutputInterface dealConnEvent(SocketChannel socketChannel) throws GunException {
-        return null;
-    }
-
-    @Override
-    public void dealCloseEvent() {
-
-    }
-
-    @Override
-    public void dealExceptionEvent(Exception e) {
-        AbstractGunBaseLogUtil.error(e.getMessage());
-    }
 }

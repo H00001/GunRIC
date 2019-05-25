@@ -6,15 +6,16 @@ import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 
 import top.gunplan.ric.protocol.*;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 
 /**
- * remove this class
+ * @author dosdrtt
  */
-public abstract class AbstractGunRicBaseCenterHandle implements GunDubboBaseHandle {
+public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle {
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicInputProtocol protocol) {
-        //AbstractGunBaseLogUtil.error("error protocol is GunRicInputProtocol", getClass().getSimpleName());
+        AbstractGunBaseLogUtil.error("error protocol is GunRicInputProtocol", getClass().getSimpleName());
         throw new GunInvidaProtocolExection(protocol.getClass().getName(), "GunRIC-Center");
     }
 
@@ -22,7 +23,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunDubboBaseHand
     public abstract AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol);
 
     @Override
-    public abstract AbstractGunRicProtocol dealEvent(GunRicGetAddressProcotol protocol);
+    public abstract GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol);
 
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface var1) throws GunException {
@@ -30,8 +31,11 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunDubboBaseHand
             return dealEvent((GunRicRegisterProtocol) var1);
         } else if (var1 instanceof GunRicGetAddressProcotol) {
             return dealEvent((GunRicGetAddressProcotol) var1);
+        } else if (var1 instanceof GunRicHelloProtocol) {
+            return dealEvent((GunRicHelloProtocol) var1);
         } else {
-            return null;
+            AbstractGunBaseLogUtil.error("not known packet", getClass().getSimpleName());
         }
+        return null;
     }
 }
