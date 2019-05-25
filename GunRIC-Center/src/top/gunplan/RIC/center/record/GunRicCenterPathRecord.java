@@ -15,7 +15,6 @@ import java.net.InetSocketAddress;
 @GunRicRegisterOrder(index = 0)
 public class GunRicCenterPathRecord implements GunRicCenterRecord {
     private final static String L = "/";
-
     private final static String DT = ".";
 
     @Override

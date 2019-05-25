@@ -31,5 +31,11 @@ public interface GunRicCenterRecordManage {
     void registerFirst(GunRicCenterRecord registerRegex);
 
 
+    /**
+     * start Regex
+     *
+     * @param g       GunRicInterfaceBuffer.GunRicCdtInterface
+     * @param address InetSocketAddress
+     */
     void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address);
 }

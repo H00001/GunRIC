@@ -2,6 +2,7 @@ package top.gunplan.RIC.center;
 
 
 import top.gunplan.RIC.center.anno.GunRicRegisterOrder;
+import top.gunplan.RIC.center.record.GunRicCenterRecordFailException;
 
 import java.io.*;
 
@@ -38,10 +39,18 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     @Override
     public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address) {
         if (isFirst(g)) {
-            firstList.forEach(reg -> reg.firstAdd(g, address));
+            try {
+                firstList.forEach(reg -> reg.firstAdd(g, address));
+            } catch (GunRicCenterRecordFailException e) {
+                throw e;
+            }
             regexList.parallelStream().forEach(reg -> reg.firstAdd(g, address));
         } else {
-            firstList.forEach(reg -> reg.nextAdd(g, address));
+            try {
+                firstList.forEach(reg -> reg.nextAdd(g, address));
+            } catch (GunRicCenterRecordFailException e) {
+                throw e;
+            }
             regexList.parallelStream().forEach(reg -> reg.nextAdd(g, address));
         }
     }

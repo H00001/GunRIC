@@ -1,15 +1,14 @@
 package top.gunplan.RIC.center;
 
-import top.gunplan.RIC.center.record.GunRicCenterFileRecord;
-import top.gunplan.RIC.center.record.GunRicCenterInlineBufferRecord;
-import top.gunplan.RIC.center.record.GunRicCenterPathRecord;
-import top.gunplan.RIC.center.record.GunRicCenterRedisRecord;
+import top.gunplan.RIC.center.record.*;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
 import top.gunplan.ric.protocol.RicProtocolCode;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
+
 import java.net.InetSocketAddress;
 
 /**
@@ -20,11 +19,6 @@ import java.net.InetSocketAddress;
  */
 class GunRicCenterStdHandle {
     private GunRicCenterStdRecordManage manage = new GunRicCenterStdRecordManage();
-
-
-    private final static String L = "/";
-    private final static String D = "_";
-
 
     void init() {
         manage.registerFirst(new GunRicCenterPathRecord());
@@ -39,10 +33,10 @@ class GunRicCenterStdHandle {
         GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(pt.getSerialnumber());
         try {
             manage.doRegex(gg, is);
-        } catch (Exception exp) {
-            exp.printStackTrace();
+        } catch (GunRicCenterRecordFailException exp) {
+            AbstractGunBaseLogUtil.error(exp);
             o.setCode(RicProtocolCode.FAIL);
-            throw new GunException(exp);
+            throw (exp);
         }
         o.setCode(RicProtocolCode.SUCCEED);
         return o;
