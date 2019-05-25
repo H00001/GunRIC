@@ -16,9 +16,11 @@ import java.util.ArrayList;
  * @author dosdrtt
  * @date 2019/04/27
  */
+@Deprecated
 @GunNetFilterOrder(index = 1)
 public class GunRicDividePacketFilter implements GunNettyFilter {
     @Override
+    @Deprecated
     public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) throws Exception {
         final ArrayList<byte[]> pb = divide(gunInputFilterChecker.getSrc());
         GunDividePacketDto dto = new GunDividePacketDto(pb, pb.size());

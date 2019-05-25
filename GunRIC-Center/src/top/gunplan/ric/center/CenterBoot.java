@@ -10,6 +10,7 @@ import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.filter.GunNettyStdFirstFilter;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.netty.impl.propertys.GunProperty;
+import top.gunplan.ric.common.GunRicStdFilter;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
@@ -43,9 +44,8 @@ public class CenterBoot implements GunBootServerBase {
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServicesProperty());
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServiceUtilProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
-                addFilter(new GunRicDividePacketFilter()).
-                addFilter(new GunRicCenterStdFilter()).
-                setHandle(new GunRicCenterNewHandle());
+                addFilter(new GunRicStdFilter()).
+                setHandle(new GunRicCenterHandle());
 
         return server.sync();
 

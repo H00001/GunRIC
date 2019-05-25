@@ -2,6 +2,7 @@ package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.impl.propertys.GunProperty;
+import top.gunplan.ric.common.GunRicStdFilter;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunNettyObserve;
@@ -67,7 +68,7 @@ public class ProviderBoot implements GunBootServerBase {
                 new LinkedBlockingQueue<>());
         GunNettyPropertyManagerImpl.registerProperty(new GunRicProvideProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
-                addFilter(new GunStdRicServerFilter()).
+                addFilter(new GunRicStdFilter()).
                 setHandle(new GunRicProvideHandle());
         return server.sync();
 

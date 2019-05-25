@@ -18,9 +18,11 @@ import java.util.List;
  * @author dosdrtt
  * @date 1557231535
  */
+@Deprecated
 @GunNetFilterOrder(index = 2)
 public class GunRicCenterStdFilter implements GunNettyFilter {
     @Override
+    @Deprecated
     public DealResult doInputFilter(GunInputFilterChecker filterDto) {
         InetSocketAddress address;
         try {
@@ -47,6 +49,7 @@ public class GunRicCenterStdFilter implements GunNettyFilter {
 
     }
 
+    @Deprecated
     @Override
     public DealResult doOutputFilter(GunOutputFilterChecker filterDto) throws Exception {
         return null;

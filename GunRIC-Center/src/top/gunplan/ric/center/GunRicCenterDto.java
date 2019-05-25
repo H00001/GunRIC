@@ -10,7 +10,9 @@ import java.util.List;
 /**
  * @author dosdrtt
  * @date 1557231535
+ * @deprecated
  */
+@Deprecated
 public final class GunRicCenterDto implements GunNetInputInterface, GunNetOutputInterface {
     private final InetSocketAddress address;
     private final List<GunRicRegisterProtocol> obji;

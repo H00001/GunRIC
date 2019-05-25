@@ -3,31 +3,24 @@ package top.gunplan.ric.center;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.*;
 
-import java.net.InetSocketAddress;
-import java.util.List;
-
 /**
  * GunRicCenterHandle
- *
+ * @since init 4.1.5.6
  * @author dosdrtt
  */
-public class GunRicCenterHandle extends AbstractGunRicBaseCenterHandle implements GunRicCommonRealDeal {
+public class GunRicCenterHandle extends AbstractGunRicBaseCenterHandle {
+    private GunRicCommonRealDeal handle = new GunRicCenterNewRegisterEvent();
+    private GunRicCommonRealDeal handle1 = new GunRicCenterNewGetEvent();
     @Override
-    public AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol) {
-        return null;
+    public GunNetOutputInterface dealEvent(GunRicRegisterProtocol protocol) {
+        return dealMuchEvent(handle::dealDataEvent, protocol);
     }
 
-    @Override
-    public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol protocol) {
-        List<InetSocketAddress> addresses = GunRicInterfaceBuffer.intermapping.get(new GunRicInterfaceBuffer.GunRicCdtInterface((AbstractCenterHelperProtocol) protocol));
-        GunRicRespAddressProtocol respprotocol = new GunRicRespAddressProtocol();
-        respprotocol.pushAddressList(addresses);
-        return respprotocol;
-    }
+
 
     @Override
     public GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol) {
-        return dealMuchEvent(this::dealDataEvent, protocol);
+        return dealMuchEvent(handle1::dealDataEvent, protocol);
     }
 
 

@@ -26,7 +26,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
      * @return AbstractGunRicProtocol to transfer
      */
     @Override
-    public abstract AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol);
+    public abstract GunNetOutputInterface dealEvent(GunRicRegisterProtocol protocol);
 
     /**
      * dealEvent

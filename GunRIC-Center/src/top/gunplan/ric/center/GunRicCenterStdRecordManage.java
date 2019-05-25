@@ -5,8 +5,6 @@ import top.gunplan.ric.center.anno.GunRicRegisterOrder;
 import top.gunplan.ric.center.record.GunRicCenterRecordFailException;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
-import java.io.*;
-
 import java.net.InetSocketAddress;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,11 +38,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     @Override
     public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address) {
         if (isFirst(g)) {
-            try {
-                firstList.forEach(reg -> reg.firstAdd(g, address));
-            } catch (GunRicCenterRecordFailException e) {
-                throw e;
-            }
+            firstList.forEach(reg -> reg.firstAdd(g, address));
             regexList.parallelStream().forEach(reg -> reg.firstAdd(g, address));
         } else {
             try {
@@ -59,12 +53,6 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     @Override
     public boolean isFirst(GunRicInterfaceBuffer.GunRicCdtInterface g) {
         return GunRicInterfaceBuffer.intermapping.get(g) == null;
-    }
-
-    private void close(Closeable... closeable) throws IOException {
-        for (Closeable clos : closeable) {
-            clos.close();
-        }
     }
 
 

@@ -9,10 +9,14 @@ import static top.gunplan.netty.GunNettyFilter.DealResult.*;
 
 /**
  * @author dosdrtt
+ * @deprecated
  */
+
+@Deprecated
 @GunNetFilterOrder(index = 1)
 public class GunStdRicServerFilter implements GunNettyFilter {
     @Override
+    @Deprecated
     public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) {
         GunRicInputProtocol protocol = new GunRicInputProtocol();
         if (protocol.unSerialize(gunInputFilterChecker.getSrc())) {
@@ -23,6 +27,7 @@ public class GunStdRicServerFilter implements GunNettyFilter {
         }
     }
 
+    @Deprecated
     @Override
     public DealResult doOutputFilter(GunOutputFilterChecker gunOutputFilterChecker) {
         return NEXT;

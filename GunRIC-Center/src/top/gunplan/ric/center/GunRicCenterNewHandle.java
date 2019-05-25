@@ -10,8 +10,10 @@ import java.nio.channels.SocketChannel;
 import java.util.List;
 
 /**
+ * @deprecated 2019/05/26
  * @author dosdrtt
  */
+@Deprecated
 public class GunRicCenterNewHandle implements GunNettyHandle {
     private final GunRicCenterStdHandle exec = new GunRicCenterStdHandle();
 
@@ -19,6 +21,7 @@ public class GunRicCenterNewHandle implements GunNettyHandle {
         exec.init();
     }
 
+    @Deprecated
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface gunNetInputInterface) throws GunException {
         final GunRicCenterDto cdto = (GunRicCenterDto) gunNetInputInterface;
@@ -32,17 +35,20 @@ public class GunRicCenterNewHandle implements GunNettyHandle {
         return cdto;
     }
 
+    @Deprecated
     @Override
     public GunNetOutputInterface dealConnEvent(SocketChannel socketChannel) throws GunException {
         return null;
     }
 
     @Override
+    @Deprecated
     public void dealCloseEvent() {
 
     }
 
     @Override
+    @Deprecated
     public void dealExceptionEvent(Exception e) {
 
     }

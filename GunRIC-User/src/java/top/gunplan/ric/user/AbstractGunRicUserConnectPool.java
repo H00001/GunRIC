@@ -1,6 +1,7 @@
 package top.gunplan.ric.user;
 
-import top.gunplan.ric.common.tct.GunRicPool;
+import top.gunplan.ric.common.GunRicPool;
+
 
 /**
  * @author dosdrtt
