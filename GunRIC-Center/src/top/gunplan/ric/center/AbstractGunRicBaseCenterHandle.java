@@ -19,9 +19,20 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
         throw new GunInvidaProtocolExection(protocol.getClass().getName(), "GunRIC-Center");
     }
 
+    /**
+     * dealEvent
+     *
+     * @param protocol GunRicRegisterProtocol
+     * @return AbstractGunRicProtocol to transfer
+     */
     @Override
     public abstract AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol);
 
+    /**
+     * dealEvent
+     * @param protocol dealEvent
+     * @return GunNetOutputInterface to transfer
+     */
     @Override
     public abstract GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol);
 
