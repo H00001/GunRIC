@@ -18,11 +18,9 @@ public final class GunRicMethodHash implements GunRicHash {
             hashl += tp.val;
         }
         return h | hashl + params.length;
-
-
     }
 
-    public final int hbase(final String base) {
+    private int hbase(final String base) {
         int h = 0;
         for (int i = 0; i < base.length(); i++) {
             h += base.charAt(i);
@@ -38,3 +36,4 @@ public final class GunRicMethodHash implements GunRicHash {
         }
     }
 }
+

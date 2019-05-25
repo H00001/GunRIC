@@ -33,34 +33,7 @@ public class CenterBoot implements GunBootServerBase {
     @Override
     public int sync() throws Exception {
         GunBootServer server = GunBootServerFactory.getInstance();
-        server.registerObserve(new GunNettyObserve() {
-            @Override
-            public void onBooted(GunProperty gunProperty) {
-
-            }
-
-            @Override
-            public boolean onBooting(GunProperty gunProperty) {
-                try {
-                    return GunRicRegisterManage.loadRegister();
-                } catch (Exception e) {
-                    AbstractGunBaseLogUtil.error(e);
-                    return false;
-                }
-
-
-            }
-
-            @Override
-            public void onStop(GunProperty gunProperty) {
-
-            }
-
-            @Override
-            public void onStatusChanged(GunNettyStatus gunNettyStatus) {
-
-            }
-        });
+        server.registerObserve(new GunRicCenterObserve());
         ExecutorService es0 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>());

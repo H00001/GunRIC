@@ -16,7 +16,7 @@ public final class GunRicCenterDto implements GunNetInputInterface, GunNetOutput
     private final List<GunRicRegisterProtocol> obji;
     private GunNetOutputInterface[] objo;
 
-    public GunRicCenterDto(InetSocketAddress address, List<GunRicRegisterProtocol> obj) {
+    GunRicCenterDto(InetSocketAddress address, List<GunRicRegisterProtocol> obj) {
         this.address = address;
         this.obji = obj;
     }
