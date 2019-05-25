@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 public final class GunRicUserPropertyManageImpl {
 
     private final static String UNUSEFULCHARS = "#";
+
     private final static String ASSIGNMENTCHARS = "=";
     private final static String[] OPENANDCLODECHILDPROPERTYS = {"{", "}"};
     private final static Map<String, GunProperty> STRING_GUN_PROPERTY_HASH_MAP = new HashMap<>();

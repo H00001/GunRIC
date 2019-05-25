@@ -9,9 +9,9 @@ import top.gunplan.ric.common.tct.GunRicPool;
  */
 public abstract class AbstractGunRicUserConnectPool implements GunRicPool {
 
-    final String address;
-    final int port;
-    final int count;
+    private final String address;
+    private final int port;
+    private final int count;
 
     AbstractGunRicUserConnectPool(String address, int port, int count) {
         this.address = address;

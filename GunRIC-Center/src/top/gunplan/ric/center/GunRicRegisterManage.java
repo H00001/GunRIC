@@ -27,8 +27,15 @@ public final class GunRicRegisterManage {
         property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
         assert property != null;
         PARFOL = GunRicCenterStaticPath.SERVICES_PATH;
-        findServices(Paths.get(PARFOL));
+        try {
+
+
+            findServices(Paths.get(PARFOL));
+        } catch (IOException exp) {
+            AbstractGunBaseLogUtil.error(exp);
+        }
         return true;
+
     }
 
     public static void findServices(Path startingDir) throws IOException {

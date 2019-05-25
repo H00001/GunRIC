@@ -89,6 +89,7 @@ class GunRicPublishManage {
 
     private static final int BUFFER_LEN = 1024;
 
+
     private void constructProtocol(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
         protocol.setInterfaceName(clazz.getName());
         protocol.setMethodName(md.getName());

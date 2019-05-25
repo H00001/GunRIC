@@ -1,5 +1,6 @@
 package top.gunplan.ric.provider.property;
 
+import top.gunplan.netty.anno.GunPropertyMap;
 import top.gunplan.netty.impl.propertys.GunProperty;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -10,6 +11,7 @@ import java.net.InetSocketAddress;
  *
  * @author dosdrtt
  */
+@GunPropertyMap(name = "ric-provide")
 public class GunRicProvideProperty implements GunProperty {
     private String scanPacket;
     private int localServerPort;

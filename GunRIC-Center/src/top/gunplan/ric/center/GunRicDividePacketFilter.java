@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  * concurrent class
- *
+ * @date 2019/04/27
  * @author dosdrtt
  */
 @GunNetFilterOrder(index = 1)

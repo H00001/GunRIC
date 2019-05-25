@@ -8,6 +8,7 @@ import java.io.*;
 
 
 /**
+ * AbstractGunRicExecuteProtocol
  * @author dosdrtt
  */
 public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtocol {

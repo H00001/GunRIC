@@ -1,5 +1,6 @@
 package top.gunplan.ric.center.property;
 
+import top.gunplan.netty.anno.GunPropertyMap;
 import top.gunplan.netty.impl.propertys.GunProperty;
 
 /**
@@ -10,18 +11,10 @@ import top.gunplan.netty.impl.propertys.GunProperty;
  * @date 2019/05/22
  * @see top.gunplan.netty.impl.propertys.GunProperty
  */
+@GunPropertyMap(name = "ric-center-services-util")
 public class GunRicCenterServiceUtilProperty implements GunProperty {
     private String divideflag;
-    private String servicespath;
-    private String redisaddr;
 
-    public String getRedisaddr() {
-        return redisaddr;
-    }
-
-    public String getServicespath() {
-        return servicespath;
-    }
 
     public String getDivideflag() {
         return divideflag;

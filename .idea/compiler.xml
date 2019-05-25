@@ -27,4 +27,7 @@
       <module name="GunRIC-User" target="12" />
     </bytecodeTargetLevel>
   </component>
+  <component name="RmicSettings">
+    <option name="IS_EANABLED" value="true" />
+  </component>
 </project>

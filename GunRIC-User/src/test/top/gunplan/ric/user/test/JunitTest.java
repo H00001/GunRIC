@@ -2,8 +2,6 @@ package top.gunplan.ric.user.test;
 
 import org.junit.jupiter.api.Test;
 
-import top.gunplan.ric.apis.test.Find;
-import top.gunplan.ric.apis.test.LinearAlgebra;
 import top.gunplan.ric.apis.test.ListQuestion;
 import top.gunplan.ric.user.UserBoot;
 
@@ -26,7 +24,7 @@ class JunitTest {
          * short 16
          * string ?
          */
-//        CalServices services = UserBoot.iocobject(CalServices.class);
+//        CalServices services = UserBoot.iocObject(CalServices.class);
 //        System.out.printf("3 + 8 = %d\n", services.intAdd(3, 8));
 //        System.out.printf("8 - 3 = %d\n", services.intSub(8, 3));
 //        System.out.printf("8 * 3 = %d\n", services.multiplication(8, 3));
@@ -38,7 +36,7 @@ class JunitTest {
         int[] x = {1, 0, 2};
         int[] y = {0, 1, -3};
 //
-        ListQuestion services1 = UserBoot.iocobject(ListQuestion.class);
+        ListQuestion services1 = UserBoot.iocObject(ListQuestion.class);
         System.out.println(Arrays.toString(services1.removeVal(lisg, 3).getList()));
 //        TestObject o = new TestObject();
 //        o.x = 1;

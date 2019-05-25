@@ -15,7 +15,7 @@ public final class UserBoot {
 
     }
 
-    public static <T> T iocobject(Class<T> clazz) throws IOException {
+    public static <T> T iocObject(Class<T> clazz) throws IOException {
         GunRicUserProperty property = GunRicUserPropertyManageImpl.getProPerty();
         Socket so = new Socket(property.getAddress()[0].getHostString(), property.getAddress()[0].getPort());
         Class[] clazzs = {clazz};

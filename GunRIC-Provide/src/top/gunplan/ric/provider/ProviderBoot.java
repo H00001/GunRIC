@@ -65,7 +65,7 @@ public class ProviderBoot implements GunBootServerBase {
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>());
-        GunNettyPropertyManagerImpl.registerProperty("ric-provide", new GunRicProvideProperty());
+        GunNettyPropertyManagerImpl.registerProperty(new GunRicProvideProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunStdRicServerFilter()).
                 setHandle(new GunRicProvideHandle());
