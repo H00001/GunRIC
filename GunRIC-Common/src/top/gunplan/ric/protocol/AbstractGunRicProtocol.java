@@ -19,8 +19,21 @@ import java.lang.reflect.Method;
  */
 public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetInputInterface, GunNetOutputInterface {
 
+    private SerizableCode serizable = new GunRicSerizableCodeImpl();
 
-    boolean checKNext(GunBytesUtil.GunReadByteStream util) {
+    @Override
+    public boolean unSerialize(byte[] in) {
+        GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(in);
+        return unSerialize(util);
+    }
+
+    public AbstractGunRicProtocol() {
+        this.autoCreateSerialnumber();
+    }
+
+    RicProtocolType type;
+
+    boolean checkNext(GunBytesUtil.GunReadByteStream util) {
         boolean thTrueSeria = true;
         if (util.getLenSum() - util.getNowflag() > 3) {
             AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(util);
@@ -29,14 +42,6 @@ public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetI
         }
         return thTrueSeria;
     }
-
-    @Override
-    public boolean unSerialize(byte[] in) {
-        GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(in);
-        return unSerialize(util);
-    }
-
-    RicProtocolType type;
     RicProtocolCode code;
     /**
      * chain style to divide pacjet
@@ -55,6 +60,11 @@ public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetI
     public int getSerialnumber() {
         return serialnumber;
     }
+
+    public void autoCreateSerialnumber() {
+        this.serialnumber = serizable.getSerizNum32();
+    }
+
 
     public void setSerialnumber(int serialnumber) {
         this.serialnumber = serialnumber;

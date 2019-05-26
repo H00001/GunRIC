@@ -35,6 +35,6 @@ public class GunRicGetAddressProtocol extends AbstractCenterHelperProtocol imple
         publicUnSet(util);
         stdHeadAnaly(util);
         readParamType(util);
-        return checkEnd(util) && checKNext(util);
+        return checkEnd(util) && checkNext(util);
     }
 }

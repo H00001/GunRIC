@@ -32,7 +32,6 @@ public final class UserBoot {
         poctol.setParamcount(2);
         poctol.pushParamType(int[].class);
         poctol.pushParamType(int.class);
-        poctol.setSerialnumber(1);
         so.getOutputStream().write(poctol.serialize());
         byte[] buffer = new byte[1024];
 

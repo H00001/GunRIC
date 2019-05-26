@@ -41,6 +41,6 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol impleme
     @Override
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
         publicUnSet(util);
-        return checkEnd(util) && checKNext(util);
+        return checkEnd(util) && checkNext(util);
     }
 }

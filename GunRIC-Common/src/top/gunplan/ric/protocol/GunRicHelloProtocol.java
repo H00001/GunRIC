@@ -32,6 +32,6 @@ public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRi
     @Override
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
         publicUnSet(util);
-        return checkEnd(util) && checKNext(util);
+        return checkEnd(util) && checkNext(util);
     }
 }

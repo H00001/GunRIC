@@ -111,6 +111,6 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         super.stdHeadAnaly(util);
         this.paramlen = util.readByte();
         boolean b = paramlen == 0 ? checkEnd(util) : analyizeParams(paramlen, util);
-        return b && checKNext(util);
+        return b && checkNext(util);
     }
 }

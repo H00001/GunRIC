@@ -42,6 +42,6 @@ public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implemen
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
         publicUnSet(util);
         returnValue = readOnceParam(util);
-        return checkEnd(util) && checKNext(util);
+        return checkEnd(util) && checkNext(util);
     }
 }

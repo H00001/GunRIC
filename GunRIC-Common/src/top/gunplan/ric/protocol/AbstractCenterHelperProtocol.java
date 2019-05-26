@@ -10,7 +10,7 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecuteProtocol {
     int paramcount = 0;
-    Class<?>[] types = null;
+    private Class<?>[] types = null;
     private int now = 0;
 
     public void setParamcount(int paramcount) {

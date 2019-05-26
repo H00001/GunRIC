@@ -73,7 +73,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
             addressItems.add(item);
             //addressItems.get(i).unSerialize()
         }
-        return checkEnd(util) && checKNext(util);
+        return checkEnd(util) && checkNext(util);
     }
 
     public static class AddressItem implements GunNetOutputInterface, GunNetInputInterface, GunRicOutputHelper {

@@ -19,6 +19,12 @@ public class GunRicProvideProperty implements GunProperty {
     private String publishFileName;
     private final static String DIV_FLAG = ",";
     private InetSocketAddress[] address;
+    private String publishLocalIp;
+
+
+    public String getPublishLocalIp() {
+        return publishLocalIp;
+    }
 
 
     public GunRicProvideProperty() {

@@ -71,6 +71,7 @@ class GunRicPublishManage {
     private boolean publishRegister(GunRicProvideProperty ppt, OutputStream os) {
         GunRicRegisterProtocol protocol = new GunRicRegisterProtocol();
         protocol.setPort(ppt.getServerLocalPort());
+        protocol.setIp(ppt.getPublishLocalIp());
         Class<?> clazz;
         try {
             while ((clazz = getNextClass()) != null) {

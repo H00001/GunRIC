@@ -25,7 +25,8 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal {
 
     @Override
     public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol protocol) {
-        InetSocketAddress is = new InetSocketAddress("127.0.0.1", 8888);
+        GunRicRegisterProtocol protocol1 = (GunRicRegisterProtocol) protocol;
+        InetSocketAddress is = new InetSocketAddress(protocol1.getIp(), ((GunRicRegisterProtocol) protocol).getPort());
         GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface((AbstractCenterHelperProtocol) protocol);
         GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(protocol.getSerialnumber());
         try {

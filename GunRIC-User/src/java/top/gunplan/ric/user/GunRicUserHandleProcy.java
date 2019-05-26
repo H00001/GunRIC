@@ -34,7 +34,6 @@ public class GunRicUserHandleProcy implements InvocationHandler {
         input.setType(RicProtocolType.REQUEST);
         input.setCode(RicProtocolCode.SUCCEED);
         input.setInterfaceName(interfaceName);
-        input.setSerialnumber((int) System.currentTimeMillis());
         input.setMethodName(method.getName());
         if (args != null) {
             input.setParamLen((byte) args.length);
