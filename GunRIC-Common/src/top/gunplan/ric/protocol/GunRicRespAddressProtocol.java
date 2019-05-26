@@ -34,16 +34,13 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
 
     @Override
     public boolean unSerialize(byte[] bytes) {
+        /**
+         * this is a bug, but no one know the reason
+         */
+        addressItems.clear();
         GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(bytes);
-        publicUnSet(util);
-        int len = util.readByte();
-        for (int i = 0; i < len; i++) {
-            AddressItem item = new AddressItem();
-            item.unSerialize(util);
-            addressItems.add(item);
-            //addressItems.get(i).unSerialize()
-        }
-        return checkEnd(util) && checKNext(util);
+        return unSerialize(util);
+
     }
 
     @Override
@@ -71,9 +68,11 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         publicUnSet(util);
         int len = util.readByte();
         for (int i = 0; i < len; i++) {
+            AddressItem item = new AddressItem();
+            item.unSerialize(util);
+            addressItems.add(item);
             //addressItems.get(i).unSerialize()
         }
-
         return checkEnd(util) && checKNext(util);
     }
 
@@ -99,6 +98,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         public AddressItem() {
 
         }
+
         private void readAddress(GunBytesUtil.GunReadByteStream stream) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 4; i++) {

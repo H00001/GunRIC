@@ -31,6 +31,6 @@ public class GunRicStdFilter implements GunNettyFilter {
 
     @Override
     public DealResult doOutputFilter(GunOutputFilterChecker gunOutputFilterChecker) throws Exception {
-        return null;
+        return NEXT;
     }
 }

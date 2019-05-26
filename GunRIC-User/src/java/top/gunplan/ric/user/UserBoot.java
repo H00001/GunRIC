@@ -35,9 +35,15 @@ public final class UserBoot {
         poctol.setSerialnumber(1);
         so.getOutputStream().write(poctol.serialize());
         byte[] buffer = new byte[1024];
-        so.getInputStream().read(buffer);
+
+        int len = so.getInputStream().read(buffer);
+        byte[] b1 = new byte[len];
+        System.arraycopy(buffer, 0, b1, 0, len);
         GunRicRespAddressProtocol protocol = new GunRicRespAddressProtocol();
-        poctol.unSerialize(buffer);
+        System.out.println("cc");
+        protocol.unSerialize(b1);
+
+        System.out.println("cc");
     }
 
     public static <T> T iocObject(Class<T> clazz) throws IOException {
