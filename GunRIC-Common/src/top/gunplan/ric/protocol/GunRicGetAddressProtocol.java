@@ -5,9 +5,9 @@ import top.gunplan.utils.GunBytesUtil;
 /**
  * @author dosdrtt
  */
-public class GunRicGetAddressProcotol extends AbstractCenterHelperProtocol implements GunRicOutputHelper {
-    //todo
-    GunRicGetAddressProcotol() {
+public class GunRicGetAddressProtocol extends AbstractCenterHelperProtocol implements GunRicOutputHelper {
+
+    public GunRicGetAddressProtocol() {
         this.type = RicProtocolType.GET;
         this.code = RicProtocolCode.GET_REQ;
         //    this.setPort(0x0);
@@ -34,7 +34,7 @@ public class GunRicGetAddressProcotol extends AbstractCenterHelperProtocol imple
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
         publicUnSet(util);
         stdHeadAnaly(util);
-        readParam(util);
+        readParamType(util);
         return checkEnd(util) && checKNext(util);
     }
 }

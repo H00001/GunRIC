@@ -31,10 +31,7 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
     }
 
 
-    public void setParamount(int paramount) {
-        this.paramcount = paramount;
-        types = new Class<?>[paramount];
-    }
+
 
 
 
@@ -60,7 +57,7 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
         this.port = util.readInt();
         this.setSerialnumber(util.readInt());
         super.stdHeadAnaly(util);
-        readParam(util);
+        readParamType(util);
         return checkEnd(util) && checKNext(util);
     }
 }

@@ -17,6 +17,7 @@ import java.net.InetSocketAddress;
  * @date 1557152414
  * Concurrent class
  */
+@Deprecated
 class GunRicCenterStdHandle {
     private GunRicCenterStdRecordManage manage = new GunRicCenterStdRecordManage();
 

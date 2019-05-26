@@ -96,7 +96,7 @@ class GunRicPublishManage {
         final int v = ((clazz.hashCode() + md.hashCode()) & 12768) + (int) (Math.random() * 1000);
         registerMapping.put((short) v, clazz.getName() + "." + md.getName());
         protocol.setSerialnumber(v);
-        protocol.setParamount(md.getParameterCount());
+        protocol.setParamcount(md.getParameterCount());
         for (Class<?> tp : md.getParameterTypes()) {
             protocol.pushParamType(tp);
         }

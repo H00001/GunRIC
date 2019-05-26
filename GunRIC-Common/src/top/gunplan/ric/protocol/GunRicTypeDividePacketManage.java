@@ -38,7 +38,7 @@ public final class GunRicTypeDividePacketManage {
             break;
             case GET: {
                 RicProtocolCode code = RicProtocolCode.valuefrom(util.readInt());
-                protocol = code == RicProtocolCode.HELLO_REQ ? new GunRicGetAddressProcotol() : new GunRicRespAddressProtocol();
+                protocol = code == RicProtocolCode.GET_REQ ? new GunRicGetAddressProtocol() : new GunRicRespAddressProtocol();
             }
             util.pSub2();
             break;

@@ -5,6 +5,7 @@ import top.gunplan.netty.GunException;
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 
+import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -34,14 +35,14 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
      * @return GunNetOutputInterface to transfer
      */
     @Override
-    public abstract GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol);
+    public abstract GunNetOutputInterface dealEvent(GunRicGetAddressProtocol protocol);
 
     @Override
     public GunNetOutputInterface dealDataEvent(GunNetInputInterface var1) throws GunException {
         if (var1 instanceof GunRicRegisterProtocol) {
             return dealEvent((GunRicRegisterProtocol) var1);
-        } else if (var1 instanceof GunRicGetAddressProcotol) {
-            return dealEvent((GunRicGetAddressProcotol) var1);
+        } else if (var1 instanceof GunRicGetAddressProtocol) {
+            return dealEvent((GunRicGetAddressProtocol) var1);
         } else if (var1 instanceof GunRicHelloProtocol) {
             return dealEvent((GunRicHelloProtocol) var1);
         } else {

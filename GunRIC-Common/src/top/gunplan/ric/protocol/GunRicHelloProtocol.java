@@ -6,7 +6,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @author dosdrtt
  */
 public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper {
-    GunRicHelloProtocol(boolean type) {
+    public GunRicHelloProtocol(boolean type) {
         this.type = RicProtocolType.HELLO;
         this.code = type ? RicProtocolCode.HELLO_REQ : RicProtocolCode.HELLO_RES;
     }

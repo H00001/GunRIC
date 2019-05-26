@@ -4,6 +4,7 @@ import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.*;
 
 /**
+ * @concurrent method
  * GunRicCenterHandle
  * @since init 4.1.5.6
  * @author dosdrtt
@@ -19,7 +20,7 @@ public class GunRicCenterHandle extends AbstractGunRicBaseCenterHandle {
 
 
     @Override
-    public GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol) {
+    public GunNetOutputInterface dealEvent(GunRicGetAddressProtocol protocol) {
         return dealMuchEvent(handle1::dealDataEvent, protocol);
     }
 

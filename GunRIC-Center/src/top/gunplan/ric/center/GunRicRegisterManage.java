@@ -37,7 +37,7 @@ public final class GunRicRegisterManage {
 
     }
 
-    public static void findServices(Path startingDir) throws IOException {
+    private static void findServices(Path startingDir) throws IOException {
         Files.walkFileTree(startingDir, new FindJavaVisitor());
     }
 

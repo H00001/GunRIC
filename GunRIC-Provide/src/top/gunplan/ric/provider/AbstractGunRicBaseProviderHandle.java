@@ -3,6 +3,7 @@ package top.gunplan.ric.provider;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
+import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.*;
 
 /**
@@ -23,7 +24,7 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
     }
 
     @Override
-    public AbstractGunRicProtocol dealEvent(GunRicGetAddressProcotol protocol) {
+    public AbstractGunRicProtocol dealEvent(GunRicGetAddressProtocol protocol) {
         throw new GunInvidaProtocolExection("GunRicRegisterProtocol", "GunRIC-Provicer");
     }
 

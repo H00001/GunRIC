@@ -1,9 +1,10 @@
-package top.gunplan.ric.protocol;
+package top.gunplan.ric.common;
 
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
+import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.nio.channels.SocketChannel;
@@ -62,12 +63,12 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     GunNetOutputInterface dealEvent(GunRicRegisterProtocol protocol);
 
     /**
-     * GunRicGetAddressProcotol center used
+     * GunRicGetAddressProtocol center used
      *
      * @param protocol dealEvent
      * @return AbstractGunRicProtocol
      */
-    GunNetOutputInterface dealEvent(GunRicGetAddressProcotol protocol);
+    GunNetOutputInterface dealEvent(GunRicGetAddressProtocol protocol);
 
     /**
      * @param var1 GunNetInputInterface

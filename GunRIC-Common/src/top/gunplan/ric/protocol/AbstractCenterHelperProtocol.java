@@ -13,6 +13,11 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
     Class<?>[] types = null;
     private int now = 0;
 
+    public void setParamcount(int paramcount) {
+        this.paramcount = paramcount;
+        types = new Class<?>[paramcount];
+    }
+
     public Class<?>[] getTypes() {
         return types;
     }
@@ -37,7 +42,7 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
         types = null;
     }
 
-    void readParam(GunBytesUtil.GunReadByteStream util) {
+    void readParamType(GunBytesUtil.GunReadByteStream util) {
         this.paramcount = util.readByte();
         if (this.paramcount != 0) {
             types = new Class<?>[paramcount];
