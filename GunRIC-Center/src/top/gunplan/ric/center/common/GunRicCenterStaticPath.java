@@ -9,5 +9,5 @@ import top.gunplan.ric.protocol.util.PathUtil;
  * @author dosdrtt
  */
 public class GunRicCenterStaticPath {
-    public static final String SERVICES_PATH = PathUtil.getRes() + ((GunRicCenterServicesProperty) GunNettyPropertyManagerImpl.getProperty("ric-center-services")).getServicespath();
+    public static final String SERVICES_PATH = PathUtil.getRes() + ((GunRicCenterServicesProperty) GunNettyPropertyManagerImpl.getProperty(GunRicCenterServicesProperty.class)).getServicespath();
 }

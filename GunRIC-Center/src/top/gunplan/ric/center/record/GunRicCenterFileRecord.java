@@ -19,7 +19,7 @@ import java.net.InetSocketAddress;
 public class GunRicCenterFileRecord implements GunRicCenterRecord {
 
 
-    private GunRicCenterServiceUtilProperty property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
+    private GunRicCenterServiceUtilProperty property = GunNettyPropertyManagerImpl.getProperty(GunRicCenterServiceUtilProperty.class);
 
     private File initFile(final GunRicInterfaceBuffer.GunRicCdtInterface g) {
         return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterFaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideflag() + g.getId());
@@ -51,8 +51,6 @@ public class GunRicCenterFileRecord implements GunRicCenterRecord {
     }
 
     private void writeFileAddress(BufferedOutputStream bf, final InetSocketAddress address) throws IOException {
-        GunRicCenterServiceUtilProperty property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
-        assert property != null;
         bf.write((address.getHostString() + property.getDivideflag() + address.getPort()).getBytes());
         bf.write('\n');
     }

@@ -24,7 +24,7 @@ public final class GunRicRegisterManage {
     private static String PARFOL;
 
     public static boolean loadRegister() {
-        property = GunNettyPropertyManagerImpl.getProperty("ric-center-services-util");
+        property = GunNettyPropertyManagerImpl.getProperty(GunRicCenterServiceUtilProperty.class);
         assert property != null;
         PARFOL = GunRicCenterStaticPath.SERVICES_PATH;
         try {
