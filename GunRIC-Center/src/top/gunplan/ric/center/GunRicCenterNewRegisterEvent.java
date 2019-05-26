@@ -11,14 +11,9 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal {
     private GunRicCenterRecordManage manage = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     GunRicCenterNewRegisterEvent() {
-        this.init();
+
     }
 
-    private void init() {
-        manage.registerFirst(new GunRicCenterPathRecord(null));
-        AbstractGunRicProxyRecord r2 = new GunRicCenterFileRecord(new GunRicCenterRedisRecord(new GunRicCenterInlineBufferRecord(null)));
-        manage.registerLoop(r2);
-    }
 
     @Override
     public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol protocol) {

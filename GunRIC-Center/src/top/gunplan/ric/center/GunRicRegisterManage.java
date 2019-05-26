@@ -23,15 +23,13 @@ import java.util.List;
  */
 public final class GunRicRegisterManage {
     private static GunRicCenterServiceUtilProperty property = null;
-    private static String PARFOL;
 
     public static boolean loadRegister() {
         property = GunNettyPropertyManagerImpl.getProperty(GunRicCenterServiceUtilProperty.class);
         assert property != null;
-        PARFOL = GunRicCenterStaticPath.SERVICES_PATH;
         try {
 
-            findServices(Paths.get(PARFOL));
+            findServices(Paths.get(GunRicCenterStaticPath.SERVICES_PATH));
         } catch (IOException exp) {
             AbstractGunBaseLogUtil.error(exp);
         }
@@ -49,7 +47,7 @@ public final class GunRicRegisterManage {
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             if (file.toFile().isFile()) {
-                final String interfacename = file.getParent().toString().replace(PARFOL + "/", "").replace("/", ".");
+                final String interfacename = file.getParent().toString().replace(GunRicCenterStaticPath.SERVICES_PATH + "/", "").replace("/", ".");
                 final String methodname = file.toFile().getName().split("_")[0];
                 GunBytesUtil.GunReadByteStream stream = new GunBytesUtil.GunReadByteStream(Files.readAllBytes(file));
                 int paramlen = stream.readByte();
@@ -58,16 +56,13 @@ public final class GunRicRegisterManage {
                     type[i] = RicProtocolParamType.valuefrom(stream.readByte());
                 }
                 stream.readByte();
-                List<GunAddressItem> addresses = new ArrayList<>(1);
                 String addr;
-
                 for (; (addr = stream.readLine()) != null; ) {
-                    addresses.add(new GunAddressItem(addr.split(property.getDivideflag())[0], Integer.parseInt(addr.split(property.getDivideflag())[1])));
+                    GunRicInterfaceBuffer.GunRicCdtInterface key = new GunRicInterfaceBuffer.GunRicCdtInterface(type, interfacename, methodname);
+                    GunRicCenterStdRecordManage.Instance.getHinstance().doRegex(key, new GunAddressItem(addr.split(property.getDivideflag())[0], Integer.parseInt(addr.split(property.getDivideflag())[1])));
                 }
-
-                GunRicInterfaceBuffer.GunRicCdtInterface key = new GunRicInterfaceBuffer.GunRicCdtInterface(type, interfacename, methodname);
                 AbstractGunBaseLogUtil.debug("find local services " + interfacename + "." + methodname);
-                GunRicInterfaceBuffer.intermapping.put(key, addresses);
+
             }
             return FileVisitResult.CONTINUE;
         }
