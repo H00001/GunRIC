@@ -1,5 +1,6 @@
 package top.gunplan.ric.center.record;
 
+import redis.clients.jedis.Jedis;
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.GunAddressItem;
@@ -16,18 +17,22 @@ import java.util.List;
  * @see GunRicCenterRecord
  */
 public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {
+    private Jedis jedis;
+
     public GunRicCenterRedisRecord(AbstractGunRicProxyRecord lastRecord) {
         super(lastRecord);
+//        jedis = new Jedis("", 0);
+//        jedis.auth();
     }
 
     @Override
     public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
-
+        // jedis.lpush(g.getInterFaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
     }
 
     @Override
     public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
-
+        // jedis.lpush(g.getInterFaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
     }
 
     @Override

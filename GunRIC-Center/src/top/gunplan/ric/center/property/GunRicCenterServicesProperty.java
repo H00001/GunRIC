@@ -11,6 +11,11 @@ import top.gunplan.netty.impl.propertys.GunProperty;
 public class GunRicCenterServicesProperty implements GunProperty {
     private String redisaddr;
     private String servicespath;
+    private String redispwd;
+
+    public String getRedispwd() {
+        return redispwd;
+    }
 
     public String getRedisaddr() {
         return redisaddr;

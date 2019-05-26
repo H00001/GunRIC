@@ -34,10 +34,13 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     @Override
     public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
         try {
-            BufferedOutputStream bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
-            writeFileFirst(g, bf);
-            writeFileAddress(bf, address);
-            bf.close();
+            File recordfile = initFile(g);
+            if (!recordfile.exists()) {
+                BufferedOutputStream bf = new BufferedOutputStream(new FileOutputStream(recordfile, true));
+                writeFileFirst(g, bf);
+                writeFileAddress(bf, address);
+                bf.close();
+            }
         } catch (IOException e) {
             throw new GunRicCenterRecordFailException("file cannot open to record");
         }
