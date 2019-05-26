@@ -2,6 +2,7 @@ package top.gunplan.ric.center.record;
 
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -28,7 +29,7 @@ public abstract class AbstractGunRicProxyRecord implements GunRicCenterRecord {
      * @param address address info
      */
     @Override
-    public abstract void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address);
+    public abstract void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address);
 
 
     /**
@@ -36,12 +37,12 @@ public abstract class AbstractGunRicProxyRecord implements GunRicCenterRecord {
      * @param address address info
      */
     @Override
-    public abstract void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address);
+    public abstract void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address);
 
-    abstract List<InetSocketAddress> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g);
+    abstract List<GunRicRespAddressProtocol.AddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g);
 
-    public List<InetSocketAddress> getAddress(GunRicInterfaceBuffer.GunRicCdtInterface gunRicCdtInterface) {
-        List<InetSocketAddress> addresses;
+    public List<GunRicRespAddressProtocol.AddressItem> getAddress(GunRicInterfaceBuffer.GunRicCdtInterface gunRicCdtInterface) {
+        List<GunRicRespAddressProtocol.AddressItem> addresses;
         if (lastRecord != null && (addresses = lastRecord.getAddress(gunRicCdtInterface)) != null) {
             return addresses;
         } else {

@@ -2,6 +2,7 @@ package top.gunplan.ric.center.record;
 
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -22,24 +23,24 @@ public class GunRicCenterInlineBufferRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
         writeBufferAddress(g, address, true);
     }
 
     @Override
-    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
         writeBufferAddress(g, address, false);
     }
 
     @Override
-    List<InetSocketAddress> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
+    List<GunRicRespAddressProtocol.AddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
         return GunRicInterfaceBuffer.intermapping.get(g);
     }
 
 
-    private void writeBufferAddress(GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address, boolean firstWrite) {
+    private void writeBufferAddress(GunRicInterfaceBuffer.GunRicCdtInterface g, final GunRicRespAddressProtocol.AddressItem address, boolean firstWrite) {
         if (firstWrite) {
-            List<InetSocketAddress> adds = new ArrayList<>();
+            List<GunRicRespAddressProtocol.AddressItem> adds = new ArrayList<>();
             adds.add(address);
             GunRicInterfaceBuffer.intermapping.put(g, adds);
         } else {

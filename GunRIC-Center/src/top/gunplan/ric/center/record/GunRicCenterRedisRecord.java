@@ -2,6 +2,7 @@ package top.gunplan.ric.center.record;
 
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -19,17 +20,17 @@ public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
 
     }
 
     @Override
-    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
 
     }
 
     @Override
-    List<InetSocketAddress> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
+    List<GunRicRespAddressProtocol.AddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
         return null;
     }
 }

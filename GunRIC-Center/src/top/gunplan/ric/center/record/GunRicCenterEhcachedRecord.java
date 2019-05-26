@@ -1,11 +1,10 @@
 package top.gunplan.ric.center.record;
 
-import top.gunplan.netty.anno.GunPropertyMap;
+
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.util.List;
 
 /**
@@ -28,18 +27,18 @@ public class GunRicCenterEhcachedRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
 
     }
 
     @Override
-    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
 
     }
 
 
     @Override
-    public List<InetSocketAddress> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface gInfo) {
+    public List<GunRicRespAddressProtocol.AddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface gInfo) {
         return null;
     }
 

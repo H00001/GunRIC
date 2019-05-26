@@ -4,6 +4,7 @@ package top.gunplan.ric.center;
 import top.gunplan.ric.center.anno.GunRicRegisterOrder;
 import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
 import top.gunplan.ric.center.record.GunRicCenterRecordFailException;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.net.InetSocketAddress;
@@ -53,7 +54,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
-    public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address) {
+    public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final GunRicRespAddressProtocol.AddressItem address) {
         if (isFirst(g)) {
             firstList.forEach(reg -> reg.firstAdd(g, address));
             regexList.parallelStream().forEach(reg -> reg.firstAdd(g, address));

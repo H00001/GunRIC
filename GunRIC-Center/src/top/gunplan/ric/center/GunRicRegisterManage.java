@@ -3,6 +3,7 @@ package top.gunplan.ric.center;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
@@ -56,11 +57,11 @@ public final class GunRicRegisterManage {
                     type[i] = RicProtocolParamType.valuefrom(stream.readByte());
                 }
                 stream.readByte();
-                List<InetSocketAddress> addresses = new ArrayList<>(1);
+                List<GunRicRespAddressProtocol.AddressItem> addresses = new ArrayList<>(1);
                 String addr;
 
                 for (; (addr = stream.readLine()) != null; ) {
-                    addresses.add(new InetSocketAddress(addr.split(property.getDivideflag())[0], Integer.parseInt(addr.split(property.getDivideflag())[1])));
+                    addresses.add(new GunRicRespAddressProtocol.AddressItem(new InetSocketAddress(addr.split(property.getDivideflag())[0], Integer.parseInt(addr.split(property.getDivideflag())[1]))));
                 }
 
                 GunRicInterfaceBuffer.GunRicCdtInterface key = new GunRicInterfaceBuffer.GunRicCdtInterface(type, interfacename, methodname);

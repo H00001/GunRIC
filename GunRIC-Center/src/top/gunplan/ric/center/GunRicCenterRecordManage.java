@@ -1,6 +1,7 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 
 import java.net.InetSocketAddress;
 
@@ -46,7 +47,7 @@ public interface GunRicCenterRecordManage {
      * @param g       GunRicInterfaceBuffer.GunRicCdtInterface
      * @param address InetSocketAddress
      */
-    void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address);
+    void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final GunRicRespAddressProtocol.AddressItem address);
 
 
     AbstractGunRicProxyRecord getFirstRecord();

@@ -1,10 +1,10 @@
 package top.gunplan.ric.center.record;
 
-import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
 import java.io.*;
@@ -31,7 +31,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
         try {
             BufferedOutputStream bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
             writeFileFirst(g, bf);
@@ -44,7 +44,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
+    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
         try {
             BufferedOutputStream bf;
             bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
@@ -56,14 +56,13 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    List<InetSocketAddress> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
+    List<GunRicRespAddressProtocol.AddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
         return null;
     }
 
 
-
-    private void writeFileAddress(BufferedOutputStream bf, final InetSocketAddress address) throws IOException {
-        bf.write((address.getHostString() + property.getDivideflag() + address.getPort()).getBytes());
+    private void writeFileAddress(BufferedOutputStream bf, final GunRicRespAddressProtocol.AddressItem address) throws IOException {
+        bf.write((address.getAddress() + property.getDivideflag() + address.getPort()).getBytes());
         bf.write('\n');
     }
 
