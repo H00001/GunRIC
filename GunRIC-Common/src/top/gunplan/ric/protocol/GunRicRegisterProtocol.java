@@ -10,14 +10,14 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
 
-    private GunRicRespAddressProtocol.AddressItem item = new GunRicRespAddressProtocol.AddressItem();
+    private GunAddressItem item = new GunAddressItem();
 
     public GunRicRegisterProtocol() {
         this.type = RicProtocolType.REGISTER;
         this.code = RicProtocolCode.SUCCEED;
     }
 
-    public void setItem(GunRicRespAddressProtocol.AddressItem item) {
+    public void setItem(GunAddressItem item) {
         this.item = item;
     }
 
@@ -31,7 +31,7 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 3 + CODE_LEN + GunRicRespAddressProtocol.AddressItem.NEED_SPACE + TYPE_LEN + SERIALNUM_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
+        int len = 3 + CODE_LEN + GunAddressItem.NEED_SPACE + TYPE_LEN + SERIALNUM_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteStream util = new GunBytesUtil.GunWriteByteStream(save);
         publicSet(util);

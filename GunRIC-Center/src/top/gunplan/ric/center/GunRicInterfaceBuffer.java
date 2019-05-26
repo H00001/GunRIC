@@ -2,6 +2,7 @@ package top.gunplan.ric.center;
 
 import top.gunplan.ric.center.common.GunRicMethodHash;
 import top.gunplan.ric.protocol.AbstractCenterHelperProtocol;
+import top.gunplan.ric.protocol.GunAddressItem;
 import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author dosdrtt
  */
 public class GunRicInterfaceBuffer {
-    public static HashMap<GunRicCdtInterface, List<GunRicRespAddressProtocol.AddressItem>> intermapping = new HashMap<>();
+    public static HashMap<GunRicCdtInterface, List<GunAddressItem>> intermapping = new HashMap<>();
 
     /**
      *

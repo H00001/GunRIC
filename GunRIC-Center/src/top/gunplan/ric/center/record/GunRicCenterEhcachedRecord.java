@@ -3,7 +3,7 @@ package top.gunplan.ric.center.record;
 
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
-import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
+import top.gunplan.ric.protocol.GunAddressItem;
 
 import java.util.List;
 
@@ -27,18 +27,18 @@ public class GunRicCenterEhcachedRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
+    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
 
     }
 
     @Override
-    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
+    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
 
     }
 
 
     @Override
-    public List<GunRicRespAddressProtocol.AddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface gInfo) {
+    public List<GunAddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface gInfo) {
         return null;
     }
 

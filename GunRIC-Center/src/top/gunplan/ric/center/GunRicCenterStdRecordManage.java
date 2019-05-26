@@ -4,10 +4,9 @@ package top.gunplan.ric.center;
 import top.gunplan.ric.center.anno.GunRicRegisterOrder;
 import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
 import top.gunplan.ric.center.record.GunRicCenterRecordFailException;
+import top.gunplan.ric.protocol.GunAddressItem;
 import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
-
-import java.net.InetSocketAddress;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -54,7 +53,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
-    public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final GunRicRespAddressProtocol.AddressItem address) {
+    public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final GunAddressItem address) {
         if (isFirst(g)) {
             firstList.forEach(reg -> reg.firstAdd(g, address));
             regexList.parallelStream().forEach(reg -> reg.firstAdd(g, address));
@@ -71,10 +70,10 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     /**
      * signal instance mode
      */
-    public static class Instance {
+    static class Instance {
         private static GunRicCenterStdRecordManage hinstance = new GunRicCenterStdRecordManage();
 
-        public static GunRicCenterStdRecordManage getHinstance() {
+        static GunRicCenterStdRecordManage getHinstance() {
             return hinstance;
         }
     }

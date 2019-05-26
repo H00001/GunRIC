@@ -7,6 +7,7 @@ package top.gunplan.ric.protocol;
  */
 public interface GunRicCommonRealDeal {
     /**
+     * dealDataEvent
      * @param protocol AbstractGunRicProtocol
      * @return AbstractGunRicProtocol to transfer to client
      */

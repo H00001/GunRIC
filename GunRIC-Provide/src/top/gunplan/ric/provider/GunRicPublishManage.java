@@ -1,8 +1,9 @@
 package top.gunplan.ric.provider;
 
 
+import top.gunplan.ric.protocol.GunAddressItem;
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
-import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
+
 import top.gunplan.ric.protocol.util.GunClassPathUtil;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
@@ -38,7 +39,7 @@ class GunRicPublishManage {
         int succeedsum = 0;
         for (InetSocketAddress addr : addrs) {
             Socket ss = new Socket(addr.getHostString(), addr.getPort());
-            if (publishRegister(ppt, ss.getOutputStream()) && resolveResult(ss.getInputStream())) {
+            if (publishRegister(ss.getOutputStream()) && resolveResult(ss.getInputStream())) {
                 succeedsum++;
             }
             ss.close();
@@ -69,10 +70,8 @@ class GunRicPublishManage {
         return true;
     }
 
-    private boolean publishRegister(GunRicProvideProperty ppt, OutputStream os) {
+    private boolean publishRegister(OutputStream os) {
         GunRicRegisterProtocol protocol = new GunRicRegisterProtocol();
-        protocol.setItem(new GunRicRespAddressProtocol.AddressItem(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
-
         Class<?> clazz;
         try {
             while ((clazz = getNextClass()) != null) {
@@ -95,6 +94,7 @@ class GunRicPublishManage {
     private void constructProtocol(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
         protocol.setInterfaceName(clazz.getName());
         protocol.setMethodName(md.getName());
+        protocol.setItem(new GunAddressItem(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
         final int v = ((clazz.hashCode() + md.hashCode()) & 12768) + (int) (Math.random() * 1000);
         registerMapping.put((short) v, clazz.getName() + "." + md.getName());
         protocol.setSerialnumber(v);

@@ -4,6 +4,7 @@ import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.ric.center.GunRicInterfaceBuffer;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
+import top.gunplan.ric.protocol.GunAddressItem;
 import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
@@ -31,7 +32,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
+    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
         try {
             BufferedOutputStream bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
             writeFileFirst(g, bf);
@@ -44,7 +45,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunRicRespAddressProtocol.AddressItem address) {
+    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
         try {
             BufferedOutputStream bf;
             bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
@@ -56,12 +57,12 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    List<GunRicRespAddressProtocol.AddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
+    List<GunAddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
         return null;
     }
 
 
-    private void writeFileAddress(BufferedOutputStream bf, final GunRicRespAddressProtocol.AddressItem address) throws IOException {
+    private void writeFileAddress(BufferedOutputStream bf, final GunAddressItem address) throws IOException {
         bf.write((address.getAddress() + property.getDivideflag() + address.getPort()).getBytes());
         bf.write('\n');
     }
