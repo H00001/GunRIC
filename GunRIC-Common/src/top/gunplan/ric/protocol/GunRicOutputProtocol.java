@@ -9,6 +9,10 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper {
 
+    public GunRicOutputProtocol() {
+        this.type = RicProtocolType.RESPONSE;
+        this.code = RicProtocolCode.SUCCEED;
+    }
 
     private ParamHelper returnValue;
 

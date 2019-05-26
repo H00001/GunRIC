@@ -2,6 +2,7 @@ package top.gunplan.ric.user.test;
 
 import org.junit.jupiter.api.Test;
 
+import top.gunplan.ric.apis.test.Find;
 import top.gunplan.ric.apis.test.ListQuestion;
 import top.gunplan.ric.user.UserBoot;
 
@@ -13,6 +14,9 @@ import java.util.Arrays;
  * RIC Test
  */
 class JunitTest {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        new JunitTest().dotest();
+    }
     @Test
     void dotest() throws IOException, InterruptedException {
         /**
@@ -36,8 +40,8 @@ class JunitTest {
         int[] x = {1, 0, 2};
         int[] y = {0, 1, -3};
 //
-        ListQuestion services1 = UserBoot.iocObject(ListQuestion.class);
-        System.out.println(Arrays.toString(services1.removeVal(lisg, 3).getList()));
+        Find services1 = UserBoot.iocObject(Find.class);
+        System.out.println(services1.findByBinaryDivide(lisg, 3));
 //        TestObject o = new TestObject();
 //        o.x = 1;
 //        o.y = 2;

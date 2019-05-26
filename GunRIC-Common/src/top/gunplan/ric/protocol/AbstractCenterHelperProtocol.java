@@ -30,6 +30,13 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
         this.types[now++] = type;
     }
 
+    public void pushParamTypes(Class<?>[] types) {
+        this.setParamcount(types.length);
+        for (Class<?> clazz : types) {
+            pushParamType(clazz);
+        }
+    }
+
     void writeParamTypes(GunBytesUtil.GunWriteByteStream util) {
         util.writeByte((byte) paramcount);
         for (int i = 0; i < paramcount; i++) {

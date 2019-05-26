@@ -13,6 +13,11 @@ import top.gunplan.utils.GunBytesUtil;
 public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper {
     private ParamHelper[] helpers;
 
+    public GunRicInputProtocol() {
+        this.setType(RicProtocolType.REQUEST);
+        this.setCode(RicProtocolCode.SUCCEED);
+    }
+
     private int paramlen = 0;
     private static final byte PARAM_LEN = 1;
 
@@ -33,6 +38,15 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         helpers = new ParamHelper[len];
     }
 
+    public void pushParams(Object[] args) {
+        setParamLen((byte) args.length);
+        for (Object arg : args) {
+            if (!pushParam(arg)) {
+                AbstractGunBaseLogUtil.error("pus parameters error");
+                return;
+            }
+        }
+    }
 
     private boolean writeParam(GunBytesUtil.GunWriteByteStream util) {
         for (int i = 0; i < paramlen; i++) {

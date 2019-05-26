@@ -5,10 +5,12 @@ import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.io.*;
+import java.lang.reflect.Method;
 
 
 /**
  * AbstractGunRicExecuteProtocol
+ *
  * @author dosdrtt
  */
 public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtocol {
@@ -25,6 +27,11 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
 
     public String gMN() {
         return methodName;
+    }
+
+    public void setInameMname(Method method) {
+        this.setMethodName(method.getName());
+        this.setInterfaceName(method.getDeclaringClass().getName());
     }
 
     public void setMethodName(String methodName) {

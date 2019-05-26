@@ -16,7 +16,7 @@ public class GunRicUserProperty implements GunProperty {
     private String centerAddress;
     private InetSocketAddress[] address;
 
-    public InetSocketAddress[] getAddress() {
+    InetSocketAddress[] getAddress() {
         return address;
     }
 

@@ -5,13 +5,14 @@ import java.net.Socket;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * @author dosdrtt
  * @concurrent
  */
-public class GunRIcUserSocketConnectPool extends AbstractGunRicUserConnectPool {
+public class GunRicUserSocketConnectPool extends AbstractGunRicUserConnectPool {
     private Socket[] sockets;
     private AtomicInteger nowused = new AtomicInteger(0);
 
-    public GunRIcUserSocketConnectPool(String address, int port, int count) throws IOException {
+    public GunRicUserSocketConnectPool(String address, int port, int count) throws IOException {
         super(address, port, count);
         sockets = new Socket[count];
         for (int i = 0; i < count; i++) {

@@ -18,6 +18,10 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
 
     private List<GunAddressItem> addressItems = new ArrayList<>(1);
 
+    public List<GunAddressItem> getAddressItems() {
+        return addressItems;
+    }
+
     public void pushAddress(GunAddressItem ad) {
         this.addressItems.add(ad);
     }
