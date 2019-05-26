@@ -9,6 +9,7 @@ import top.gunplan.ric.protocol.RicProtocolParamType;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.util.List;
 
 /**
  * GunRicCenterFileRecord
@@ -16,10 +17,14 @@ import java.net.InetSocketAddress;
  *
  * @author dosdrtt
  */
-public class GunRicCenterFileRecord implements GunRicCenterRecord {
+public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
 
 
     private GunRicCenterServiceUtilProperty property = GunNettyPropertyManagerImpl.getProperty(GunRicCenterServiceUtilProperty.class);
+
+    public GunRicCenterFileRecord(AbstractGunRicProxyRecord lastRecord) {
+        super(lastRecord);
+    }
 
     private File initFile(final GunRicInterfaceBuffer.GunRicCdtInterface g) {
         return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterFaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideflag() + g.getId());
@@ -49,6 +54,13 @@ public class GunRicCenterFileRecord implements GunRicCenterRecord {
             throw new GunRicCenterRecordFailException("file cannot open to record");
         }
     }
+
+    @Override
+    List<InetSocketAddress> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
+        return null;
+    }
+
+
 
     private void writeFileAddress(BufferedOutputStream bf, final InetSocketAddress address) throws IOException {
         bf.write((address.getHostString() + property.getDivideflag() + address.getPort()).getBytes());

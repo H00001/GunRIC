@@ -14,8 +14,12 @@ import java.util.List;
  * @date 1558736830
  * @see GunRicCenterRecord
  */
-public class GunRicCenterInlineBufferRecord implements GunRicCenterRecord {
+public class GunRicCenterInlineBufferRecord extends AbstractGunRicProxyRecord {
 
+
+    public GunRicCenterInlineBufferRecord(AbstractGunRicProxyRecord lastRecord) {
+        super(lastRecord);
+    }
 
     @Override
     public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
@@ -26,6 +30,12 @@ public class GunRicCenterInlineBufferRecord implements GunRicCenterRecord {
     public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
         writeBufferAddress(g, address, false);
     }
+
+    @Override
+    List<InetSocketAddress> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
+        return GunRicInterfaceBuffer.intermapping.get(g);
+    }
+
 
     private void writeBufferAddress(GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address, boolean firstWrite) {
         if (firstWrite) {

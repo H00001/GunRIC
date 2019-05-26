@@ -14,6 +14,8 @@ import java.nio.channels.SocketChannel;
  */
 public interface GunRicBaseHandle extends GunNettyHandle {
     /**
+     * dealEvent
+     * hello message send auto
      * @param protocol GunRicHelloProtocol
      * @return AbstractGunRicProtocol
      */
@@ -24,6 +26,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
             protocol1.setSerialnumber(protocol.getSerialnumber());
             return protocol1;
         } else {
+            AbstractGunBaseLogUtil.debug("get hello protocol");
             return null;
         }
     }

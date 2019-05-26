@@ -19,21 +19,21 @@ import java.net.InetSocketAddress;
  */
 @Deprecated
 class GunRicCenterStdHandle {
-    private GunRicCenterStdRecordManage manage = new GunRicCenterStdRecordManage();
+//    private GunRicCenterStdRecordManage manage = new GunRicCenterStdRecordManage();
 
-    void init() {
-        manage.registerFirst(new GunRicCenterPathRecord());
-        manage.register(new GunRicCenterInlineBufferRecord());
-        manage.register(new GunRicCenterFileRecord());
-        manage.register(new GunRicCenterRedisRecord());
-    }
+//    void init() {
+//        manage.registerFirst(new GunRicCenterPathRecord());
+//        manage.register(new GunRicCenterInlineBufferRecord());
+//        manage.register(new GunRicCenterFileRecord());
+//        manage.register(new GunRicCenterRedisRecord());
+//    }
 
     GunNetOutputInterface dealDataEvent(GunRicRegisterProtocol pt, InetSocketAddress a) throws GunException {
         InetSocketAddress is = new InetSocketAddress(a.getAddress(), pt.getPort());
         GunRicInterfaceBuffer.GunRicCdtInterface gg = new GunRicInterfaceBuffer.GunRicCdtInterface(pt);
         GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(pt.getSerialnumber());
         try {
-            manage.doRegex(gg, is);
+            //          manage.doRegex(gg, is);
         } catch (GunRicCenterRecordFailException exp) {
             AbstractGunBaseLogUtil.error(exp);
             o.setCode(RicProtocolCode.FAIL);

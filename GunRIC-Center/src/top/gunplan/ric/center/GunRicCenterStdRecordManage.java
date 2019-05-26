@@ -2,6 +2,7 @@ package top.gunplan.ric.center;
 
 
 import top.gunplan.ric.center.anno.GunRicRegisterOrder;
+import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
 import top.gunplan.ric.center.record.GunRicCenterRecordFailException;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -16,8 +17,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @concurrent GunRicCenterStdRecordManage
  */
 public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
+    private List<AbstractGunRicProxyRecord> regexList = new CopyOnWriteArrayList<>();
 
-    private List<GunRicCenterRecord> regexList = new CopyOnWriteArrayList<>();
+    private GunRicCenterStdRecordManage() {
+
+    }
+
+    @Override
+    public void register(AbstractGunRicProxyRecord registerRegex) {
+        regexList.add(registerRegex);
+    }
     private List<GunRicCenterRecord> firstList = new LinkedList<>();
 
     @Override
@@ -31,8 +40,16 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
-    public void register(GunRicCenterRecord registerRegex) {
-        regexList.add(registerRegex);
+    public void registerLoop(AbstractGunRicProxyRecord record) {
+        while (record != null) {
+            register(record);
+            record = record.getLastRecord();
+        }
+    }
+
+    @Override
+    public AbstractGunRicProxyRecord getFirstRecord() {
+        return regexList.get(0);
     }
 
     @Override
@@ -47,6 +64,17 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
                 AbstractGunBaseLogUtil.error(e);
             }
             regexList.parallelStream().forEach(reg -> reg.nextAdd(g, address));
+        }
+    }
+
+    /**
+     * signal instance mode
+     */
+    public static class Instance {
+        private static GunRicCenterStdRecordManage hinstance = new GunRicCenterStdRecordManage();
+
+        public static GunRicCenterStdRecordManage getHinstance() {
+            return hinstance;
         }
     }
 

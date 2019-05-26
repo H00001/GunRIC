@@ -1,5 +1,7 @@
 package top.gunplan.ric.center;
 
+import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
+
 import java.net.InetSocketAddress;
 
 /**
@@ -22,8 +24,15 @@ public interface GunRicCenterRecordManage {
      *
      * @param registerRegex GunRicCenterRecord
      */
-    void register(GunRicCenterRecord registerRegex);
+    void register(AbstractGunRicProxyRecord registerRegex);
 
+    /**
+     * register by loop way
+     *
+     * @param record AbstractGunRicProxyRecord
+     */
+
+    void registerLoop(AbstractGunRicProxyRecord record);
     /**
      * registerFirst first execute to register
      * @param registerRegex GunRicCenterRecord
@@ -38,4 +47,8 @@ public interface GunRicCenterRecordManage {
      * @param address InetSocketAddress
      */
     void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final InetSocketAddress address);
+
+
+    AbstractGunRicProxyRecord getFirstRecord();
+
 }

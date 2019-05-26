@@ -15,7 +15,8 @@ import java.util.List;
 public class GunRicCenterNewGetEvent implements GunRicCommonRealDeal {
     @Override
     public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol protocol) {
-        List<InetSocketAddress> addresses = GunRicInterfaceBuffer.intermapping.get(new GunRicInterfaceBuffer.GunRicCdtInterface((AbstractCenterHelperProtocol) protocol));
+        GunRicInterfaceBuffer.GunRicCdtInterface gunRicCdtInterface = new GunRicInterfaceBuffer.GunRicCdtInterface((AbstractCenterHelperProtocol) protocol);
+        List<InetSocketAddress> addresses = GunRicCenterStdRecordManage.Instance.getHinstance().getFirstRecord().getAddress(gunRicCdtInterface);
         GunRicRespAddressProtocol ricRespAddressProtocol = new GunRicRespAddressProtocol();
         ricRespAddressProtocol.pushAddressList(addresses);
         return ricRespAddressProtocol;

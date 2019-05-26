@@ -10,17 +10,16 @@ import java.net.InetSocketAddress;
  * @author dosdrtt
  */
 public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal {
-    private GunRicCenterRecordManage manage = new GunRicCenterStdRecordManage();
+    private GunRicCenterRecordManage manage = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     GunRicCenterNewRegisterEvent() {
         this.init();
     }
 
     private void init() {
-        manage.registerFirst(new GunRicCenterPathRecord());
-        manage.register(new GunRicCenterInlineBufferRecord());
-        manage.register(new GunRicCenterFileRecord());
-        manage.register(new GunRicCenterRedisRecord());
+        manage.registerFirst(new GunRicCenterPathRecord(null));
+        AbstractGunRicProxyRecord r2 = new GunRicCenterFileRecord(new GunRicCenterRedisRecord(new GunRicCenterInlineBufferRecord(null)));
+        manage.registerLoop(r2);
     }
 
     @Override

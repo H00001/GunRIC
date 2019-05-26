@@ -17,9 +17,9 @@ import java.util.List;
 public class GunRicCenterNewHandle implements GunNettyHandle {
     private final GunRicCenterStdHandle exec = new GunRicCenterStdHandle();
 
-    {
-        exec.init();
-    }
+//    {
+//        exec.init();
+//    }
 
     @Deprecated
     @Override

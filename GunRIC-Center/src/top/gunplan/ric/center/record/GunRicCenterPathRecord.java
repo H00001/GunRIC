@@ -7,6 +7,7 @@ import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 
 import java.io.File;
 import java.net.InetSocketAddress;
+import java.util.List;
 
 /**
  * @author dosdrtt
@@ -15,6 +16,10 @@ import java.net.InetSocketAddress;
 public class GunRicCenterPathRecord implements GunRicCenterRecord {
     private final static String L = "/";
     private final static String DT = ".";
+
+    public GunRicCenterPathRecord(GunRicCenterRecord lastRecord) {
+
+    }
 
     @Override
     public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
@@ -26,4 +31,6 @@ public class GunRicCenterPathRecord implements GunRicCenterRecord {
     public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, InetSocketAddress address) {
 
     }
+
+
 }
