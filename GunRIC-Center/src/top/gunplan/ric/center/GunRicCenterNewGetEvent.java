@@ -13,10 +13,11 @@ public class GunRicCenterNewGetEvent implements GunRicCommonRealDeal {
 
     @Override
     public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol protocol) {
-        GunRicInterfaceBuffer.GunRicCdtInterface gunRicCdtInterface = new GunRicInterfaceBuffer.GunRicCdtInterface((AbstractCenterHelperProtocol) protocol);
-        List<GunAddressItem> addresses = hinstance.getFirstRecord().getAddress(gunRicCdtInterface);
-        GunRicRespAddressProtocol ricRespAddressProtocol = new GunRicRespAddressProtocol();
-        ricRespAddressProtocol.pushAddressList(addresses);
-        return ricRespAddressProtocol;
+        GunRicInterfaceBuffer.GunRicCdtInterface g = new GunRicInterfaceBuffer.
+                GunRicCdtInterface((AbstractCenterHelperProtocol) protocol);
+        List<GunAddressItem> s1 = hinstance.getFirstRecord().getAddress(g);
+        GunRicRespAddressProtocol r = new GunRicRespAddressProtocol();
+        r.pushAddressList(s1);
+        return r;
     }
 }

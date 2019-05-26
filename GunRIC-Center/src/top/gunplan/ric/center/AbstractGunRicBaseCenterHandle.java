@@ -31,6 +31,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
 
     /**
      * dealEvent
+     *
      * @param protocol dealEvent
      * @return GunNetOutputInterface to transfer
      */
@@ -46,7 +47,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
         } else if (var1 instanceof GunRicHelloProtocol) {
             return dealEvent((GunRicHelloProtocol) var1);
         } else {
-            AbstractGunBaseLogUtil.error("not known packet", getClass().getSimpleName());
+            AbstractGunBaseLogUtil.error("not known packet" + var1.getClass().getName(), getClass().getSimpleName());
         }
         return null;
     }
