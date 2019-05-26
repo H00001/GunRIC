@@ -2,6 +2,7 @@ package top.gunplan.ric.provider;
 
 
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
+import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.ric.protocol.util.GunClassPathUtil;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
@@ -70,8 +71,8 @@ class GunRicPublishManage {
 
     private boolean publishRegister(GunRicProvideProperty ppt, OutputStream os) {
         GunRicRegisterProtocol protocol = new GunRicRegisterProtocol();
-        protocol.setPort(ppt.getServerLocalPort());
-        protocol.setIp(ppt.getPublishLocalIp());
+        protocol.setItem(new GunRicRespAddressProtocol.AddressItem(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
+
         Class<?> clazz;
         try {
             while ((clazz = getNextClass()) != null) {

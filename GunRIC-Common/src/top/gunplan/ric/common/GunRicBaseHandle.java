@@ -16,6 +16,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     /**
      * dealEvent
      * hello message send auto
+     *
      * @param protocol GunRicHelloProtocol
      * @return AbstractGunRicProtocol
      */
@@ -32,6 +33,8 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     }
 
     /**
+     * dealMuchEvent
+     *
      * @param dealhandle hanle to real deal event
      * @param protocol   prorocol
      * @return GunNetOutputInterface

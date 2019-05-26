@@ -76,9 +76,9 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
 
     public static class AddressItem implements GunNetOutputInterface, GunNetInputInterface, GunRicOutputHelper {
 
-        static final int FLAG_LEN = 8;
-        static final int ADD_LEN = 8;
-        static final int PORT_LEN = 2;
+        private static final int FLAG_LEN = 8;
+        private static final int ADD_LEN = 8;
+        private static final int PORT_LEN = 2;
         static final int NEED_SPACE = FLAG_LEN + ADD_LEN + PORT_LEN;
         private byte[] flag = new byte[FLAG_LEN];
         InetSocketAddress address;
@@ -88,8 +88,11 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         }
 
         public AddressItem(InetSocketAddress address) {
-
             this.address = address;
+        }
+
+        public AddressItem(String address, int port) {
+            this(new InetSocketAddress(address, port));
         }
 
         private void readAddress(GunBytesUtil.GunReadByteStream stream) {

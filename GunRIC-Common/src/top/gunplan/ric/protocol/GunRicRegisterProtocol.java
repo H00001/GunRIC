@@ -10,76 +10,58 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
 
-    public static final int ADDRESS_LEN = 4;
-    private String ip;
-
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-
-    private int port;
-
+    private GunRicRespAddressProtocol.AddressItem item = new GunRicRespAddressProtocol.AddressItem();
 
     public GunRicRegisterProtocol() {
         this.type = RicProtocolType.REGISTER;
+        this.code = RicProtocolCode.SUCCEED;
     }
 
-    public GunRicRegisterProtocol(int port) {
-        this.port = port;
+    public void setItem(GunRicRespAddressProtocol.AddressItem item) {
+        this.item = item;
     }
 
+    public String getIp() {
+        return item.getAddress();
+    }
+
+    public int getPort() {
+        return item.getPort();
+    }
 
     @Override
     public byte[] serialize() {
-        int len = 3 + CODE_LEN + ADDRESS_LEN + TYPE_LEN + SERIALNUM_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
+        int len = 3 + CODE_LEN + GunRicRespAddressProtocol.AddressItem.NEED_SPACE + TYPE_LEN + SERIALNUM_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteStream util = new GunBytesUtil.GunWriteByteStream(save);
-        util.write(RicProtocolType.REGISTER.value);
-        util.write(port);
-        util.write(getSerialnumber());
-        writeIpAddress4(util);
+        publicSet(util);
+        util.write(item.serialize());
         super.stdHeadWrite(util);
         writeParamTypes(util);
         util.write(END_FLAG);
         return save;
     }
 
-    private void writeIpAddress4(GunBytesUtil.GunWriteByteStream util) {
-        String[] fg = this.ip.split("\\.");
-        for (int i = 0; i < 4; i++) {
-            util.writeByte((byte) Integer.parseInt(fg[i]));
-        }
-    }
+//    private void writeIpAddress4(GunBytesUtil.GunWriteByteStream util) {
+//        String[] fg = this.ip.split("\\.");
+//        for (int i = 0; i < 4; i++) {
+//            util.writeByte((byte) Integer.parseInt(fg[i]));
+//        }
+//    }
 
-    private void readIpAddress4(GunBytesUtil.GunReadByteStream util) {
-        short f1 = util.readUByte();
-        short f2 = util.readUByte();
-        short f3 = util.readUByte();
-        short f4 = util.readUByte();
-        this.ip = (f1) + "." + f2 + "." + f3 + "." + f4;
-    }
+//    private void readIpAddress4(GunBytesUtil.GunReadByteStream util) {
+//        short f1 = util.readUByte();
+//        short f2 = util.readUByte();
+//        short f3 = util.readUByte();
+//        short f4 = util.readUByte();
+//        this.ip = (f1) + "." + f2 + "." + f3 + "." + f4;
+//    }
 
 
     @Override
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
-        this.type = RicProtocolType.valuefrom(util.readInt());
-        this.port = util.readInt();
-        this.setSerialnumber(util.readInt());
-        readIpAddress4(util);
+        publicUnSet(util);
+        item.unSerialize(util);
         super.stdHeadAnaly(util);
         readParamType(util);
         return checkEnd(util) && checkNext(util);

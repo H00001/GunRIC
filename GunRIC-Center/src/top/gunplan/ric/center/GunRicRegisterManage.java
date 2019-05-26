@@ -61,7 +61,7 @@ public final class GunRicRegisterManage {
                 String addr;
 
                 for (; (addr = stream.readLine()) != null; ) {
-                    addresses.add(new GunRicRespAddressProtocol.AddressItem(new InetSocketAddress(addr.split(property.getDivideflag())[0], Integer.parseInt(addr.split(property.getDivideflag())[1]))));
+                    addresses.add(new GunRicRespAddressProtocol.AddressItem(addr.split(property.getDivideflag())[0], Integer.parseInt(addr.split(property.getDivideflag())[1])));
                 }
 
                 GunRicInterfaceBuffer.GunRicCdtInterface key = new GunRicInterfaceBuffer.GunRicCdtInterface(type, interfacename, methodname);

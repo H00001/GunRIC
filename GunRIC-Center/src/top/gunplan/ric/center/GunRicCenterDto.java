@@ -21,6 +21,7 @@ public final class GunRicCenterDto implements GunNetInputInterface, GunNetOutput
     GunRicCenterDto(InetSocketAddress address, List<GunRicRegisterProtocol> obj) {
         this.address = address;
         this.obji = obj;
+
     }
 
     public GunNetOutputInterface[] getObjo() {

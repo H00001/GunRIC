@@ -50,6 +50,10 @@ public interface GunRicCenterRecordManage {
     void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final GunRicRespAddressProtocol.AddressItem address);
 
 
+    /**
+     * @return AbstractGunRicProxyRecord
+     * @apiNote p
+     */
     AbstractGunRicProxyRecord getFirstRecord();
 
 }
