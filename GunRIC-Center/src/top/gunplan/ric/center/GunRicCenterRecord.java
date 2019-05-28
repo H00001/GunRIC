@@ -1,12 +1,8 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.netty.GunHandle;
+import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.GunAddressItem;
-import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
-
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.util.List;
 
 /**
  * GunRicCenterRecord
@@ -21,7 +17,7 @@ public interface GunRicCenterRecord extends GunHandle {
      * @param address address info
      */
 
-    void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address);
+    void firstAdd(GunRicCdtInterface g, GunAddressItem address);
 
     /**
      * when record next request
@@ -29,7 +25,7 @@ public interface GunRicCenterRecord extends GunHandle {
      * @param g       ric record from information
      * @param address address info
      */
-    void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address);
+    void nextAdd(GunRicCdtInterface g, GunAddressItem address);
 
 
 }

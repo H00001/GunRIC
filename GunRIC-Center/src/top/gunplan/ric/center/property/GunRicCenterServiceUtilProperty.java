@@ -15,8 +15,7 @@ import top.gunplan.netty.impl.propertys.GunProperty;
 public class GunRicCenterServiceUtilProperty implements GunProperty {
     private String divideflag;
 
-
-    public String getDivideflag() {
+    public String getDivideFlag() {
         return divideflag;
     }
 

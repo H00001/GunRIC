@@ -1,5 +1,6 @@
 package top.gunplan.ric.center;
 
+import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.*;
 
 import java.util.List;
@@ -13,8 +14,7 @@ public class GunRicCenterNewGetEvent implements GunRicCommonRealDeal {
 
     @Override
     public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol protocol) {
-        GunRicInterfaceBuffer.GunRicCdtInterface g = new GunRicInterfaceBuffer.
-                GunRicCdtInterface((AbstractCenterHelperProtocol) protocol);
+        GunRicCdtInterface g = new GunRicCdtInterface((AbstractCenterHelperProtocol) protocol);
         List<GunAddressItem> s1 = hinstance.getFirstRecord().getAddress(g);
         GunRicRespAddressProtocol r = new GunRicRespAddressProtocol();
         r.pushAddressList(s1);

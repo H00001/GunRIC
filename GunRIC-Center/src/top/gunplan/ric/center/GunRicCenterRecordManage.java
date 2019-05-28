@@ -2,9 +2,6 @@ package top.gunplan.ric.center;
 
 import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
 import top.gunplan.ric.protocol.GunAddressItem;
-import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
-
-import java.net.InetSocketAddress;
 
 /**
  * this class is used to record manage
@@ -19,7 +16,7 @@ public interface GunRicCenterRecordManage {
      * @param g record object
      * @return is or not
      */
-    boolean isFirst(GunRicInterfaceBuffer.GunRicCdtInterface g);
+    boolean isFirst(GunRicCdtInterface g);
 
     /**
      * register the recorder
@@ -35,8 +32,10 @@ public interface GunRicCenterRecordManage {
      */
 
     void registerLoop(AbstractGunRicProxyRecord record);
+
     /**
      * registerFirst first execute to register
+     *
      * @param registerRegex GunRicCenterRecord
      */
     void registerFirst(GunRicCenterRecord registerRegex);
@@ -48,11 +47,12 @@ public interface GunRicCenterRecordManage {
      * @param g       GunRicInterfaceBuffer.GunRicCdtInterface
      * @param address InetSocketAddress
      */
-    void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final GunAddressItem address);
+    void doRegex(final GunRicCdtInterface g, final GunAddressItem address);
 
 
     /**
      * getFirstRecord
+     *
      * @return AbstractGunRicProxyRecord
      * @apiNote p
      */

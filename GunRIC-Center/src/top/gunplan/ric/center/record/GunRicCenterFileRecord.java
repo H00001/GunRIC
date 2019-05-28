@@ -1,15 +1,14 @@
 package top.gunplan.ric.center.record;
 
+import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
-import top.gunplan.ric.center.GunRicInterfaceBuffer;
+import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.protocol.GunAddressItem;
-import top.gunplan.ric.protocol.GunRicRespAddressProtocol;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
 import java.io.*;
-import java.net.InetSocketAddress;
 import java.util.List;
 
 /**
@@ -27,12 +26,12 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
         super(lastRecord);
     }
 
-    private File initFile(final GunRicInterfaceBuffer.GunRicCdtInterface g) {
-        return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterFaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideflag() + g.getId());
+    private File initFile(final GunRicCdtInterface g) {
+        return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterFaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideFlag() + g.getId());
     }
 
     @Override
-    public void firstAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
+    public void firstAdd(GunRicCdtInterface g, GunAddressItem address) {
         try {
             File recordfile = initFile(g);
             if (!recordfile.exists()) {
@@ -48,7 +47,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void nextAdd(GunRicInterfaceBuffer.GunRicCdtInterface g, GunAddressItem address) {
+    public void nextAdd(GunRicCdtInterface g, GunAddressItem address) {
         try {
             BufferedOutputStream bf;
             bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
@@ -60,17 +59,17 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    List<GunAddressItem> getAddressBase(GunRicInterfaceBuffer.GunRicCdtInterface g) {
+    List<GunAddressItem> getAddressBase(GunRicCdtInterface g) {
         return null;
     }
 
 
     private void writeFileAddress(BufferedOutputStream bf, final GunAddressItem address) throws IOException {
-        bf.write((address.getAddress() + property.getDivideflag() + address.getPort()).getBytes());
+        bf.write((address.getAddress() + property.getDivideFlag() + address.getPort()).getBytes());
         bf.write('\n');
     }
 
-    private void writeFileFirst(GunRicInterfaceBuffer.GunRicCdtInterface g, BufferedOutputStream bf) throws IOException {
+    private void writeFileFirst(GunRicCdtInterface g, BufferedOutputStream bf) throws IOException {
         bf.write(g.getParams().length);
         for (Class<?> aClass : g.getParams()) {
             RicProtocolParamType tp = RicProtocolParamType.valuefrom(aClass);

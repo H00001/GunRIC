@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class GunRicUserHandleProxy implements InvocationHandler {
-    private GunRicUserProperty property = GunRicUserPropertyManageImpl.getProPerty();
+    private GunRicUserProperty property = GunRicUserPropertyManageImpl.getProperty();
 
     private List<GunAddressItem> getAddress(Method method) throws IOException {
         List<GunAddressItem> addressItems;

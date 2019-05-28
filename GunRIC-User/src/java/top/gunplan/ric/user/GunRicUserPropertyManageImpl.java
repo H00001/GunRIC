@@ -36,7 +36,7 @@ public final class GunRicUserPropertyManageImpl {
      *
      * @return ture or false to get field
      */
-    public static boolean initProperty() {
+    static boolean initProperty() {
         try {
             STRING_GUN_PROPERTY_HASH_MAP.put("ric-user", new GunRicUserProperty());
             String[] propertys = new String(Files.readAllBytes(Paths.get(Objects.
@@ -51,7 +51,7 @@ public final class GunRicUserPropertyManageImpl {
         return true;
     }
 
-    public static GunRicUserProperty getProPerty() {
+    public static GunRicUserProperty getProperty() {
         return (GunRicUserProperty) STRING_GUN_PROPERTY_HASH_MAP.get("ric-user");
     }
 

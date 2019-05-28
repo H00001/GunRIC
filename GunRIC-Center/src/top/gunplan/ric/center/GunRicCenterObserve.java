@@ -23,7 +23,7 @@ public class GunRicCenterObserve extends GunNettyDefaultObserveImpl {
             return GunRicRegisterManage.loadRegister();
         } catch (Exception e) {
             AbstractGunBaseLogUtil.error(e);
-            return false;
+            return true;
         }
     }
 

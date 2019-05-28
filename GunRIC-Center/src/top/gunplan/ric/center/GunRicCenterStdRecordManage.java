@@ -4,8 +4,10 @@ package top.gunplan.ric.center;
 import top.gunplan.ric.center.anno.GunRicRegisterOrder;
 import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
 import top.gunplan.ric.center.record.GunRicCenterRecordFailException;
+import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.GunAddressItem;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -26,6 +28,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     public void register(AbstractGunRicProxyRecord registerRegex) {
         regexList.add(registerRegex);
     }
+
     private List<GunRicCenterRecord> firstList = new LinkedList<>();
 
     @Override
@@ -52,7 +55,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
-    public void doRegex(final GunRicInterfaceBuffer.GunRicCdtInterface g, final GunAddressItem address) {
+    public void doRegex(final GunRicCdtInterface g, final GunAddressItem address) {
         if (isFirst(g)) {
             firstList.forEach(reg -> reg.firstAdd(g, address));
             regexList.parallelStream().forEach(reg -> reg.firstAdd(g, address));
@@ -78,8 +81,8 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
-    public boolean isFirst(GunRicInterfaceBuffer.GunRicCdtInterface g) {
-        return GunRicInterfaceBuffer.intermapping.get(g) == null;
+    public boolean isFirst(GunRicCdtInterface g) {
+        return GunRicInterfaceBuffer.newInstance().get(g) == null;
     }
 
 
