@@ -33,7 +33,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         return checkEnd(util);
     }
 
-    public void setParamLen(int len) {
+    private void setParamLen(int len) {
         paramlen = len;
         helpers = new ParamHelper[len];
     }

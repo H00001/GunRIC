@@ -2,6 +2,8 @@ package top.gunplan.ric.protocol;
 
 import top.gunplan.utils.GunBytesUtil;
 
+import java.lang.reflect.Method;
+
 /**
  * @author dosdrtt
  */
@@ -13,6 +15,10 @@ public class GunRicGetAddressProtocol extends AbstractCenterHelperProtocol imple
         //    this.setPort(0x0);
     }
 
+    public GunRicGetAddressProtocol(Method method) {
+        this();
+        setInameMnameAndParam(method);
+    }
 
     @Override
     public byte[] serialize() {

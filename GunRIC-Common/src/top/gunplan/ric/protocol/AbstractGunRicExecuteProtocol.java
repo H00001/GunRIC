@@ -34,6 +34,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
         this.setInterfaceName(method.getDeclaringClass().getName());
     }
 
+
     public void setMethodName(String methodName) {
         this.methodName = methodName;
     }

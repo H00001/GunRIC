@@ -10,7 +10,7 @@ import java.util.List;
  * @author dosdrtt
  */
 public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunRicCommonBuffered<T> {
-    private HashMap<T, List<GunAddressItem>> intermapping = new HashMap<>();
+    private HashMap<T, List<GunAddressItem>> mapping = new HashMap<>();
 
 
     private GunRicInterfaceBuffer() {
@@ -24,18 +24,18 @@ public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunR
 
     @Override
     public List<GunAddressItem> get(T key) {
-        return intermapping.get(key);
+        return mapping.get(key);
     }
 
     @Override
     public void clear() {
-        this.intermapping.clear();
+        this.mapping.clear();
     }
 
 
     @Override
     public void push(T key, List<GunAddressItem> addresses) {
-        intermapping.put(key, addresses);
+        mapping.put(key, addresses);
     }
 
 

@@ -1,7 +1,10 @@
 package top.gunplan.ric.user;
 
 
+import top.gunplan.ric.common.GunRicCommonBuffered;
+import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.*;
+import top.gunplan.ric.user.util.GunRicBufferRead;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +22,8 @@ import java.util.List;
 
 public class GunRicUserHandleProxy implements InvocationHandler {
     private GunRicUserProperty property = GunRicUserPropertyManageImpl.getProperty();
+
+    private GunRicCommonBuffered<GunRicUserClassRec> buffer = GunRicInterfaceBuffer.newInstance();
 
     private List<GunAddressItem> getAddress(Method method) throws IOException {
         List<GunAddressItem> addressItems;
@@ -69,18 +74,11 @@ public class GunRicUserHandleProxy implements InvocationHandler {
 
     private List<GunAddressItem> sendTOCenterToFind(Method method) throws IOException {
         Socket so = GunRicUserConncetionFactory.newSocket(property.getAddress()[0]);
-        GunRicGetAddressProtocol proctol = new GunRicGetAddressProtocol();
-        proctol.setInameMname(method);
-        proctol.pushParamTypes(method.getParameterTypes());
-        so.getOutputStream().write(proctol.serialize());
-        byte[] buffer = new byte[1024];
-        int len = so.getInputStream().read(buffer);
-        so.close();
-        byte[] b1 = new byte[len];
-        System.arraycopy(buffer, 0, b1, 0, len);
+        so.getOutputStream().write(new GunRicGetAddressProtocol(method).serialize());
+        byte[] pt = GunRicBufferRead.bufferRead(so.getInputStream());
         GunRicRespAddressProtocol protocol = new GunRicRespAddressProtocol();
-        protocol.unSerialize(b1);
-        GunRicUserRemoteAddressManage.mmap.put(method.getDeclaringClass().getName(), protocol.getAddressItems());
+        protocol.unSerialize(pt);
+        this.buffer.push(new GunRicUserClassRec(method.getDeclaringClass()), protocol.getAddressItems());
         return protocol.getAddressItems();
     }
 }

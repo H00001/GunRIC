@@ -2,6 +2,8 @@ package top.gunplan.ric.protocol;
 
 import top.gunplan.utils.GunBytesUtil;
 
+import java.lang.reflect.Method;
+
 /**
  * AbstractCenterHelperProtocol
  *
@@ -49,6 +51,12 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
         types = null;
     }
 
+
+    public void setInameMnameAndParam(Method method) {
+        this.setInameMname(method);
+        this.pushParamTypes(method.getParameterTypes());
+
+    }
     void readParamType(GunBytesUtil.GunReadByteStream util) {
         this.paramcount = util.readByte();
         if (this.paramcount != 0) {
