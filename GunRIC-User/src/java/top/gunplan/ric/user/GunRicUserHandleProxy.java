@@ -9,7 +9,6 @@ import top.gunplan.ric.user.util.GunRicBufferRead;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.List;
@@ -20,12 +19,13 @@ import java.util.List;
  * @since 0.0.0.1
  */
 
-public class GunRicUserHandleProxy implements InvocationHandler {
-    private GunRicUserProperty property = GunRicUserPropertyManageImpl.getProperty();
+public class GunRicUserHandleProxy extends AbstractGunRicUserHandleProxy {
+
 
     private GunRicCommonBuffered<GunRicUserClassRec> buffer = GunRicInterfaceBuffer.newInstance();
 
-    private List<GunAddressItem> getAddress(Method method) throws IOException {
+    @Override
+    public List<GunAddressItem> getAddress(Method method) throws IOException {
         List<GunAddressItem> addressItems;
         if ((addressItems = GunRicUserRemoteAddressManage.mmap.get(method.getDeclaringClass().getName())) == null) {
             addressItems = sendTOCenterToFind(method);
@@ -33,15 +33,9 @@ public class GunRicUserHandleProxy implements InvocationHandler {
         return addressItems;
     }
 
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        List<GunAddressItem> addressItems = getAddress(method);
-        Socket ss = GunRicUserConnectionFactory.newSocket(addressItems.get(0).getAddress(), addressItems.get(0).getPort());
-        sendMessage(method, args, ss.getOutputStream());
-        return receiveMessage(ss.getInputStream(), 0);
-    }
 
-    private Object receiveMessage(InputStream in, long sernum) throws IOException {
+    @Override
+    public Object receiveMessage(InputStream in, int sernum) throws IOException {
         byte[] pt = GunRicBufferRead.bufferRead(in);
         GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicTypeDividePacketManage.findPackage(pt);
         output.unSerialize(pt);
@@ -55,7 +49,8 @@ public class GunRicUserHandleProxy implements InvocationHandler {
         return output.getReturnValue().obj;
     }
 
-    private void sendMessage(Method method, Object[] args, OutputStream out) throws IOException {
+    @Override
+    public void sendMessage(Method method, Object[] args, OutputStream out) throws IOException {
         GunRicInputProtocol input = new GunRicInputProtocol();
         input.setSerialnumber(0);
         input.setInameMname(method);
