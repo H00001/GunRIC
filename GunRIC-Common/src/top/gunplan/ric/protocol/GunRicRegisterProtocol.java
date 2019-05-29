@@ -31,7 +31,7 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 3 + CODE_LEN + GunAddressItem.NEED_SPACE + TYPE_LEN + SERIALNUM_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
+        int len = 3 + CODE_LEN + GunAddressItem.NEED_SPACE + TYPE_LEN + SERIALIZE_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteStream util = new GunBytesUtil.GunWriteByteStream(save);
         publicSet(util);

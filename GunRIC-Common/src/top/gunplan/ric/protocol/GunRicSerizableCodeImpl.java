@@ -4,6 +4,7 @@ package top.gunplan.ric.protocol;
  * std create serizabel code
  */
 class GunRicSerizableCodeImpl implements SerizableCode {
+
     @Override
     public int getSerizNum32() {
         return (int) getSerizNum64();

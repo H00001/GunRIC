@@ -34,7 +34,7 @@ public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol impleme
 
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
-        byte[] sv = new byte[TYPE_LEN + CODE_LEN + SERIALNUM_LEN + END_FLAG.length];
+        byte[] sv = new byte[TYPE_LEN + CODE_LEN + SERIALIZE_LEN + END_FLAG.length];
         return new GunBytesUtil.GunWriteByteStream(sv);
     }
 

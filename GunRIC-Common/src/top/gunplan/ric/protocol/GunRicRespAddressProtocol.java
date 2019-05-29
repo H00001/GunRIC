@@ -56,7 +56,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
         int lenneed = addressItems.size() * GunAddressItem.NEED_SPACE;
-        lenneed += TYPE_LEN + CODE_LEN + END_FLAG.length + SERIALNUM_LEN + 1;
+        lenneed += TYPE_LEN + CODE_LEN + END_FLAG.length + SERIALIZE_LEN + 1;
         return new GunBytesUtil.GunWriteByteStream(new byte[lenneed]);
     }
 

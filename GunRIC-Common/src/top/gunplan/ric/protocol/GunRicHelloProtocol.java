@@ -25,7 +25,7 @@ public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRi
 
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
-        byte[] seriz = new byte[CODE_LEN + SERIALNUM_LEN + TYPE_LEN + END_FLAG.length];
+        byte[] seriz = new byte[CODE_LEN + SERIALIZE_LEN + TYPE_LEN + END_FLAG.length];
         return new GunBytesUtil.GunWriteByteStream(seriz);
     }
 

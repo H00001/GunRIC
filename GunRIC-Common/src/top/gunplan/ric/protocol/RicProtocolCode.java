@@ -25,6 +25,6 @@ public enum RicProtocolCode {
                 return tp;
             }
         }
-        return null;
+        return NONE;
     }
 }

@@ -5,7 +5,7 @@ import top.gunplan.utils.GunBytesUtil;
 /**
  * @author dosdrtt
  */
-public interface GunDubboNxInput {
+public interface GunRicNxInput {
     /**
      * unSerialize
      *

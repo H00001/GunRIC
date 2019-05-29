@@ -17,7 +17,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicInputProtocol protocol) {
         AbstractGunBaseLogUtil.error("error protocol is GunRicInputProtocol", getClass().getSimpleName());
-        throw new GunInvidaProtocolExection(protocol.getClass().getName(), "GunRIC-Center");
+        throw new GunInvidaProtocolException(protocol.getClass().getName(), "GunRIC-Center");
     }
 
     /**

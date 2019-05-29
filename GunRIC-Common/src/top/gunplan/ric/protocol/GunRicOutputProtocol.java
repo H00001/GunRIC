@@ -36,7 +36,7 @@ public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implemen
 
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
-        int len = TYPE_LEN + SERIALNUM_LEN + CODE_LEN + 1 + END_FLAG.length;
+        int len = TYPE_LEN + SERIALIZE_LEN + CODE_LEN + 1 + END_FLAG.length;
         len = addLenByParam(len, returnValue.obj);
         byte[] serize = new byte[len];
         return new GunBytesUtil.GunWriteByteStream(serize);

@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  * @version 0.0.0.0
  * @date
  */
-public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetInputInterface, GunNetOutputInterface {
+public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInputInterface, GunNetOutputInterface {
 
     private SerizableCode serizable = new GunRicSerizableCodeImpl();
 
@@ -33,15 +33,7 @@ public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetI
 
     RicProtocolType type;
 
-    boolean checkNext(GunBytesUtil.GunReadByteStream util) {
-        boolean thTrueSeria = true;
-        if (util.getLenSum() - util.getNowflag() > 3) {
-            AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(util);
-            thTrueSeria = protocol.unSerialize(util);
-            setNext(protocol);
-        }
-        return thTrueSeria;
-    }
+    final static byte SERIALIZE_LEN = 2;
     RicProtocolCode code;
     /**
      * chain style to divide pacjet
@@ -72,7 +64,16 @@ public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetI
 
     final static byte TYPE_LEN = 2;
     final static byte CODE_LEN = 2;
-    final static byte SERIALNUM_LEN = 2;
+
+    boolean checkNext(GunBytesUtil.GunReadByteStream util) {
+        boolean thTrueSeria = true;
+        if (util.getLenSum() - util.getNowflag() > 0) {
+            AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(util);
+            thTrueSeria = protocol.unSerialize(util);
+            setNext(protocol);
+        }
+        return thTrueSeria;
+    }
 
 
     public RicProtocolType getType() {
@@ -105,15 +106,15 @@ public abstract class AbstractGunRicProtocol implements GunDubboNxInput, GunNetI
         util.write(serialnumber);
     }
 
-    boolean checkEnd(GunBytesUtil.GunReadByteStream unserizutil) {
-        byte[] end = unserizutil.readByte(END_FLAG.length);
+    boolean checkEnd(GunBytesUtil.GunReadByteStream stream) {
+        byte[] end = stream.readByte(END_FLAG.length);
         return GunBytesUtil.compareBytesFromEnd(end, END_FLAG);
     }
 
-    void publicUnSet(GunBytesUtil.GunReadByteStream unserizutil) {
-        this.type = RicProtocolType.valuefrom(unserizutil.readInt());
-        this.code = RicProtocolCode.valuefrom(unserizutil.readInt());
-        this.serialnumber = unserizutil.readInt();
+    void publicUnSet(GunBytesUtil.GunReadByteStream stream) {
+        this.type = RicProtocolType.valuefrom(stream.readInt());
+        this.code = RicProtocolCode.valuefrom(stream.readInt());
+        this.serialnumber = stream.readInt();
     }
 
     static class Helper {
