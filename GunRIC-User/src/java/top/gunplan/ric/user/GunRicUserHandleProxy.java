@@ -36,24 +36,17 @@ public class GunRicUserHandleProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         List<GunAddressItem> addressItems = getAddress(method);
-        Socket ss = GunRicUserConncetionFactory.newSocket(addressItems.get(0).getAddress(), addressItems.get(0).getPort());
+        Socket ss = GunRicUserConnectionFactory.newSocket(addressItems.get(0).getAddress(), addressItems.get(0).getPort());
         sendMessage(method, args, ss.getOutputStream());
-        Object result = receiveMessage(ss.getInputStream(), 0);
-        ss.close();
-        return result;
-
+        return receiveMessage(ss.getInputStream(), 0);
     }
 
     private Object receiveMessage(InputStream in, long sernum) throws IOException {
-        byte[] b = new byte[2014];
-        int len = in.read(b);
-        byte[] newb = new byte[len];
-        System.arraycopy(b, 0, newb, 0, len);
-        GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicTypeDividePacketManage.findPackage(newb);
-        output.unSerialize(newb);
+        byte[] pt = GunRicBufferRead.bufferRead(in);
+        GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicTypeDividePacketManage.findPackage(pt);
+        output.unSerialize(pt);
         if (output.getCode() == RicProtocolCode.FAIL) {
-            System.out.println(output.getReturnValue().obj);
-            return null;
+            throw new GunRicUserReceiveException(output.getReturnValue().obj.toString());
         } else if (output.getCode() == RicProtocolCode.SUCCEED) {
             if (output.getSerialnumber() == sernum) {
                 return output.getReturnValue().obj;
@@ -73,7 +66,7 @@ public class GunRicUserHandleProxy implements InvocationHandler {
     }
 
     private List<GunAddressItem> sendTOCenterToFind(Method method) throws IOException {
-        Socket so = GunRicUserConncetionFactory.newSocket(property.getAddress()[0]);
+        Socket so = GunRicUserConnectionFactory.newSocket(property.getAddress()[0]);
         so.getOutputStream().write(new GunRicGetAddressProtocol(method).serialize());
         byte[] pt = GunRicBufferRead.bufferRead(so.getInputStream());
         GunRicRespAddressProtocol protocol = new GunRicRespAddressProtocol();
