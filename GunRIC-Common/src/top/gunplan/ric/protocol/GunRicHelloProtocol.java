@@ -11,9 +11,7 @@ public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRi
         this.code = type ? RicProtocolCode.HELLO_REQ : RicProtocolCode.HELLO_RES;
     }
 
-    GunRicHelloProtocol() {
 
-    }
 
     @Override
     public byte[] serialize() {

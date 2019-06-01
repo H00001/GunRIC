@@ -3,8 +3,8 @@ package top.gunplan.ric.center.record;
 import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
-import top.gunplan.ric.common.GunRicInterfaceBuffer;
-import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
+
+import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.protocol.GunAddressItem;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 

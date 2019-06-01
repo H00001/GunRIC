@@ -1,7 +1,7 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.netty.impl.GunNettyDefaultObserveImpl;
-import top.gunplan.netty.impl.propertys.GunProperty;
+import top.gunplan.netty.impl.propertys.GunNettyCoreProperty;
 import top.gunplan.ric.center.record.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -14,7 +14,7 @@ public class GunRicCenterObserve extends GunNettyDefaultObserveImpl {
     private GunRicCenterRecordManage manage = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     @Override
-    public boolean onBooting(GunProperty gunProperty) {
+    public boolean onBooting(GunNettyCoreProperty gunProperty) {
         super.onBooting(gunProperty);
         manage.registerFirst(new GunRicCenterPathRecord(null));
         AbstractGunRicProxyRecord r2 = new GunRicCenterFileRecord(new GunRicCenterRedisRecord(new GunRicCenterInlineBufferRecord(null)));
@@ -28,7 +28,7 @@ public class GunRicCenterObserve extends GunNettyDefaultObserveImpl {
     }
 
     @Override
-    public void onBooted(GunProperty property) {
+    public void onBooted(GunNettyCoreProperty property) {
         super.onBooted(property);
     }
 }

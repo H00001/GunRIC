@@ -76,7 +76,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     }
 
 
-    public boolean pushParam(Object obj) {
+    private boolean pushParam(Object obj) {
         otherCount += 1;
         try {
             otherCount = addLenByParam(otherCount, obj);

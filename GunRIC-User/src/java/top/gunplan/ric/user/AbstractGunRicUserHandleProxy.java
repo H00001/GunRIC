@@ -14,21 +14,17 @@ import java.util.List;
  * @author dosdrtt
  */
 public abstract class AbstractGunRicUserHandleProxy implements InvocationHandler {
-    GunRicUserProperty property = GunRicUserPropertyManageImpl.getProperty();
-
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        List<GunAddressItem> addressItems = getAddress(method);
-        Socket ss = GunRicUserConnectionFactory.newSocket(addressItems.get(0).getAddress(), addressItems.get(0).getPort());
-        sendMessage(method, args, ss.getOutputStream());
-        return receiveMessage(ss.getInputStream(), 0);
+        return sendMessage(method, args);
     }
 
-    abstract List<GunAddressItem> getAddress(Method method) throws IOException;
-
-
-    abstract Object receiveMessage(InputStream inputStream, int i) throws IOException;
-
-    abstract void sendMessage(Method method, Object[] args, OutputStream outputStream) throws IOException;
+    /**
+     * @param method method
+     * @param args   paramteers
+     * @return result
+     * @throws IOException
+     */
+    abstract Object sendMessage(Method method, Object[] args) throws IOException;
 
 }

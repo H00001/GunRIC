@@ -27,11 +27,11 @@ public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implemen
 
     @Override
     public byte[] serialize() {
-        GunBytesUtil.GunWriteByteStream serizUtil = createSpace();
-        publicSet(serizUtil);
-        writeOnceParam(serizUtil, returnValue.obj);
-        serizUtil.write(END_FLAG);
-        return serizUtil.getInput();
+        GunBytesUtil.GunWriteByteStream stream = createSpace();
+        publicSet(stream);
+        writeOnceParam(stream, returnValue.obj);
+        stream.write(END_FLAG);
+        return stream.getInput();
     }
 
     @Override

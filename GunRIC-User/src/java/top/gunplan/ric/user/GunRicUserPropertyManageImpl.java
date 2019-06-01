@@ -3,7 +3,8 @@ package top.gunplan.ric.user;
 
 import top.gunplan.netty.GunException;
 
-import top.gunplan.netty.impl.propertys.GunProperty;
+
+import top.gunplan.netty.GunProperty;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.lang.reflect.Field;
@@ -40,8 +41,7 @@ public final class GunRicUserPropertyManageImpl {
         try {
             STRING_GUN_PROPERTY_HASH_MAP.put("ric-user", new GunRicUserProperty());
             String[] propertys = new String(Files.readAllBytes(Paths.get(Objects.
-                    requireNonNull(top.gunplan.netty.common.GunNettyPropertyManagerImpl.class.getClassLoader().
-                            getResource("GunRic-User.conf")).toURI()))).
+                    requireNonNull(GunRicUserPropertyManageImpl.class.getResource("GunRic-User.conf")).toURI()))).
                     split("\n");
             realAnalyPropertys(propertys);
         } catch (Exception e) {

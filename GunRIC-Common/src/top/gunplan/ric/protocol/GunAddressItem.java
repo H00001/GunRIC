@@ -45,6 +45,11 @@ public class GunAddressItem implements GunNetOutputInterface, GunNetInputInterfa
 
     }
 
+
+    public InetSocketAddress getInet() {
+        return this.address;
+    }
+
     public int getPort() {
         return this.address.getPort();
     }

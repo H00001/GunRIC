@@ -1,8 +1,8 @@
 package top.gunplan.ric.provider;
 
-import top.gunplan.netty.common.GunNettyPropertyManagerImpl;
+import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.impl.GunNettyDefaultObserveImpl;
-import top.gunplan.netty.impl.propertys.GunProperty;
+import top.gunplan.netty.impl.propertys.GunNettyCoreProperty;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -11,7 +11,7 @@ import top.gunplan.utils.AbstractGunBaseLogUtil;
  */
 public class GunRicProviderObserve extends GunNettyDefaultObserveImpl {
     @Override
-    public boolean onBooting(GunProperty gunProperty) {
+    public boolean onBooting(GunNettyCoreProperty gunProperty) {
         try {
             GunRicPublishManage manage = new GunRicPublishManage(GunNettyPropertyManagerImpl.getProperty(GunRicProvideProperty.class));
             return manage.publishInterface();

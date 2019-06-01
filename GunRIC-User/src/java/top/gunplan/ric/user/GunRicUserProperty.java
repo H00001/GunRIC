@@ -1,6 +1,7 @@
 package top.gunplan.ric.user;
 
-import top.gunplan.netty.impl.propertys.GunProperty;
+
+import top.gunplan.netty.GunProperty;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.net.InetSocketAddress;
@@ -9,7 +10,7 @@ import java.net.InetSocketAddress;
  * @author dosdrtt
  * @nonconcurrent
  * @time 1557658871
- * @see top.gunplan.netty.impl.propertys.GunProperty
+ * @see top.gunplan.netty.GunProperty
  */
 public class GunRicUserProperty implements GunProperty {
     private static final String DIV_FLAG = ",";
