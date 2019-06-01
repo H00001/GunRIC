@@ -37,10 +37,11 @@ public class CenterBoot implements GunBootServerBase {
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>());
+
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServicesProperty());
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServiceUtilProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
-                addFilter(new GunRicStdFilter()).
+                addFilter(new GunRicStdFilter()).addTimer(new GunRicCoreTimer()).
                 setHandle(new GunRicCenterHandle());
 
         return server.sync();
