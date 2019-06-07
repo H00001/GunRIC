@@ -83,9 +83,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @throws GunException kinds of exceptions
      */
     @Override
-    default GunNetOutputInterface dealDataEvent(GunNetInputInterface var1) throws GunException {
-        return null;
-    }
+    GunNetOutputInterface dealDataEvent(GunNetInputInterface var1);
 
     /**
      * deal colse event

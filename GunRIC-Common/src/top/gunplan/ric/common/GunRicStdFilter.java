@@ -6,6 +6,7 @@ import top.gunplan.netty.impl.GunInputFilterChecker;
 import top.gunplan.netty.impl.GunOutputFilterChecker;
 import top.gunplan.ric.protocol.AbstractGunRicProtocol;
 import top.gunplan.ric.protocol.GunRicTypeDividePacketManage;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import static top.gunplan.netty.GunNettyFilter.DealResult.NEXT;
 import static top.gunplan.netty.GunNettyFilter.DealResult.NOTDEALALLNEXT;
@@ -25,6 +26,7 @@ public class GunRicStdFilter implements GunNettyFilter {
             gunInputFilterChecker.setObject(protocol);
             return NEXT;
         } else {
+            AbstractGunBaseLogUtil.urgency("protocol unSerialize fail", getClass().getName());
             return NOTDEALALLNEXT;
         }
     }

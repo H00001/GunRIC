@@ -1,7 +1,9 @@
 package top.gunplan.ric.protocol;
 
 import top.gunplan.ric.anno.FieldMap;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,12 +84,18 @@ public enum RicProtocolParamType {
         static Map<Class<?>, RicProtocolParamType> mmap = new HashMap<>();
 
         static {
-            for (RicProtocolParamType tp : RicProtocolParamType.values()) {
-                FieldMap mp = tp.getClass().getAnnotation(FieldMap.class);
-                if (mp != null) {
-                    mmap.put(mp.mapc(), tp);
+            for (Field fd : RicProtocolParamType.class.getFields()) {
+                FieldMap map = fd.getAnnotation(FieldMap.class);
+                if (map != null) {
+                    try {
+                        mmap.put(map.mapc(), (RicProtocolParamType) fd.get(null));
+                    } catch (IllegalAccessException e) {
+                        AbstractGunBaseLogUtil.urgency(e.getMessage());
+                    }
+                    //  mmap.put()
                 }
             }
+
 
 //            mmap.put(Integer.class, RicProtocolParamType.INT);
 //            mmap.put(Boolean.class, RicProtocolParamType.BOOLEAN);

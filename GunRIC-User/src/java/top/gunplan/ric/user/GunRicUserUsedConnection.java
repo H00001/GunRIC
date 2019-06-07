@@ -4,6 +4,7 @@ import top.gunplan.ric.common.GunRicCommonBuffered;
 import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.ric.user.util.GunRicBufferRead;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -24,6 +25,7 @@ public class GunRicUserUsedConnection extends AbstractRicUserConnection {
         protocol.unSerialize(pt);
         this.buffer.push(new GunRicUserClassRec(method.getDeclaringClass()), protocol.getAddressItems());
         this.addresss = protocol.getAddressItems();
+        AbstractGunBaseLogUtil.debug("address has finded ");
     }
 
     GunRicOutputProtocol send(GunRicInputProtocol protocol) throws IOException {

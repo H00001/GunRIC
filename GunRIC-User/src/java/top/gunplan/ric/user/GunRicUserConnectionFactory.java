@@ -16,7 +16,7 @@ class GunRicUserConnectionFactory {
 
     private final static DelayQueue<GunRicUserSocket> SOCKETS = new DelayQueue<>();
 
-    private static volatile boolean isScan = true;
+    private static volatile boolean isScan = false;
 
     private static ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
 

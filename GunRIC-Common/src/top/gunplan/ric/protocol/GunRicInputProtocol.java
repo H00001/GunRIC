@@ -66,7 +66,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     public byte[] serialize() {
         GunBytesUtil.GunWriteByteStream serizUtil = createSpace();
         publicSet(serizUtil);
-        super.stdHeadWrite(serizUtil);
+        stdHeadWrite(serizUtil);
         serizUtil.writeByte((byte) paramlen);
         if (!writeParam(serizUtil)) {
             throw new GunException("write Param error");

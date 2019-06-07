@@ -13,11 +13,10 @@ import java.net.Socket;
 public final class UserBoot {
     static {
         GunRicUserPropertyManageImpl.initProperty();
-        GunRicUserConnectionFactory.scan();
+        //  GunRicUserConnectionFactory.scan();
     }
 
     public static <T> T iocObject(Class<T> clazz) throws IOException {
-
         Class[] clazzi = {clazz};
         GunRicUserHandleProxy proxy = new GunRicUserHandleProxy();
         T oc = null;

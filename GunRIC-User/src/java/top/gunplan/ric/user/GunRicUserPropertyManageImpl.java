@@ -5,6 +5,7 @@ import top.gunplan.netty.GunException;
 
 
 import top.gunplan.netty.GunProperty;
+import top.gunplan.ric.protocol.util.PathUtil;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.lang.reflect.Field;
@@ -39,11 +40,9 @@ public final class GunRicUserPropertyManageImpl {
      */
     static boolean initProperty() {
         try {
-            STRING_GUN_PROPERTY_HASH_MAP.put("ric-user", new GunRicUserProperty());
-            String[] propertys = new String(Files.readAllBytes(Paths.get(Objects.
-                    requireNonNull(GunRicUserPropertyManageImpl.class.getResource("GunRic-User.conf")).toURI()))).
-                    split("\n");
-            realAnalyPropertys(propertys);
+            //   STRING_GUN_PROPERTY_HASH_MAP.put("ric-user", new GunRicUserProperty());
+            //  String[] propertys = new String(Files.readAllBytes(Files.readAllBytes(PathUtil.getRes() + "/GunRic-User.conf");
+            //    realAnalyPropertys(propertys);
         } catch (Exception e) {
             return false;
         }

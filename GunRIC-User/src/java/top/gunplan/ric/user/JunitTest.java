@@ -1,14 +1,12 @@
-package top.gunplan.ric.user.test;
+package top.gunplan.ric.user;
 
 import org.junit.jupiter.api.Test;
 
 import top.gunplan.ric.apis.test.Find;
 import top.gunplan.ric.apis.test.ListQuestion;
-import top.gunplan.ric.user.UserBoot;
 
 
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * RIC Test

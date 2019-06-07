@@ -19,7 +19,7 @@ public abstract class AbstractRicUserConnection implements GunRicUserConnection 
 
     public AbstractRicUserConnection() {
         try {
-            socket = GunRicUserConnectionFactory.newSocket(GunRicUserPropertyManageImpl.getProperty().getAddress()[0]);
+            socket = GunRicUserConnectionFactory.newSocket("127.0.0.1-8855");
         } catch (IOException e) {
             AbstractGunBaseLogUtil.error(e);
             return;
