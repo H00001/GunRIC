@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface GunRicCommonBuffered<T extends GunRicCommonExeIst> {
     /**
-     * @param key
-     * @param addresses
+     * @param key GunRicCommonExeIst
+     * @param addresses list GunAddressItem
      */
 
     void push(T key, List<GunAddressItem> addresses);

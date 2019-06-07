@@ -1,7 +1,6 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.netty.GunHandle;
-import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.GunAddressItem;
 
 /**

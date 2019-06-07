@@ -7,6 +7,7 @@ import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
+import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -104,9 +105,6 @@ public interface GunRicBaseHandle extends GunNettyHandle {
         AbstractGunBaseLogUtil.error(e);
     }
 
-
     @Override
-    default GunNetOutputInterface dealConnEvent(SocketChannel socketChannel) throws GunException {
-        return null;
-    }
+    GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException;
 }

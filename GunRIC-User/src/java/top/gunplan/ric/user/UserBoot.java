@@ -1,6 +1,8 @@
 package top.gunplan.ric.user;
 
 
+import top.gunplan.utils.AbstractGunBaseLogUtil;
+
 import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.net.Socket;
@@ -13,15 +15,16 @@ public final class UserBoot {
         GunRicUserPropertyManageImpl.initProperty();
         GunRicUserConnectionFactory.scan();
     }
+
     public static <T> T iocObject(Class<T> clazz) throws IOException {
 
-        Class[] clazzs = {clazz};
-        GunRicUserHandleProxy procxy = new GunRicUserHandleProxy();
+        Class[] clazzi = {clazz};
+        GunRicUserHandleProxy proxy = new GunRicUserHandleProxy();
         T oc = null;
         try {
-            oc = clazz.cast(Proxy.newProxyInstance(UserBoot.class.getClassLoader(), clazzs, procxy));
+            oc = clazz.cast(Proxy.newProxyInstance(UserBoot.class.getClassLoader(), clazzi, proxy));
         } catch (Exception exp) {
-            exp.printStackTrace();
+            AbstractGunBaseLogUtil.error(exp);
         }
         return oc;
     }

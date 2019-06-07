@@ -9,6 +9,8 @@ import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
+import java.net.SocketAddress;
+
 
 /**
  * @author dosdrtt
@@ -49,6 +51,12 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
         } else {
             AbstractGunBaseLogUtil.error("not known packet" + var1.getClass().getName(), getClass().getSimpleName());
         }
+        return null;
+    }
+
+
+    @Override
+    public GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException {
         return null;
     }
 }

@@ -26,6 +26,19 @@ class GunRicUserConnectionFactory {
         return ss;
     }
 
+    static Socket newSocket(String addr) throws IOException {
+        return newSocket(addr.split("-")[0], Integer.parseInt(addr.split("-")[1]));
+    }
+
+    static Socket[] newSocket(InetSocketAddress[] addr) throws IOException {
+        Socket[] sss = new Socket[addr.length];
+        for (int i = 0; i < addr.length; i++) {
+            sss[i] = newSocket(addr[i].getHostString(), addr[i].getPort());
+        }
+        return sss;
+    }
+
+
     private static void stopScan() {
         isScan = false;
         service.shutdown();

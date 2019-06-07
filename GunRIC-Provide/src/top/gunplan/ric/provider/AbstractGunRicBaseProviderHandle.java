@@ -6,6 +6,8 @@ import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.*;
 
+import java.net.SocketAddress;
+
 /**
  * @author dosdrtt
  * @concurrent AbstractGunRicBaseProviderHandle
@@ -39,6 +41,11 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
 
             return dealEvent((GunRicInputProtocol) (var1));
         }
+        return null;
+    }
+
+    @Override
+    public GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException {
         return null;
     }
 }

@@ -4,8 +4,10 @@ package top.gunplan.ric.common;
  * @author dosdrtt
  */
 public interface GunRicPool {
-    public abstract int avaliableCount();
+    /**
+     * @return count value
+     */
+    int avaliableCount();
 
-
-    public abstract int allCount();
+    int allCount();
 }

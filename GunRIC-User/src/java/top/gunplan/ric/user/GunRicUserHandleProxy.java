@@ -23,7 +23,6 @@ public class GunRicUserHandleProxy extends AbstractGunRicUserHandleProxy {
 
     private GunRicUserUsedConnection connection = new GunRicUserUsedConnection();
 
-
     @Override
     public Object sendMessage(Method method, Object[] args) throws IOException {
         connection.getAddressItem(method);

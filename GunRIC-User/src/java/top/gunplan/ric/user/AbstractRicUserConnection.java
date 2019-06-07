@@ -3,20 +3,27 @@ package top.gunplan.ric.user;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
 import top.gunplan.ric.protocol.RicProtocolCode;
 import top.gunplan.ric.user.util.GunRicBufferRead;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
+import java.net.Socket;
 
 /**
  * AbstractRicUserConnection
  *
  * @author dosdrtt
  */
-public class AbstractRicUserConnection implements GunRicUserConnection {
+public abstract class AbstractRicUserConnection implements GunRicUserConnection {
 
-    GunRicUserSocket socket;
+    Socket socket;
 
     public AbstractRicUserConnection() {
-        // socket = GunRicUserConnectionFactory.newSocket();
+        try {
+            socket = GunRicUserConnectionFactory.newSocket(GunRicUserPropertyManageImpl.getProperty().getAddress()[0]);
+        } catch (IOException e) {
+            AbstractGunBaseLogUtil.error(e);
+            return;
+        }
     }
 
     @Override
@@ -26,6 +33,5 @@ public class AbstractRicUserConnection implements GunRicUserConnection {
         protocol.unSerialize(GunRicBufferRead.bufferRead(socket.getInputStream()));
         return protocol.getCode() == RicProtocolCode.HELLO_RES;
     }
-
 
 }

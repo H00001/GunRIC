@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/sdc/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/test-res" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="jdk" jdkName="12" jdkType="JavaSDK" />
