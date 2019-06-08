@@ -16,8 +16,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author dosdrtt
+ * CenterBoot
+ *
+ * @author frank albert
+ * @date 2019-06-08 08:42
  */
+
 public class CenterBoot implements GunBootServerBase {
     public static void main(String[] args) {
         try {

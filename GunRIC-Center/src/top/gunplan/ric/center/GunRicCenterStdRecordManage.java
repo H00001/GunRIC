@@ -15,6 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author dosdrtt
+ * @date 2019.05.27
  * @concurrent GunRicCenterStdRecordManage
  */
 public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
