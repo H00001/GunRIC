@@ -15,7 +15,7 @@ public enum RicProtocolType {
      * PONG reply PING (hello message)
      */
     REQUEST(0x01), RESPONSE(0x02), REGISTER(0x03),
-    REGRESP(0x04),GET(0x08), HELLO(0x09);
+    REGRESP(0x04), GET(0x08), HELLO(0x09), NONE(0x30);
     int value;
 
     RicProtocolType(int i) {
@@ -29,6 +29,6 @@ public enum RicProtocolType {
                 return tp;
             }
         }
-        return null;
+        return NONE;
     }
 }

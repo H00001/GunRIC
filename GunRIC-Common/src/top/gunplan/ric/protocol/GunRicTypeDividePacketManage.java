@@ -15,7 +15,7 @@ public final class GunRicTypeDividePacketManage {
         return findPackage(util);
     }
 
-    public static AbstractGunRicProtocol findPackage(GunBytesUtil.GunReadByteStream util) {
+    static AbstractGunRicProtocol findPackage(GunBytesUtil.GunReadByteStream util) {
         RicProtocolType retype = RicProtocolType.valuefrom(util.readInt());
         AbstractGunRicProtocol protocol = null;
         assert retype != null;

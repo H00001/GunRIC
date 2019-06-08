@@ -22,12 +22,12 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
 
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol) {
-        throw new GunInvidaProtocolException("GunRicRegisterProtocol", "GunRIC-Provicer");
+        throw new GunIllegalProtocolException("GunRicRegisterProtocol", "GunRIC-Provicer");
     }
 
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicGetAddressProtocol protocol) {
-        throw new GunInvidaProtocolException("GunRicRegisterProtocol", "GunRIC-Provicer");
+        throw new GunIllegalProtocolException("GunRicRegisterProtocol", "GunRIC-Provicer");
     }
 
     @Override

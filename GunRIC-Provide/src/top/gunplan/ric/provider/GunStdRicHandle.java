@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 
 import static top.gunplan.ric.protocol.RicProtocolCode.FAIL;
 import static top.gunplan.ric.protocol.RicProtocolType.RESPONSE;
+import static top.gunplan.ric.provider.GunRicProviderException.GunRicProviderErrorType.INVOKE_ERROR;
 
 
 /**
@@ -18,38 +19,36 @@ public class GunStdRicHandle implements GunRicCommonRealDeal {
 
     @Override
     public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol gunNetInputInterface) {
-        AbstractGunRicExecuteProtocol.ParamHelper help = new AbstractGunRicExecuteProtocol.ParamHelper();
-        final GunRicOutputProtocol o = new GunRicOutputProtocol();
+        AbstractGunRicExecuteProtocol.ParamHelper helper = new AbstractGunRicExecuteProtocol.ParamHelper();
         final GunRicInputProtocol i = ((GunRicInputProtocol) gunNetInputInterface);
-        o.setReturnValue(help);
-        o.setType(RESPONSE);
-        o.setSerialnumber(i.getSerialnumber());
+        final GunRicOutputProtocol o = new GunRicOutputProtocol(i);
         try {
-            if (invokeMethod(help, o, i)) {
-                return o;
-            }
+            helper = invokeMethod(i);
+            o.setReturnValue(helper);
         } catch (ReflectiveOperationException e) {
-            help.setObj(e.getClass().getSimpleName() + ":" + e.getLocalizedMessage());
+            helper.setObj(e.getClass().getSimpleName() + ":" + e.getLocalizedMessage());
+            AbstractGunBaseLogUtil.error(e);
             o.setCode(FAIL);
         } catch (Exception exp) {
             AbstractGunBaseLogUtil.error(exp);
+            o.setCode(FAIL);
         }
         return o;
+
     }
 
-    private boolean invokeMethod(AbstractGunRicExecuteProtocol.ParamHelper help, GunRicOutputProtocol outputpol, GunRicInputProtocol inputpol) throws Exception {
+    private AbstractGunRicExecuteProtocol.ParamHelper invokeMethod(GunRicInputProtocol inputpol) throws Exception {
+        AbstractGunRicExecuteProtocol.ParamHelper help = new AbstractGunRicExecuteProtocol.ParamHelper();
         Class<?> inst = Class.forName(inputpol.gIN());
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).getDeclaredConstructor().newInstance();
         Method instMethod = inst.getMethod(inputpol.gMN(), inputpol.getParamTypeList());
         if (instMethod == null) {
-            outputpol.setCode(FAIL);
-            help.setObj("method not found ");
+            help.setObj("method not found");
             AbstractGunBaseLogUtil.error(inputpol.gMN(), "method not found", "[PROVIDE]");
-            return false;
+            throw new GunRicProviderException("method not found", INVOKE_ERROR);
         }
         help.setObj(inputpol.getParamleng() == 0 ? instMethod.invoke(rpcService) : instMethod.invoke(rpcService, inputpol.getParameters()));
-        outputpol.setCode(RicProtocolCode.SUCCEED);
-        return true;
+        return help;
     }
 
 

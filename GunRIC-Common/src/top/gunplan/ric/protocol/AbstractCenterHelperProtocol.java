@@ -11,21 +11,21 @@ import java.lang.reflect.Method;
  * @see AbstractGunRicExecuteProtocol
  */
 public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecuteProtocol {
-    int paramcount = 0;
+    int paramCount = 0;
     private Class<?>[] types = null;
     private int now = 0;
 
-    public void setParamcount(int paramcount) {
-        this.paramcount = paramcount;
-        types = new Class<?>[paramcount];
+    public int getParamcount() {
+        return paramCount;
     }
 
     public Class<?>[] getTypes() {
         return types;
     }
 
-    public int getParamcount() {
-        return paramcount;
+    public void setParamcount(int paramcount) {
+        this.paramCount = paramcount;
+        types = new Class<?>[paramcount];
     }
 
     public void pushParamType(Class<?> type) {
@@ -40,8 +40,8 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
     }
 
     void writeParamTypes(GunBytesUtil.GunWriteByteStream util) {
-        util.writeByte((byte) paramcount);
-        for (int i = 0; i < paramcount; i++) {
+        util.writeByte((byte) paramCount);
+        for (int i = 0; i < paramCount; i++) {
             util.writeByte(RicProtocolParamType.valuefrom(types[i]).val);
         }
     }
@@ -58,10 +58,10 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
 
     }
     void readParamType(GunBytesUtil.GunReadByteStream util) {
-        this.paramcount = util.readByte();
-        if (this.paramcount != 0) {
-            types = new Class<?>[paramcount];
-            for (int i = 0; i < this.paramcount; i++) {
+        this.paramCount = util.readByte();
+        if (this.paramCount != 0) {
+            types = new Class<?>[paramCount];
+            for (int i = 0; i < this.paramCount; i++) {
                 types[i] = RicProtocolParamType.valuefrom(util.readByte()).clazz;
             }
         }

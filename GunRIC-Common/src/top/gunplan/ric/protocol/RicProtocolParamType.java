@@ -97,14 +97,6 @@ public enum RicProtocolParamType {
             }
 
 
-//            mmap.put(Integer.class, RicProtocolParamType.INT);
-//            mmap.put(Boolean.class, RicProtocolParamType.BOOLEAN);
-//            mmap.put(Byte.class, RicProtocolParamType.BYTE);
-//            mmap.put(Integer[].class, RicProtocolParamType.LINT);
-//            mmap.put(Short.class, RicProtocolParamType.SHORT);
-//            mmap.put(Long.class, RicProtocolParamType.LONG);
-//            mmap.put(Integer[][].class, RicProtocolParamType.LLINT);
-
 
         }
     }

@@ -1,8 +1,11 @@
 package top.gunplan.ric.protocol;
 
 import top.gunplan.netty.GunException;
+import top.gunplan.ric.protocol.exp.GunRicProtocolError;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
+
+import static top.gunplan.ric.protocol.exp.GunRicProtocolError.GunRicProtocolErrorType.WRITE_PARAM_ERROR;
 
 /**
  * no concurrent class
@@ -64,15 +67,15 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
 
     @Override
     public byte[] serialize() {
-        GunBytesUtil.GunWriteByteStream serizUtil = createSpace();
-        publicSet(serizUtil);
-        stdHeadWrite(serizUtil);
-        serizUtil.writeByte((byte) paramlen);
-        if (!writeParam(serizUtil)) {
-            throw new GunException("write Param error");
+        GunBytesUtil.GunWriteByteStream util = createSpace();
+        publicSet(util);
+        stdHeadWrite(util);
+        util.writeByte((byte) paramlen);
+        if (!writeParam(util)) {
+            throw new GunRicProtocolError("write Param error", WRITE_PARAM_ERROR);
         }
-        serizUtil.write(END_FLAG);
-        return serizUtil.getInput();
+        util.write(END_FLAG);
+        return util.getInput();
     }
 
 

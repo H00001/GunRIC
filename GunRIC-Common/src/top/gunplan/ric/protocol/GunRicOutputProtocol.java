@@ -14,6 +14,11 @@ public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implemen
         this.code = RicProtocolCode.SUCCEED;
     }
 
+    public GunRicOutputProtocol(AbstractGunRicProtocol request) {
+        this();
+        setSerialnumber(request.getSerialnumber());
+    }
+
     private ParamHelper returnValue;
 
     public ParamHelper getReturnValue() {

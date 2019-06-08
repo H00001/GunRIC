@@ -32,7 +32,7 @@ public class GunRicGetAddressProtocol extends AbstractCenterHelperProtocol imple
 
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
-        int len = TYPE_LEN + CODE_LEN + SERIALIZE_LEN + 3 + interfaceName.length() + methodName.length() + paramcount + END_FLAG.length;
+        int len = TYPE_LEN + CODE_LEN + SERIALIZE_LEN + 3 + interfaceName.length() + methodName.length() + paramCount + END_FLAG.length;
         return new GunBytesUtil.GunWriteByteStream(new byte[len]);
     }
 

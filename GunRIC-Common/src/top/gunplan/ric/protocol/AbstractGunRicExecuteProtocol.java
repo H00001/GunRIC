@@ -174,4 +174,10 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
         }
         return help;
     }
+
+
+    @Override
+    public abstract boolean unSerialize(GunBytesUtil.GunReadByteStream util);
+
+
 }

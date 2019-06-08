@@ -5,7 +5,7 @@ import top.gunplan.utils.GunBytesUtil;
 
 /**
  * @author dosdrtt
- * @version 0.0.0.1
+ * @version 0.0.0.2
  * @since 0.0.0.1
  */
 public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
@@ -31,7 +31,7 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
 
     @Override
     public byte[] serialize() {
-        int len = 3 + CODE_LEN + GunAddressItem.NEED_SPACE + TYPE_LEN + SERIALIZE_LEN + paramcount + END_FLAG.length + interfaceName.length() + methodName.length();
+        int len = 3 + CODE_LEN + GunAddressItem.NEED_SPACE + TYPE_LEN + SERIALIZE_LEN + paramCount + END_FLAG.length + interfaceName.length() + methodName.length();
         byte[] save = new byte[len];
         GunBytesUtil.GunWriteByteStream util = new GunBytesUtil.GunWriteByteStream(save);
         publicSet(util);
@@ -41,22 +41,6 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
         util.write(END_FLAG);
         return save;
     }
-
-//    private void writeIpAddress4(GunBytesUtil.GunWriteByteStream util) {
-//        String[] fg = this.ip.split("\\.");
-//        for (int i = 0; i < 4; i++) {
-//            util.writeByte((byte) Integer.parseInt(fg[i]));
-//        }
-//    }
-
-//    private void readIpAddress4(GunBytesUtil.GunReadByteStream util) {
-//        short f1 = util.readUByte();
-//        short f2 = util.readUByte();
-//        short f3 = util.readUByte();
-//        short f4 = util.readUByte();
-//        this.ip = (f1) + "." + f2 + "." + f3 + "." + f4;
-//    }
-
 
     @Override
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
