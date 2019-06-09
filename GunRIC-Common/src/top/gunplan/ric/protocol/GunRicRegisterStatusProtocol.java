@@ -10,11 +10,12 @@ import top.gunplan.utils.GunBytesUtil;
 public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper {
     public GunRicRegisterStatusProtocol() {
         this.type = RicProtocolType.REGRESP;
+        this.code = RicProtocolCode.SUCCEED;
     }
 
-    public GunRicRegisterStatusProtocol(int sericoode) {
+    public GunRicRegisterStatusProtocol(int serizoode) {
         this();
-        this.setSerialnumber(sericoode);
+        this.setSerialnumber(serizoode);
     }
 
     public GunRicRegisterStatusProtocol(RicProtocolCode status) {

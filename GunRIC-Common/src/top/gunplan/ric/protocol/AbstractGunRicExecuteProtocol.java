@@ -176,6 +176,12 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
     }
 
 
+    /**
+     * unSerialize
+     *
+     * @param util GunReadByteStream stream util
+     * @return result succeed:true , fail:false
+     */
     @Override
     public abstract boolean unSerialize(GunBytesUtil.GunReadByteStream util);
 

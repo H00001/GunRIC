@@ -8,6 +8,7 @@ import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.ric.common.GunRicStdFilter;
+import top.gunplan.ric.common.GunRicThreadFactory;
 
 
 import java.util.concurrent.ExecutorService;
@@ -37,10 +38,10 @@ public class CenterBoot implements GunBootServerBase {
         server.registerObserve(new GunRicCenterObserve());
         ExecutorService es0 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>(20000), new GunRicThreadFactory(CenterBoot.class.getSimpleName()));
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>(20000), new GunRicThreadFactory(CenterBoot.class.getSimpleName()));
 
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServicesProperty());
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServiceUtilProperty());

@@ -7,6 +7,8 @@ import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 
@@ -40,14 +42,13 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param protocol   prorocol
      * @return GunNetOutputInterface
      */
-    default GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<AbstractGunRicProtocol, AbstractGunRicProtocol> dealhandle, AbstractGunRicProtocol protocol) {
+    default <I extends AbstractGunRicProtocol, O extends AbstractGunRicProtocol> GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealhandle, I protocol) {
         if (protocol.getNext() == null) {
             return dealhandle.dealEvent(protocol);
         } else {
             GunCombineOutput capt = new GunCombineOutput();
-            for (; protocol != null; ) {
+            for (; (protocol = (I) protocol.getNext()) != null; ) {
                 capt.push(dealhandle.dealEvent(protocol));
-                protocol = protocol.getNext();
             }
             return capt;
         }
@@ -78,6 +79,10 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     GunNetOutputInterface dealEvent(GunRicGetAddressProtocol protocol);
 
     /**
+     * dealDataEvent
+     * <p>
+     * bus of input
+     *
      * @param var1 GunNetInputInterface
      * @return GunNetOutputInterface
      * @throws GunException kinds of exceptions

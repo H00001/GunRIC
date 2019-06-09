@@ -4,6 +4,7 @@ package top.gunplan.ric.provider;
 import top.gunplan.ric.protocol.GunAddressItem;
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
 
+import top.gunplan.ric.protocol.SerizableCode;
 import top.gunplan.ric.protocol.util.GunClassPathUtil;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
@@ -95,7 +96,8 @@ class GunRicPublishManage {
         protocol.setInterfaceName(clazz.getName());
         protocol.setMethodName(md.getName());
         protocol.setItem(new GunAddressItem(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
-        final int v = ((clazz.hashCode() + md.hashCode()) & 12768) + (int) (Math.random() * 1000);
+        SerizableCode serizableCode = SerizableCode.newInstance();
+        final int v = serizableCode.getSerizNum32();
         registerMapping.put((short) v, clazz.getName() + "." + md.getName());
         protocol.setSerialnumber(v);
         protocol.pushParamTypes(md.getParameterTypes());

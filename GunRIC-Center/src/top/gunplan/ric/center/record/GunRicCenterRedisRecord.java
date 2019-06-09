@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.record;
 
-import redis.clients.jedis.Jedis;
+
 import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.common.GunRicInterfaceBuffer;
@@ -16,7 +16,7 @@ import java.util.List;
  * @see GunRicCenterRecord
  */
 public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {
-    private Jedis jedis;
+
 
     public GunRicCenterRedisRecord(AbstractGunRicProxyRecord lastRecord) {
         super(lastRecord);

@@ -3,7 +3,6 @@ package top.gunplan.ric.protocol;
 
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
-import top.gunplan.ric.protocol.exp.GunRPCException;
 import top.gunplan.ric.protocol.exp.GunRicProtocolError;
 import top.gunplan.utils.GunBytesUtil;
 
@@ -22,7 +21,7 @@ import static top.gunplan.ric.protocol.exp.GunRicProtocolError.GunRicProtocolErr
  */
 public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInputInterface, GunNetOutputInterface {
 
-    private SerizableCode serizable = new GunRicSerizableCodeImpl();
+    private SerizableCode serizable = SerizableCode.newInstance();
 
     @Override
     public boolean unSerialize(byte[] in) {
@@ -98,6 +97,13 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
         this.code = code;
     }
 
+    /**
+     * unSerialize
+     * implement by children class
+     *
+     * @param util GunWriteByteStream
+     * @return is:true of false:false serialize
+     */
     @Override
     public abstract boolean unSerialize(GunBytesUtil.GunReadByteStream util);
 
@@ -125,6 +131,8 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     }
 
     static class Helper {
+        private static final String LILLI = "[]";
+        private static final String NULL_STR = "";
         private final GunBytesUtil.GunWriteByteStream util;
 
         Helper(GunBytesUtil.GunWriteByteStream util) {
@@ -136,8 +144,8 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
             RicProtocolParamType type = RicProtocolParamType.valuefrom(obj.getClass());
             Method md;
             try {
-                if (name.contains("[]")) {
-                    name = name.replace("[]", "");
+                if (name.contains(LILLI)) {
+                    name = name.replace(LILLI, NULL_STR);
                     name = "L" + name;
                     if (obj instanceof int[][]) {
                         name = "L" + name;
@@ -240,7 +248,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
                 util.write(bos.toByteArray());
                 return 0;
             } catch (IOException e) {
-                //  throw new GunRPCException("object write error");
+                //  throw new GunRicException("object write error");
                 return -1;
             }
         }

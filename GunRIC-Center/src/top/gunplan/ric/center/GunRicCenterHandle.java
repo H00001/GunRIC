@@ -10,8 +10,8 @@ import top.gunplan.ric.protocol.*;
  * @author dosdrtt
  */
 public class GunRicCenterHandle extends AbstractGunRicBaseCenterHandle {
-    private GunRicCommonRealDeal handle = new GunRicCenterNewRegisterEvent();
-    private GunRicCommonRealDeal handle1 = new GunRicCenterNewGetEvent();
+    private GunRicCommonRealDeal<GunRicRegisterProtocol, GunRicRegisterStatusProtocol> handle = new GunRicCenterNewRegisterEvent();
+    private GunRicCommonRealDeal<AbstractCenterHelperProtocol, GunRicRespAddressProtocol> handle1 = new GunRicCenterNewGetEvent();
     @Override
     public GunNetOutputInterface dealEvent(GunRicRegisterProtocol protocol) {
         return dealMuchEvent(handle::dealDataEvent, protocol);

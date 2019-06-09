@@ -1,9 +1,12 @@
 package top.gunplan.ric.protocol;
 
+import java.util.Random;
+
 /**
  * std create serizabel code
  */
 class GunRicSerizableCodeImpl implements SerizableCode {
+    private Random rand = new Random(System.currentTimeMillis());
 
     @Override
     public int getSerizNum32() {
@@ -12,6 +15,6 @@ class GunRicSerizableCodeImpl implements SerizableCode {
 
     @Override
     public long getSerizNum64() {
-        return (System.currentTimeMillis() >>> 8) ^ (int) (Math.random() * 100);
+        return (System.currentTimeMillis() >>> 8) ^ (rand.nextInt(100));
     }
 }

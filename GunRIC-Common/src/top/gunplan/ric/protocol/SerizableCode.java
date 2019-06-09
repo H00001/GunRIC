@@ -7,16 +7,25 @@ package top.gunplan.ric.protocol;
 public interface SerizableCode {
 
     /**
+     * create instance
+     *
+     * @return instance
+     */
+    static SerizableCode newInstance() {
+        return new GunRicSerizableCodeImpl();
+    }
+
+    /**
      * getSerizNum32
      *
-     * @return
+     * @return number 32 bit
      */
     int getSerizNum32();
 
     /**
      * getSerizNum64
      *
-     * @return
+     * @return number 64 bit
      */
     long getSerizNum64();
 }

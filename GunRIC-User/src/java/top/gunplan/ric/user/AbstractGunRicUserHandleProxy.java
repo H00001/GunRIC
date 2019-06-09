@@ -20,10 +20,12 @@ public abstract class AbstractGunRicUserHandleProxy implements InvocationHandler
     }
 
     /**
+     * sendMessage
+     *
      * @param method method
      * @param args   paramteers
      * @return result
-     * @throws IOException
+     * @throws IOException i/o or connect exception
      */
     abstract Object sendMessage(Method method, Object[] args) throws IOException;
 

@@ -8,7 +8,7 @@ package top.gunplan.ric.center.common;
 public interface GunRicHash {
 
     /**
-     * h
+     * h get hash code
      *
      * @param interfaceName hash 0
      * @param methodName    hash 1

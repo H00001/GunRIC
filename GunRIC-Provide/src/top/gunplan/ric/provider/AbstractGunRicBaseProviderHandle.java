@@ -14,6 +14,9 @@ import java.net.SocketAddress;
  */
 public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHandle {
     /**
+     * dealEvent
+     *
+     * deal GunRicInputProtocol request event
      * @param protocol GunRicInputProtocol
      * @return AbstractGunRicProtocol
      */

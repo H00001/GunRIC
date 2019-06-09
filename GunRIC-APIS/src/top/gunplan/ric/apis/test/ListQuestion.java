@@ -10,7 +10,10 @@ import java.io.Serializable;
 @GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.ListQuestionImpl")
 public interface ListQuestion {
     /**
-     * lc 281
+     * moveZero
+     *
+     * @param list input
+     * @return result
      */
     int[] moveZero(int[] list);
 

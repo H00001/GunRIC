@@ -4,6 +4,8 @@ import top.gunplan.ric.apis.test.LinearAlgebra;
 
 /**
  * LinearAlgebra function lib
+ *
+ * @author dosdrtt
  */
 public class LinearAlgebraImpl implements LinearAlgebra {
 //    static {

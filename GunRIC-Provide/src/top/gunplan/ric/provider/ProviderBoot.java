@@ -4,6 +4,7 @@ import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
 
 import top.gunplan.ric.common.GunRicStdFilter;
+import top.gunplan.ric.common.GunRicThreadFactory;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.netty.GunBootServer;
 
@@ -12,10 +13,7 @@ import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.impl.GunBootServerFactory;
 
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author dosdrtt
@@ -36,10 +34,10 @@ public class ProviderBoot implements GunBootServerBase {
         server.registerObserve(new GunRicProviderObserve());
         ExecutorService es0 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>(), new GunRicThreadFactory());
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>(), new GunRicThreadFactory());
         GunNettyPropertyManagerImpl.registerProperty(new GunRicProvideProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunRicStdFilter()).

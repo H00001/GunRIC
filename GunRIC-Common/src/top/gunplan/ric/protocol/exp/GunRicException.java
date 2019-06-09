@@ -9,11 +9,11 @@ import top.gunplan.netty.GunException;
  * kinds of models have theirs exception
  */
 
-public class GunRPCException extends GunException {
+public class GunRicException extends GunException {
 
     private static final long serialVersionUID = 7522713377771117578L;
 
-    public GunRPCException(String why) {
+    public GunRicException(String why) {
         super(why);
     }
 }
