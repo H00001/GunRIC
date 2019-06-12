@@ -10,6 +10,7 @@ import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.net.SocketAddress;
+import java.nio.channels.SelectionKey;
 
 
 /**
@@ -19,6 +20,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicInputProtocol protocol) {
         AbstractGunBaseLogUtil.error("error protocol is GunRicInputProtocol", getClass().getSimpleName());
+
         throw new GunIllegalProtocolException(protocol.getClass().getName(), "GunRIC-Center");
     }
 

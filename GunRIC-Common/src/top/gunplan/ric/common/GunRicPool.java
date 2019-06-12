@@ -5,12 +5,12 @@ package top.gunplan.ric.common;
  */
 public interface GunRicPool {
     /**
-     * avaliableCount
+     * availableCount
      *
      *
      * @return count value
      */
-    int avaliableCount();
+    int availableCount();
 
 
     /**

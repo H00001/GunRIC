@@ -18,12 +18,19 @@ public interface ListQuestion {
     int[] moveZero(int[] list);
 
     /**
+     * removeVal
+     *
      * lc 27
+     * @return Result27
      */
     Result27 removeVal(int[] list, int target);
 
     /**
+     * removeRepetition
+     *
      * lc 26
+     * @param list list input
+     * @return int
      */
     int removeRepetition(int[] list);
 

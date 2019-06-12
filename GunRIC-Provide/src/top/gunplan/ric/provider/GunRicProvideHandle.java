@@ -4,6 +4,7 @@ package top.gunplan.ric.provider;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.GunRicCommonRealDeal;
 import top.gunplan.ric.protocol.GunRicInputProtocol;
+import top.gunplan.ric.protocol.GunRicOutputProtocol;
 
 
 /**
@@ -14,7 +15,7 @@ import top.gunplan.ric.protocol.GunRicInputProtocol;
 public class GunRicProvideHandle extends AbstractGunRicBaseProviderHandle {
 
 
-    private GunRicCommonRealDeal handle = new GunStdRicHandle();
+    private GunRicCommonRealDeal<GunRicInputProtocol, GunRicOutputProtocol> handle = new GunStdRicProviderHandle();
 
     @Override
     public GunNetOutputInterface dealEvent(GunRicInputProtocol protocol) {

@@ -15,6 +15,6 @@ class GunRicSerizableCodeImpl implements SerizableCode {
 
     @Override
     public long getSerizNum64() {
-        return (System.currentTimeMillis() >>> 8) ^ (rand.nextInt(100));
+        return (System.currentTimeMillis()) ^ System.nanoTime() ^ (rand.nextInt(100));
     }
 }

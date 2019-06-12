@@ -33,12 +33,21 @@ public abstract class AbstractGunRicProxyRecord implements GunRicCenterRecord {
 
 
     /**
+     * nextAdd
+     *
+     * this method invoke at next record
      * @param g       ric record from information
      * @param address address info
      */
     @Override
     public abstract void nextAdd(GunRicCdtInterface g, GunAddressItem address);
 
+    /**
+     * get address
+     *
+     * @param g GunRicCdtInterface
+     * @return list of item
+     */
     abstract List<GunAddressItem> getAddressBase(GunRicCdtInterface g);
 
     public List<GunAddressItem> getAddress(GunRicCdtInterface gunRicCdtInterface) {

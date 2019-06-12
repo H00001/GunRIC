@@ -15,12 +15,11 @@ import static top.gunplan.ric.provider.GunRicProviderException.GunRicProviderErr
 /**
  * @author dosdrtt
  */
-public class GunStdRicHandle implements GunRicCommonRealDeal {
+public class GunStdRicProviderHandle implements GunRicCommonRealDeal<GunRicInputProtocol, GunRicOutputProtocol> {
 
     @Override
-    public AbstractGunRicProtocol dealDataEvent(AbstractGunRicProtocol gunNetInputInterface) {
+    public GunRicOutputProtocol dealDataEvent(final GunRicInputProtocol i) {
         AbstractGunRicExecuteProtocol.ParamHelper helper = new AbstractGunRicExecuteProtocol.ParamHelper();
-        final GunRicInputProtocol i = ((GunRicInputProtocol) gunNetInputInterface);
         final GunRicOutputProtocol o = new GunRicOutputProtocol(i);
         try {
             helper = invokeMethod(i);

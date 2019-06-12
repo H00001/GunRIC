@@ -32,9 +32,20 @@ public abstract class AbstractGunRicUserConnectPool implements GunRicPool {
         return port;
     }
 
-    @Override
-    public abstract int avaliableCount();
 
+    /**
+     * available count
+     *
+     * @return
+     */
+    @Override
+    public abstract int availableCount();
+
+    /**
+     * allCount
+     *
+     * @return all of count
+     */
     @Override
     public abstract int allCount();
 

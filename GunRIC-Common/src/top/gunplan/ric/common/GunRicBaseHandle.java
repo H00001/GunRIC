@@ -38,17 +38,19 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     /**
      * dealMuchEvent
      *
-     * @param dealhandle hanle to real deal event
+     * @param dealHandle hanle to real deal event
      * @param protocol   prorocol
      * @return GunNetOutputInterface
      */
-    default <I extends AbstractGunRicProtocol, O extends AbstractGunRicProtocol> GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealhandle, I protocol) {
+    default <I extends AbstractGunRicProtocol, O extends AbstractGunRicProtocol> GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealHandle, I protocol) {
+        O baseProtcol = dealHandle.dealEvent(protocol);
         if (protocol.getNext() == null) {
-            return dealhandle.dealEvent(protocol);
+            return baseProtcol;
         } else {
             GunCombineOutput capt = new GunCombineOutput();
+            capt.push(baseProtcol);
             for (; (protocol = (I) protocol.getNext()) != null; ) {
-                capt.push(dealhandle.dealEvent(protocol));
+                capt.push(dealHandle.dealEvent(protocol));
             }
             return capt;
         }
@@ -108,6 +110,13 @@ public interface GunRicBaseHandle extends GunNettyHandle {
         AbstractGunBaseLogUtil.error(e);
     }
 
+    /**
+     * connection happened
+     *
+     * @param socketAddress SocketAddress
+     * @return output
+     * @throws GunException kinds of exception
+     */
     @Override
     GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException;
 }

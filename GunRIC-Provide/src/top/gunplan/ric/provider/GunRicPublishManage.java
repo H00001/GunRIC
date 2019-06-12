@@ -93,8 +93,7 @@ class GunRicPublishManage {
 
 
     private void constructProtocol(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
-        protocol.setInterfaceName(clazz.getName());
-        protocol.setMethodName(md.getName());
+        protocol.setInameMname(md);
         protocol.setItem(new GunAddressItem(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
         SerizableCode serizableCode = SerizableCode.newInstance();
         final int v = serizableCode.getSerizNum32();

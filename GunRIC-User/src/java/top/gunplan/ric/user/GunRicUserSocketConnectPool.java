@@ -28,7 +28,7 @@ public class GunRicUserSocketConnectPool extends AbstractGunRicUserConnectPool {
     }
 
     @Override
-    public int avaliableCount() {
+    public int availableCount() {
         return 0;
     }
 
