@@ -16,6 +16,11 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         this.code = RicProtocolCode.GET_RES;
     }
 
+    public GunRicRespAddressProtocol(List<GunAddressItem> addresses) {
+        this();
+        addresses.forEach(this::pushAddress);
+    }
+
     private List<GunAddressItem> addressItems = new ArrayList<>(1);
 
     public List<GunAddressItem> getAddressItems() {

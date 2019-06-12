@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 
 
 import static top.gunplan.ric.protocol.RicProtocolCode.FAIL;
-import static top.gunplan.ric.protocol.RicProtocolType.RESPONSE;
 import static top.gunplan.ric.provider.GunRicProviderException.GunRicProviderErrorType.INVOKE_ERROR;
 
 
@@ -46,7 +45,7 @@ public class GunStdRicProviderHandle implements GunRicCommonRealDeal<GunRicInput
             AbstractGunBaseLogUtil.error(inputpol.gMN(), "method not found", "[PROVIDE]");
             throw new GunRicProviderException("method not found", INVOKE_ERROR);
         }
-        help.setObj(inputpol.getParamleng() == 0 ? instMethod.invoke(rpcService) : instMethod.invoke(rpcService, inputpol.getParameters()));
+        help.setObj(inputpol.getParamLeng() == 0 ? instMethod.invoke(rpcService) : instMethod.invoke(rpcService, inputpol.getParameters()));
         return help;
     }
 

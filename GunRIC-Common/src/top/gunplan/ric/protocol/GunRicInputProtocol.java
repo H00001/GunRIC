@@ -1,6 +1,5 @@
 package top.gunplan.ric.protocol;
 
-import top.gunplan.netty.GunException;
 import top.gunplan.ric.protocol.exp.GunRicProtocolError;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
@@ -21,7 +20,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         this.setCode(RicProtocolCode.SUCCEED);
     }
 
-    private int paramlen = 0;
+    private int paramLen = 0;
     private static final byte PARAM_LEN = 1;
 
     public ParamHelper[] getParaHelpers() {
@@ -37,7 +36,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     }
 
     private void setParamLen(int len) {
-        paramlen = len;
+        paramLen = len;
         helpers = new ParamHelper[len];
     }
 
@@ -45,14 +44,14 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         setParamLen((byte) args.length);
         for (Object arg : args) {
             if (!pushParam(arg)) {
-                AbstractGunBaseLogUtil.error("pus parameters error");
+                AbstractGunBaseLogUtil.error("push parameters error");
                 return;
             }
         }
     }
 
     private boolean writeParam(GunBytesUtil.GunWriteByteStream util) {
-        for (int i = 0; i < paramlen; i++) {
+        for (int i = 0; i < paramLen; i++) {
             Object fil = helpers[i].obj;
             try {
                 writeOnceParam(util, fil);
@@ -70,9 +69,9 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         GunBytesUtil.GunWriteByteStream util = createSpace();
         publicSet(util);
         stdHeadWrite(util);
-        util.writeByte((byte) paramlen);
+        util.writeByte((byte) paramLen);
         if (!writeParam(util)) {
-            throw new GunRicProtocolError("write Param error", WRITE_PARAM_ERROR);
+            throw new GunRicProtocolError("write Params error", WRITE_PARAM_ERROR);
         }
         util.write(END_FLAG);
         return util.getInput();
@@ -95,22 +94,22 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     private int otherCount = 0;
 
 
-    public byte getParamleng() {
-        return (byte) paramlen;
+    public byte getParamLeng() {
+        return (byte) paramLen;
     }
 
 
     public Class<?>[] getParamTypeList() {
-        Class<?>[] var2 = new Class<?>[paramlen];
-        for (int i = 0; i < paramlen; i++) {
+        Class<?>[] var2 = new Class<?>[paramLen];
+        for (int i = 0; i < paramLen; i++) {
             var2[i] = helpers[i].clazz;
         }
         return var2;
     }
 
     public Object[] getParameters() {
-        Object[] var2 = new Object[paramlen];
-        for (int i = 0; i < paramlen; i++) {
+        Object[] var2 = new Object[paramLen];
+        for (int i = 0; i < paramLen; i++) {
             var2[i] = helpers[i].obj;
         }
         return var2;
@@ -126,8 +125,8 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
         publicUnSet(util);
         super.stdHeadAnaly(util);
-        this.paramlen = util.readByte();
-        boolean b = paramlen == 0 ? checkEnd(util) : analyizeParams(paramlen, util);
+        this.paramLen = util.readByte();
+        boolean b = paramLen == 0 ? checkEnd(util) : analyizeParams(paramLen, util);
         return b && checkNext(util);
     }
 }

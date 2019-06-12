@@ -9,12 +9,20 @@ import java.util.List;
  */
 public interface GunRicCommonBuffered<T extends GunRicCommonExeIst> {
     /**
+     * push
+     *
      * @param key GunRicCommonExeIst
      * @param addresses list GunAddressItem
      */
 
     void push(T key, List<GunAddressItem> addresses);
 
+    /**
+     * get
+     *
+     * @param key get key
+     * @return List<GunAddressItem>
+     */
     List<GunAddressItem> get(T key);
 
 

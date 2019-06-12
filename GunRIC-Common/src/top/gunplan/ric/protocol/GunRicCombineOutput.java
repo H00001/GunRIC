@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author dosdrtt
  */
-public final class GunCombineOutput extends AbstractGunRicProtocol {
+public final class GunRicCombineOutput extends AbstractGunRicProtocol {
     private List<GunNetOutputInterface> protocollist = new ArrayList<>(1);
 
     public void push(GunNetOutputInterface protocol) {

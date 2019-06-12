@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * @author dosdrtt
  */
-public class GunAddressItem implements GunNetOutputInterface, GunNetInputInterface, GunRicOutputHelper {
+public class GunAddressItem implements GunAddressItemInterface, GunNetOutputInterface, GunNetInputInterface, GunRicOutputHelper {
 
     private static final int FLAG_LEN = 8;
     private static final int ADD_LEN = 8;
@@ -46,18 +46,23 @@ public class GunAddressItem implements GunNetOutputInterface, GunNetInputInterfa
     }
 
 
+    @Override
     public InetSocketAddress getInet() {
         return this.address;
     }
 
+    @Override
     public int getPort() {
         return this.address.getPort();
     }
 
+
+    @Override
     public String getAddress() {
         return address.getHostString();
     }
 
+    @Override
     public void setAddress(InetSocketAddress address) {
         this.address = address;
     }

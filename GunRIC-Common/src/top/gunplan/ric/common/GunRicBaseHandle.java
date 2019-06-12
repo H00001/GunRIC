@@ -7,10 +7,7 @@ import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.TypeVariable;
 import java.net.SocketAddress;
-import java.nio.channels.SocketChannel;
 
 /**
  * @author dosdrtt
@@ -47,7 +44,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
         if (protocol.getNext() == null) {
             return baseProtcol;
         } else {
-            GunCombineOutput capt = new GunCombineOutput();
+            GunRicCombineOutput capt = new GunRicCombineOutput();
             capt.push(baseProtcol);
             for (; (protocol = (I) protocol.getNext()) != null; ) {
                 capt.push(dealHandle.dealEvent(protocol));
