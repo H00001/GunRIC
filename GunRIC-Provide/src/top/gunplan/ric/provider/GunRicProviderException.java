@@ -1,7 +1,6 @@
 package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunException;
-import top.gunplan.ric.protocol.exp.GunRicProtocolError;
 
 /**
  * GunRicProviderException

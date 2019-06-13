@@ -3,7 +3,7 @@ package top.gunplan.ric.protocol;
 
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
-import top.gunplan.ric.protocol.exp.GunRicProtocolError;
+import top.gunplan.ric.protocol.exp.GunRicProtocolException;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.io.ByteArrayOutputStream;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 
-import static top.gunplan.ric.protocol.exp.GunRicProtocolError.GunRicProtocolErrorType.WRITE_OBJECT;
+import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.WRITE_OBJECT;
 
 
 /**
@@ -30,7 +30,6 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     }
 
     final static byte[] END_FLAG = {0x7a, 0x7a};
-
 
     public AbstractGunRicProtocol() {
         this.autoCreateSerialnumber();
@@ -157,7 +156,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
             } catch (Exception e) {
                 util.writeByte(type.val);
                 if (writeObject0(obj) == -1) {
-                    throw new GunRicProtocolError("write Object Fail", WRITE_OBJECT);
+                    throw new GunRicProtocolException("write Object Fail", WRITE_OBJECT);
                 }
             }
         }
@@ -235,7 +234,6 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
         }
 
         private void writeByte(Byte b) {
-
             util.writeByte(b);
         }
 

@@ -1,12 +1,14 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.netty.GunHandle;
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 /**
  * GunRicCenterRecord
- * @date 2019/05/28
+ *
  * @author dosdrtt
+ * @date 2019/05/28
  */
 public interface GunRicCenterRecord extends GunHandle {
     /**
@@ -16,7 +18,7 @@ public interface GunRicCenterRecord extends GunHandle {
      * @param address address info
      */
 
-    void firstAdd(GunRicCdtInterface g, GunAddressItem address);
+    void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address);
 
     /**
      * when record next request
@@ -24,7 +26,7 @@ public interface GunRicCenterRecord extends GunHandle {
      * @param g       ric record from information
      * @param address address info
      */
-    void nextAdd(GunRicCdtInterface g, GunAddressItem address);
+    void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address);
 
 
 }

@@ -20,12 +20,18 @@ import static top.gunplan.netty.GunNettyFilter.DealResult.NOTDEALALLNEXT;
 public class GunRicStdFilter implements GunNettyFilter {
 
     @Override
-    public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) throws Exception {
-        AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(gunInputFilterChecker.getSrc());
-        if (protocol.unSerialize(gunInputFilterChecker.getSrc())) {
-            gunInputFilterChecker.setObject(protocol);
-            return NEXT;
-        } else {
+    public DealResult doInputFilter(GunInputFilterChecker gunInputFilterChecker) {
+        try {
+
+            AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(gunInputFilterChecker.getSrc());
+            if (protocol.unSerialize(gunInputFilterChecker.getSrc())) {
+                gunInputFilterChecker.setObject(protocol);
+                return NEXT;
+            } else {
+                AbstractGunBaseLogUtil.urgency("protocol unSerialize fail", getClass().getName());
+                return NOTDEALALLNEXT;
+            }
+        } catch (Exception exp) {
             AbstractGunBaseLogUtil.urgency("protocol unSerialize fail", getClass().getName());
             return NOTDEALALLNEXT;
         }

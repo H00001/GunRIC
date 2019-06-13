@@ -1,7 +1,6 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.ric.center.record.*;
-import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -18,8 +17,8 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRic
 
     @Override
     public GunRicRegisterStatusProtocol dealDataEvent(GunRicRegisterProtocol protocol) {
-        GunAddressItem ai = new GunAddressItem(protocol.getIp(), protocol.getPort());
-        GunRicCdtInterface interfaceInformation = new GunRicCdtInterface(protocol);
+        GunAddressItemInterface ai = new GunAddressItem4(protocol.getIp(), protocol.getPort());
+        BaseGunRicCdt interfaceInformation = new GunRicCdtImpl(protocol);
         GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(protocol.getSerialnumber());
         try {
             manage.doRegex(interfaceInformation, ai);

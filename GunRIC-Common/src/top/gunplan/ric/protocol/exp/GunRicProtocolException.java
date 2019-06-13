@@ -7,13 +7,19 @@ import top.gunplan.netty.GunException;
  *
  * @author dosdrtt
  */
-public class GunRicProtocolError extends GunException {
+public class GunRicProtocolException extends GunException {
 
     private static final long serialVersionUID = 916487049376902889L;
+
     private GunRicProtocolErrorType type;
 
-    public GunRicProtocolError(String why, GunRicProtocolErrorType type) {
+    public GunRicProtocolException(String why, GunRicProtocolErrorType type) {
         super(why);
+        this.type = type;
+    }
+
+    public GunRicProtocolErrorType getType() {
+        return type;
     }
 
     public enum GunRicProtocolErrorType {

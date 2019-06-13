@@ -1,10 +1,10 @@
 package top.gunplan.ric.center.record;
 
-import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.GunRicCenterRecord;
 import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.common.GunRicCommonBuffered;
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,31 +18,31 @@ import java.util.List;
  */
 public class GunRicCenterInlineBufferRecord extends AbstractGunRicProxyRecord {
 
-    private GunRicCommonBuffered<GunRicCdtInterface> buffered = GunRicInterfaceBuffer.newInstance();
+    private GunRicCommonBuffered<BaseGunRicCdt> buffered = GunRicInterfaceBuffer.newInstance();
 
     public GunRicCenterInlineBufferRecord(AbstractGunRicProxyRecord lastRecord) {
         super(lastRecord);
     }
 
     @Override
-    public void firstAdd(GunRicCdtInterface g, GunAddressItem address) {
+    public void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
         writeBufferAddress(g, address, true);
     }
 
     @Override
-    public void nextAdd(GunRicCdtInterface g, GunAddressItem address) {
+    public void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
         writeBufferAddress(g, address, false);
     }
 
     @Override
-    List<GunAddressItem> getAddressBase(GunRicCdtInterface g) {
+    List<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
         return buffered.get(g);
     }
 
 
-    private void writeBufferAddress(GunRicCdtInterface g, final GunAddressItem address, boolean firstWrite) {
+    private void writeBufferAddress(BaseGunRicCdt g, final GunAddressItemInterface address, boolean firstWrite) {
         if (firstWrite) {
-            List<GunAddressItem> adds = new ArrayList<>();
+            List<GunAddressItemInterface> adds = new ArrayList<>();
             adds.add(address);
             buffered.push(g, adds);
 

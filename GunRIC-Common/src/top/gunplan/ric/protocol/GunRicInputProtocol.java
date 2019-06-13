@@ -1,10 +1,10 @@
 package top.gunplan.ric.protocol;
 
-import top.gunplan.ric.protocol.exp.GunRicProtocolError;
+import top.gunplan.ric.protocol.exp.GunRicProtocolException;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
 
-import static top.gunplan.ric.protocol.exp.GunRicProtocolError.GunRicProtocolErrorType.WRITE_PARAM_ERROR;
+import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.WRITE_PARAM_ERROR;
 
 /**
  * no concurrent class
@@ -71,7 +71,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         stdHeadWrite(util);
         util.writeByte((byte) paramLen);
         if (!writeParam(util)) {
-            throw new GunRicProtocolError("write Params error", WRITE_PARAM_ERROR);
+            throw new GunRicProtocolException("write Params error", WRITE_PARAM_ERROR);
         }
         util.write(END_FLAG);
         return util.getInput();

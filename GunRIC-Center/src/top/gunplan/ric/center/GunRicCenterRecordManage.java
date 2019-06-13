@@ -1,7 +1,8 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 /**
  * this class is used to record manage
@@ -16,7 +17,7 @@ public interface GunRicCenterRecordManage {
      * @param g record object
      * @return is or not
      */
-    boolean isFirst(GunRicCdtInterface g);
+    boolean isFirst(BaseGunRicCdt g);
 
     /**
      * register the recorder
@@ -44,10 +45,10 @@ public interface GunRicCenterRecordManage {
     /**
      * start Regex
      *
-     * @param g       GunRicInterfaceBuffer.GunRicCdtInterface
+     * @param g       GunRicInterfaceBuffer.BaseGunRicCdt
      * @param address InetSocketAddress
      */
-    void doRegex(final GunRicCdtInterface g, final GunAddressItem address);
+    void doRegex(final BaseGunRicCdt g, final GunAddressItemInterface address);
 
 
     /**

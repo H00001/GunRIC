@@ -3,7 +3,9 @@ package top.gunplan.ric.center;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItem4;
+import top.gunplan.ric.protocol.GunRicCdtImpl;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
@@ -53,8 +55,8 @@ public final class GunRicRegisterManage {
                 stream.readByte();
                 String addr;
                 for (; (addr = stream.readLine()) != null; ) {
-                    GunRicCdtInterface key = new GunRicCdtInterface(type, interfacename, methodname);
-                    GunRicCenterStdRecordManage.Instance.getHinstance().doRegex(key, new GunAddressItem(addr.split(property.getDivideFlag())[0], Integer.parseInt(addr.split(property.getDivideFlag())[1])));
+                    BaseGunRicCdt key = new GunRicCdtImpl(type, interfacename, methodname);
+                    GunRicCenterStdRecordManage.Instance.getHinstance().doRegex(key, new GunAddressItem4(addr.split(property.getDivideFlag())[0], Integer.parseInt(addr.split(property.getDivideFlag())[1])));
                 }
                 AbstractGunBaseLogUtil.debug("find local services " + interfacename + "." + methodname);
 

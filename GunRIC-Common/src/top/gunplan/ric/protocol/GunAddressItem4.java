@@ -1,7 +1,5 @@
 package top.gunplan.ric.protocol;
 
-import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.net.InetSocketAddress;
@@ -10,11 +8,11 @@ import java.util.Arrays;
 /**
  * @author dosdrtt
  */
-public class GunAddressItem implements GunAddressItemInterface, GunNetOutputInterface, GunNetInputInterface, GunRicOutputHelper {
+public class GunAddressItem4 implements GunAddressItemInterface {
 
-    private static final int FLAG_LEN = 8;
-    private static final int ADD_LEN = 8;
-    private static final int PORT_LEN = 2;
+
+    private static final int ADDR_LEN = 0b100;
+
     static final int NEED_SPACE = FLAG_LEN + ADD_LEN + PORT_LEN;
     private byte[] flag = new byte[FLAG_LEN];
     private InetSocketAddress address;
@@ -23,26 +21,26 @@ public class GunAddressItem implements GunAddressItemInterface, GunNetOutputInte
         this.flag = stream.readByte(FLAG_LEN);
     }
 
-    public GunAddressItem(InetSocketAddress address) {
+    public GunAddressItem4(InetSocketAddress address) {
         this.address = address;
     }
 
-    public GunAddressItem(String address, int port) {
+    public GunAddressItem4(String address, int port) {
         this(new InetSocketAddress(address, port));
+    }
+
+    public GunAddressItem4() {
+
     }
 
     private void readAddress(GunBytesUtil.GunReadByteStream stream) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < ADDR_LEN; i++) {
             int v = stream.readInt();
             sb.append(v).append(".");
         }
 
         this.address = new InetSocketAddress(sb.toString().substring(0, sb.length() - 1), stream.readInt());
-    }
-
-    public GunAddressItem() {
-
     }
 
 
@@ -88,11 +86,10 @@ public class GunAddressItem implements GunAddressItemInterface, GunNetOutputInte
         return true;
     }
 
-
+    @Override
     public boolean unSerialize(GunBytesUtil.GunReadByteStream stream) {
         readFlag(stream);
         readAddress(stream);
-
         return true;
     }
 

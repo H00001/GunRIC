@@ -1,11 +1,11 @@
 package top.gunplan.ric.center.record;
 
-import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
 import java.io.*;
@@ -26,12 +26,12 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
         super(lastRecord);
     }
 
-    private File initFile(final GunRicCdtInterface g) {
-        return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterFaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideFlag() + g.getId());
+    private File initFile(final BaseGunRicCdt g) {
+        return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterfaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideFlag() + g.getId());
     }
 
     @Override
-    public void firstAdd(GunRicCdtInterface g, GunAddressItem address) {
+    public void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
         try {
             File recordfile = initFile(g);
             if (!recordfile.exists()) {
@@ -47,7 +47,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void nextAdd(GunRicCdtInterface g, GunAddressItem address) {
+    public void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
         try {
             BufferedOutputStream bf;
             bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
@@ -59,17 +59,17 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    List<GunAddressItem> getAddressBase(GunRicCdtInterface g) {
+    List<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
         return null;
     }
 
 
-    private void writeFileAddress(BufferedOutputStream bf, final GunAddressItem address) throws IOException {
+    private void writeFileAddress(BufferedOutputStream bf, final GunAddressItemInterface address) throws IOException {
         bf.write((address.getAddress() + property.getDivideFlag() + address.getPort()).getBytes());
         bf.write('\n');
     }
 
-    private void writeFileFirst(GunRicCdtInterface g, BufferedOutputStream bf) throws IOException {
+    private void writeFileFirst(BaseGunRicCdt g, BufferedOutputStream bf) throws IOException {
         bf.write(g.getParams().length);
         for (Class<?> aClass : g.getParams()) {
             RicProtocolParamType tp = RicProtocolParamType.valuefrom(aClass);

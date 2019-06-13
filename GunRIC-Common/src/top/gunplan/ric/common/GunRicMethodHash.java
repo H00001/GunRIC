@@ -1,4 +1,4 @@
-package top.gunplan.ric.center.common;
+package top.gunplan.ric.common;
 
 import top.gunplan.ric.protocol.RicProtocolParamType;
 

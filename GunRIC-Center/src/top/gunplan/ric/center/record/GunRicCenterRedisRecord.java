@@ -1,10 +1,9 @@
 package top.gunplan.ric.center.record;
 
 
-import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.GunRicCenterRecord;
-import top.gunplan.ric.common.GunRicInterfaceBuffer;
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.List;
 
@@ -25,17 +24,17 @@ public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void firstAdd(GunRicCdtInterface g, GunAddressItem address) {
-        // jedis.lpush(g.getInterFaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
+    public void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
+        // jedis.lpush(g.getInterfaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
     }
 
     @Override
-    public void nextAdd(GunRicCdtInterface g, GunAddressItem address) {
-        // jedis.lpush(g.getInterFaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
+    public void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
+        // jedis.lpush(g.getInterfaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
     }
 
     @Override
-    List<GunAddressItem> getAddressBase(GunRicCdtInterface g) {
+    List<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
         return null;
     }
 }

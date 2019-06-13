@@ -6,16 +6,16 @@ import java.util.List;
  * GunRicProtocolFactory
  *
  * @author frank albert
- * @version 0.0.0.1
+ * @version 0.0.0.2
  * @date 2019-06-12 21:36
  */
 public class GunRicProtocolFactory {
-    public static GunRicHelloProtocol newHelloProtocol() {
+    static GunRicHelloProtocol newHelloProtocol() {
         return newHelloProtocol();
     }
 
 
-    public static GunRicRespAddressProtocol newGunRicRespAddressProtocol(List<GunAddressItem> addresses) {
+    public static GunRicRespAddressProtocol newGunRicRespAddressProtocol(List<GunAddressItemInterface> addresses) {
         return new GunRicRespAddressProtocol(addresses);
     }
 }

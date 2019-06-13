@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * @author dosdrtt
  */
-public class GunRicUserUsedConnection extends AbstractRicUserConnection {
+class GunRicUserUsedConnection extends AbstractRicUserConnection {
     private GunRicCommonBuffered<GunRicUserClassRec> buffer = GunRicInterfaceBuffer.newInstance();
-    private List<GunAddressItem> addresss;
+    private List<GunAddressItemInterface> addresss;
 
     void getAddressItem(Method method) throws IOException {
         socket.getOutputStream().write(new GunRicGetAddressProtocol(method).serialize());

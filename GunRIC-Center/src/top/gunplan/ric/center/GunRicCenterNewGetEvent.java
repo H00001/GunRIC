@@ -13,8 +13,8 @@ public class GunRicCenterNewGetEvent implements GunRicCommonRealDeal<AbstractCen
 
     @Override
     public GunRicRespAddressProtocol dealDataEvent(AbstractCenterHelperProtocol protocol) {
-        GunRicCdtInterface g = new GunRicCdtInterface(protocol);
-        List<GunAddressItem> s1 = hinstance.getFirstRecord().getAddress(g);
+        BaseGunRicCdt g = new GunRicCdtImpl(protocol);
+        List<GunAddressItemInterface> s1 = hinstance.getFirstRecord().getAddress(g);
         return GunRicProtocolFactory.newGunRicRespAddressProtocol(s1);
     }
 }

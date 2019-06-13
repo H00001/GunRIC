@@ -16,22 +16,22 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         this.code = RicProtocolCode.GET_RES;
     }
 
-    public GunRicRespAddressProtocol(List<GunAddressItem> addresses) {
+    private List<GunAddressItemInterface> addressItems = new ArrayList<>(1);
+
+    public GunRicRespAddressProtocol(List<GunAddressItemInterface> addresses) {
         this();
         addresses.forEach(this::pushAddress);
     }
 
-    private List<GunAddressItem> addressItems = new ArrayList<>(1);
-
-    public List<GunAddressItem> getAddressItems() {
+    public List<GunAddressItemInterface> getAddressItems() {
         return addressItems;
     }
 
-    public void pushAddress(GunAddressItem ad) {
+    public void pushAddress(GunAddressItemInterface ad) {
         this.addressItems.add(ad);
     }
 
-    public void pushAddressList(List<GunAddressItem> addresses) {
+    public void pushAddressList(List<GunAddressItemInterface> addresses) {
         addresses.forEach(this::pushAddress);
     }
 
@@ -51,7 +51,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         GunBytesUtil.GunWriteByteStream util = createSpace();
         publicSet(util);
         util.writeByte((byte) addressItems.size());
-        for (GunAddressItem item : addressItems) {
+        for (GunAddressItemInterface item : addressItems) {
             util.write(item.serialize());
         }
         util.write(END_FLAG);
@@ -60,7 +60,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
 
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
-        int lenneed = addressItems.size() * GunAddressItem.NEED_SPACE;
+        int lenneed = addressItems.size() * GunAddressItemInterface.NEED_SPACE;
         lenneed += TYPE_LEN + CODE_LEN + END_FLAG.length + SERIALIZE_LEN + 1;
         return new GunBytesUtil.GunWriteByteStream(new byte[lenneed]);
     }
@@ -71,7 +71,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         publicUnSet(util);
         int len = util.readByte();
         for (int i = 0; i < len; i++) {
-            GunAddressItem item = new GunAddressItem();
+            GunAddressItem4 item = new GunAddressItem4();
             item.unSerialize(util);
             addressItems.add(item);
             //addressItems.get(i).unSerialize()

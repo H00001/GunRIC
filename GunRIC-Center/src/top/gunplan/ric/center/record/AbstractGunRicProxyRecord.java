@@ -1,9 +1,9 @@
 package top.gunplan.ric.center.record;
 
-import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.GunRicCenterRecord;
 
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.List;
 
@@ -29,29 +29,30 @@ public abstract class AbstractGunRicProxyRecord implements GunRicCenterRecord {
      * @param address address info
      */
     @Override
-    public abstract void firstAdd(GunRicCdtInterface g, GunAddressItem address);
+    public abstract void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address);
 
 
     /**
      * nextAdd
-     *
+     * <p>
      * this method invoke at next record
+     *
      * @param g       ric record from information
      * @param address address info
      */
     @Override
-    public abstract void nextAdd(GunRicCdtInterface g, GunAddressItem address);
+    public abstract void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address);
 
     /**
      * get address
      *
-     * @param g GunRicCdtInterface
+     * @param g BaseGunRicCdt
      * @return list of item
      */
-    abstract List<GunAddressItem> getAddressBase(GunRicCdtInterface g);
+    abstract List<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g);
 
-    public List<GunAddressItem> getAddress(GunRicCdtInterface gunRicCdtInterface) {
-        List<GunAddressItem> addresses;
+    public List<GunAddressItemInterface> getAddress(BaseGunRicCdt gunRicCdtInterface) {
+        List<GunAddressItemInterface> addresses;
         if (lastRecord != null && (addresses = lastRecord.getAddress(gunRicCdtInterface)) != null) {
             return addresses;
         } else {

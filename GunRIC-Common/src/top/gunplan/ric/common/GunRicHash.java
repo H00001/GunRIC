@@ -1,4 +1,4 @@
-package top.gunplan.ric.center.common;
+package top.gunplan.ric.common;
 
 /**
  * GunRicHash a hash interface

@@ -40,12 +40,12 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @return GunNetOutputInterface
      */
     default <I extends AbstractGunRicProtocol, O extends AbstractGunRicProtocol> GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealHandle, I protocol) {
-        O baseProtcol = dealHandle.dealEvent(protocol);
+        O baseProtocol = dealHandle.dealEvent(protocol);
         if (protocol.getNext() == null) {
-            return baseProtcol;
+            return baseProtocol;
         } else {
             GunRicCombineOutput capt = new GunRicCombineOutput();
-            capt.push(baseProtcol);
+            capt.push(baseProtocol);
             for (; (protocol = (I) protocol.getNext()) != null; ) {
                 capt.push(dealHandle.dealEvent(protocol));
             }
@@ -77,17 +77,6 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      */
     GunNetOutputInterface dealEvent(GunRicGetAddressProtocol protocol);
 
-    /**
-     * dealDataEvent
-     * <p>
-     * bus of input
-     *
-     * @param var1 GunNetInputInterface
-     * @return GunNetOutputInterface
-     * @throws GunException kinds of exceptions
-     */
-    @Override
-    GunNetOutputInterface dealDataEvent(GunNetInputInterface var1);
 
     /**
      * deal colse event
@@ -116,4 +105,36 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      */
     @Override
     GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException;
+
+    /**
+     * dealDataEvent
+     * <p>
+     * bus of input
+     *
+     * @param var1 GunNetInputInterface
+     * @return GunNetOutputInterface
+     * @throws GunException kinds of exceptions
+     */
+    @Override
+    default GunNetOutputInterface dealDataEvent(GunNetInputInterface var1) throws GunException {
+        try {
+
+            if (var1 instanceof GunRicHelloProtocol) {
+                return dealEvent((GunRicHelloProtocol) (var1));
+            } else if (var1 instanceof GunRicInputProtocol) {
+                return dealEvent((GunRicInputProtocol) (var1));
+            } else if (var1 instanceof GunRicRegisterProtocol) {
+                return dealEvent((GunRicRegisterProtocol) var1);
+            } else if (var1 instanceof GunRicGetAddressProtocol) {
+                return dealEvent((GunRicGetAddressProtocol) var1);
+            } else {
+                AbstractGunBaseLogUtil.error("not known packet" + var1.getClass().getName(), getClass().getSimpleName());
+                return null;
+            }
+        } catch (GunIllegalProtocolException exp) {
+            AbstractGunBaseLogUtil.error(exp);
+            return null;
+        }
+    }
+
 }

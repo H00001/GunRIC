@@ -1,11 +1,10 @@
 package top.gunplan.ric.center.record;
 
-import top.gunplan.ric.center.GunRicCdtInterface;
 import top.gunplan.ric.center.GunRicCenterRecord;
-import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.center.anno.GunRicRegisterOrder;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.io.File;
 
@@ -22,13 +21,13 @@ public class GunRicCenterPathRecord implements GunRicCenterRecord {
     }
 
     @Override
-    public void firstAdd(GunRicCdtInterface g, GunAddressItem address) {
-        File f = new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterFaceName().replace(DT, L));
+    public void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
+        File f = new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterfaceName().replace(DT, L));
         f.mkdirs();
     }
 
     @Override
-    public void nextAdd(GunRicCdtInterface g, GunAddressItem address) {
+    public void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
 
     }
 

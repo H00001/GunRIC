@@ -1,13 +1,11 @@
 package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunException;
-import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.*;
 
 import java.net.SocketAddress;
-import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @author dosdrtt
@@ -16,8 +14,9 @@ import java.util.concurrent.atomic.LongAdder;
 public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHandle {
     /**
      * dealEvent
-     *
+     * <p>
      * deal GunRicInputProtocol request event
+     *
      * @param protocol GunRicInputProtocol
      * @return AbstractGunRicProtocol
      */
@@ -26,27 +25,14 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
 
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicRegisterProtocol protocol) {
-        throw new GunIllegalProtocolException("GunRicRegisterProtocol", "GunRIC-Provicer");
+        throw new GunIllegalProtocolException(GunRicRegisterProtocol.class, GunIllegalProtocolException.GunRicAcceptProtocolTypes.GunRicProviderAcceptProtocol);
     }
 
     @Override
     public AbstractGunRicProtocol dealEvent(GunRicGetAddressProtocol protocol) {
-        throw new GunIllegalProtocolException("GunRicRegisterProtocol", "GunRIC-Provicer");
+        throw new GunIllegalProtocolException(GunRicRegisterProtocol.class, GunIllegalProtocolException.GunRicAcceptProtocolTypes.GunRicProviderAcceptProtocol);
     }
 
-    @Override
-    public GunNetOutputInterface dealDataEvent(GunNetInputInterface var1) throws GunException {
-        if (var1 instanceof GunRicHelloProtocol) {
-            /**
-             *   hello do not need packet because hello send have interval
-             */
-            return dealEvent((GunRicHelloProtocol) (var1));
-        } else if (var1 instanceof GunRicInputProtocol) {
-
-            return dealEvent((GunRicInputProtocol) (var1));
-        }
-        return null;
-    }
 
     @Override
     public GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException {

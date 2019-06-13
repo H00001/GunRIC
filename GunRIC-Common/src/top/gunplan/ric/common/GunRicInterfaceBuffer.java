@@ -1,7 +1,7 @@
 package top.gunplan.ric.common;
 
 
-import top.gunplan.ric.protocol.GunAddressItem;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  * @author dosdrtt
  */
 public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunRicCommonBuffered<T> {
-    private HashMap<T, List<GunAddressItem>> mapping = new HashMap<>();
+    private HashMap<T, List<GunAddressItemInterface>> mapping = new HashMap<>();
 
 
     private GunRicInterfaceBuffer() {
@@ -23,7 +23,7 @@ public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunR
 
 
     @Override
-    public List<GunAddressItem> get(T key) {
+    public List<GunAddressItemInterface> get(T key) {
         return mapping.get(key);
     }
 
@@ -34,7 +34,7 @@ public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunR
 
 
     @Override
-    public void push(T key, List<GunAddressItem> addresses) {
+    public void push(T key, List<GunAddressItemInterface> addresses) {
         mapping.put(key, addresses);
     }
 
