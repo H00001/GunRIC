@@ -1,6 +1,8 @@
 package top.gunplan.ric.provider;
 
 
+import top.gunplan.ric.common.AbstractGunRicCommonProtocolSocket;
+import top.gunplan.ric.common.GunRicUserConnectionFactory;
 import top.gunplan.ric.protocol.GunAddressItem4;
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
 
@@ -39,46 +41,37 @@ class GunRicPublishManage {
         InetSocketAddress[] addrs = ppt.getAddress();
         int succeedsum = 0;
         for (InetSocketAddress addr : addrs) {
-            Socket ss = new Socket(addr.getHostString(), addr.getPort());
-            if (publishRegister(ss.getOutputStream()) && resolveResult(ss.getInputStream())) {
+            AbstractGunRicCommonProtocolSocket p = GunRicUserConnectionFactory.newSocket(addr);
+            if (publishRegister(p) && resolveResult(p)) {
                 succeedsum++;
             }
-            ss.close();
+            p.setNoUsed();
         }
         return succeedsum >= 1;
     }
 
-    private boolean resolveResult(InputStream is) throws Exception {
-        byte[] bt = new byte[BUFFER_LEN];
-        GunRicRegisterStatusProtocol poto;
-        int readied;
+    private boolean resolveResult(AbstractGunRicCommonProtocolSocket is) throws Exception {
         int nowcount = 0;
-        while ((readied = is.read(bt)) > 0) {
-            poto = new GunRicRegisterStatusProtocol();
-            byte[] bts = new byte[readied];
-            System.arraycopy(bt, 0, bts, 0, readied);
-            poto.unSerialize(bts);
+        while (nowcount < registerMapping.size()) {
+            GunRicRegisterStatusProtocol protocol = is.receiveProtocol(GunRicRegisterStatusProtocol.class);
             do {
                 nowcount++;
-                AbstractGunBaseLogUtil.debug(registerMapping.get((short) poto.getSerialnumber()) + " register succeed", "[REGISTER]");
-                poto = (GunRicRegisterStatusProtocol) poto.getNext();
+                AbstractGunBaseLogUtil.debug(registerMapping.get((short) protocol.getSerialnumber()) + " register succeed", "[REGISTER]");
+                protocol = (GunRicRegisterStatusProtocol) protocol.getNext();
             }
-            while (poto != null);
-            if (readied < BUFFER_LEN && nowcount == registerMapping.size()) {
-                break;
-            }
+            while (protocol != null);
         }
         return true;
     }
 
-    private boolean publishRegister(OutputStream os) {
+    private boolean publishRegister(AbstractGunRicCommonProtocolSocket os) {
         GunRicRegisterProtocol protocol = new GunRicRegisterProtocol();
         Class<?> clazz;
         try {
             while ((clazz = getNextClass()) != null) {
                 for (Method md : clazz.getMethods()) {
                     constructProtocol(clazz, md, protocol);
-                    os.write(protocol.serialize());
+                    os.sendProtocol(protocol);
                     protocol.clearParams();
                 }
             }
@@ -96,7 +89,7 @@ class GunRicPublishManage {
         protocol.setInameMname(md);
         protocol.setItem(new GunAddressItem4(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
         SerizableCode serizableCode = SerizableCode.newInstance();
-        final int v = serizableCode.getSerizNum32();
+        final int v = serizableCode.getSerialNum32();
         registerMapping.put((short) v, clazz.getName() + "." + md.getName());
         protocol.setSerialnumber(v);
         protocol.pushParamTypes(md.getParameterTypes());

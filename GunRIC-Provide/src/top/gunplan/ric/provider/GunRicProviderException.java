@@ -11,7 +11,7 @@ public class GunRicProviderException extends GunException {
     private static final long serialVersionUID = 8682992677645496203L;
     private GunRicProviderErrorType type;
 
-    public GunRicProviderException(String why, GunRicProviderErrorType type) {
+    GunRicProviderException(String why, GunRicProviderErrorType type) {
         super(why);
         this.type = type;
     }

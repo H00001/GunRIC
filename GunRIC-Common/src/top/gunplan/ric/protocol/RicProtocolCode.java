@@ -18,7 +18,7 @@ public enum RicProtocolCode {
         this.value = i;
     }
 
-    public static RicProtocolCode valuefrom(int val) {
+    public static RicProtocolCode valueFrom(int val) {
         RicProtocolCode[] types = values();
         for (RicProtocolCode tp : types) {
             if (tp.value == val) {

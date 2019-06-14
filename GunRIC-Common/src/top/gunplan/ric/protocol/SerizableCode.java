@@ -12,20 +12,20 @@ public interface SerizableCode {
      * @return instance
      */
     static SerizableCode newInstance() {
-        return new GunRicSerizableCodeImpl();
+        return new GunRicSerialCodeImpl();
     }
 
     /**
-     * getSerizNum32
+     * getSerialNum32
      *
      * @return number 32 bit
      */
-    int getSerizNum32();
+    int getSerialNum32();
 
     /**
-     * getSerizNum64
+     * getSerialNum64
      *
      * @return number 64 bit
      */
-    long getSerizNum64();
+    long getSerialNum64();
 }

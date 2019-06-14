@@ -9,7 +9,7 @@ import top.gunplan.utils.GunBytesUtil;
  */
 public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper {
 
-    public GunRicOutputProtocol() {
+    GunRicOutputProtocol() {
         this.type = RicProtocolType.RESPONSE;
         this.code = RicProtocolCode.SUCCEED;
     }
@@ -43,8 +43,8 @@ public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implemen
     public GunBytesUtil.GunWriteByteStream createSpace() {
         int len = TYPE_LEN + SERIALIZE_LEN + CODE_LEN + 1 + END_FLAG.length;
         len = addLenByParam(len, returnValue.obj);
-        byte[] serize = new byte[len];
-        return new GunBytesUtil.GunWriteByteStream(serize);
+        byte[] serial = new byte[len];
+        return new GunBytesUtil.GunWriteByteStream(serial);
     }
 
     @Override

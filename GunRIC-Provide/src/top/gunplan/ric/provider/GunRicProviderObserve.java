@@ -16,8 +16,7 @@ public class GunRicProviderObserve extends GunNettyDefaultObserveImpl {
             GunRicPublishManage manage = new GunRicPublishManage(GunNettyPropertyManagerImpl.getProperty(GunRicProvideProperty.class));
             return manage.publishInterface();
         } catch (Exception e) {
-            AbstractGunBaseLogUtil.error(e);
-            AbstractGunBaseLogUtil.error("register fail", "[PROVIDER]");
+            AbstractGunBaseLogUtil.error(e.getMessage(), "register fail", "[PROVIDER]");
             return false;
         }
     }

@@ -4,6 +4,7 @@ import top.gunplan.ric.protocol.exp.GunRicProtocolException;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
 
+import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.NOTKNOW;
 import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.WRITE_PARAM_ERROR;
 
 /**
@@ -27,9 +28,9 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         return helpers;
     }
 
-    private boolean analyizeParams(int paramlen, GunBytesUtil.GunReadByteStream util) {
-        helpers = new ParamHelper[paramlen];
-        for (int i = 0; i < paramlen; i++) {
+    private boolean analyzeParams(int paramLen, GunBytesUtil.GunReadByteStream util) {
+        helpers = new ParamHelper[paramLen];
+        for (int i = 0; i < paramLen; i++) {
             helpers[i] = readOnceParam(util);
         }
         return checkEnd(util);
@@ -40,12 +41,12 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         helpers = new ParamHelper[len];
     }
 
-    public void pushParams(Object[] args) {
+    public void pushParams(Object[] args) throws GunRicProtocolException {
         setParamLen((byte) args.length);
         for (Object arg : args) {
             if (!pushParam(arg)) {
-                AbstractGunBaseLogUtil.error("push parameters error");
-                return;
+                throw new GunRicProtocolException("push parameters error", NOTKNOW);
+
             }
         }
     }
@@ -94,7 +95,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     private int otherCount = 0;
 
 
-    public byte getParamLeng() {
+    public byte getParamLen() {
         return (byte) paramLen;
     }
 
@@ -126,7 +127,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         publicUnSet(util);
         super.stdHeadAnaly(util);
         this.paramLen = util.readByte();
-        boolean b = paramLen == 0 ? checkEnd(util) : analyizeParams(paramLen, util);
+        boolean b = paramLen == 0 ? checkEnd(util) : analyzeParams(paramLen, util);
         return b && checkNext(util);
     }
 }

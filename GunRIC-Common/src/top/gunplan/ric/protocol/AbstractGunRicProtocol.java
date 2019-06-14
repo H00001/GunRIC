@@ -21,8 +21,8 @@ import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtoco
  */
 public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInputInterface, GunNetOutputInterface {
 
-    private SerizableCode serizable = SerizableCode.newInstance();
-    private GunRicProtocolBody body;
+    private SerizableCode serial = SerizableCode.newInstance();
+
 
     @Override
     public boolean unSerialize(byte[] in) {
@@ -59,7 +59,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     }
 
     public void autoCreateSerialnumber() {
-        this.serialnumber = serizable.getSerizNum32();
+        this.serialnumber = serial.getSerialNum32();
     }
 
 
@@ -126,7 +126,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
 
     void publicUnSet(GunBytesUtil.GunReadByteStream stream) {
         this.type = RicProtocolType.valuefrom(stream.readInt());
-        this.code = RicProtocolCode.valuefrom(stream.readInt());
+        this.code = RicProtocolCode.valueFrom(stream.readInt());
         this.serialnumber = stream.readInt();
     }
 

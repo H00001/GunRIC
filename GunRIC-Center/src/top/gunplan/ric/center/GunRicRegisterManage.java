@@ -44,7 +44,7 @@ public final class GunRicRegisterManage {
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             if (file.toFile().isFile()) {
-                final String interfacename = file.getParent().toString().replace(GunRicCenterStaticPath.SERVICES_PATH + "/", "").replace("/", ".");
+                final String interfaceName = file.getParent().toString().replace(GunRicCenterStaticPath.SERVICES_PATH + "/", "").replace("/", ".");
                 final String methodname = file.toFile().getName().split("_")[0];
                 GunBytesUtil.GunReadByteStream stream = new GunBytesUtil.GunReadByteStream(Files.readAllBytes(file));
                 int paramlen = stream.readByte();
@@ -55,10 +55,10 @@ public final class GunRicRegisterManage {
                 stream.readByte();
                 String addr;
                 for (; (addr = stream.readLine()) != null; ) {
-                    BaseGunRicCdt key = new GunRicCdtImpl(type, interfacename, methodname);
+                    BaseGunRicCdt key = new GunRicCdtImpl(type, interfaceName, methodname);
                     GunRicCenterStdRecordManage.Instance.getHinstance().doRegex(key, new GunAddressItem4(addr.split(property.getDivideFlag())[0], Integer.parseInt(addr.split(property.getDivideFlag())[1])));
                 }
-                AbstractGunBaseLogUtil.debug("find local services " + interfacename + "." + methodname);
+                AbstractGunBaseLogUtil.debug("find local services " + interfaceName + "." + methodname);
 
             }
             return FileVisitResult.CONTINUE;

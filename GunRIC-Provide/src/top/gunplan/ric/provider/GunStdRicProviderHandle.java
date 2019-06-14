@@ -45,7 +45,7 @@ public class GunStdRicProviderHandle implements GunRicCommonRealDeal<GunRicInput
             AbstractGunBaseLogUtil.error(inputpol.gMN(), "method not found", "[PROVIDE]");
             throw new GunRicProviderException("method not found", INVOKE_ERROR);
         }
-        help.setObj(inputpol.getParamLeng() == 0 ? instMethod.invoke(rpcService) : instMethod.invoke(rpcService, inputpol.getParameters()));
+        help.setObj(inputpol.getParamLen() == 0 ? instMethod.invoke(rpcService) : instMethod.invoke(rpcService, inputpol.getParameters()));
         return help;
     }
 

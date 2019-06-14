@@ -21,7 +21,7 @@ public final class GunRicTypeDividePacketManage {
         assert retype != null;
         switch (retype) {
             case HELLO: {
-                RicProtocolCode code = RicProtocolCode.valuefrom(util.readInt());
+                RicProtocolCode code = RicProtocolCode.valueFrom(util.readInt());
                 protocol = code == RicProtocolCode.HELLO_REQ ? new GunRicHelloProtocol(true) : new GunRicHelloProtocol(false);
             }
             util.pSub2();
@@ -37,7 +37,7 @@ public final class GunRicTypeDividePacketManage {
             }
             break;
             case GET: {
-                RicProtocolCode code = RicProtocolCode.valuefrom(util.readInt());
+                RicProtocolCode code = RicProtocolCode.valueFrom(util.readInt());
                 protocol = code == RicProtocolCode.GET_REQ ? new GunRicGetAddressProtocol() : new GunRicRespAddressProtocol();
             }
             util.pSub2();

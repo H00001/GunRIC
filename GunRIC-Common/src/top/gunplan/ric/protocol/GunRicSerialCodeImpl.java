@@ -3,18 +3,18 @@ package top.gunplan.ric.protocol;
 import java.util.Random;
 
 /**
- * std create serizabel code
+ * std create serial code
  */
-class GunRicSerizableCodeImpl implements SerizableCode {
+class GunRicSerialCodeImpl implements SerizableCode {
     private Random rand = new Random(System.currentTimeMillis());
 
     @Override
-    public int getSerizNum32() {
-        return (int) getSerizNum64();
+    public int getSerialNum32() {
+        return (int) getSerialNum64();
     }
 
     @Override
-    public long getSerizNum64() {
+    public long getSerialNum64() {
         return (System.currentTimeMillis()) ^ System.nanoTime() ^ (rand.nextInt(100));
     }
 }

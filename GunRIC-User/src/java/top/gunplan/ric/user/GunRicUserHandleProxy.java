@@ -4,7 +4,9 @@ package top.gunplan.ric.user;
 import top.gunplan.ric.common.GunRicCommonBuffered;
 import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.*;
-import top.gunplan.ric.user.util.GunRicBufferRead;
+import top.gunplan.ric.protocol.exp.GunRicProtocolException;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +31,12 @@ public class GunRicUserHandleProxy extends AbstractGunRicUserHandleProxy {
         GunRicInputProtocol input = new GunRicInputProtocol();
         input.setInameMname(method);
         if (args != null) {
-            input.pushParams(args);
+            try {
+                input.pushParams(args);
+            } catch (GunRicProtocolException exp) {
+                AbstractGunBaseLogUtil.error(exp);
+                return null;
+            }
         }
         return connection.send(input).getReturnValue().obj;
     }

@@ -18,7 +18,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
 
     private List<GunAddressItemInterface> addressItems = new ArrayList<>(1);
 
-    public GunRicRespAddressProtocol(List<GunAddressItemInterface> addresses) {
+    GunRicRespAddressProtocol(List<GunAddressItemInterface> addresses) {
         this();
         addresses.forEach(this::pushAddress);
     }
