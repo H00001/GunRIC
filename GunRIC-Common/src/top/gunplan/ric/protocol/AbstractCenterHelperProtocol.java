@@ -66,4 +66,5 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
             }
         }
     }
+
 }

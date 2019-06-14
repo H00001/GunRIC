@@ -1,3 +1,5 @@
+
+
 package top.gunplan.ric.provider;
 
 
@@ -17,6 +19,7 @@ import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @nonconcurrent
@@ -27,7 +30,7 @@ class GunRicPublishManage {
      *
      */
 
-    private HashMap<Short, String> registerMapping = new HashMap<>();
+    private Map<Short, String> registerMapping = new HashMap<>();
     private BufferedReader reader;
 
     GunRicPublishManage(final GunRicProvideProperty ppt) {
@@ -82,9 +85,6 @@ class GunRicPublishManage {
         return true;
     }
 
-    private static final int BUFFER_LEN = 1024;
-
-
     private void constructProtocol(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
         protocol.setInameMname(md);
         protocol.setItem(new GunAddressItem4(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
@@ -93,7 +93,6 @@ class GunRicPublishManage {
         registerMapping.put((short) v, clazz.getName() + "." + md.getName());
         protocol.setSerialnumber(v);
         protocol.pushParamTypes(md.getParameterTypes());
-
     }
 
     private Class<?> getNextClass() throws IOException, ClassNotFoundException {
@@ -101,3 +100,4 @@ class GunRicPublishManage {
         return line != null ? Class.forName(line) : null;
     }
 }
+

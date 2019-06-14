@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @author dosdrtt
  */
 public abstract class AbstractGunRicCommonSocket extends Socket implements Delayed {
-    private boolean isUsed;
+    private boolean isUsed = true;
 
     AbstractGunRicCommonSocket(String addr, int port) throws IOException {
         super(addr, port);

@@ -1,8 +1,8 @@
 package top.gunplan.ric.user;
 
+import top.gunplan.ric.common.GunRicBufferRead;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
 import top.gunplan.ric.protocol.RicProtocolCode;
-import top.gunplan.ric.user.util.GunRicBufferRead;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;

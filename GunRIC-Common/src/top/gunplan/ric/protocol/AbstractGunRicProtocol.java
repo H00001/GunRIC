@@ -253,5 +253,8 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
         }
     }
 
+    public void incrSeq() {
+        this.serialnumber++;
+    }
 
 }
