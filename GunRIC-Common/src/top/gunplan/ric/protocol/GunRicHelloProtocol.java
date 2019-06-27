@@ -5,7 +5,7 @@ import top.gunplan.utils.GunBytesUtil;
 /**
  * @author dosdrtt
  */
-public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper {
+public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper,GunRicProtocolBody {
     public GunRicHelloProtocol(boolean type) {
         this.type = RicProtocolType.HELLO;
         this.code = type ? RicProtocolCode.HELLO_REQ : RicProtocolCode.HELLO_RES;
@@ -30,5 +30,15 @@ public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRi
     public boolean unSerialize(GunBytesUtil.GunReadByteStream util) {
         publicUnSet(util);
         return checkEnd(util) && checkNext(util);
+    }
+
+    @Override
+    public boolean fillData(GunBytesUtil.GunWriteByteStream stream) {
+        return true;
+    }
+
+    @Override
+    public int needSpace() {
+        return 0;
     }
 }

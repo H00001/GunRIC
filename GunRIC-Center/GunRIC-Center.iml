@@ -25,7 +25,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="GunRIC-Common" />
     <orderEntry type="library" name="jedis-3.0.1" level="project" />
   </component>
 </module>

@@ -22,6 +22,7 @@ import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtoco
 public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInputInterface, GunNetOutputInterface {
 
     private SerizableCode serizable = SerizableCode.newInstance();
+    private GunRicProtocolBody body;
 
     @Override
     public boolean unSerialize(byte[] in) {
