@@ -3,6 +3,7 @@ package top.gunplan.ric.provider;
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.impl.GunNettyDefaultObserveImpl;
 import top.gunplan.netty.impl.propertys.GunNettyCoreProperty;
+import top.gunplan.ric.provider.constat.ConstatPool;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
@@ -16,7 +17,7 @@ public class GunRicProviderObserve extends GunNettyDefaultObserveImpl {
             GunRicPublishManage manage = new GunRicPublishManage(GunNettyPropertyManagerImpl.getProperty(GunRicProvideProperty.class));
             return manage.publishInterface();
         } catch (Exception e) {
-            AbstractGunBaseLogUtil.error(e.getMessage(), "register fail", "[PROVIDER]");
+            AbstractGunBaseLogUtil.error(e.getMessage(), "register fail", ConstatPool.Model.TAG);
             return false;
         }
     }

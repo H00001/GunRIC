@@ -78,8 +78,12 @@ class GunRicPublishManage {
                     protocol.clearParams();
                 }
             }
-        } catch (Exception e) {
-            AbstractGunBaseLogUtil.error(e);
+        } catch (ReflectiveOperationException | IOException e) {
+            if (e instanceof IOException) {
+                AbstractGunBaseLogUtil.error(e.getMessage(), "cannot output please check Socket");
+            } else {
+                AbstractGunBaseLogUtil.error(e.getMessage(), "class error");
+            }
             return false;
         }
         return true;

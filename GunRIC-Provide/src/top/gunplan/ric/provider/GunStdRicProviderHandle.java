@@ -4,6 +4,8 @@ import top.gunplan.ric.apis.test.anno.GunUseImpl;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
@@ -23,12 +25,8 @@ public class GunStdRicProviderHandle implements GunRicCommonRealDeal<GunRicInput
         try {
             helper = invokeMethod(i);
             o.setReturnValue(helper);
-        } catch (Exception e) {
-            if (e instanceof ReflectiveOperationException) {
-                helper.setObj(e.getClass().getSimpleName() + ":" + e.getMessage());
-            } else {
-                helper.setObj(e.getClass() + ":" + e.getMessage());
-            }
+        } catch (ReflectiveOperationException e) {
+            helper.setObj(e.getClass().getSimpleName() + ":" + e.getMessage());
             AbstractGunBaseLogUtil.error(e);
             o.setCode(FAIL);
         }
@@ -36,7 +34,7 @@ public class GunStdRicProviderHandle implements GunRicCommonRealDeal<GunRicInput
 
     }
 
-    private AbstractGunRicExecuteProtocol.ParamHelper invokeMethod(GunRicInputProtocol inputpol) throws Exception {
+    private AbstractGunRicExecuteProtocol.ParamHelper invokeMethod(GunRicInputProtocol inputpol) throws ReflectiveOperationException {
         AbstractGunRicExecuteProtocol.ParamHelper help = new AbstractGunRicExecuteProtocol.ParamHelper();
         Class<?> inst = Class.forName(inputpol.gIN());
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).getDeclaredConstructor().newInstance();

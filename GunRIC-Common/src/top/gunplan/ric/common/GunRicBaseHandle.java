@@ -35,8 +35,8 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     /**
      * dealMuchEvent
      *
-     * @param dealHandle hanle to real deal event
-     * @param protocol   prorocol
+     * @param dealHandle handle to real deal event
+     * @param protocol   protocol
      * @return GunNetOutputInterface
      */
     default <I extends AbstractGunRicProtocol, O extends AbstractGunRicProtocol> GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealHandle, I protocol) {
