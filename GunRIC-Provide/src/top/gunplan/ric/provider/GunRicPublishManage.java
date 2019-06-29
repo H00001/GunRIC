@@ -40,7 +40,7 @@ class GunRicPublishManage {
 
     }
 
-    boolean publishInterface() throws Exception {
+    boolean publishInterface() throws IOException, ReflectiveOperationException {
         InetSocketAddress[] addrs = ppt.getAddress();
         int succeedsum = 0;
         for (InetSocketAddress addr : addrs) {
@@ -53,7 +53,7 @@ class GunRicPublishManage {
         return succeedsum >= 1;
     }
 
-    private boolean resolveResult(AbstractGunRicCommonProtocolSocket is) throws Exception {
+    private boolean resolveResult(AbstractGunRicCommonProtocolSocket is) throws ReflectiveOperationException, IOException {
         int nowcount = 0;
         while (nowcount < registerMapping.size()) {
             GunRicRegisterStatusProtocol protocol = is.receiveProtocol(GunRicRegisterStatusProtocol.class);

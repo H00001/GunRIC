@@ -7,6 +7,8 @@ import top.gunplan.ric.provider.constat.ConstatPool;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
+import java.io.IOException;
+
 /**
  * @author dosdrtt
  */
@@ -16,7 +18,7 @@ public class GunRicProviderObserve extends GunNettyDefaultObserveImpl {
         try {
             GunRicPublishManage manage = new GunRicPublishManage(GunNettyPropertyManagerImpl.getProperty(GunRicProvideProperty.class));
             return manage.publishInterface();
-        } catch (Exception e) {
+        } catch (IOException | ReflectiveOperationException e) {
             AbstractGunBaseLogUtil.error(e.getMessage(), "register fail", ConstatPool.Model.TAG);
             return false;
         }
