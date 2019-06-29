@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="GunNioUtil">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../GunConcurrent/out/artifacts/GunNioUtil_jar/GunNioUtil.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

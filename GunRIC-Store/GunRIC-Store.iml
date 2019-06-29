@@ -12,7 +12,5 @@
     </content>
     <orderEntry type="jdk" jdkName="12" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="GunNetty" level="project" />
-    <orderEntry type="library" name="GunNioUtil" level="project" />
   </component>
 </module>

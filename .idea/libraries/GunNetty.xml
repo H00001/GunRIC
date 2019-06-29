@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="GunNetty">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../GunConcurrent/out/artifacts/GunNetty_jar/GunNetty.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
