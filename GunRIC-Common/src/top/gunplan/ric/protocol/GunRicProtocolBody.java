@@ -1,5 +1,7 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.utils.GunBytesUtil;
+
 /**
  * this is a new way to organize the protocol
  *
@@ -8,12 +10,14 @@ package top.gunplan.ric.protocol;
  */
 public interface GunRicProtocolBody {
     /**
+     * fillData
+     *
      * on protocol construct happened
      * {@link AbstractGunRicProtocol } will
      * called this method to construct message
      * body.
-     *
-     * @param stream
+     * @param stream input stream
+     * @return fill data result
      */
     boolean fillData(GunBytesUtil.GunWriteByteStream stream);
 

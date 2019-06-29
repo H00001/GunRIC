@@ -1,8 +1,8 @@
 package top.gunplan.ric.user;
 
-import top.gunplan.ric.common.GunRicBufferRead;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
 import top.gunplan.ric.protocol.RicProtocolCode;
+import top.gunplan.ric.utils.GunRicBufferRead;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
@@ -22,7 +22,6 @@ public abstract class AbstractRicUserConnection implements GunRicUserConnection 
             socket = GunRicUserConnectionFactory.newSocket("127.0.0.1-8855");
         } catch (IOException e) {
             AbstractGunBaseLogUtil.error(e);
-            return;
         }
     }
 

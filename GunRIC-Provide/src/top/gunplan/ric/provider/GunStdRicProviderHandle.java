@@ -23,12 +23,13 @@ public class GunStdRicProviderHandle implements GunRicCommonRealDeal<GunRicInput
         try {
             helper = invokeMethod(i);
             o.setReturnValue(helper);
-        } catch (ReflectiveOperationException e) {
-            helper.setObj(e.getClass().getSimpleName() + ":" + e.getLocalizedMessage());
+        } catch (Exception e) {
+            if (e instanceof ReflectiveOperationException) {
+                helper.setObj(e.getClass().getSimpleName() + ":" + e.getMessage());
+            } else {
+                helper.setObj(e.getClass() + ":" + e.getMessage());
+            }
             AbstractGunBaseLogUtil.error(e);
-            o.setCode(FAIL);
-        } catch (Exception exp) {
-            AbstractGunBaseLogUtil.error(exp);
             o.setCode(FAIL);
         }
         return o;

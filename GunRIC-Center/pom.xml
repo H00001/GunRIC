@@ -8,6 +8,13 @@
     <artifactId>ric-center</artifactId>
     <version>Init-1.0.0.3</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>top.gunplan</groupId>
+            <artifactId>ric-common</artifactId>
+            <version>Init-1.0.0.1</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

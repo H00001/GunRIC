@@ -1,6 +1,6 @@
 package top.gunplan.ric.center;
 
-import top.gunplan.netty.GunTimer;
+import top.gunplan.netty.GunNettyTimer;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.nio.channels.SelectionKey;
@@ -13,7 +13,7 @@ import java.util.Set;
  * @author dosdrtt
  * @date 2019/05/30
  */
-public class GunRicCoreTimer implements GunTimer {
+public class GunRicCoreTimer implements GunNettyTimer {
     @Override
     public int interval() {
         return 1;

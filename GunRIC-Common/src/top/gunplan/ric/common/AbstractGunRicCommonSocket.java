@@ -1,5 +1,7 @@
 package top.gunplan.ric.common;
 
+import top.gunplan.ric.utils.GunRicBufferRead;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.Delayed;
@@ -35,7 +37,7 @@ public abstract class AbstractGunRicCommonSocket extends Socket implements Delay
     @Override
     public abstract int compareTo(Delayed o);
 
-    public boolean isUsed() {
+    boolean isUsed() {
         return isUsed;
     }
 
@@ -47,12 +49,12 @@ public abstract class AbstractGunRicCommonSocket extends Socket implements Delay
         isUsed = false;
     }
 
-    public void sendTcpData(byte[] bytes) throws IOException {
+    void sendTcpData(byte[] bytes) throws IOException {
         this.getOutputStream().write(bytes);
     }
 
 
-    public byte[] receiveTcpData() throws IOException {
+    byte[] receiveTcpData() throws IOException {
         return GunRicBufferRead.bufferRead(this.getInputStream());
     }
 }

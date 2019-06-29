@@ -1,4 +1,4 @@
-package top.gunplan.ric.user.util;
+package top.gunplan.ric.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

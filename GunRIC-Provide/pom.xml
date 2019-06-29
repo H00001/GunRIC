@@ -11,6 +11,11 @@
     <dependencies>
         <dependency>
             <groupId>top.gunplan</groupId>
+            <artifactId>ric-common</artifactId>
+            <version>Init-1.0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>top.gunplan</groupId>
             <artifactId>ric-provider-lib</artifactId>
             <version>Init-1.0.0.1</version>
         </dependency>
