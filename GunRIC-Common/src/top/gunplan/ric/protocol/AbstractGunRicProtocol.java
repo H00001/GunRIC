@@ -24,6 +24,9 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     private SerizableCode serial = SerizableCode.newInstance();
 
 
+    public final static byte TYPE_LEN = 2;
+    public final static byte CODE_LEN = 2;
+
     @Override
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(in);
@@ -67,8 +70,6 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
         this.serialnumber = serialnumber;
     }
 
-    final static byte TYPE_LEN = 2;
-    final static byte CODE_LEN = 2;
 
     boolean checkNext(GunBytesUtil.GunReadByteStream util) {
         boolean thTrueSeria = true;
