@@ -26,6 +26,9 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
 
     public final static byte TYPE_LEN = 2;
     public final static byte CODE_LEN = 2;
+    public final static byte SERIALIZE_LEN = 2;
+    public final static byte[] END_FLAG = {0x7a, 0x7a};
+
 
     @Override
     public boolean unSerialize(byte[] in) {
@@ -33,7 +36,6 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
         return unSerialize(util);
     }
 
-    final static byte[] END_FLAG = {0x7a, 0x7a};
 
     public AbstractGunRicProtocol() {
         this.autoCreateSerialnumber();
@@ -41,7 +43,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
 
     RicProtocolType type;
 
-    final static byte SERIALIZE_LEN = 2;
+
     RicProtocolCode code;
     /**
      * chain style to divide pacjet

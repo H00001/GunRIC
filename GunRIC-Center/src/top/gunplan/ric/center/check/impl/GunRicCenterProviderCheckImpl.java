@@ -22,7 +22,7 @@ public class GunRicCenterProviderCheckImpl implements GunRicCenterProviderCheck 
         AbstractGunRicCommonProtocolSocket ss = null;
         GunRicHelloProtocol pt = new GunRicHelloProtocol(true);
         try {
-            ss = GunRicUserConnectionFactory.newSocket("127.0.0.1", 8822);
+            ss = GunRicUserConnectionFactoryImpl.newSocket("127.0.0.1", 8822);
             short seq = (short) pt.getSerialnumber();
             ss.sendProtocol(pt);
             pt = ss.receiveProtocol(pt.getClass());

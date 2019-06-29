@@ -4,7 +4,7 @@ package top.gunplan.ric.provider;
 
 
 import top.gunplan.ric.common.AbstractGunRicCommonProtocolSocket;
-import top.gunplan.ric.common.GunRicUserConnectionFactory;
+import top.gunplan.ric.common.GunRicUserConnectionFactoryImpl;
 import top.gunplan.ric.protocol.GunAddressItem4;
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
 
@@ -44,7 +44,7 @@ class GunRicPublishManage {
         InetSocketAddress[] addrs = ppt.getAddress();
         int succeedsum = 0;
         for (InetSocketAddress addr : addrs) {
-            AbstractGunRicCommonProtocolSocket p = GunRicUserConnectionFactory.newSocket(addr);
+            AbstractGunRicCommonProtocolSocket p = GunRicUserConnectionFactoryImpl.newSocket(addr);
             if (publishRegister(p) && resolveResult(p)) {
                 succeedsum++;
             }

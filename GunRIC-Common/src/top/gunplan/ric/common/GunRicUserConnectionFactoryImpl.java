@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 /**
  * @author dosdrtt
  */
-public class GunRicUserConnectionFactory {
+public class GunRicUserConnectionFactoryImpl implements GunRicConnectionFactory {
 
     private final static DelayQueue<AbstractGunRicCommonProtocolSocket> SOCKETS = new DelayQueue<>();
 
