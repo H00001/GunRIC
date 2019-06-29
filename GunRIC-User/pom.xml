@@ -7,6 +7,13 @@
     <groupId>top.gunplan</groupId>
     <artifactId>ric-user</artifactId>
     <version>Init-1.0.0.2</version>
+    <dependencies>
+        <dependency>
+            <groupId>top.gunplan</groupId>
+            <artifactId>ric-common</artifactId>
+            <version>Init-1.0.0.1</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
