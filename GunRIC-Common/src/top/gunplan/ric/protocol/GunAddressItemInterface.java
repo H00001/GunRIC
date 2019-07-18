@@ -25,7 +25,7 @@ public interface GunAddressItemInterface extends GunNetOutputInterface, GunNetIn
     InetSocketAddress getInet();
 
     /**
-     * getPort
+     * portNumber
      *
      * @return int
      */

@@ -31,7 +31,7 @@ public abstract class AbstractRicUserConnection implements GunRicUserConnection 
         GunRicHelloProtocol protocol = new GunRicHelloProtocol(true);
         socket.getOutputStream().write(protocol.serialize());
         protocol.unSerialize(GunRicBufferRead.bufferRead(socket.getInputStream()));
-        return protocol.getCode() == RicProtocolCode.HELLO_RES;
+        return protocol.code() == RicProtocolCode.HELLO_RES;
     }
 
 }

@@ -1,9 +1,8 @@
 package top.gunplan.ric.protocol;
 
 
-import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.netty.protocol.GunNetOutputInterface;
 import top.gunplan.ric.protocol.exp.GunRicProtocolException;
+import top.gunplan.ric.stand.GunRicBaseStand;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.io.ByteArrayOutputStream;
@@ -19,7 +18,7 @@ import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtoco
  * @version 0.0.0.0
  * @date
  */
-public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInputInterface, GunNetOutputInterface {
+public abstract class AbstractGunRicProtocol implements GunRicNxInput {
 
     private SerizableCode serial = SerizableCode.newInstance();
 
@@ -30,7 +29,6 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     public final static byte[] END_FLAG = {0x7a, 0x7a};
 
 
-    @Override
     public boolean unSerialize(byte[] in) {
         GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(in);
         return unSerialize(util);
@@ -48,18 +46,18 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     /**
      * chain style to divide pacjet
      */
-    private AbstractGunRicProtocol next;
+    private GunRicBaseStand next;
     private int serialnumber = 0;
 
-    public AbstractGunRicProtocol getNext() {
+    public GunRicBaseStand next() {
         return next;
     }
 
-    private void setNext(AbstractGunRicProtocol next) {
+    private void setNext(GunRicBaseStand next) {
         this.next = next;
     }
 
-    public int getSerialnumber() {
+    public int serialNumber() {
         return serialnumber;
     }
 
@@ -76,7 +74,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     boolean checkNext(GunBytesUtil.GunReadByteStream util) {
         boolean thTrueSeria = true;
         if (util.getLenSum() - util.getNowflag() > 0) {
-            AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(util);
+            GunRicBaseStand protocol = GunRicTypeDividePacketManage.findPackage(util);
             thTrueSeria = protocol.unSerialize(util);
             setNext(protocol);
         }
@@ -84,7 +82,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
     }
 
 
-    public RicProtocolType getType() {
+    public RicProtocolType type() {
         return type;
     }
 
@@ -92,7 +90,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput, GunNetInp
         this.type = type;
     }
 
-    public RicProtocolCode getCode() {
+    public RicProtocolCode code() {
         return code;
     }
 

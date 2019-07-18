@@ -25,12 +25,12 @@ public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {
 
     @Override
     public void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
-        // jedis.lpush(g.getInterfaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
+        // jedis.lpush(g.interfaceName() + ":" + g.methodName(), address.getAddress() + "-" + address.portNumber());
     }
 
     @Override
     public void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
-        // jedis.lpush(g.getInterfaceName() + ":" + g.getMethodName(), address.getAddress() + "-" + address.getPort());
+        // jedis.lpush(g.interfaceName() + ":" + g.methodName(), address.getAddress() + "-" + address.portNumber());
     }
 
     @Override

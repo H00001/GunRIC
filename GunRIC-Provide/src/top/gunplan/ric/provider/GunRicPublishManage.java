@@ -59,8 +59,8 @@ class GunRicPublishManage {
             GunRicRegisterStatusProtocol protocol = is.receiveProtocol(GunRicRegisterStatusProtocol.class);
             do {
                 nowcount++;
-                AbstractGunBaseLogUtil.debug(registerMapping.get((short) protocol.getSerialnumber()) + " register succeed", "[REGISTER]");
-                protocol = (GunRicRegisterStatusProtocol) protocol.getNext();
+                AbstractGunBaseLogUtil.debug(registerMapping.get((short) protocol.serialNumber()) + " register succeed", "[REGISTER]");
+                protocol = (GunRicRegisterStatusProtocol) protocol.next();
             }
             while (protocol != null);
         }

@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol;
 
 import top.gunplan.netty.protocol.GunNetOutputInterface;
+import top.gunplan.ric.stand.GunRicBaseStand;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * @author dosdrtt
  */
-public final class GunRicCombineOutput extends AbstractGunRicProtocol {
+public final class GunRicCombineOutput extends AbstractGunRicProtocol implements GunRicBaseStand {
     private List<GunNetOutputInterface> protocollist = new ArrayList<>(1);
 
     public void push(GunNetOutputInterface protocol) {

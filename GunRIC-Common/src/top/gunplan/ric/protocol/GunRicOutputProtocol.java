@@ -1,5 +1,7 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.ric.stand.GunRicInvokeReqStand;
+import top.gunplan.ric.stand.GunRicInvokeResStand;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
@@ -7,25 +9,27 @@ import top.gunplan.utils.GunBytesUtil;
  *
  * @author dosdrtt
  */
-public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper {
+public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper, GunRicInvokeResStand {
 
     GunRicOutputProtocol() {
         this.type = RicProtocolType.RESPONSE;
         this.code = RicProtocolCode.SUCCEED;
     }
 
-    public GunRicOutputProtocol(AbstractGunRicProtocol request) {
+    public GunRicOutputProtocol(GunRicInvokeReqStand request) {
         this();
-        setSerialnumber(request.getSerialnumber());
+        setSerialnumber(request.serialNumber());
     }
 
     private ParamHelper returnValue;
 
-    public ParamHelper getReturnValue() {
+    @Override
+    public ParamHelper result() {
         return returnValue;
     }
 
-    public void setReturnValue(ParamHelper returnValue) {
+    @Override
+    public void setResult(ParamHelper returnValue) {
         this.returnValue = returnValue;
     }
 

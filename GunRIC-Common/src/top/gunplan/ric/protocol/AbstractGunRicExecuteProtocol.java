@@ -17,17 +17,10 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
     String methodName;
     String interfaceName;
 
-    public String getMethodName() {
+    public String methodName() {
         return methodName;
     }
 
-    public String gIN() {
-        return interfaceName;
-    }
-
-    public String gMN() {
-        return methodName;
-    }
 
     public void setInameMname(Method method) {
         this.setMethodName(method.getName());
@@ -39,7 +32,7 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
         this.methodName = methodName;
     }
 
-    public String getInterfaceName() {
+    public String interfaceName() {
         return interfaceName;
     }
 

@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol;
 
 
+import top.gunplan.ric.stand.GunRicRegisterStand;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
@@ -8,7 +9,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @version 0.0.0.2
  * @since 0.0.0.1
  */
-public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
+public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol implements GunRicRegisterStand {
 
     private GunAddressItemInterface item = new GunAddressItem4();
 
@@ -21,11 +22,13 @@ public class GunRicRegisterProtocol extends AbstractCenterHelperProtocol {
         this.item = item;
     }
 
-    public String getIp() {
+    @Override
+    public String ipAddress() {
         return item.getAddress();
     }
 
-    public int getPort() {
+    @Override
+    public int portNumber() {
         return item.getPort();
     }
 

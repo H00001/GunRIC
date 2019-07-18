@@ -1,5 +1,6 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.ric.stand.GunRicRegisterStateStand;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
@@ -7,7 +8,7 @@ import top.gunplan.utils.GunBytesUtil;
  * @version 0.0.0.1
  * @since 0.0.0.1
  */
-public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper {
+public class GunRicRegisterStatusProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper, GunRicRegisterStateStand {
     public GunRicRegisterStatusProtocol() {
         this.type = RicProtocolType.REGRESP;
         this.code = RicProtocolCode.SUCCEED;

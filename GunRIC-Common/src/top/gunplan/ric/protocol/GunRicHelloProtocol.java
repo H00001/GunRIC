@@ -1,15 +1,17 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.ric.stand.GunRicHelloStand;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
  * @author dosdrtt
  */
-public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper,GunRicProtocolBody {
+public class GunRicHelloProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper, GunRicProtocolBody, GunRicHelloStand {
     public GunRicHelloProtocol(boolean type) {
         this.type = RicProtocolType.HELLO;
         this.code = type ? RicProtocolCode.HELLO_REQ : RicProtocolCode.HELLO_RES;
     }
+
 
     public GunRicHelloProtocol() {
         super();

@@ -15,11 +15,11 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
     private Class<?>[] types = null;
     private int now = 0;
 
-    public int getParamcount() {
+    public int paramLength() {
         return paramCount;
     }
 
-    public Class<?>[] getTypes() {
+    public Class<?>[] paramTypes() {
         return types;
     }
 
@@ -57,6 +57,7 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
         this.pushParamTypes(method.getParameterTypes());
 
     }
+
     void readParamType(GunBytesUtil.GunReadByteStream util) {
         this.paramCount = util.readByte();
         if (this.paramCount != 0) {

@@ -1,15 +1,17 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.ric.stand.GunRicBaseStand;
+
 /**
  * @param <F> GunRicInputProtocol
- *
- * @author dosdrtt
  * @param <T> GunRicOutputProtocol
+ * @author dosdrtt
  */
 @FunctionalInterface
-public interface GunRicCommonRealDealEvent<F extends AbstractGunRicProtocol, T extends AbstractGunRicProtocol> {
+public interface GunRicCommonRealDealEvent<F extends GunRicBaseStand, T extends GunRicBaseStand> {
     /**
      * dealEvent
+     *
      * @param source source protocol
      * @return transfer protocol
      */

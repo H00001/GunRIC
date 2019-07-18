@@ -23,14 +23,14 @@ public class GunRicCenterProviderCheckImpl implements GunRicCenterProviderCheck 
         GunRicHelloProtocol pt = new GunRicHelloProtocol(true);
         try {
             ss = GunRicUserConnectionFactoryImpl.newSocket("127.0.0.1", 8822);
-            short seq = (short) pt.getSerialnumber();
+            short seq = (short) pt.serialNumber();
             ss.sendProtocol(pt);
             pt = ss.receiveProtocol(pt.getClass());
-            if (seq == pt.getSerialnumber()) {
+            if (seq == pt.serialNumber()) {
                 AbstractGunBaseLogUtil.debug("receive")
                 ;
             } else {
-                AbstractGunBaseLogUtil.error(seq + "seq fail" + pt.getSerialnumber() + pt.getCode());
+                AbstractGunBaseLogUtil.error(seq + "seq fail" + pt.serialNumber() + pt.code());
             }
 
         } catch (IOException e) {

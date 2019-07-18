@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol;
 
 import top.gunplan.ric.protocol.exp.GunRicProtocolException;
+import top.gunplan.ric.stand.GunRicBaseStand;
 
 import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.PROROCOL_INVIDA;
 
@@ -11,10 +12,10 @@ public class GunIllegalProtocolException extends GunRicProtocolException {
 
     private static final long serialVersionUID = 885590046532621322L;
 
-    private GunRicAcceptProtocolTypes type = null;
-    private Class<? extends AbstractGunRicProtocol> protocol = null;
+    private GunRicAcceptProtocolTypes type;
+    private Class<? extends GunRicBaseStand> protocol;
 
-    public <T extends AbstractGunRicProtocol> GunIllegalProtocolException(Class<T> protocol, GunRicAcceptProtocolTypes accept) {
+    public <T extends GunRicBaseStand> GunIllegalProtocolException(Class<T> protocol, GunRicAcceptProtocolTypes accept) {
         super(protocol.getName() + " is error", PROROCOL_INVIDA);
         this.protocol = protocol;
         this.type = accept;

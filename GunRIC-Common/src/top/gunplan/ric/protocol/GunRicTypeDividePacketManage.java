@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol;
 
 
+import top.gunplan.ric.stand.GunRicBaseStand;
 import top.gunplan.utils.GunBytesUtil;
 
 /**
@@ -10,14 +11,14 @@ import top.gunplan.utils.GunBytesUtil;
  * @date 1557303969
  */
 public final class GunRicTypeDividePacketManage {
-    public static AbstractGunRicProtocol findPackage(byte[] bytes) {
+    public static GunRicBaseStand findPackage(byte[] bytes) {
         GunBytesUtil.GunReadByteStream util = new GunBytesUtil.GunReadByteStream(bytes);
         return findPackage(util);
     }
 
-    static AbstractGunRicProtocol findPackage(GunBytesUtil.GunReadByteStream util) {
+    static GunRicBaseStand findPackage(GunBytesUtil.GunReadByteStream util) {
         RicProtocolType retype = RicProtocolType.valuefrom(util.readInt());
-        AbstractGunRicProtocol protocol = null;
+        GunRicBaseStand protocol = null;
         assert retype != null;
         switch (retype) {
             case HELLO: {

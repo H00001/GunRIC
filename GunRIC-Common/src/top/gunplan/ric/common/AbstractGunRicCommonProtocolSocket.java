@@ -2,6 +2,7 @@ package top.gunplan.ric.common;
 
 import top.gunplan.ric.protocol.AbstractGunRicProtocol;
 import top.gunplan.ric.protocol.GunRicTypeDividePacketManage;
+import top.gunplan.ric.stand.GunRicBaseStand;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -19,18 +20,18 @@ public abstract class AbstractGunRicCommonProtocolSocket extends AbstractGunRicC
         super(addr, port);
     }
 
-    public void sendProtocol(AbstractGunRicProtocol protocol) throws IOException {
+    public void sendProtocol(GunRicBaseStand protocol) throws IOException {
         super.sendTcpData(protocol.serialize());
     }
 
-    public <U extends AbstractGunRicProtocol> U receiveProtocol(Class<U> uClass) throws ReflectiveOperationException, IOException {
+    public <U extends GunRicBaseStand> U receiveProtocol(Class<U> uClass) throws ReflectiveOperationException, IOException {
         U object = uClass.getDeclaredConstructor().newInstance();
         object.unSerialize(super.receiveTcpData());
         return object;
     }
 
-    public AbstractGunRicProtocol receiveProtocol() throws ReflectiveOperationException, IOException {
-        AbstractGunRicProtocol protocol = GunRicTypeDividePacketManage.findPackage(super.receiveTcpData());
+    public GunRicBaseStand receiveProtocol() throws ReflectiveOperationException, IOException {
+        GunRicBaseStand protocol = GunRicTypeDividePacketManage.findPackage(super.receiveTcpData());
         protocol.unSerialize(super.receiveTcpData());
         return protocol;
     }

@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol;
 
-import top.gunplan.ric.common.GunRicMethodHash;
+
+import top.gunplan.ric.stand.GunRicParamBaseStand;
 
 /**
  * GunRicCdtImpl
@@ -19,8 +20,8 @@ public class GunRicCdtImpl extends BaseGunRicCdt {
         super(params, interFaceName, methodName);
     }
 
-    public GunRicCdtImpl(AbstractCenterHelperProtocol help) {
-        this(help.getTypes(), help.interfaceName, help.methodName);
+    public GunRicCdtImpl(GunRicParamBaseStand help) {
+        this(help.paramTypes(), help.interfaceName(), help.methodName());
     }
 
     private GunRicCdtImpl(String interFaceName, String methodName) {

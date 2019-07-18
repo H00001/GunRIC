@@ -31,7 +31,7 @@ public abstract class BaseGunRicCdt implements GunRicCommonExeIst {
     }
 
     public BaseGunRicCdt(AbstractCenterHelperProtocol help) {
-        this(help.getTypes(), help.interfaceName, help.methodName);
+        this(help.paramTypes(), help.interfaceName, help.methodName);
     }
 
     BaseGunRicCdt(String interFaceName, String methodName) {

@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol;
 
 import top.gunplan.ric.protocol.exp.GunRicProtocolException;
+import top.gunplan.ric.stand.GunRicInvokeReqStand;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
 
@@ -13,7 +14,7 @@ import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtoco
  * @author dosdrtt
  * @date
  */
-public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper {
+public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper, GunRicInvokeReqStand {
     private ParamHelper[] helpers;
 
     public GunRicInputProtocol() {
@@ -95,12 +96,14 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     private int otherCount = 0;
 
 
-    public byte getParamLen() {
-        return (byte) paramLen;
+    @Override
+    public int paramLength() {
+        return paramLen;
     }
 
 
-    public Class<?>[] getParamTypeList() {
+    @Override
+    public Class<?>[] paramTypes() {
         Class<?>[] var2 = new Class<?>[paramLen];
         for (int i = 0; i < paramLen; i++) {
             var2[i] = helpers[i].clazz;
@@ -108,7 +111,8 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         return var2;
     }
 
-    public Object[] getParameters() {
+    @Override
+    public Object[] parameters() {
         Object[] var2 = new Object[paramLen];
         for (int i = 0; i < paramLen; i++) {
             var2[i] = helpers[i].obj;

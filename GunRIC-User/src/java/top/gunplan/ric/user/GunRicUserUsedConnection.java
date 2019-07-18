@@ -24,8 +24,8 @@ class GunRicUserUsedConnection extends AbstractRicUserConnection {
         byte[] pt = GunRicBufferRead.bufferRead(socket.getInputStream());
         GunRicRespAddressProtocol protocol = new GunRicRespAddressProtocol();
         protocol.unSerialize(pt);
-        this.buffer.push(new GunRicUserClassRec(method.getDeclaringClass()), protocol.getAddressItems());
-        this.addresss = protocol.getAddressItems();
+        this.buffer.push(new GunRicUserClassRec(method.getDeclaringClass()), protocol.addressItems());
+        this.addresss = protocol.addressItems();
         AbstractGunBaseLogUtil.debug("address has finded ");
     }
 

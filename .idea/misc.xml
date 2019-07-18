@@ -14,6 +14,7 @@
         <option value="$PROJECT_DIR$/GunRIC-Common/pom.xml" />
         <option value="$PROJECT_DIR$/GunRIC-APIS/pom.xml" />
         <option value="$PROJECT_DIR$/GunRIC-Store/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>

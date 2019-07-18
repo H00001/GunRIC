@@ -38,7 +38,7 @@ public class GunRicUserHandleProxy extends AbstractGunRicUserHandleProxy {
                 return null;
             }
         }
-        return connection.send(input).getReturnValue().obj;
+        return connection.send(input).result().obj;
     }
 
 

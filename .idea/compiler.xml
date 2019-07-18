@@ -25,6 +25,7 @@
       <module name="GunRIC-Provide-Lib" target="12" />
       <module name="GunRIC-Store" target="12" />
       <module name="GunRIC-User" target="12" />
+      <module name="GunRPC" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="RmicSettings">

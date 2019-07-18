@@ -1,5 +1,6 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.ric.stand.GunRicGetAddressStand;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.lang.reflect.Method;
@@ -7,7 +8,8 @@ import java.lang.reflect.Method;
 /**
  * @author dosdrtt
  */
-public class GunRicGetAddressProtocol extends AbstractCenterHelperProtocol implements GunRicOutputHelper {
+public class GunRicGetAddressProtocol extends AbstractCenterHelperProtocol implements GunRicOutputHelper, GunRicGetAddressStand {
+
 
     public GunRicGetAddressProtocol() {
         this.type = RicProtocolType.GET;
