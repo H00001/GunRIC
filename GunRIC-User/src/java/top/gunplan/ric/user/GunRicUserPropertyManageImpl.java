@@ -4,6 +4,7 @@ package top.gunplan.ric.user;
 import top.gunplan.netty.GunException;
 
 
+import top.gunplan.netty.GunExceptionType;
 import top.gunplan.netty.GunProperty;
 import top.gunplan.ric.protocol.util.PathUtil;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
@@ -79,7 +80,7 @@ public final class GunRicUserPropertyManageImpl {
                         }
                     }
                     if (!obj.doRegex()) {
-                        throw new GunException("property regex error:" + obj.getClass());
+                        throw new GunException(GunExceptionType.EXC2, "property regex error:" + obj.getClass());
                     }
                 }
             }

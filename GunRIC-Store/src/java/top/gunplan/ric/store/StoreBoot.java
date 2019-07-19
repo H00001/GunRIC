@@ -20,4 +20,9 @@ public class StoreBoot implements GunBootServerBase {
     public int sync() throws Exception {
         return 0;
     }
+
+    @Override
+    public int stop() throws InterruptedException {
+        return 0;
+    }
 }

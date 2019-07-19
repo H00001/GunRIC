@@ -1,6 +1,7 @@
 package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunException;
+import top.gunplan.netty.GunExceptionType;
 
 /**
  * GunRicProviderException
@@ -12,7 +13,7 @@ public class GunRicProviderException extends GunException {
     private GunRicProviderErrorType type;
 
     GunRicProviderException(String why, GunRicProviderErrorType type) {
-        super(why);
+        super(GunExceptionType.EXC3, why);
         this.type = type;
     }
 

@@ -4,7 +4,7 @@ package top.gunplan.ric.center.contest;
  * GunRicCenterInformation
  *
  * @author frank albert
- * @version 0.0.0.1
+ * @version 0.0.0.2
  * @date 2019-07-19 08:23
  */
 
@@ -19,10 +19,10 @@ public interface GunRicCenterInformation {
 
     enum GunRicCenterRole {
         /**
-         * MASTER   :
-         * SLAVE    :
-         * OBSERVER :
-         * NONE     :
+         * MASTER   :master
+         * SLAVE    :slave
+         * OBSERVER :un using
+         * NONE     :none
          */
 
         MASTER, SLAVE, OBSERVER, NONE

@@ -1,5 +1,6 @@
 package top.gunplan.ric.common;
 
+import top.gunplan.netty.GunChannelException;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.protocol.GunNetInputInterface;
@@ -92,7 +93,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param e Exception
      */
     @Override
-    default void dealExceptionEvent(Exception e) {
+    default void dealExceptionEvent(GunChannelException e) {
         AbstractGunBaseLogUtil.error(e);
     }
 

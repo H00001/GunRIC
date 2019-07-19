@@ -20,6 +20,8 @@ import java.util.concurrent.*;
  * @date 1557359009
  */
 public class ProviderBoot implements GunBootServerBase {
+    private volatile GunBootServer server;
+
     public static void main(String[] args) {
         try {
             new ProviderBoot().sync();
@@ -30,7 +32,7 @@ public class ProviderBoot implements GunBootServerBase {
 
     @Override
     public int sync() throws Exception {
-        GunBootServer server = GunBootServerFactory.getInstance();
+        server = GunBootServerFactory.getInstance();
         server.registerObserve(new GunRicProviderObserve());
         ExecutorService es0 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
@@ -45,5 +47,10 @@ public class ProviderBoot implements GunBootServerBase {
         return server.sync();
 
 
+    }
+
+    @Override
+    public int stop() throws InterruptedException {
+        return server.stop();
     }
 }

@@ -1,6 +1,7 @@
 package top.gunplan.ric.user;
 
 import top.gunplan.netty.GunException;
+import top.gunplan.netty.GunExceptionType;
 
 /**
  * @author dosdrtt
@@ -8,6 +9,6 @@ import top.gunplan.netty.GunException;
  */
 public class GunRicUserReceiveException extends GunException {
     public GunRicUserReceiveException(String why) {
-        super(why);
+        super(GunExceptionType.EXC2, why);
     }
 }

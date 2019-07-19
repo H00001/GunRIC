@@ -26,6 +26,8 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class CenterBoot implements GunBootServerBase {
+    private volatile GunBootServer server;
+
     public static void main(String[] args) {
         try {
             new CenterBoot().sync();
@@ -36,7 +38,7 @@ public class CenterBoot implements GunBootServerBase {
 
     @Override
     public int sync() throws Exception {
-        GunBootServer server = GunBootServerFactory.getInstance();
+        server = GunBootServerFactory.getInstance();
         server.registerObserve(new GunRicCenterObserve());
         ExecutorService es0 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
@@ -55,5 +57,10 @@ public class CenterBoot implements GunBootServerBase {
 
         return server.sync();
 
+    }
+
+    @Override
+    public int stop() throws InterruptedException {
+        return server.stop();
     }
 }

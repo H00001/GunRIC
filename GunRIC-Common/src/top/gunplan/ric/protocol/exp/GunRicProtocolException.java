@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol.exp;
 
 import top.gunplan.netty.GunException;
+import top.gunplan.netty.GunExceptionType;
 
 /**
  * this exception is used to ric provider
@@ -14,7 +15,7 @@ public class GunRicProtocolException extends GunException {
     private GunRicProtocolErrorType type;
 
     public GunRicProtocolException(String why, GunRicProtocolErrorType type) {
-        super(why);
+        super(GunExceptionType.EXC2, why);
         this.type = type;
     }
 
