@@ -15,12 +15,15 @@ import java.io.IOException;
 public class GunRicProviderObserve extends GunNettyDefaultObserveImpl {
     @Override
     public boolean onBooting(GunNettyCoreProperty gunProperty) {
-        try {
-            GunRicPublishManage manage = new GunRicPublishManage(GunNettyPropertyManagerImpl.getProperty(GunRicProvideProperty.class));
-            return manage.publishInterface();
-        } catch (IOException | ReflectiveOperationException e) {
-            AbstractGunBaseLogUtil.error(e.getMessage(), "register fail", ConstatPool.Model.TAG);
-            return false;
-        }
+        new Thread(() -> {
+            try {
+                GunRicPublishManage manage = new GunRicPublishManage(GunNettyPropertyManagerImpl.getProperty(GunRicProvideProperty.class));
+                manage.publishInterface();
+            } catch (IOException | ReflectiveOperationException e) {
+                AbstractGunBaseLogUtil.error(e.getMessage(), "register fail", ConstatPool.Model.TAG);
+
+            }
+        }).start();
+        return true;
     }
 }
