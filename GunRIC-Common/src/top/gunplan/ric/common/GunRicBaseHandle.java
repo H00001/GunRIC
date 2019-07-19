@@ -42,15 +42,8 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      */
     default <I extends GunRicBaseStand, O extends GunRicBaseStand> O dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealHandle, I protocol) {
         O baseProtocol = dealHandle.dealEvent(protocol);
-        GunRicBaseStand next;
-        if (protocol.next() == null) {
-            return baseProtocol;
-        } else {
-            for (; (next = protocol.next()) != null; ) {
-                baseProtocol.next(dealDataEvent(next));
-            }
-            return baseProtocol;
-        }
+        baseProtocol.next(protocol.next() == null ? null : dealDataEvent(protocol.next()));
+        return baseProtocol;
     }
 
     /**

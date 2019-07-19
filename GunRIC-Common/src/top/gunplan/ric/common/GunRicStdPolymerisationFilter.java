@@ -10,14 +10,15 @@ import top.gunplan.ric.stand.GunRicBaseStand;
 public class GunRicStdPolymerisationFilter implements GunRicPolymerisationFilter {
     @Override
     public DealResult doOutputFilter(GunNettyOutputFilterChecker gunNettyOutputFilterChecker) throws GunChannelException {
-        GunRicCombineOutput opt = new GunRicCombineOutput();
         GunRicBaseStand std = (GunRicBaseStand) gunNettyOutputFilterChecker.getTransfer();
-        opt.push(std);
-        do {
-            opt.push(std);
+        if (std.next() != null) {
+            GunRicCombineOutput opt = new GunRicCombineOutput();
+            for (; std != null; std = std.next()) {
+                opt.push(std);
+            }
+            gunNettyOutputFilterChecker.setTransfer(opt);
+            gunNettyOutputFilterChecker.translate();
         }
-        while ((std = std.next()) != null);
-        gunNettyOutputFilterChecker.setTransfer(opt);
         return DealResult.NEXT;
     }
 }

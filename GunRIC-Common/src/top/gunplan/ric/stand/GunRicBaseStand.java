@@ -30,6 +30,11 @@ public interface GunRicBaseStand extends GunNetInputInterface, GunNetOutputInter
     RicProtocolCode code();
 
 
+    void setCode(RicProtocolCode coder);
+
+
+    void setType(RicProtocolType typer);
+
     /**
      * @return serialNumber
      */

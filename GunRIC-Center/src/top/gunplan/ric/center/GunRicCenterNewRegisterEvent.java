@@ -21,7 +21,7 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRic
     public GunRicRegisterStateStand dealDataEvent(GunRicRegisterStand protocol) {
         GunAddressItemInterface ai = new GunAddressItem4(protocol.ipAddress(), protocol.portNumber());
         BaseGunRicCdt interfaceInformation = new GunRicCdtImpl(protocol);
-        GunRicRegisterStatusProtocol o = new GunRicRegisterStatusProtocol(protocol.serialNumber());
+        GunRicRegisterStateStand o = new GunRicRegisterStatusProtocol(protocol.serialNumber());
         try {
             manage.doRegex(interfaceInformation, ai);
         } catch (GunRicCenterRecordFailException exp) {
