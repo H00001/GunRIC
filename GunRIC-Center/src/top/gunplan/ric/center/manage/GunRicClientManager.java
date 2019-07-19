@@ -3,14 +3,14 @@ package top.gunplan.ric.center.manage;
 import java.util.List;
 
 /**
- * GunRicClientManage
+ * GunRicClientManager
  *
  * @author frank albert
- * @version 0.0.0.1
+ * @version 0.0.0.2
  * @date 2019-07-19 20:13
  */
 
-public interface GunRicClientManage<U extends GunRicClient> {
+public interface GunRicClientManager<U extends GunRicClient> {
 
     List<U> clientList();
 

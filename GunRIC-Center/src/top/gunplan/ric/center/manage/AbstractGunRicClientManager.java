@@ -3,7 +3,7 @@ package top.gunplan.ric.center.manage;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public abstract class AbstractGunRicClientManage<S extends GunRicClient> implements GunRicClientManage<S> {
+public abstract class AbstractGunRicClientManager<S extends GunRicClient> implements GunRicClientManager<S> {
     List<S> clients = new CopyOnWriteArrayList<>();
 
     @Override

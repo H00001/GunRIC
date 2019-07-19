@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2019-07-19 19:57
  */
 
-public interface GunRicProviderManage extends GunRicClientManage<GunRicProviderClient> {
+public interface GunRicProviderManage extends GunRicClientManager<GunRicProviderClient> {
 
     List<GunRicProviderClient> removeUnuseProvider();
 }

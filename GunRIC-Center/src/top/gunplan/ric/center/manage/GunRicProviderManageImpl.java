@@ -12,8 +12,7 @@ import java.util.List;
  * @version 0.0.0.2
  * @date 2019-07-19 20:50
  */
-public class GunRicProviderManageImpl extends AbstractGunRicClientManage<GunRicProviderClient> implements GunRicProviderManage {
-
+public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRicProviderClient> implements GunRicProviderManage {
     {
         /**
          * test

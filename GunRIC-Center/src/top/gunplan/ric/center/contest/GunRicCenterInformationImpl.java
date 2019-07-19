@@ -1,5 +1,8 @@
 package top.gunplan.ric.center.contest;
 
+import top.gunplan.netty.GunProperty;
+import top.gunplan.netty.anno.GunPropertyMap;
+
 /**
  * GunRicCenterInformationImpl
  *
@@ -7,11 +10,17 @@ package top.gunplan.ric.center.contest;
  * @version 0.0.0.1
  * @date 2019-07-19 19:54
  */
-public class GunRicCenterInformationImpl implements GunRicCenterInformation {
-    private final short id;
-    private final String name;
-    private final GunRicCenterInformationAttachObject attach;
+
+@GunPropertyMap(name = "ric-center-node-information")
+public class GunRicCenterInformationImpl implements GunRicCenterInformation, GunProperty {
+    private int id;
+    private String name;
+    private GunRicCenterInformationAttachObject attach;
     private GunRicCenterRole role;
+
+    public GunRicCenterInformationImpl() {
+
+    }
 
     public GunRicCenterInformationImpl(short id, String name) {
         this(id, name, null);
@@ -25,7 +34,7 @@ public class GunRicCenterInformationImpl implements GunRicCenterInformation {
     }
 
     @Override
-    public short id() {
+    public int id() {
         return id;
     }
 
@@ -47,5 +56,10 @@ public class GunRicCenterInformationImpl implements GunRicCenterInformation {
     @Override
     public void changeRole(GunRicCenterRole role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
     }
 }

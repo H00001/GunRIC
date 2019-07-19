@@ -10,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version 0.0.0.1
  * @date 2019-07-19 20:38
  */
-public class GunRicConsumerManageImpl extends AbstractGunRicClientManage<GunRicConsumerClient> implements GunRicConsumerManage {
+public class GunRicConsumerManageImpl extends AbstractGunRicClientManager<GunRicConsumerClient> implements GunRicConsumerManage {
 
     private List<GunRicConsumerClient> clients = new CopyOnWriteArrayList<>();
 

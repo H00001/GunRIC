@@ -9,11 +9,9 @@ package top.gunplan.ric.center.contest;
  */
 
 public interface GunRicCenterInformation {
-    short id();
-
+    int id();
 
     String name();
-
 
     GunRicCenterInformationAttachObject attach();
 
