@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class AbstractGunRicClientManager<S extends GunRicClient> implements GunRicClientManager<S> {
-    List<S> clients = new CopyOnWriteArrayList<>();
+    protected List<S> clients = new CopyOnWriteArrayList<>();
 
     @Override
     public List<S> clientList() {

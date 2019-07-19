@@ -1,6 +1,7 @@
-package top.gunplan.ric.center.manage;
+package top.gunplan.ric.center.manage.impl;
 
 import top.gunplan.ric.center.common.GunChannels;
+import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
@@ -16,7 +17,7 @@ import java.nio.channels.SocketChannel;
  * GunRicProviderClientImpl
  *
  * @author frank albert
- * @version 0.0.0.1
+ * @version 0.0.0.2
  * @date 2019-07-19 20:02
  */
 public class GunRicProviderClientImpl implements GunRicProviderClient {
