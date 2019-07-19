@@ -27,8 +27,7 @@ public class GunRicCenterProviderCheckImpl implements GunRicCenterProviderCheck 
             ss.sendProtocol(pt);
             pt = ss.receiveProtocol(pt.getClass());
             if (seq == pt.serialNumber()) {
-                AbstractGunBaseLogUtil.debug("receive")
-                ;
+                AbstractGunBaseLogUtil.debug("receive");
             } else {
                 AbstractGunBaseLogUtil.error(seq + "seq fail" + pt.serialNumber() + pt.code());
             }

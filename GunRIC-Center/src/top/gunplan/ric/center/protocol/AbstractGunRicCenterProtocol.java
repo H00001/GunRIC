@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.protocol;
 
-import top.gunplan.ric.common.GunRicBaseHandle;
+
 import top.gunplan.ric.protocol.AbstractGunRicProtocol;
 import top.gunplan.ric.stand.GunRicBaseStand;
 import top.gunplan.utils.GunBytesUtil;

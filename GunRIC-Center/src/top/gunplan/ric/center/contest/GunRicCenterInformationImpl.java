@@ -1,5 +1,12 @@
 package top.gunplan.ric.center.contest;
 
+/**
+ * GunRicCenterInformationImpl
+ *
+ * @author frank albert
+ * @version 0.0.0.1
+ * @date 2019-07-19 19:54
+ */
 public class GunRicCenterInformationImpl implements GunRicCenterInformation {
     private final short id;
     private final String name;

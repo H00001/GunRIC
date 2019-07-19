@@ -16,6 +16,10 @@ import java.lang.reflect.Method;
 public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtocol {
     String methodName;
     String interfaceName;
+    public static byte METHOD_LEN = 1;
+    public static byte INTERFACE_LEN = 1;
+    public static byte METHOD_LEN_AND_INTERFACE_LEN = 1;
+
 
     public String methodName() {
         return methodName;
@@ -93,6 +97,10 @@ public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtoc
 
         public Object obj;
         Class<?> clazz;
+
+        public Class<?> getClazz() {
+            return clazz;
+        }
 
         ParamHelper(Object obj, Class<?> clazz) {
             this.obj = obj;

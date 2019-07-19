@@ -1,5 +1,6 @@
 package top.gunplan.ric.center;
 
+
 import top.gunplan.ric.protocol.*;
 import top.gunplan.ric.stand.GunRicGetAddressStand;
 import top.gunplan.ric.stand.GunRicRetAddressStand;

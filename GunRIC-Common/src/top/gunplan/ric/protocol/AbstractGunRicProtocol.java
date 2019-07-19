@@ -27,6 +27,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
     public final static byte CODE_LEN = 2;
     public final static byte SERIALIZE_LEN = 2;
     public final static byte[] END_FLAG = {0x7a, 0x7a};
+    public final static int STAND_BASE_MIN_LEN = TYPE_LEN + CODE_LEN + SERIALIZE_LEN + END_FLAG.length;
 
 
     public boolean unSerialize(byte[] in) {

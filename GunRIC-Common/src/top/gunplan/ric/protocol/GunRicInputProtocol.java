@@ -17,6 +17,8 @@ import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtoco
 public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol implements GunRicOutputHelper, GunRicInvokeReqStand {
     private ParamHelper[] helpers;
 
+    private RicProtocolParamType returnType;
+
     public GunRicInputProtocol() {
         this.setType(RicProtocolType.REQUEST);
         this.setCode(RicProtocolCode.SUCCEED);
@@ -112,6 +114,11 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
     }
 
     @Override
+    public Class<?> returnType() {
+        return returnType.clazz;
+    }
+
+    @Override
     public Object[] parameters() {
         Object[] var2 = new Object[paramLen];
         for (int i = 0; i < paramLen; i++) {
@@ -122,7 +129,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
 
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
-        int len = 2 + SERIALIZE_LEN + CODE_LEN + TYPE_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount + END_FLAG.length;
+        int len = METHOD_LEN_AND_INTERFACE_LEN + STAND_BASE_MIN_LEN + PARAM_LEN + methodName.length() + interfaceName.length() + otherCount;
         return new GunBytesUtil.GunWriteByteStream(new byte[len]);
     }
 

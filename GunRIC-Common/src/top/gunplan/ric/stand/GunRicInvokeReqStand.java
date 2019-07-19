@@ -10,29 +10,14 @@ package top.gunplan.ric.stand;
  */
 public interface GunRicInvokeReqStand extends GunRicParamBaseStand {
 
-    /**
-     * get paramlen
-     *
-     * @return parameter length
-     */
-    @Override
-    int paramLength();
 
+    Class<?> returnType();
     /**
      * get parameters
      *
      * @return parameters
      */
     Object[] parameters();
-
-
-    /**
-     * get parameter paramTypes
-     *
-     * @return paramTypes
-     */
-    @Override
-    Class<?>[] paramTypes();
 
 
 }
