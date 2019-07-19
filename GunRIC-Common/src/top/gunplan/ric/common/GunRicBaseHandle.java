@@ -22,16 +22,19 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param protocol GunRicHelloStand
      * @return AbstractGunRicProtocol
      */
-    default GunRicBaseStand dealEvent(GunRicHelloStand protocol) {
-        GunRicHelloStand protocol1 = new GunRicHelloProtocol(false);
+    default GunRicHelloStand dealEvent(GunRicHelloStand protocol) {
         if (protocol.code() == RicProtocolCode.HELLO_REQ) {
-            protocol1.setSerialnumber(protocol.serialNumber());
-            return protocol1;
+            protocol.setCode(RicProtocolCode.HELLO_RES);
+            final GunRicBaseStand next = protocol.next();
+            protocol.next(next == null ? null : dealDataEvent(next));
+            return protocol;
         } else {
             AbstractGunBaseLogUtil.debug("get hello protocol");
             return null;
         }
     }
+
+
 
     /**
      * dealMuchEvent
@@ -41,8 +44,9 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @return GunNetOutputInterface
      */
     default <I extends GunRicBaseStand, O extends GunRicBaseStand> O dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealHandle, I protocol) {
-        O baseProtocol = dealHandle.dealEvent(protocol);
-        baseProtocol.next(protocol.next() == null ? null : dealDataEvent(protocol.next()));
+        final O baseProtocol = dealHandle.dealEvent(protocol);
+        final GunRicBaseStand next = protocol.next();
+        baseProtocol.next(next == null ? null : dealDataEvent(next));
         return baseProtocol;
     }
 
