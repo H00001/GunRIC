@@ -10,6 +10,7 @@ import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
 import java.net.SocketAddress;
+import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
 import java.nio.channels.Channels;
@@ -19,7 +20,7 @@ import java.nio.channels.SocketChannel;
  * GunRicProviderClientImpl
  *
  * @author frank albert
- * @version 0.0.0.2
+ * @version 0.0.0.3
  * @date 2019-07-19 20:02
  */
 public class GunRicProviderClientImpl implements GunRicProviderClient {
@@ -36,11 +37,10 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public int init() {
-        SocketAddress socketAddress = address.getInet();
         SocketChannel socketChannel;
         try {
             socketChannel = SocketChannel.open();
-            socketChannel.connect(socketAddress);
+            socketChannel.connect(address.getInet());
         } catch (IOException e) {
             AbstractGunBaseLogUtil.error(e);
             return -2;
@@ -85,10 +85,18 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public boolean doCheck() {
+        if (channel == null) {
+            init();
+        }
         try {
             GunChannels.channelWrite(channel, new GunRicHelloProtocol(true).serialize());
             GunRicHelloStand hello = new GunRicHelloProtocol();
-            hello.unSerialize(GunChannels.channelRead(channel, 1024));
+            System.out.println("blockinv");
+            byte[] b = GunChannels.channelRead(channel, 8);
+            if (b != null) {
+                hello.unSerialize(b);
+            }
+            System.out.println("blockinv1");
         } catch (IOException e) {
             AbstractGunBaseLogUtil.error(e);
         }

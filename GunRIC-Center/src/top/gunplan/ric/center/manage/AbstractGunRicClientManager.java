@@ -17,7 +17,9 @@ public abstract class AbstractGunRicClientManager<S extends GunRicClient> implem
 
     @Override
     public void register(S user) {
-        clients.add(user);
+        if (user.init() !=-3) {
+            clients.add(user);
+        }
     }
 
     @Override

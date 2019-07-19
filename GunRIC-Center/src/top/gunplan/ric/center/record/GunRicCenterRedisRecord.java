@@ -2,6 +2,8 @@ package top.gunplan.ric.center.record;
 
 
 import top.gunplan.ric.center.GunRicCenterRecord;
+import top.gunplan.ric.center.manage.check.GunRicCoreHeartTimer;
+import top.gunplan.ric.center.manage.impl.GunRicProviderClientImpl;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
@@ -25,11 +27,13 @@ public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {
 
     @Override
     public void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
+
         // jedis.lpush(g.interfaceName() + ":" + g.methodName(), address.getAddress() + "-" + address.portNumber());
     }
 
     @Override
     public void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
+
         // jedis.lpush(g.interfaceName() + ":" + g.methodName(), address.getAddress() + "-" + address.portNumber());
     }
 

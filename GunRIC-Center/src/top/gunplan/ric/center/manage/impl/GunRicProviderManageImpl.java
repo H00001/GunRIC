@@ -18,15 +18,7 @@ import java.util.List;
  * @date 2019-07-19 20:50
  */
 public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRicProviderClient> implements GunRicProviderManage {
-    {
-        /**
-         * test
-         */
-        GunAddressItem4 add = new GunAddressItem4(new InetSocketAddress("127.0.0.1", 8822));
-        GunRicProviderClient c = new GunRicProviderClientImpl(add, null);
-        c.init();
-        clients.add(c);
-    }
+
 
     @Override
     public List<GunRicProviderClient> removeUnuseProvider() {

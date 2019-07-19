@@ -13,8 +13,8 @@ import java.util.Set;
  * @author dosdrtt
  */
 public class GunRicCoreHeartTimer implements GunNettyTimer {
-    private volatile GunRicConsumerManage consumerManage = new GunRicConsumerManageImpl();
-    private volatile GunRicProviderManage providerManage = new GunRicProviderManageImpl();
+    private static volatile GunRicConsumerManage consumerManage = new GunRicConsumerManageImpl();
+    public static volatile GunRicProviderManage providerManage = new GunRicProviderManageImpl();
 
     @Override
     public int interval() {
