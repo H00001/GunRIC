@@ -5,12 +5,14 @@ import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
+import top.gunplan.ric.stand.GunRicHelloStand;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
+import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -34,18 +36,16 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public int init() {
-        try (SocketChannel socketChannel = SocketChannel.open()) {
-            SocketAddress socketAddress = address.getInet();
-            try {
-                socketChannel.connect(socketAddress);
-            } catch (IOException e) {
-                AbstractGunBaseLogUtil.error(e);
-                return -2;
-            }
-            socketChannel.configureBlocking(false);
+        SocketAddress socketAddress = address.getInet();
+        SocketChannel socketChannel;
+        try {
+            socketChannel = SocketChannel.open();
+            socketChannel.connect(socketAddress);
         } catch (IOException e) {
-            return -1;
+            AbstractGunBaseLogUtil.error(e);
+            return -2;
         }
+        this.channel = socketChannel;
         return 0;
 
     }
@@ -86,11 +86,9 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     @Override
     public boolean doCheck() {
         try {
-            if (GunChannels.ClannelAvaliable(channel)) {
-                channel.write(ByteBuffer.wrap(new GunRicHelloProtocol(true).serialize()));
-                ByteBuffer buffer = ByteBuffer.allocate(1024);
-                channel.read(buffer);
-            }
+            GunChannels.channelWrite(channel, new GunRicHelloProtocol(true).serialize());
+            GunRicHelloStand hello = new GunRicHelloProtocol();
+            hello.unSerialize(GunChannels.channelRead(channel, 1024));
         } catch (IOException e) {
             AbstractGunBaseLogUtil.error(e);
         }

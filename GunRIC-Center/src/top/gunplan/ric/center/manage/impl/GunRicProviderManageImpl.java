@@ -23,7 +23,9 @@ public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRic
          * test
          */
         GunAddressItem4 add = new GunAddressItem4(new InetSocketAddress("127.0.0.1", 8822));
-        clients.add(new GunRicProviderClientImpl(add, null));
+        GunRicProviderClient c = new GunRicProviderClientImpl(add, null);
+        c.init();
+        clients.add(c);
     }
 
     @Override
