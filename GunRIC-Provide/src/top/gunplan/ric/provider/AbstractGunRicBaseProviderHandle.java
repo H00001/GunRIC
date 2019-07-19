@@ -22,7 +22,7 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
      * @return AbstractGunRicProtocol
      */
     @Override
-    public abstract GunNetOutputInterface dealEvent(GunRicInvokeReqStand protocol);
+    public abstract GunRicInvokeResStand dealEvent(GunRicInvokeReqStand protocol);
 
     @Override
     public GunRicRegisterStateStand dealEvent(GunRicRegisterStand protocol) {

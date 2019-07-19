@@ -10,6 +10,7 @@ import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.ric.common.GunRicStdFilter;
+import top.gunplan.ric.common.GunRicStdPolymerisationFilter;
 import top.gunplan.ric.common.GunRicThreadFactory;
 
 
@@ -51,6 +52,7 @@ public class CenterBoot implements GunBootServerBase {
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServiceUtilProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunRicStdFilter()).
+                addFilter(new GunRicStdPolymerisationFilter()).
                 //addTimer(new GunRicCoreTimer()).
                         addTimer(new GunRicCoreHeartTimer()).
                 setHandle(new GunRicCenterHandle());

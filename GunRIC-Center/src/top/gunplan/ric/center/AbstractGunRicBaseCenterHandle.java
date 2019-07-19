@@ -6,10 +6,7 @@ import top.gunplan.netty.protocol.GunNetOutputInterface;
 
 import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.*;
-import top.gunplan.ric.stand.GunRicBaseStand;
-import top.gunplan.ric.stand.GunRicGetAddressStand;
-import top.gunplan.ric.stand.GunRicInvokeReqStand;
-import top.gunplan.ric.stand.GunRicRegisterStand;
+import top.gunplan.ric.stand.*;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.net.SocketAddress;
@@ -20,7 +17,7 @@ import java.net.SocketAddress;
  */
 public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle {
     @Override
-    public GunRicBaseStand dealEvent(GunRicInvokeReqStand protocol) {
+    public GunRicInvokeResStand dealEvent(GunRicInvokeReqStand protocol) {
         AbstractGunBaseLogUtil.error("error protocol is GunRicInputProtocol", getClass().getSimpleName());
         throw new GunIllegalProtocolException(GunRicInputProtocol.class, GunIllegalProtocolException.GunRicAcceptProtocolTypes.GunRicCenterAcceptProtocol);
     }
@@ -32,7 +29,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
      * @return AbstractGunRicProtocol to transfer
      */
     @Override
-    public abstract GunNetOutputInterface dealEvent(GunRicRegisterStand protocol);
+    public abstract GunRicRegisterStateStand dealEvent(GunRicRegisterStand protocol);
 
     /**
      * dealEvent
@@ -41,7 +38,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
      * @return GunNetOutputInterface to transfer
      */
     @Override
-    public abstract GunNetOutputInterface dealEvent(GunRicGetAddressStand protocol);
+    public abstract GunRicRetAddressStand dealEvent(GunRicGetAddressStand protocol);
 
 
     @Override

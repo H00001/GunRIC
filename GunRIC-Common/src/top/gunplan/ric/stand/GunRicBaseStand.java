@@ -39,5 +39,7 @@ public interface GunRicBaseStand extends GunNetInputInterface, GunNetOutputInter
     GunRicBaseStand next();
 
 
+    void next(GunRicBaseStand next);
+
     void setSerialnumber(int number);
 }

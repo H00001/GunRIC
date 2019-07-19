@@ -53,7 +53,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
         return next;
     }
 
-    private void setNext(GunRicBaseStand next) {
+    public void next(GunRicBaseStand next) {
         this.next = next;
     }
 
@@ -76,7 +76,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
         if (util.getLenSum() - util.getNowflag() > 0) {
             GunRicBaseStand protocol = GunRicTypeDividePacketManage.findPackage(util);
             thTrueSeria = protocol.unSerialize(util);
-            setNext(protocol);
+            next(protocol);
         }
         return thTrueSeria;
     }

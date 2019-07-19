@@ -22,7 +22,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param protocol GunRicHelloStand
      * @return AbstractGunRicProtocol
      */
-    default GunNetOutputInterface dealEvent(GunRicHelloStand protocol) {
+    default GunRicBaseStand dealEvent(GunRicHelloStand protocol) {
         GunRicHelloStand protocol1 = new GunRicHelloProtocol(false);
         if (protocol.code() == RicProtocolCode.HELLO_REQ) {
             protocol1.setSerialnumber(protocol.serialNumber());
@@ -40,17 +40,16 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param protocol   protocol
      * @return GunNetOutputInterface
      */
-    default <I extends GunRicBaseStand, O extends GunRicBaseStand> GunNetOutputInterface dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealHandle, I protocol) {
+    default <I extends GunRicBaseStand, O extends GunRicBaseStand> O dealMuchEvent(GunRicCommonRealDealEvent<I, O> dealHandle, I protocol) {
         O baseProtocol = dealHandle.dealEvent(protocol);
+        GunRicBaseStand next;
         if (protocol.next() == null) {
             return baseProtocol;
         } else {
-            GunRicCombineOutput capt = new GunRicCombineOutput();
-            capt.push(baseProtocol);
-            for (; (protocol = (I) protocol.next()) != null; ) {
-                capt.push(dealHandle.dealEvent(protocol));
+            for (; (next = protocol.next()) != null; ) {
+                baseProtocol.next(dealDataEvent(next));
             }
-            return capt;
+            return baseProtocol;
         }
     }
 
@@ -60,7 +59,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param protocol GunRicInputProtocol
      * @return AbstractGunRicProtocol
      */
-    GunNetOutputInterface dealEvent(GunRicInvokeReqStand protocol);
+    GunRicInvokeResStand dealEvent(GunRicInvokeReqStand protocol);
 
     /**
      * dealEvent center used
@@ -68,7 +67,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param protocol GunRicRegisterStand
      * @return AbstractGunRicProtocol
      */
-    GunNetOutputInterface dealEvent(GunRicRegisterStand protocol);
+    GunRicRegisterStateStand dealEvent(GunRicRegisterStand protocol);
 
     /**
      * GunRicGetAddressProtocol center used
@@ -76,7 +75,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param protocol dealEvent
      * @return AbstractGunRicProtocol
      */
-    GunNetOutputInterface dealEvent(GunRicGetAddressStand protocol);
+    GunRicRetAddressStand dealEvent(GunRicGetAddressStand protocol);
 
 
     /**
@@ -117,7 +116,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @throws GunException kinds of exceptions
      */
     @Override
-    default GunNetOutputInterface dealDataEvent(GunNetInputInterface var1) throws GunException {
+    default GunRicBaseStand dealDataEvent(GunNetInputInterface var1) throws GunException {
         try {
 
             if (var1 instanceof GunRicHelloStand) {
