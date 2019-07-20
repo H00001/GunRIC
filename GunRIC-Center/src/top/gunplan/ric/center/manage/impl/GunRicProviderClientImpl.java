@@ -86,17 +86,17 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     @Override
     public boolean doCheck() {
         if (channel == null) {
+            AbstractGunBaseLogUtil.debug("attempt to connect");
             init();
+            AbstractGunBaseLogUtil.debug("ed");
         }
         try {
             GunChannels.channelWrite(channel, new GunRicHelloProtocol(true).serialize());
             GunRicHelloStand hello = new GunRicHelloProtocol();
-            System.out.println("blockinv");
             byte[] b = GunChannels.channelRead(channel, 8);
             if (b != null) {
                 hello.unSerialize(b);
             }
-            System.out.println("blockinv1");
         } catch (IOException e) {
             AbstractGunBaseLogUtil.error(e);
         }

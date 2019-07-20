@@ -28,8 +28,7 @@ public final class GunChannels {
             } catch (IOException e) {
                 AbstractGunBaseLogUtil.error(e);
             }
-        }
-        else {
+        } else {
             throw new SocketException("Channel can not use");
         }
         return false;

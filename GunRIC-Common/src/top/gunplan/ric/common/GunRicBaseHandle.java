@@ -29,11 +29,9 @@ public interface GunRicBaseHandle extends GunNettyHandle {
             protocol.next(next == null ? null : dealDataEvent(next));
             return protocol;
         } else {
-            AbstractGunBaseLogUtil.debug("get hello protocol");
             return null;
         }
     }
-
 
 
     /**

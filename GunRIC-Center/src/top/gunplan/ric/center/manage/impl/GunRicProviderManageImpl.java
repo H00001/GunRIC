@@ -28,7 +28,9 @@ public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRic
 
     @Override
     public GunProviderAliveCheckResult aliveCheck() {
+
         clients.parallelStream().forEach(GunRicProviderClient::doCheck);
+
         return null;
     }
 
