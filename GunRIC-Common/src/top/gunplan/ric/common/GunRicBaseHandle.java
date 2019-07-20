@@ -25,6 +25,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     default GunRicHelloStand dealEvent(GunRicHelloStand protocol) {
         if (protocol.code() == RicProtocolCode.HELLO_REQ) {
             protocol.setCode(RicProtocolCode.HELLO_RES);
+            protocol.incrSeq();
             final GunRicBaseStand next = protocol.next();
             protocol.next(next == null ? null : dealDataEvent(next));
             return protocol;

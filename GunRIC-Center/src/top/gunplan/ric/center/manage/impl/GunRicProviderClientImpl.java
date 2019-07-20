@@ -1,6 +1,8 @@
 package top.gunplan.ric.center.manage.impl;
 
 import top.gunplan.ric.center.common.GunChannels;
+import top.gunplan.ric.center.manage.GunRicClient;
+import top.gunplan.ric.center.manage.GunRicOperator;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
@@ -9,11 +11,7 @@ import top.gunplan.ric.stand.GunRicHelloStand;
 import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
-import java.net.SocketAddress;
-import java.net.SocketException;
-import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
-import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -25,9 +23,11 @@ import java.nio.channels.SocketChannel;
  */
 public class GunRicProviderClientImpl implements GunRicProviderClient {
 
+    private GunRicOperator operator;
     private volatile SocketChannel channel;
     private final GunAddressItemInterface address;
     private final BaseGunRicCdt cdt;
+    private int reTimes = 0;
 
 
     public GunRicProviderClientImpl(GunAddressItemInterface address, BaseGunRicCdt cdt) {
@@ -47,7 +47,6 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
         }
         this.channel = socketChannel;
         return 0;
-
     }
 
 
@@ -67,6 +66,9 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
         return channel;
     }
 
+
+
+
     @Override
     public BaseGunRicCdt cdt() {
         return cdt;
@@ -85,21 +87,47 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public boolean doCheck() {
-        if (channel == null) {
-            AbstractGunBaseLogUtil.debug("attempt to connect");
+        if (!GunChannels.channelAvailable(channel)) {
             init();
-            AbstractGunBaseLogUtil.debug("ed");
+            if (!GunChannels.channelAvailable(channel)) {
+                update();
+                return false;
+            }
         }
         try {
-            GunChannels.channelWrite(channel, new GunRicHelloProtocol(true).serialize());
-            GunRicHelloStand hello = new GunRicHelloProtocol();
+            GunRicHelloStand hello = new GunRicHelloProtocol(true);
+            short number = (short) hello.serialNumber();
+            GunChannels.channelWrite(channel, hello.serialize());
             byte[] b = GunChannels.channelRead(channel, 8);
             if (b != null) {
                 hello.unSerialize(b);
+                if (number + 1 == hello.serialNumber()) {
+                    AbstractGunBaseLogUtil.info("connect is normal now");
+                } else {
+                    AbstractGunBaseLogUtil.info("connect is not now " + number + " " + hello.serialNumber());
+                }
+            } else {
+                channel = null;
             }
+
         } catch (IOException e) {
             AbstractGunBaseLogUtil.error(e);
         }
         return true;
+    }
+
+    @Override
+    public int reConnectionTimes() {
+        return reTimes;
+    }
+
+    @Override
+    public void clean() {
+        reTimes = 0;
+    }
+
+    @Override
+    public void update() {
+        reTimes++;
     }
 }

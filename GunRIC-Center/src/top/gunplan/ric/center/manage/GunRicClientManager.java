@@ -14,6 +14,8 @@ public interface GunRicClientManager<U extends GunRicClient> {
 
     List<U> clientList();
 
+    int normalSize();
+
     GunProviderAliveCheckResult aliveCheck();
 
     void register(U user);

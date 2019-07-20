@@ -6,9 +6,14 @@ import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.center.manage.GunRicProviderManage;
 import top.gunplan.ric.center.manage.impl.GunRicProviderClientImpl;
 import top.gunplan.ric.protocol.GunAddressItem4;
+import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.net.InetSocketAddress;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static top.gunplan.ric.center.manage.GunRICStateRecorder.ConnectionState.LOSTCONECTION;
 
 /**
  * GunRicProviderManageImpl
@@ -28,10 +33,11 @@ public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRic
 
     @Override
     public GunProviderAliveCheckResult aliveCheck() {
-
+        AbstractGunBaseLogUtil.info("alive count is:" + clients.size());
         clients.parallelStream().forEach(GunRicProviderClient::doCheck);
-
+        clients = clients.parallelStream().filter(who -> who.state() != LOSTCONECTION).collect(Collectors.toList());
         return null;
     }
+
 
 }

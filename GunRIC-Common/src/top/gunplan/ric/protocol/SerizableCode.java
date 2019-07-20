@@ -28,4 +28,7 @@ public interface SerizableCode {
      * @return number 64 bit
      */
     long getSerialNum64();
+
+
+    short getSerialNum16();
 }

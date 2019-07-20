@@ -39,6 +39,10 @@ public final class GunChannels {
         if (channelAvailable(channel)) {
             ByteBuffer buffer = ByteBuffer.allocate(size);
             int len = channel.read(buffer);
+            if (len==-1){
+                AbstractGunBaseLogUtil.debug("error");
+                return null;
+            }
             realSave = new byte[len];
             System.arraycopy(buffer.array(), 0, realSave, 0, len);
         }

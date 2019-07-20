@@ -63,7 +63,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
     }
 
     public void autoCreateSerialnumber() {
-        this.serialnumber = serial.getSerialNum32();
+        this.serialnumber = serial.getSerialNum16();
     }
 
 
