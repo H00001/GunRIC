@@ -3,29 +3,29 @@ package top.gunplan.ric.protocol;
 import top.gunplan.ric.stand.GunRicRetAddressStand;
 import top.gunplan.utils.GunBytesUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author dosdrtt
  */
 public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements GunRicOutputHelper, GunRicRetAddressStand {
 
+    private Set<GunAddressItemInterface> addressItems = new HashSet<>(1);
 
     public GunRicRespAddressProtocol() {
         this.type = RicProtocolType.GET;
         this.code = RicProtocolCode.GET_RES;
     }
 
-    private List<GunAddressItemInterface> addressItems = new ArrayList<>(1);
 
-    GunRicRespAddressProtocol(List<GunAddressItemInterface> addresses) {
+    GunRicRespAddressProtocol(Set<GunAddressItemInterface> addresses) {
         this();
         addresses.forEach(this::pushAddress);
     }
 
     @Override
-    public List<GunAddressItemInterface> addressItems() {
+    public Set<GunAddressItemInterface> addressItems() {
         return addressItems;
     }
 
@@ -34,7 +34,7 @@ public class GunRicRespAddressProtocol extends AbstractGunRicProtocol implements
         this.addressItems.add(ad);
     }
 
-    public void pushAddressList(List<GunAddressItemInterface> addresses) {
+    public void pushAddressList(Set<GunAddressItemInterface> addresses) {
         addresses.forEach(this::pushAddress);
     }
 

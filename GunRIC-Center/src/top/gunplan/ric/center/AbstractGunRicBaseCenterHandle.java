@@ -2,7 +2,7 @@ package top.gunplan.ric.center;
 
 
 import top.gunplan.netty.GunException;
-import top.gunplan.netty.protocol.GunNetOutputInterface;
+
 import top.gunplan.ric.common.F;
 import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.GunIllegalProtocolException;
@@ -42,7 +42,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
 
 
     @Override
-    public GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException {
+    public GunRicBaseStand dealConnEvent(SocketAddress socketAddress) throws GunException {
         return null;
     }
 }

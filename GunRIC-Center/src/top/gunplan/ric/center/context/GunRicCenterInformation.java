@@ -1,4 +1,4 @@
-package top.gunplan.ric.center.contest;
+package top.gunplan.ric.center.context;
 
 /**
  * GunRicCenterInformation

@@ -4,8 +4,8 @@ import top.gunplan.netty.GunChannelException;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.common.GunNettyContext;
-import top.gunplan.netty.protocol.GunNetInputInterface;
-import top.gunplan.netty.protocol.GunNetOutputInterface;
+import top.gunplan.netty.protocol.GunNetInbound;
+import top.gunplan.netty.protocol.GunNetOutBound;
 import top.gunplan.ric.protocol.GunIllegalProtocolException;
 import top.gunplan.ric.protocol.GunRicCommonRealDealEvent;
 import top.gunplan.ric.protocol.RicProtocolCode;
@@ -18,7 +18,8 @@ import java.net.SocketAddress;
  * @author dosdrtt
  */
 public interface GunRicBaseHandle extends GunNettyHandle {
-    GunLogger LOG = GunNettyContext.logger;
+    GunLogger LOG = GunNettyContext.logger.setTAG(GunRicBaseHandle.class);
+
     /**
      * dealEvent
      * hello message send auto
@@ -104,19 +105,19 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @throws GunException kinds of exception
      */
     @Override
-    GunNetOutputInterface dealConnEvent(SocketAddress socketAddress) throws GunException;
+    GunNetOutBound dealConnEvent(SocketAddress socketAddress) throws GunException;
 
     /**
      * dealDataEvent
      * <p>
      * bus of input
      *
-     * @param var1 GunNetInputInterface
-     * @return GunNetOutputInterface
+     * @param var1 GunNetInbound
+     * @return GunRicBaseStand
      * @throws GunException kinds of exceptions
      */
     @Override
-    default GunRicBaseStand dealDataEvent(GunNetInputInterface var1) throws GunException {
+    default GunRicBaseStand dealDataEvent(GunNetInbound var1) throws GunException {
         try {
 
             if (var1 instanceof GunRicHelloStand) {

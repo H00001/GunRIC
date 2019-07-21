@@ -1,5 +1,7 @@
 package top.gunplan.ric.provider;
 
+import java.io.IOException;
+
 /**
  * GunRicPublishManager
  *
@@ -8,4 +10,6 @@ package top.gunplan.ric.provider;
  * @date 2019-07-21 09:06
  */
 public interface GunRicPublishManager {
+
+    boolean publishInterface() throws IOException, ReflectiveOperationException;
 }

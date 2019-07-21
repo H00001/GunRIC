@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadFactory;
  * GunRicThreadFactory
  *
  * @author frank albert
- * @version 0.0.0.1
+ * @version 0.0.0.2
  * @date 2019-06-08 13:25
  */
 
@@ -15,7 +15,9 @@ public class GunRicThreadFactory implements ThreadFactory {
     private String baseName = "";
 
     public GunRicThreadFactory(String baseName) {
-        this.baseName = baseName;
+        if (baseName != null) {
+            this.baseName = baseName;
+        }
     }
 
     public GunRicThreadFactory() {

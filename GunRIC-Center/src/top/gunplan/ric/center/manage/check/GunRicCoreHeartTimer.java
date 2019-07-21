@@ -1,10 +1,12 @@
 package top.gunplan.ric.center.manage.check;
 
 import top.gunplan.netty.GunNettyTimer;
+import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.center.manage.GunRicConsumerManage;
 import top.gunplan.ric.center.manage.impl.GunRicConsumerManageImpl;
 import top.gunplan.ric.center.manage.GunRicProviderManage;
 import top.gunplan.ric.center.manage.impl.GunRicProviderManageImpl;
+import top.gunplan.ric.center.property.GunRicClientCheckProperty;
 
 import java.nio.channels.SelectionKey;
 import java.util.Set;
@@ -18,7 +20,7 @@ public class GunRicCoreHeartTimer implements GunNettyTimer {
 
     @Override
     public int interval() {
-        return 18;
+        return GunNettyPropertyManagerImpl.getProperty(GunRicClientCheckProperty.class).getInterval();
     }
 
     @Override
@@ -28,7 +30,6 @@ public class GunRicCoreHeartTimer implements GunNettyTimer {
 
     @Override
     public int doWork(Set<SelectionKey> set) {
-        System.out.println("tick");
         providerManage.aliveCheck();
         return 0;
     }

@@ -1,4 +1,4 @@
-package top.gunplan.ric.center.contest;
+package top.gunplan.ric.center.context;
 
 import top.gunplan.netty.GunProperty;
 import top.gunplan.netty.anno.GunPropertyMap;

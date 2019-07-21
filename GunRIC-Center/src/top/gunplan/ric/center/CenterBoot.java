@@ -2,13 +2,14 @@ package top.gunplan.ric.center;
 
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
 import top.gunplan.ric.center.manage.check.GunRicCoreHeartTimer;
-import top.gunplan.ric.center.contest.GunRicCenterInformationImpl;
+import top.gunplan.ric.center.context.GunRicCenterInformationImpl;
 import top.gunplan.ric.center.property.GunRicCenterServicesProperty;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.netty.impl.GunBootServerFactory;
+import top.gunplan.ric.center.property.GunRicClientCheckProperty;
 import top.gunplan.ric.common.GunRicStdFilter;
 import top.gunplan.ric.common.GunRicStdPolymerisationFilter;
 import top.gunplan.ric.common.GunRicThreadFactory;
@@ -52,6 +53,7 @@ public class CenterBoot implements GunBootServerBase {
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServicesProperty());
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterServiceUtilProperty());
         GunNettyPropertyManagerImpl.registerProperty(new GunRicCenterInformationImpl());
+        GunNettyPropertyManagerImpl.registerProperty(new GunRicClientCheckProperty());
         server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunRicStdFilter()).
                 addFilter(new GunRicStdPolymerisationFilter()).

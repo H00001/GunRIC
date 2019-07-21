@@ -1,14 +1,9 @@
 package top.gunplan.ric.center;
 
-import top.gunplan.ric.center.common.GunRicCenterStaticPath;
-import top.gunplan.ric.center.contest.F;
-import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
-import top.gunplan.ric.protocol.BaseGunRicCdt;
-import top.gunplan.ric.protocol.GunAddressItem4;
-import top.gunplan.ric.protocol.GunRicCdtImpl;
-import top.gunplan.ric.protocol.RicProtocolParamType;
-import top.gunplan.utils.GunBytesUtil;
+import top.gunplan.ric.center.common.GunRicCenterStaticPath;
+import top.gunplan.ric.center.context.F;
+import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -25,7 +20,6 @@ public final class GunRicRegisterManage {
         property = GunNettyPropertyManagerImpl.getProperty(GunRicCenterServiceUtilProperty.class);
         assert property != null;
         try {
-
             findServices(Paths.get(GunRicCenterStaticPath.SERVICES_PATH));
         } catch (IOException exp) {
             F.LOG.error(exp);
@@ -46,20 +40,7 @@ public final class GunRicRegisterManage {
             if (file.toFile().isFile()) {
                 final String interfaceName = file.getParent().toString().replace(GunRicCenterStaticPath.SERVICES_PATH + "/", "").replace("/", ".");
                 final String methodname = file.toFile().getName().split("_")[0];
-                GunBytesUtil.GunReadByteStream stream = new GunBytesUtil.GunReadByteStream(Files.readAllBytes(file));
-                int paramlen = stream.readByte();
-                RicProtocolParamType[] type = new RicProtocolParamType[paramlen];
-                for (int i = 0; i < paramlen; i++) {
-                    type[i] = RicProtocolParamType.valuefrom(stream.readByte());
-                }
-                stream.readByte();
-                String addr;
-                for (; (addr = stream.readLine()) != null; ) {
-                    BaseGunRicCdt key = new GunRicCdtImpl(type, interfaceName, methodname);
-                    GunRicCenterStdRecordManage.Instance.getHinstance().doRegex(key, new GunAddressItem4(addr.split(property.getDivideFlag())[0], Integer.parseInt(addr.split(property.getDivideFlag())[1])));
-                }
-                F.LOG.debug("find local services " + interfaceName + "." + methodname);
-
+                F.LOG.debug("find history local services " + interfaceName + "." + methodname);
             }
             return FileVisitResult.CONTINUE;
         }

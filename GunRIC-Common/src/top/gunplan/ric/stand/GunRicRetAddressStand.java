@@ -2,7 +2,7 @@ package top.gunplan.ric.stand;
 
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * GunRicRetAddressStand
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface GunRicRetAddressStand extends GunRicBaseStand {
 
-    List<GunAddressItemInterface> addressItems();
+    Set<GunAddressItemInterface> addressItems();
 
 
     void pushAddress(GunAddressItemInterface ad);

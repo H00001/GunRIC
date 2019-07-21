@@ -43,7 +43,8 @@ class GunRicPublishManagerImpl implements GunRicPublishManager {
 
     }
 
-    boolean publishInterface() throws IOException, ReflectiveOperationException {
+    @Override
+    public boolean publishInterface() throws IOException, ReflectiveOperationException {
         InetSocketAddress[] addrs = ppt.getAddress();
         int succeedsum = 0;
         for (InetSocketAddress addr : addrs) {

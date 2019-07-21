@@ -1,11 +1,10 @@
 package top.gunplan.ric.center.record;
 
 import top.gunplan.ric.center.GunRicCenterRecord;
-
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author dosdrtt
@@ -49,10 +48,10 @@ public abstract class AbstractGunRicProxyRecord implements GunRicCenterRecord {
      * @param g BaseGunRicCdt
      * @return list of item
      */
-    abstract List<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g);
+    abstract Set<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g);
 
-    public List<GunAddressItemInterface> getAddress(BaseGunRicCdt gunRicCdtInterface) {
-        List<GunAddressItemInterface> addresses;
+    public Set<GunAddressItemInterface> getAddress(BaseGunRicCdt gunRicCdtInterface) {
+        Set<GunAddressItemInterface> addresses;
         if (lastRecord != null && (addresses = lastRecord.getAddress(gunRicCdtInterface)) != null) {
             return addresses;
         } else {

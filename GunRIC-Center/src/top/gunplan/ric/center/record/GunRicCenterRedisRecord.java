@@ -2,12 +2,10 @@ package top.gunplan.ric.center.record;
 
 
 import top.gunplan.ric.center.GunRicCenterRecord;
-import top.gunplan.ric.center.manage.check.GunRicCoreHeartTimer;
-import top.gunplan.ric.center.manage.impl.GunRicProviderClientImpl;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * use redis to record
@@ -38,7 +36,12 @@ public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    List<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
+    public void remove(GunAddressItemInterface address) {
+
+    }
+
+    @Override
+    Set<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
         return null;
     }
 }

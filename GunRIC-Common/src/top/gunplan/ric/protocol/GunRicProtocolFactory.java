@@ -1,6 +1,7 @@
 package top.gunplan.ric.protocol;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * GunRicProtocolFactory
@@ -15,7 +16,7 @@ public class GunRicProtocolFactory {
     }
 
 
-    public static GunRicRespAddressProtocol newGunRicRespAddressProtocol(List<GunAddressItemInterface> addresses) {
+    public static GunRicRespAddressProtocol newGunRicRespAddressProtocol(Set<GunAddressItemInterface> addresses) {
         return new GunRicRespAddressProtocol(addresses);
     }
 }

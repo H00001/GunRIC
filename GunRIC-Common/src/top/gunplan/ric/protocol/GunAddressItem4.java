@@ -1,5 +1,6 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.ric.common.GunRicMethodHash;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.net.InetSocketAddress;
@@ -96,5 +97,22 @@ public class GunAddressItem4 implements GunAddressItemInterface {
     @Override
     public GunBytesUtil.GunWriteByteStream createSpace() {
         return new GunBytesUtil.GunWriteByteStream(new byte[NEED_SPACE]);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return GunRicMethodHash.Instance.getHashInstance().h(getAddress(), "", null) ^ getPort();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof GunAddressItemInterface) {
+            if (hashCode() == obj.hashCode()) {
+                GunAddressItemInterface s = (GunAddressItemInterface) obj;
+                return getAddress().equals(s.getAddress()) && getPort() == s.getPort();
+            }
+        }
+        return false;
     }
 }

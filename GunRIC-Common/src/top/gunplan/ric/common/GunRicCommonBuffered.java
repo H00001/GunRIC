@@ -2,7 +2,7 @@ package top.gunplan.ric.common;
 
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author dosdrtt
@@ -11,11 +11,11 @@ public interface GunRicCommonBuffered<T extends GunRicCommonExeIst> {
     /**
      * push
      *
-     * @param key GunRicCommonExeIst
+     * @param key       GunRicCommonExeIst
      * @param addresses list GunAddressItem4
      */
 
-    void push(T key, List<GunAddressItemInterface> addresses);
+    void push(T key, Set<GunAddressItemInterface> addresses);
 
     /**
      * get
@@ -23,7 +23,7 @@ public interface GunRicCommonBuffered<T extends GunRicCommonExeIst> {
      * @param key get key
      * @return List<GunAddressItem4>
      */
-    List<GunAddressItemInterface> get(T key);
+    Set<GunAddressItemInterface> get(T key);
 
 
     /**
@@ -31,5 +31,7 @@ public interface GunRicCommonBuffered<T extends GunRicCommonExeIst> {
      */
     void clear();
 
+
+    void remove(GunAddressItemInterface address);
 
 }

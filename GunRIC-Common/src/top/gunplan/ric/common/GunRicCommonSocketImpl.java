@@ -27,7 +27,5 @@ public class GunRicCommonSocketImpl extends AbstractGunRicCommonProtocolSocket {
     }
 
 
-    //
-
 
 }

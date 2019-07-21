@@ -13,11 +13,13 @@ public final class GunRicMethodHash implements GunRicHash {
         h = h | hbase(interfaceName) << 16;
         h = h | hbase(methodName) << 8;
         int hashl = 0;
-        for (Class<?> paramtype : params) {
-            RicProtocolParamType tp = RicProtocolParamType.valuefrom(paramtype);
-            hashl += tp.val;
+        if (params != null) {
+            for (Class<?> paramType : params) {
+                RicProtocolParamType tp = RicProtocolParamType.valuefrom(paramType);
+                hashl += tp.val;
+            }
         }
-        return h | hashl + params.length;
+        return h | hashl + (params == null ? 0 : params.length);
     }
 
     private int hbase(final String base) {

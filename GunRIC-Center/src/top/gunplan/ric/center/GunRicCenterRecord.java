@@ -29,4 +29,10 @@ public interface GunRicCenterRecord extends GunHandle {
     void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address);
 
 
+    /**
+     * remove
+     *
+     * @param address address info
+     */
+    void remove(GunAddressItemInterface address);
 }

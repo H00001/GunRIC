@@ -1,15 +1,17 @@
 package top.gunplan.ric.center.record;
 
+import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
-
-import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
-import java.io.*;
-import java.util.List;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * GunRicCenterFileRecord
@@ -59,7 +61,12 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    List<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
+    public void remove(GunAddressItemInterface address) {
+
+    }
+
+    @Override
+    Set<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
         return null;
     }
 

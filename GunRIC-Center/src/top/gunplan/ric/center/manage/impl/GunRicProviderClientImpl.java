@@ -1,13 +1,13 @@
 package top.gunplan.ric.center.manage.impl;
 
 import top.gunplan.ric.center.common.GunChannels;
-import top.gunplan.ric.center.manage.GunRicOperator;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.common.F;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
 import top.gunplan.ric.stand.GunRicHelloStand;
+import top.gunplan.utils.GunLogger;
 
 import java.io.IOException;
 import java.nio.channels.Channel;
@@ -21,8 +21,7 @@ import java.nio.channels.SocketChannel;
  * @date 2019-07-19 20:02
  */
 public class GunRicProviderClientImpl implements GunRicProviderClient {
-
-    private GunRicOperator operator;
+    private static GunLogger logger = F.LOG.setTAG(GunRicProviderClientImpl.class);
     private volatile SocketChannel channel;
     private final GunAddressItemInterface address;
     private final BaseGunRicCdt cdt;
@@ -41,7 +40,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
             socketChannel = SocketChannel.open();
             socketChannel.connect(address.getInet());
         } catch (IOException e) {
-            F.LOG.error(e);
+            logger.error(e);
             return -2;
         }
         this.channel = socketChannel;
@@ -50,7 +49,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
 
     @Override
-    public int destory() {
+    public int destroy() {
         try {
             channel.close();
         } catch (IOException e) {
@@ -64,8 +63,6 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     public Channel channel() {
         return channel;
     }
-
-
 
 
     @Override
@@ -101,16 +98,16 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
             if (b != null) {
                 hello.unSerialize(b);
                 if (number + 1 == hello.serialNumber()) {
-                    F.LOG.info("connect is normal now");
+                    logger.info("connect is normal now");
                 } else {
-                    F.LOG.info("connect is not now " + number + " " + hello.serialNumber());
+                    logger.info("connect is not now " + number + " " + hello.serialNumber());
                 }
             } else {
                 channel = null;
             }
 
         } catch (IOException e) {
-            F.LOG.error(e);
+            logger.error(e);
         }
         return true;
     }

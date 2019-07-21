@@ -7,8 +7,6 @@ import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.center.manage.GunRicProviderManage;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 import static top.gunplan.ric.center.manage.GunRICStateRecorder.ConnectionState.LOSTCONECTION;
 
@@ -16,7 +14,7 @@ import static top.gunplan.ric.center.manage.GunRICStateRecorder.ConnectionState.
  * GunRicProviderManageImpl
  *
  * @author frank albert
- * @version 0.0.0.3
+ * @version 0.0.0.4
  * @date 2019-07-19 20:50
  */
 public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRicProviderClient> implements GunRicProviderManage {
@@ -30,9 +28,9 @@ public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRic
 
     @Override
     public GunProviderAliveCheckResult aliveCheck() {
-        GunNettyContext.logger.info("alive count is:" + clients.size());
+        GunNettyContext.logger.setTAG(GunRicProviderManageImpl.class).info("alive count is:" + clients.size());
         clients.parallelStream().forEach(GunRicProviderClient::doCheck);
-        clients = clients.parallelStream().filter(who -> who.state() != LOSTCONECTION).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
+        clients.removeIf(who -> who.state() == LOSTCONECTION);
         return null;
     }
 

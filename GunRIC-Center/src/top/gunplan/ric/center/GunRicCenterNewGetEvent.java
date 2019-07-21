@@ -5,7 +5,7 @@ import top.gunplan.ric.protocol.*;
 import top.gunplan.ric.stand.GunRicGetAddressStand;
 import top.gunplan.ric.stand.GunRicRetAddressStand;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author dosdrtt
@@ -17,7 +17,7 @@ public class GunRicCenterNewGetEvent implements GunRicCommonRealDeal<GunRicGetAd
     @Override
     public GunRicRetAddressStand dealDataEvent(GunRicGetAddressStand protocol) {
         BaseGunRicCdt g = new GunRicCdtImpl(protocol);
-        List<GunAddressItemInterface> s1 = hinstance.getFirstRecord().getAddress(g);
+        Set<GunAddressItemInterface> s1 = hinstance.getFirstRecord().getAddress(g);
         return GunRicProtocolFactory.newGunRicRespAddressProtocol(s1);
     }
 }

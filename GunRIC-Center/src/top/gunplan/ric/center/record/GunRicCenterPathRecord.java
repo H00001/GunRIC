@@ -31,5 +31,10 @@ public class GunRicCenterPathRecord implements GunRicCenterRecord {
 
     }
 
+    @Override
+    public void remove(GunAddressItemInterface address) {
+
+    }
+
 
 }

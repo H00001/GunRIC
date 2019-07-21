@@ -2,7 +2,7 @@ package top.gunplan.ric.center;
 
 import top.gunplan.netty.impl.GunNettyDefaultObserveImpl;
 import top.gunplan.netty.impl.propertys.GunNettyCoreProperty;
-import top.gunplan.ric.center.contest.F;
+import top.gunplan.ric.center.context.F;
 import top.gunplan.ric.center.record.*;
 
 /**

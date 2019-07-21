@@ -3,14 +3,15 @@ package top.gunplan.ric.common;
 
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author dosdrtt
  */
 public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunRicCommonBuffered<T> {
-    private HashMap<T, List<GunAddressItemInterface>> mapping = new HashMap<>();
+    private final Map<T, Set<GunAddressItemInterface>> mapping = new ConcurrentHashMap<>(2);
 
 
     private GunRicInterfaceBuffer() {
@@ -23,7 +24,7 @@ public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunR
 
 
     @Override
-    public List<GunAddressItemInterface> get(T key) {
+    public Set<GunAddressItemInterface> get(T key) {
         return mapping.get(key);
     }
 
@@ -32,9 +33,14 @@ public class GunRicInterfaceBuffer<T extends GunRicCommonExeIst> implements GunR
         this.mapping.clear();
     }
 
+    @Override
+    public void remove(GunAddressItemInterface address) {
+        mapping.forEach((k, v) -> v.removeIf(t -> t.equals(address)));
+    }
+
 
     @Override
-    public void push(T key, List<GunAddressItemInterface> addresses) {
+    public void push(T key, Set<GunAddressItemInterface> addresses) {
         mapping.put(key, addresses);
     }
 

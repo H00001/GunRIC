@@ -1,7 +1,7 @@
 package top.gunplan.ric.center.common;
 
 
-import top.gunplan.ric.center.contest.F;
+import top.gunplan.ric.center.context.F;
 
 import java.io.IOException;
 import java.net.SocketException;
