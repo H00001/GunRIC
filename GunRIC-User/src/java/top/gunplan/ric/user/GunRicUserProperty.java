@@ -2,7 +2,8 @@ package top.gunplan.ric.user;
 
 
 import top.gunplan.netty.GunProperty;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.netty.common.GunNettyContext;
+
 
 import java.net.InetSocketAddress;
 
@@ -36,7 +37,7 @@ public class GunRicUserProperty implements GunProperty {
                 address[i] = new InetSocketAddress(servers[i].split("-")[0], Integer.parseInt(servers[i].split("-")[1]));
             }
         } catch (Exception e) {
-            AbstractGunBaseLogUtil.error(e);
+            GunNettyContext.logger.setTAG(GunRicUserProperty.class).error(e);
             return false;
         }
         return true;

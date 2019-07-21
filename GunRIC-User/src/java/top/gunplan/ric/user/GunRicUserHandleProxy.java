@@ -1,19 +1,12 @@
 package top.gunplan.ric.user;
 
 
-import top.gunplan.ric.common.GunRicCommonBuffered;
-import top.gunplan.ric.common.GunRicInterfaceBuffer;
-import top.gunplan.ric.protocol.*;
+import top.gunplan.netty.common.GunNettyContext;
+import top.gunplan.ric.protocol.GunRicInputProtocol;
 import top.gunplan.ric.protocol.exp.GunRicProtocolException;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
-
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.lang.reflect.Method;
-import java.net.Socket;
-import java.util.List;
 
 /**
  * @author dosdrtt
@@ -34,7 +27,7 @@ public class GunRicUserHandleProxy extends AbstractGunRicUserHandleProxy {
             try {
                 input.pushParams(args);
             } catch (GunRicProtocolException exp) {
-                AbstractGunBaseLogUtil.error(exp);
+                GunNettyContext.logger.error(exp);
                 return null;
             }
         }

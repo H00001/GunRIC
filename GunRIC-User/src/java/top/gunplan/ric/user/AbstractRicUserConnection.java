@@ -1,9 +1,10 @@
 package top.gunplan.ric.user;
 
+import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
 import top.gunplan.ric.protocol.RicProtocolCode;
-import top.gunplan.ric.utils.GunRicBufferRead;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.ric.utils.GunRicBufferUtils;
+
 
 import java.io.IOException;
 import java.net.Socket;
@@ -22,7 +23,7 @@ public abstract class AbstractRicUserConnection implements GunRicUserConnection 
             //todo
             socket = GunRicUserConnectionFactory.newSocket("127.0.0.1-8855");
         } catch (IOException e) {
-            AbstractGunBaseLogUtil.error(e);
+            GunNettyContext.logger.error(e);
         }
     }
 
@@ -30,7 +31,7 @@ public abstract class AbstractRicUserConnection implements GunRicUserConnection 
     public boolean sayHello() throws IOException {
         GunRicHelloProtocol protocol = new GunRicHelloProtocol(true);
         socket.getOutputStream().write(protocol.serialize());
-        protocol.unSerialize(GunRicBufferRead.bufferRead(socket.getInputStream()));
+        protocol.unSerialize(GunRicBufferUtils.READER.bufferRead(socket.getInputStream()));
         return protocol.code() == RicProtocolCode.HELLO_RES;
     }
 

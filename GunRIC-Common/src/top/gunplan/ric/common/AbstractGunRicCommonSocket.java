@@ -1,6 +1,6 @@
 package top.gunplan.ric.common;
 
-import top.gunplan.ric.utils.GunRicBufferRead;
+import top.gunplan.ric.utils.GunRicBufferUtils;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -55,6 +55,6 @@ public abstract class AbstractGunRicCommonSocket extends Socket implements Delay
 
 
     byte[] receiveTcpData() throws IOException {
-        return GunRicBufferRead.bufferRead(this.getInputStream());
+        return GunRicBufferUtils.READER.bufferRead(this.getInputStream());
     }
 }

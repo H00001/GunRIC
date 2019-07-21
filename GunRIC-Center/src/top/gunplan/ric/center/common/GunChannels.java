@@ -1,6 +1,7 @@
 package top.gunplan.ric.center.common;
 
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+
+import top.gunplan.ric.center.contest.F;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -26,7 +27,7 @@ public final class GunChannels {
                 channel.write(ByteBuffer.wrap(data));
                 return true;
             } catch (IOException e) {
-                AbstractGunBaseLogUtil.error(e);
+                F.LOG.error(e);
             }
         } else {
             throw new SocketException("Channel can not use");
@@ -40,7 +41,7 @@ public final class GunChannels {
             ByteBuffer buffer = ByteBuffer.allocate(size);
             int len = channel.read(buffer);
             if (len==-1){
-                AbstractGunBaseLogUtil.debug("error");
+                F.LOG.debug("error");
                 return null;
             }
             realSave = new byte[len];

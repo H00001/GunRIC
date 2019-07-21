@@ -3,6 +3,7 @@
 package top.gunplan.ric.provider;
 
 
+import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.ric.common.AbstractGunRicCommonProtocolSocket;
 import top.gunplan.ric.common.GunRicUserConnectionFactoryImpl;
 import top.gunplan.ric.protocol.GunAddressItem4;
@@ -12,7 +13,8 @@ import top.gunplan.ric.protocol.SerizableCode;
 import top.gunplan.ric.protocol.util.GunClassPathUtil;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.ric.protocol.GunRicRegisterProtocol;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.utils.GunLogger;
+
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -24,7 +26,8 @@ import java.util.Map;
 /**
  * @nonconcurrent
  */
-class GunRicPublishManage {
+class GunRicPublishManagerImpl implements GunRicPublishManager {
+    private static GunLogger logger = GunNettyContext.logger.setTAG(GunRicPublishManagerImpl.class);
     private final GunRicProvideProperty ppt;
     /**
      *
@@ -33,7 +36,7 @@ class GunRicPublishManage {
     private Map<Short, String> registerMapping = new HashMap<>();
     private BufferedReader reader;
 
-    GunRicPublishManage(final GunRicProvideProperty ppt) {
+    GunRicPublishManagerImpl(final GunRicProvideProperty ppt) {
         this.ppt = ppt;
         InputStream is = GunClassPathUtil.getResFileAsStream(ppt.getPublishFileName());
         this.reader = new BufferedReader(new InputStreamReader(is));
@@ -59,7 +62,7 @@ class GunRicPublishManage {
             GunRicRegisterStatusProtocol protocol = is.receiveProtocol(GunRicRegisterStatusProtocol.class);
             do {
                 nowcount++;
-                AbstractGunBaseLogUtil.debug(registerMapping.get((short) protocol.serialNumber()) + " register succeed", "[REGISTER]");
+                logger.debug(registerMapping.get((short) protocol.serialNumber()) + " register succeed", "[REGISTER]");
                 protocol = (GunRicRegisterStatusProtocol) protocol.next();
             }
             while (protocol != null);
@@ -80,9 +83,9 @@ class GunRicPublishManage {
             }
         } catch (ReflectiveOperationException | IOException e) {
             if (e instanceof IOException) {
-                AbstractGunBaseLogUtil.error(e.getMessage(), "cannot output please check Socket");
+                logger.error(e.getMessage(), "cannot output please check Socket");
             } else {
-                AbstractGunBaseLogUtil.error(e.getMessage(), "class error");
+                logger.error(e.getMessage(), "class error");
             }
             return false;
         }

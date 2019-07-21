@@ -2,20 +2,13 @@ package top.gunplan.ric.user;
 
 
 import top.gunplan.netty.GunException;
-
-
 import top.gunplan.netty.GunExceptionType;
 import top.gunplan.netty.GunProperty;
-import top.gunplan.ric.protocol.util.PathUtil;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.netty.common.GunNettyContext;
 
 import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 
@@ -70,7 +63,7 @@ public final class GunRicUserPropertyManageImpl {
                             if (!propertys[now].startsWith(UNUSEFULCHARS)) {
                                 proname = propertys[now].replace(" ", "").split(ASSIGNMENTCHARS);
                                 fd = obj.getClass().getDeclaredField(proname[0]);
-                                AbstractGunBaseLogUtil.info(proname[0] + ":" + proname[1].trim(), "[PROPERTY]");
+                                GunNettyContext.logger.setTAG(GunRicUserPropertyManageImpl.class).info(proname[0] + ":" + proname[1].trim(), "[PROPERTY]");
                                 fd.setAccessible(true);
                                 fd.set(obj, isInteger(proname[1].trim()) ? Integer.valueOf(proname[1].trim()) : proname[1].trim());
                             }

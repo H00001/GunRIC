@@ -4,10 +4,10 @@ package top.gunplan.ric.center;
 import top.gunplan.ric.center.anno.GunRicRegisterOrder;
 import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
 import top.gunplan.ric.center.record.GunRicCenterRecordFailException;
+import top.gunplan.ric.common.F;
 import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
             try {
                 firstList.forEach(reg -> reg.nextAdd(g, address));
             } catch (GunRicCenterRecordFailException e) {
-                AbstractGunBaseLogUtil.error(e);
+                F.LOG.error(e);
             }
             regexList.parallelStream().forEach(reg -> reg.nextAdd(g, address));
         }

@@ -1,7 +1,7 @@
 package top.gunplan.ric.protocol;
 
 import top.gunplan.ric.anno.FieldMap;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.ric.common.F;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -90,7 +90,7 @@ public enum RicProtocolParamType {
                     try {
                         mmap.put(map.mapc(), (RicProtocolParamType) fd.get(null));
                     } catch (IllegalAccessException e) {
-                        AbstractGunBaseLogUtil.urgency(e.getMessage());
+                        F.LOG.error(e);
                     }
                     //  mmap.put()
                 }

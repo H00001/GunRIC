@@ -1,12 +1,14 @@
 package top.gunplan.ric.common;
 
 
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.util.concurrent.*;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author dosdrtt
@@ -58,11 +60,11 @@ public class GunRicUserConnectionFactoryImpl implements GunRicConnectionFactory 
 
                 AbstractGunRicCommonProtocolSocket take = SOCKETS.take();
                 if (!take.isUsed() || take.isClosed()) {
-                    AbstractGunBaseLogUtil.debug("collection {0}".replace("{0}", take.getRemoteSocketAddress().toString()));
+                    F.LOG.debug("collection {0}".replace("{0}", take.getRemoteSocketAddress().toString()));
                     take.close();
                 }
             } catch (Exception e) {
-                AbstractGunBaseLogUtil.error(e);
+                F.LOG.error(e);
             }
         }, 5000, 1000, TimeUnit.MILLISECONDS);
 

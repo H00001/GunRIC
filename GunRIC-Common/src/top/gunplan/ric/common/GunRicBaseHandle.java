@@ -3,11 +3,14 @@ package top.gunplan.ric.common;
 import top.gunplan.netty.GunChannelException;
 import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
+import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.netty.protocol.GunNetInputInterface;
 import top.gunplan.netty.protocol.GunNetOutputInterface;
-import top.gunplan.ric.protocol.*;
+import top.gunplan.ric.protocol.GunIllegalProtocolException;
+import top.gunplan.ric.protocol.GunRicCommonRealDealEvent;
+import top.gunplan.ric.protocol.RicProtocolCode;
 import top.gunplan.ric.stand.*;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.utils.GunLogger;
 
 import java.net.SocketAddress;
 
@@ -15,6 +18,7 @@ import java.net.SocketAddress;
  * @author dosdrtt
  */
 public interface GunRicBaseHandle extends GunNettyHandle {
+    GunLogger LOG = GunNettyContext.logger;
     /**
      * dealEvent
      * hello message send auto
@@ -89,7 +93,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      */
     @Override
     default void dealExceptionEvent(GunChannelException e) {
-        AbstractGunBaseLogUtil.error(e);
+        LOG.error(e);
     }
 
     /**
@@ -124,11 +128,11 @@ public interface GunRicBaseHandle extends GunNettyHandle {
             } else if (var1 instanceof GunRicGetAddressStand) {
                 return dealEvent((GunRicGetAddressStand) var1);
             } else {
-                AbstractGunBaseLogUtil.error("not known packet" + var1.getClass().getName(), getClass().getSimpleName());
+                LOG.error("not known packet" + var1.getClass().getName(), getClass().getSimpleName());
                 return null;
             }
         } catch (GunIllegalProtocolException exp) {
-            AbstractGunBaseLogUtil.error(exp);
+            LOG.error(exp);
             return null;
         }
     }

@@ -1,11 +1,15 @@
 package top.gunplan.ric.user;
 
 
+import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.ric.common.GunRicCommonBuffered;
 import top.gunplan.ric.common.GunRicInterfaceBuffer;
 import top.gunplan.ric.protocol.*;
-import top.gunplan.ric.utils.GunRicBufferRead;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.ric.stand.GunRicInvokeReqStand;
+import top.gunplan.ric.stand.GunRicInvokeResStand;
+import top.gunplan.ric.stand.GunRicRetAddressStand;
+import top.gunplan.ric.utils.GunRicBufferUtils;
+
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -21,19 +25,20 @@ class GunRicUserUsedConnection extends AbstractRicUserConnection {
 
     void getAddressItem(Method method) throws IOException {
         socket.getOutputStream().write(new GunRicGetAddressProtocol(method).serialize());
-        byte[] pt = GunRicBufferRead.bufferRead(socket.getInputStream());
-        GunRicRespAddressProtocol protocol = new GunRicRespAddressProtocol();
+        byte[] pt = GunRicBufferUtils.READER.bufferRead(socket.getInputStream());
+        GunRicRetAddressStand protocol = new GunRicRespAddressProtocol();
         protocol.unSerialize(pt);
         this.buffer.push(new GunRicUserClassRec(method.getDeclaringClass()), protocol.addressItems());
         this.addresss = protocol.addressItems();
-        AbstractGunBaseLogUtil.debug("address has finded ");
+        GunNettyContext.logger.debug("address has finded ");
+
     }
 
-    GunRicOutputProtocol send(GunRicInputProtocol protocol) throws IOException {
+    GunRicInvokeResStand send(GunRicInvokeReqStand protocol) throws IOException {
         Socket ss = GunRicUserConnectionFactory.newSocket(this.addresss.get(0).getInet());
         ss.getOutputStream().write(protocol.serialize());
-        byte[] pt = GunRicBufferRead.bufferRead(ss.getInputStream());
-        GunRicOutputProtocol output = (GunRicOutputProtocol) GunRicTypeDividePacketManage.findPackage(pt);
+        byte[] pt = GunRicBufferUtils.READER.bufferRead(ss.getInputStream());
+        GunRicInvokeResStand output = (GunRicInvokeResStand) GunRicTypeDividePacketManage.findPackage(pt);
         output.unSerialize(pt);
         return output;
     }

@@ -1,14 +1,13 @@
 package top.gunplan.ric.center.manage.impl;
 
 import top.gunplan.ric.center.common.GunChannels;
-import top.gunplan.ric.center.manage.GunRicClient;
 import top.gunplan.ric.center.manage.GunRicOperator;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
+import top.gunplan.ric.common.F;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
 import top.gunplan.ric.stand.GunRicHelloStand;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
 
 import java.io.IOException;
 import java.nio.channels.Channel;
@@ -42,7 +41,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
             socketChannel = SocketChannel.open();
             socketChannel.connect(address.getInet());
         } catch (IOException e) {
-            AbstractGunBaseLogUtil.error(e);
+            F.LOG.error(e);
             return -2;
         }
         this.channel = socketChannel;
@@ -55,7 +54,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
         try {
             channel.close();
         } catch (IOException e) {
-            AbstractGunBaseLogUtil.error(e);
+            F.LOG.error(e);
             return -1;
         }
         return 0;
@@ -102,16 +101,16 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
             if (b != null) {
                 hello.unSerialize(b);
                 if (number + 1 == hello.serialNumber()) {
-                    AbstractGunBaseLogUtil.info("connect is normal now");
+                    F.LOG.info("connect is normal now");
                 } else {
-                    AbstractGunBaseLogUtil.info("connect is not now " + number + " " + hello.serialNumber());
+                    F.LOG.info("connect is not now " + number + " " + hello.serialNumber());
                 }
             } else {
                 channel = null;
             }
 
         } catch (IOException e) {
-            AbstractGunBaseLogUtil.error(e);
+            F.LOG.error(e);
         }
         return true;
     }

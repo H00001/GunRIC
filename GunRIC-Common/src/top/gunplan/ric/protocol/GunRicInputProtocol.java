@@ -1,9 +1,11 @@
 package top.gunplan.ric.protocol;
 
+import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.ric.protocol.exp.GunRicProtocolException;
 import top.gunplan.ric.stand.GunRicInvokeReqStand;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
+
+import java.io.IOException;
 
 import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.NOTKNOW;
 import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.WRITE_PARAM_ERROR;
@@ -60,7 +62,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
             try {
                 writeOnceParam(util, fil);
             } catch (Exception exp) {
-                AbstractGunBaseLogUtil.error(exp);
+                GunNettyContext.logger.error(exp);
                 return false;
             }
         }

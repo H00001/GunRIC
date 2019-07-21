@@ -3,7 +3,9 @@ package top.gunplan.ric.provider.property;
 
 import top.gunplan.netty.GunProperty;
 import top.gunplan.netty.anno.GunPropertyMap;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.netty.common.GunNettyContext;
+import top.gunplan.utils.GunLogger;
+
 
 import java.net.InetSocketAddress;
 
@@ -14,6 +16,7 @@ import java.net.InetSocketAddress;
  */
 @GunPropertyMap(name = "ric-provide")
 public class GunRicProvideProperty implements GunProperty {
+    private GunLogger logger = GunNettyContext.logger;
     private String scanPacket;
     private int localServerPort;
     private String centerAddr;
@@ -27,8 +30,8 @@ public class GunRicProvideProperty implements GunProperty {
         return publishLocalIp;
     }
 
-
     public GunRicProvideProperty() {
+        logger.setTAG(GunRicProvideProperty.class);
     }
 
     public InetSocketAddress[] getAddress() {
@@ -63,7 +66,7 @@ public class GunRicProvideProperty implements GunProperty {
                 address[i] = new InetSocketAddress(servers[i].split("-")[0], Integer.parseInt(servers[i].split("-")[1]));
             }
         } catch (Exception e) {
-            AbstractGunBaseLogUtil.error(e);
+            logger.error(e);
             return false;
         }
         return true;

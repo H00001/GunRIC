@@ -1,13 +1,13 @@
 package top.gunplan.ric.center;
 
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
+import top.gunplan.ric.center.contest.F;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItem4;
 import top.gunplan.ric.protocol.GunRicCdtImpl;
 import top.gunplan.ric.protocol.RicProtocolParamType;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public final class GunRicRegisterManage {
 
             findServices(Paths.get(GunRicCenterStaticPath.SERVICES_PATH));
         } catch (IOException exp) {
-            AbstractGunBaseLogUtil.error(exp);
+            F.LOG.error(exp);
         }
         return true;
 
@@ -58,7 +58,7 @@ public final class GunRicRegisterManage {
                     BaseGunRicCdt key = new GunRicCdtImpl(type, interfaceName, methodname);
                     GunRicCenterStdRecordManage.Instance.getHinstance().doRegex(key, new GunAddressItem4(addr.split(property.getDivideFlag())[0], Integer.parseInt(addr.split(property.getDivideFlag())[1])));
                 }
-                AbstractGunBaseLogUtil.debug("find local services " + interfaceName + "." + methodname);
+                F.LOG.debug("find local services " + interfaceName + "." + methodname);
 
             }
             return FileVisitResult.CONTINUE;

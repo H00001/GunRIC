@@ -1,7 +1,8 @@
 package top.gunplan.ric.user;
 
 
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.netty.common.GunNettyContext;
+import top.gunplan.utils.GunLogger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -46,13 +47,14 @@ class GunRicUserConnectionFactory {
 
 
     static void scan() {
+        GunLogger logger = GunNettyContext.logger.setTAG(GunRicUserConnectionFactory.class);
         service.scheduleAtFixedRate(() -> {
             try {
                 GunRicUserSocket take = SOCKETS.take();
                 take.close();
-                AbstractGunBaseLogUtil.error("close");
+                logger.error("close");
             } catch (Exception e) {
-                AbstractGunBaseLogUtil.error(e);
+                logger.error(e);
             }
         }, 5000, 10000, TimeUnit.MILLISECONDS);
 

@@ -1,12 +1,13 @@
 package top.gunplan.ric.center;
 
+import top.gunplan.ric.center.contest.F;
 import top.gunplan.ric.center.manage.check.GunRicCoreHeartTimer;
 import top.gunplan.ric.center.manage.impl.GunRicProviderClientImpl;
 import top.gunplan.ric.center.record.*;
 import top.gunplan.ric.protocol.*;
 import top.gunplan.ric.stand.GunRicRegisterStand;
 import top.gunplan.ric.stand.GunRicRegisterStateStand;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+
 
 /**
  * @author dosdrtt
@@ -29,7 +30,7 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRic
             GunRicCoreHeartTimer.providerManage.register(impl);
             manage.doRegex(interfaceInformation, ai);
         } catch (GunRicCenterRecordFailException exp) {
-            AbstractGunBaseLogUtil.error(exp);
+            F.LOG.error(exp);
             o.setCode(RicProtocolCode.FAIL);
             throw (exp);
         }

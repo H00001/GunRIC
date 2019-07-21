@@ -1,7 +1,8 @@
 package top.gunplan.ric.store;
 
 import top.gunplan.netty.GunBootServerBase;
-import top.gunplan.utils.AbstractGunBaseLogUtil;
+import top.gunplan.netty.common.GunNettyContext;
+
 
 /**
  * @author dosdrtt
@@ -12,7 +13,7 @@ public class StoreBoot implements GunBootServerBase {
         try {
             new StoreBoot().sync();
         } catch (Exception e) {
-            AbstractGunBaseLogUtil.error(e);
+            GunNettyContext.logger.error(e);
         }
     }
 
