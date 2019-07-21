@@ -3,6 +3,8 @@ package top.gunplan.ric.protocol;
 import top.gunplan.ric.common.GunRicCommonExeIst;
 import top.gunplan.ric.common.GunRicMethodHash;
 
+import java.util.Arrays;
+
 /**
  * @author dosdrtt
  * @version 0.0.1.1
@@ -56,5 +58,22 @@ public abstract class BaseGunRicCdt implements GunRicCommonExeIst {
         return methodName;
     }
 
+    @Override
+    public int hashCode() {
+        return GunRicMethodHash.Instance.getHashInstance().h(interfaceName, methodName, params);
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof BaseGunRicCdt) {
+            BaseGunRicCdt cdt = (BaseGunRicCdt) obj;
+            if (hashCode() == cdt.hashCode()) {
+                return interfaceName.equals(cdt.interfaceName) &&
+                        methodName.equals(cdt.methodName) &&
+                        Arrays.equals(params, cdt.params);
+            }
+        }
+        return false;
+
+    }
 }

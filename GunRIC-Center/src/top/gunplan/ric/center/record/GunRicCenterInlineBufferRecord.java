@@ -7,6 +7,7 @@ import top.gunplan.ric.protocol.BaseGunRicCdt;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -48,7 +49,7 @@ public class GunRicCenterInlineBufferRecord extends AbstractGunRicProxyRecord {
     private void writeBufferAddress(BaseGunRicCdt g, final GunAddressItemInterface address, boolean firstWrite) {
         if (firstWrite) {
             try {
-                Set<GunAddressItemInterface> adds = new HashSet<>(16);
+                HashSet<GunAddressItemInterface> adds = new LinkedHashSet<>(16);
                 adds.add(address);
                 buffered.push(g, adds);
             } catch (Exception exp) {

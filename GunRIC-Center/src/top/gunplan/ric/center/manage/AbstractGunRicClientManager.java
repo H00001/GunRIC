@@ -1,29 +1,31 @@
 package top.gunplan.ric.center.manage;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import top.gunplan.ric.center.GunRicCenterStdRecordManage;
+
+import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.stream.Stream;
 
 /**
  * AbstractGunRicClientManager
  *
  * @author frank albert
- * @version 0.0.0.1
+ * @version 0.0.0.2
  * @date 2019-07-20 08:25
  */
 public abstract class AbstractGunRicClientManager<S extends GunRicClient> implements GunRicClientManager<S> {
-    protected List<S> clients = new CopyOnWriteArrayList<>();
+    protected Set<S> clients = new ConcurrentSkipListSet<>();
 
     @Override
-    public void register(S user) {
-        if (user!=null&&user.init()!=-3) {
-            this.clients.add(user);
+    public void inforToRecorder(Stream<S> stream) {
+        if (stream.count() != 0) {
+            stream.forEach(which -> GunRicCenterStdRecordManage.Instance.getHinstance().eraser(which.addressInformation()));
         }
     }
 
     @Override
-    public List<S> clientList() {
-        return Collections.unmodifiableList(clients);
+    public Set<S> clientList() {
+        return clients;
     }
 
     @Override
@@ -39,6 +41,7 @@ public abstract class AbstractGunRicClientManager<S extends GunRicClient> implem
     public S removeById(long id) {
         return null;
     }
+
 
     @Override
     public void remove(S user) {

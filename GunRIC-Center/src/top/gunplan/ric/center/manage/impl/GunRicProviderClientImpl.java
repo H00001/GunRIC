@@ -12,25 +12,28 @@ import top.gunplan.utils.GunLogger;
 import java.io.IOException;
 import java.nio.channels.Channel;
 import java.nio.channels.SocketChannel;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * GunRicProviderClientImpl
  *
  * @author frank albert
- * @version 0.0.0.3
+ * @version 0.0.0.4
  * @date 2019-07-19 20:02
  */
 public class GunRicProviderClientImpl implements GunRicProviderClient {
     private static GunLogger logger = F.LOG.setTAG(GunRicProviderClientImpl.class);
     private volatile SocketChannel channel;
     private final GunAddressItemInterface address;
-    private final BaseGunRicCdt cdt;
+    private final Set<BaseGunRicCdt> cdt;
     private int reTimes = 0;
 
 
     public GunRicProviderClientImpl(GunAddressItemInterface address, BaseGunRicCdt cdt) {
         this.address = address;
-        this.cdt = cdt;
+        this.cdt = new HashSet<>();
+        this.cdt.add(cdt);
     }
 
     @Override
@@ -65,9 +68,20 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     }
 
 
+
     @Override
-    public BaseGunRicCdt cdt() {
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    @Override
+    public Set<BaseGunRicCdt> cdt() {
         return cdt;
+    }
+
+    @Override
+    public void addCdt(BaseGunRicCdt c) {
+        cdt.add(c);
     }
 
     @Override
@@ -126,4 +140,6 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     public void update() {
         reTimes++;
     }
+
+
 }

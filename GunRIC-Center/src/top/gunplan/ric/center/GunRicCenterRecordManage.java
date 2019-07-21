@@ -59,4 +59,12 @@ public interface GunRicCenterRecordManage {
      */
     AbstractGunRicProxyRecord getFirstRecord();
 
+
+    /**
+     * eraser
+     *
+     * @param address removed address
+     */
+    void eraser(final GunAddressItemInterface address);
+
 }

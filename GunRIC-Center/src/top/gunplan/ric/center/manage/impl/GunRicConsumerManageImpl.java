@@ -4,9 +4,10 @@ import top.gunplan.ric.center.manage.AbstractGunRicClientManager;
 import top.gunplan.ric.center.manage.GunProviderAliveCheckResult;
 import top.gunplan.ric.center.manage.GunRicConsumerClient;
 import top.gunplan.ric.center.manage.GunRicConsumerManage;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Set;
 
 /**
  * GunRicConsumerManageImpl
@@ -19,7 +20,7 @@ public class GunRicConsumerManageImpl extends AbstractGunRicClientManager<GunRic
 
 
     @Override
-    public List<GunRicConsumerClient> aireSavoirConsumers() {
+    public Set<GunRicConsumerClient> aireSavoirConsumers() {
         return clients;
     }
 
@@ -27,6 +28,11 @@ public class GunRicConsumerManageImpl extends AbstractGunRicClientManager<GunRic
     @Override
     public GunProviderAliveCheckResult aliveCheck() {
         return null;
+    }
+
+    @Override
+    public void register(GunAddressItemInterface user, BaseGunRicCdt cdt) {
+
     }
 
 

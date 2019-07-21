@@ -2,6 +2,8 @@ package top.gunplan.ric.center.manage;
 
 import top.gunplan.ric.protocol.BaseGunRicCdt;
 
+import java.util.Set;
+
 /**
  * GunRicProviderClient
  *
@@ -11,13 +13,13 @@ import top.gunplan.ric.protocol.BaseGunRicCdt;
  */
 public interface GunRicProviderClient extends GunRicClient {
 
-    BaseGunRicCdt cdt();
+    Set<BaseGunRicCdt> cdt();
+
+    void addCdt(BaseGunRicCdt c);
 
     byte flag();
 
     boolean doCheck();
-
-
 
 
 }

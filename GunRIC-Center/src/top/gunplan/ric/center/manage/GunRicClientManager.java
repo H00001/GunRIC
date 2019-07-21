@@ -1,6 +1,10 @@
 package top.gunplan.ric.center.manage;
 
-import java.util.List;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
+
+import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * GunRicClientManager
@@ -12,15 +16,18 @@ import java.util.List;
 
 public interface GunRicClientManager<U extends GunRicClient> {
 
-    List<U> clientList();
+    Set<U> clientList();
 
     int normalSize();
 
     GunProviderAliveCheckResult aliveCheck();
 
-    void register(U user);
+    void register(GunAddressItemInterface user, BaseGunRicCdt cdt);
 
     U removeById(long id);
 
     void remove(U u);
+
+
+    void inforToRecorder(Stream<U> stream);
 }

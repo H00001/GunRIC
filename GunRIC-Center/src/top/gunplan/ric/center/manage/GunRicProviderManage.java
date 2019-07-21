@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.manage;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * GunRicProviderManage
@@ -12,5 +12,5 @@ import java.util.List;
 
 public interface GunRicProviderManage extends GunRicClientManager<GunRicProviderClient> {
 
-    List<GunRicProviderClient> removeUnuseProvider();
+    Set<GunRicProviderClient> removeUnuseProvider();
 }

@@ -5,8 +5,11 @@ import top.gunplan.ric.center.manage.AbstractGunRicClientManager;
 import top.gunplan.ric.center.manage.GunProviderAliveCheckResult;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.center.manage.GunRicProviderManage;
+import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import static top.gunplan.ric.center.manage.GunRICStateRecorder.ConnectionState.LOSTCONECTION;
 
@@ -19,9 +22,23 @@ import static top.gunplan.ric.center.manage.GunRICStateRecorder.ConnectionState.
  */
 public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRicProviderClient> implements GunRicProviderManage {
 
+    @Override
+    public void register(GunAddressItemInterface user, BaseGunRicCdt cdt) {
+        boolean have = false;
+        for (var v : clients) {
+            if (v.addressInformation().equals(user)) {
+                v.addCdt(cdt);
+                have = true;
+            }
+        }
+        if (!have) {
+            clients.add(new GunRicProviderClientImpl(user, cdt));
+        }
+    }
+
 
     @Override
-    public List<GunRicProviderClient> removeUnuseProvider() {
+    public Set<GunRicProviderClient> removeUnuseProvider() {
         return null;
     }
 
@@ -29,8 +46,15 @@ public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRic
     @Override
     public GunProviderAliveCheckResult aliveCheck() {
         GunNettyContext.logger.setTAG(GunRicProviderManageImpl.class).info("alive count is:" + clients.size());
-        clients.parallelStream().forEach(GunRicProviderClient::doCheck);
-        clients.removeIf(who -> who.state() == LOSTCONECTION);
+        try {
+            clients.parallelStream().forEach(GunRicProviderClient::doCheck);
+            Stream<GunRicProviderClient> clientStream = clients.parallelStream().filter(who -> who.state() == LOSTCONECTION);
+            inforToRecorder(clientStream);
+            clients.removeIf(who -> who.state() == LOSTCONECTION);
+
+        } catch (Exception x) {
+            x.printStackTrace();
+        }
         return null;
     }
 

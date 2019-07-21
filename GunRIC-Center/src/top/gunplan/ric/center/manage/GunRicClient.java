@@ -2,7 +2,6 @@ package top.gunplan.ric.center.manage;
 
 import top.gunplan.netty.GunHandle;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
-import top.gunplan.ric.stand.GunRicBaseStand;
 
 import java.nio.channels.Channel;
 
@@ -15,8 +14,18 @@ import java.nio.channels.Channel;
  * @version 0.0.0.1
  * @date 2019-07-19 20:14
  */
-public interface GunRicClient extends GunHandle, GunRICStateRecorder {
+public interface GunRicClient extends GunHandle, GunRICStateRecorder, Comparable<GunRicClient> {
+    /**
+     * get channel
+     *
+     * @return channel
+     */
     Channel channel();
+
+    @Override
+    default int compareTo(GunRicClient o) {
+        return Integer.compare(hashCode(), o.hashCode());
+    }
 
 
     GunAddressItemInterface addressInformation();

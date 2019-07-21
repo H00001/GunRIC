@@ -27,6 +27,12 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
+    public void eraser(final GunAddressItemInterface address) {
+        F.LOG.urgency("infor ");
+        firstList.parallelStream().forEach(one -> one.remove(address));
+    }
+
+    @Override
     public void register(AbstractGunRicProxyRecord registerRegex) {
         regexList.add(registerRegex);
     }
@@ -74,10 +80,10 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     /**
      * signal instance mode
      */
-    static class Instance {
+    public static class Instance {
         private static GunRicCenterStdRecordManage hinstance = new GunRicCenterStdRecordManage();
 
-        static GunRicCenterStdRecordManage getHinstance() {
+        public static GunRicCenterStdRecordManage getHinstance() {
             return hinstance;
         }
     }
