@@ -1,10 +1,10 @@
 package top.gunplan.ric.center.manage.check;
 
+import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.netty.GunNettyTimer;
-import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 import top.gunplan.ric.center.manage.GunRicConsumerManage;
-import top.gunplan.ric.center.manage.impl.GunRicConsumerManageImpl;
 import top.gunplan.ric.center.manage.GunRicProviderManage;
+import top.gunplan.ric.center.manage.impl.GunRicConsumerManageImpl;
 import top.gunplan.ric.center.manage.impl.GunRicProviderManageImpl;
 import top.gunplan.ric.center.property.GunRicClientCheckProperty;
 
@@ -20,7 +20,7 @@ public class GunRicCoreHeartTimer implements GunNettyTimer {
 
     @Override
     public int interval() {
-        return GunNettyPropertyManagerImpl.getProperty(GunRicClientCheckProperty.class).getInterval();
+        return GunNettySystemServices.PROPERTY_MANAGER.acquireProperty(GunRicClientCheckProperty.class).getInterval();
     }
 
     @Override

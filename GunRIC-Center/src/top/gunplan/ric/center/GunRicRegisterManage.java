@@ -1,6 +1,6 @@
 package top.gunplan.ric.center;
 
-import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
+import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.context.F;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
@@ -17,7 +17,7 @@ public final class GunRicRegisterManage {
     private static GunRicCenterServiceUtilProperty property = null;
 
     public static boolean loadRegister() {
-        property = GunNettyPropertyManagerImpl.getProperty(GunRicCenterServiceUtilProperty.class);
+        property = GunNettySystemServices.PROPERTY_MANAGER.acquireProperty(GunRicCenterServiceUtilProperty.class);
         assert property != null;
         try {
             findServices(Paths.get(GunRicCenterStaticPath.SERVICES_PATH));
@@ -39,8 +39,8 @@ public final class GunRicRegisterManage {
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             if (file.toFile().isFile()) {
                 final String interfaceName = file.getParent().toString().replace(GunRicCenterStaticPath.SERVICES_PATH + "/", "").replace("/", ".");
-                final String methodname = file.toFile().getName().split("_")[0];
-                F.LOG.debug("find history local services " + interfaceName + "." + methodname);
+                final String methodName = file.toFile().getName().split("_")[0];
+                F.LOG.debug("find history local services " + interfaceName + "." + methodName);
             }
             return FileVisitResult.CONTINUE;
         }

@@ -1,14 +1,13 @@
 package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunBootServerBase;
+import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
 
 import top.gunplan.ric.common.GunRicStdFilter;
 import top.gunplan.ric.common.GunRicThreadFactory;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
 import top.gunplan.netty.GunBootServer;
-
-import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
 
 import top.gunplan.netty.impl.GunBootServerFactory;
 
@@ -40,8 +39,8 @@ public class ProviderBoot implements GunBootServerBase {
         ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
                 5L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(), new GunRicThreadFactory());
-        GunNettyPropertyManagerImpl.registerProperty(new GunRicProvideProperty());
-        server.setExecuters(es0, es1).getPipeline().addFilter(new GunNettyStdFirstFilter()).
+        GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicProvideProperty());
+        server.setExecutors(es0, es1).pipeline().addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunRicStdFilter()).
                 setHandle(new GunRicProvideHandle());
         return server.sync();

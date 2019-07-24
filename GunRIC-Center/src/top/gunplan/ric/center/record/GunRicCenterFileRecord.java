@@ -1,6 +1,7 @@
 package top.gunplan.ric.center.record;
 
-import top.gunplan.netty.impl.GunNettyPropertyManagerImpl;
+
+import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.ric.protocol.BaseGunRicCdt;
@@ -22,7 +23,7 @@ import java.util.Set;
 public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
 
 
-    private GunRicCenterServiceUtilProperty property = GunNettyPropertyManagerImpl.getProperty(GunRicCenterServiceUtilProperty.class);
+    private GunRicCenterServiceUtilProperty property = GunNettySystemServices.PROPERTY_MANAGER.acquireProperty(GunRicCenterServiceUtilProperty.class);
 
     public GunRicCenterFileRecord(AbstractGunRicProxyRecord lastRecord) {
         super(lastRecord);
