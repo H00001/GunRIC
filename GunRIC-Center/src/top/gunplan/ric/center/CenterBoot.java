@@ -57,4 +57,14 @@ public class CenterBoot implements GunBootServerBase {
     public int stop() throws InterruptedException {
         return server.stop();
     }
+
+    @Override
+    public boolean isSync() {
+        return false;
+    }
+
+    @Override
+    public void setSyncType(boolean b) {
+        
+    }
 }

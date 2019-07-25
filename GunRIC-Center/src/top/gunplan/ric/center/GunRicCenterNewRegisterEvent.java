@@ -12,7 +12,7 @@ import top.gunplan.ric.stand.GunRicRegisterStateStand;
  * @author dosdrtt
  */
 public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRicRegisterStand, GunRicRegisterStateStand> {
-    private GunRicCenterRecordManage manage = GunRicCenterStdRecordManage.Instance.getHinstance();
+    private GunRICCenterRecordManager manage = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     GunRicCenterNewRegisterEvent() {
 
@@ -22,7 +22,7 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRic
     @Override
     public GunRicRegisterStateStand dealDataEvent(GunRicRegisterStand protocol) {
         GunAddressItemInterface ai = new GunAddressItem4(protocol.ipAddress(), protocol.portNumber());
-        BaseGunRicCdt interfaceInformation = new GunRicCdtImpl(protocol);
+        BaseGunRicServerInformation interfaceInformation = new GunRicServerInformationImpl(protocol);
         GunRicRegisterStateStand o = new GunRicRegisterStatusProtocol(protocol.serialNumber());
         try {
 

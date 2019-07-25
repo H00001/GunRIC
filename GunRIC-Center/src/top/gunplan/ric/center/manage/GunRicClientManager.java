@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.manage;
 
-import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.BaseGunRicServerInformation;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.Set;
@@ -22,7 +22,7 @@ public interface GunRicClientManager<U extends GunRicClient> {
 
     GunProviderAliveCheckResult aliveCheck();
 
-    void register(GunAddressItemInterface user, BaseGunRicCdt cdt);
+    void register(GunAddressItemInterface user, BaseGunRicServerInformation cdt);
 
     U removeById(long id);
 

@@ -4,7 +4,7 @@ package top.gunplan.ric.center.record;
 import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
-import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.BaseGunRicServerInformation;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.RicProtocolParamType;
 
@@ -29,12 +29,12 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
         super(lastRecord);
     }
 
-    private File initFile(final BaseGunRicCdt g) {
+    private File initFile(final BaseGunRicServerInformation g) {
         return new File(GunRicCenterStaticPath.SERVICES_PATH + "/" + g.getInterfaceName().replace(".", "/") + "/" + g.getMethodName() + property.getDivideFlag() + g.getId());
     }
 
     @Override
-    public void firstAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
+    public void firstAdd(BaseGunRicServerInformation g, GunAddressItemInterface address) {
         try {
             File recordfile = initFile(g);
             if (!recordfile.exists()) {
@@ -50,7 +50,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    public void nextAdd(BaseGunRicCdt g, GunAddressItemInterface address) {
+    public void nextAdd(BaseGunRicServerInformation g, GunAddressItemInterface address) {
         try {
             BufferedOutputStream bf;
             bf = new BufferedOutputStream(new FileOutputStream(initFile(g), true));
@@ -67,7 +67,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
     }
 
     @Override
-    Set<GunAddressItemInterface> getAddressBase(BaseGunRicCdt g) {
+    Set<GunAddressItemInterface> getAddressBase(BaseGunRicServerInformation g) {
         return null;
     }
 
@@ -77,7 +77,7 @@ public class GunRicCenterFileRecord extends AbstractGunRicProxyRecord {
         bf.write('\n');
     }
 
-    private void writeFileFirst(BaseGunRicCdt g, BufferedOutputStream bf) throws IOException {
+    private void writeFileFirst(BaseGunRicServerInformation g, BufferedOutputStream bf) throws IOException {
         bf.write(g.getParams().length);
         for (Class<?> aClass : g.getParams()) {
             RicProtocolParamType tp = RicProtocolParamType.valuefrom(aClass);

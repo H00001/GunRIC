@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  * AbstractGunRicClientManager
  *
  * @author frank albert
- * @version 0.0.0.2
+ * @version 0.0.0.3
  * @date 2019-07-20 08:25
  */
 public abstract class AbstractGunRicClientManager<S extends GunRicClient> implements GunRicClientManager<S> {
@@ -18,9 +18,7 @@ public abstract class AbstractGunRicClientManager<S extends GunRicClient> implem
 
     @Override
     public void inforToRecorder(Stream<S> stream) {
-        if (stream.count() != 0) {
-            stream.forEach(which -> GunRicCenterStdRecordManage.Instance.getHinstance().eraser(which.addressInformation()));
-        }
+        stream.forEach(which -> GunRicCenterStdRecordManage.Instance.getHinstance().eraser(which.addressInformation()));
     }
 
     @Override

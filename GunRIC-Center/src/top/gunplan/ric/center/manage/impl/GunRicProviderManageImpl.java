@@ -5,7 +5,7 @@ import top.gunplan.ric.center.manage.AbstractGunRicClientManager;
 import top.gunplan.ric.center.manage.GunProviderAliveCheckResult;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.center.manage.GunRicProviderManage;
-import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.BaseGunRicServerInformation;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.Set;
@@ -23,7 +23,7 @@ import static top.gunplan.ric.center.manage.GunRICStateRecorder.ConnectionState.
 public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRicProviderClient> implements GunRicProviderManage {
 
     @Override
-    public void register(GunAddressItemInterface user, BaseGunRicCdt cdt) {
+    public void register(GunAddressItemInterface user, BaseGunRicServerInformation cdt) {
         boolean have = false;
         for (var v : clients) {
             if (v.addressInformation().equals(user)) {

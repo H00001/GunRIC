@@ -6,7 +6,7 @@ import top.gunplan.ric.center.record.AbstractGunRicProxyRecord;
 import top.gunplan.ric.center.record.GunRicCenterRecordFailException;
 import top.gunplan.ric.common.F;
 import top.gunplan.ric.common.GunRicInterfaceBuffer;
-import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.BaseGunRicServerInformation;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.LinkedList;
@@ -19,7 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @date 2019.05.27
  * @concurrent GunRicCenterStdRecordManage
  */
-public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
+public class GunRicCenterStdRecordManage implements GunRICCenterRecordManager {
     private List<AbstractGunRicProxyRecord> regexList = new CopyOnWriteArrayList<>();
 
     private GunRicCenterStdRecordManage() {
@@ -63,7 +63,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
-    public void doRegex(final BaseGunRicCdt g, final GunAddressItemInterface address) {
+    public void doRegex(final BaseGunRicServerInformation g, final GunAddressItemInterface address) {
         if (isFirst(g)) {
             firstList.forEach(reg -> reg.firstAdd(g, address));
             regexList.parallelStream().forEach(reg -> reg.firstAdd(g, address));
@@ -89,7 +89,7 @@ public class GunRicCenterStdRecordManage implements GunRicCenterRecordManage {
     }
 
     @Override
-    public boolean isFirst(BaseGunRicCdt g) {
+    public boolean isFirst(BaseGunRicServerInformation g) {
         return GunRicInterfaceBuffer.newInstance().get(g) == null;
     }
 

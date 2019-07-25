@@ -4,7 +4,7 @@ import top.gunplan.ric.center.manage.AbstractGunRicClientManager;
 import top.gunplan.ric.center.manage.GunProviderAliveCheckResult;
 import top.gunplan.ric.center.manage.GunRicConsumerClient;
 import top.gunplan.ric.center.manage.GunRicConsumerManage;
-import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.BaseGunRicServerInformation;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 import java.util.Set;
@@ -31,7 +31,7 @@ public class GunRicConsumerManageImpl extends AbstractGunRicClientManager<GunRic
     }
 
     @Override
-    public void register(GunAddressItemInterface user, BaseGunRicCdt cdt) {
+    public void register(GunAddressItemInterface user, BaseGunRicServerInformation cdt) {
 
     }
 

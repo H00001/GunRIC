@@ -4,33 +4,31 @@ package top.gunplan.ric.protocol;
 import top.gunplan.ric.stand.GunRicParamBaseStand;
 
 /**
- * GunRicCdtImpl
+ * GunRicServerInformationImpl
  *
  * @author frank albert
  * @version 0.0.0.1
  * @date 2019-06-13 09:30
  */
-public class GunRicCdtImpl extends BaseGunRicCdt {
+public class GunRicServerInformationImpl extends BaseGunRicServerInformation {
 
-    private GunRicCdtImpl(Class<?>[] params, String interFaceName, String methodName) {
+    private GunRicServerInformationImpl(Class<?>[] params, String interFaceName, String methodName) {
         super(params, interFaceName, methodName);
     }
 
-    public GunRicCdtImpl(RicProtocolParamType[] params, String interFaceName, String methodName) {
+    public GunRicServerInformationImpl(RicProtocolParamType[] params, String interFaceName, String methodName) {
         super(params, interFaceName, methodName);
     }
 
-    public GunRicCdtImpl(GunRicParamBaseStand help) {
+    public GunRicServerInformationImpl(GunRicParamBaseStand help) {
         this(help.paramTypes(), help.interfaceName(), help.methodName());
     }
 
-    private GunRicCdtImpl(String interFaceName, String methodName) {
+    private GunRicServerInformationImpl(String interFaceName, String methodName) {
         super(interFaceName, methodName);
     }
 
-//    public GunRicCdtImpl(AbstractCenterHelperProtocol protocol) {
-//
-//    }
+
 
 
     @Override
@@ -39,7 +37,7 @@ public class GunRicCdtImpl extends BaseGunRicCdt {
     }
 
 
-    private boolean equals1(BaseGunRicCdt objc) {
+    private boolean equals1(BaseGunRicServerInformation objc) {
         if (interfaceName.equals(objc.getInterfaceName()) &&
                 methodName.equals(objc.getMethodName()) &&
                 objc.getParams().length == params.length) {
@@ -54,13 +52,13 @@ public class GunRicCdtImpl extends BaseGunRicCdt {
         }
     }
 
-    private boolean equals0(BaseGunRicCdt objc) {
+    private boolean equals0(BaseGunRicServerInformation objc) {
         return id == objc.getId() && equals1(objc);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj) || equals0((BaseGunRicCdt) obj);
+        return super.equals(obj) || equals0((BaseGunRicServerInformation) obj);
     }
 }
 

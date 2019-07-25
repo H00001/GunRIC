@@ -9,21 +9,19 @@ import java.util.Arrays;
  * @author dosdrtt
  * @version 0.0.1.1
  */
-public abstract class BaseGunRicCdt implements GunRicCommonExeIst {
-
-
+public abstract class BaseGunRicServerInformation implements GunRicCommonExeIst {
     final String interfaceName;
     final String methodName;
     long id;
     Class<?>[] params;
 
-    BaseGunRicCdt(Class<?>[] params, String interFaceName, String methodName) {
+    BaseGunRicServerInformation(Class<?>[] params, String interFaceName, String methodName) {
         this(interFaceName, methodName);
         this.params = params;
         id = GunRicMethodHash.Instance.getHashInstance().h(interFaceName, methodName, params);
     }
 
-    public BaseGunRicCdt(RicProtocolParamType[] params, String interFaceName, String methodName) {
+    public BaseGunRicServerInformation(RicProtocolParamType[] params, String interFaceName, String methodName) {
         this(interFaceName, methodName);
         this.params = new Class<?>[params.length];
         for (int i = 0; i < params.length; i++) {
@@ -32,11 +30,11 @@ public abstract class BaseGunRicCdt implements GunRicCommonExeIst {
         id = GunRicMethodHash.Instance.getHashInstance().h(interFaceName, methodName, this.params);
     }
 
-    public BaseGunRicCdt(AbstractCenterHelperProtocol help) {
+    public BaseGunRicServerInformation(AbstractCenterHelperProtocol help) {
         this(help.paramTypes(), help.interfaceName, help.methodName);
     }
 
-    BaseGunRicCdt(String interFaceName, String methodName) {
+    BaseGunRicServerInformation(String interFaceName, String methodName) {
         this.interfaceName = interFaceName;
         this.methodName = methodName;
     }
@@ -65,8 +63,8 @@ public abstract class BaseGunRicCdt implements GunRicCommonExeIst {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof BaseGunRicCdt) {
-            BaseGunRicCdt cdt = (BaseGunRicCdt) obj;
+        if (obj instanceof BaseGunRicServerInformation) {
+            BaseGunRicServerInformation cdt = (BaseGunRicServerInformation) obj;
             if (hashCode() == cdt.hashCode()) {
                 return interfaceName.equals(cdt.interfaceName) &&
                         methodName.equals(cdt.methodName) &&

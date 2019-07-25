@@ -3,7 +3,7 @@ package top.gunplan.ric.center.manage.impl;
 import top.gunplan.ric.center.common.GunChannels;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.common.F;
-import top.gunplan.ric.protocol.BaseGunRicCdt;
+import top.gunplan.ric.protocol.BaseGunRicServerInformation;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 import top.gunplan.ric.protocol.GunRicHelloProtocol;
 import top.gunplan.ric.stand.GunRicHelloStand;
@@ -26,11 +26,11 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     private static GunLogger logger = F.LOG.setTAG(GunRicProviderClientImpl.class);
     private volatile SocketChannel channel;
     private final GunAddressItemInterface address;
-    private final Set<BaseGunRicCdt> cdt;
+    private final Set<BaseGunRicServerInformation> cdt;
     private int reTimes = 0;
 
 
-    public GunRicProviderClientImpl(GunAddressItemInterface address, BaseGunRicCdt cdt) {
+    public GunRicProviderClientImpl(GunAddressItemInterface address, BaseGunRicServerInformation cdt) {
         this.address = address;
         this.cdt = new HashSet<>();
         this.cdt.add(cdt);
@@ -75,12 +75,12 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     }
 
     @Override
-    public Set<BaseGunRicCdt> cdt() {
+    public Set<BaseGunRicServerInformation> cdt() {
         return cdt;
     }
 
     @Override
-    public void addCdt(BaseGunRicCdt c) {
+    public void addCdt(BaseGunRicServerInformation c) {
         cdt.add(c);
     }
 
