@@ -26,4 +26,9 @@ public class StoreBoot implements GunBootServerBase {
     public int stop() throws InterruptedException {
         return 0;
     }
+
+    @Override
+    public void setSyncType(boolean b) {
+
+    }
 }

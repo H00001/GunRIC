@@ -2,7 +2,7 @@ package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.netty.common.GunNettyContext;
-import top.gunplan.netty.impl.GunNettyDefaultObserveImpl;
+import top.gunplan.netty.impl.GunNettyDefaultObserve;
 
 import top.gunplan.netty.impl.propertys.GunNettyCoreProperty;
 import top.gunplan.ric.common.GunRicExecutors;
@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * @author dosdrtt
  */
-public class GunRicProviderObserve extends GunNettyDefaultObserveImpl {
+public class GunRicProviderObserve extends GunNettyDefaultObserve {
     private ExecutorService threadPool = GunRicExecutors.newSignalExector();
 
     @Override

@@ -26,17 +26,29 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
 
     @Override
     public GunRicRegisterStateStand dealEvent(GunRicRegisterStand protocol) {
+        threwError(protocol);
+        return null;
+    }
+
+    private void threwError(GunRicBaseStand protocol) {
         throw new GunIllegalProtocolException(protocol.getClass(), GunIllegalProtocolException.GunRicAcceptProtocolTypes.GunRicProviderAcceptProtocol);
     }
 
     @Override
     public GunRicRetAddressStand dealEvent(GunRicGetAddressStand protocol) {
-        throw new GunIllegalProtocolException(protocol.getClass(), GunIllegalProtocolException.GunRicAcceptProtocolTypes.GunRicProviderAcceptProtocol);
+        threwError(protocol);
+        return null;
     }
 
 
     @Override
-    public GunRicBaseStand dealConnEvent(SocketAddress socketAddress) throws GunException {
+    public GunRICCenterInlineStand dealEvent(GunRICCenterInlineStand protocol) {
+        threwError(protocol);
         return null;
+    }
+
+    @Override
+    public GunRicBaseStand dealConnEvent(SocketAddress socketAddress) throws GunException {
+        return new GunRicHelloProtocol();
     }
 }

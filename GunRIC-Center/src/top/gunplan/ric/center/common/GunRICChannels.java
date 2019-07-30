@@ -10,13 +10,13 @@ import java.nio.channels.Channel;
 import java.nio.channels.SocketChannel;
 
 /**
- * GunChannels
+ * GunRICChannels
  *
  * @author frank albert
  * @version 0.0.0.1
  * @date 2019-07-19 21:18
  */
-public final class GunChannels {
+public final class GunRICChannels {
     public static boolean channelAvailable(Channel channel) {
         return channel != null && (channel.isOpen());
     }

@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.manage.impl;
 
-import top.gunplan.ric.center.common.GunChannels;
+import top.gunplan.ric.center.common.GunRICChannels;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.common.F;
 import top.gunplan.ric.protocol.BaseGunRicServerInformation;
@@ -68,7 +68,6 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     }
 
 
-
     @Override
     public boolean equals(Object obj) {
         return false;
@@ -97,9 +96,9 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public boolean doCheck() {
-        if (!GunChannels.channelAvailable(channel)) {
+        if (!GunRICChannels.channelAvailable(channel)) {
             init();
-            if (!GunChannels.channelAvailable(channel)) {
+            if (!GunRICChannels.channelAvailable(channel)) {
                 update();
                 return false;
             }
@@ -107,8 +106,10 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
         try {
             GunRicHelloStand hello = new GunRicHelloProtocol(true);
             short number = (short) hello.serialNumber();
-            GunChannels.channelWrite(channel, hello.serialize());
-            byte[] b = GunChannels.channelRead(channel, 8);
+            if (!GunRICChannels.channelWrite(channel, hello.serialize())) {
+                return false;
+            }
+            byte[] b = GunRICChannels.channelRead(channel, 8);
             if (b != null) {
                 hello.unSerialize(b);
                 if (number + 1 == hello.serialNumber()) {

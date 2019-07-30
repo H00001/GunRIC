@@ -5,7 +5,7 @@ import top.gunplan.netty.GunException;
 import top.gunplan.netty.GunNettyHandle;
 import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.netty.protocol.GunNetInbound;
-import top.gunplan.netty.protocol.GunNetOutBound;
+import top.gunplan.netty.protocol.GunNetOutbound;
 import top.gunplan.ric.protocol.GunIllegalProtocolException;
 import top.gunplan.ric.protocol.GunRicCommonRealDealEvent;
 import top.gunplan.ric.protocol.RicProtocolCode;
@@ -28,6 +28,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @return AbstractGunRicProtocol
      */
     default GunRicHelloStand dealEvent(GunRicHelloStand protocol) {
+        LOG.info("hello");
         if (protocol.code() == RicProtocolCode.HELLO_REQ) {
             protocol.setCode(RicProtocolCode.HELLO_RES);
             protocol.incrSeq();
@@ -79,6 +80,8 @@ public interface GunRicBaseHandle extends GunNettyHandle {
     GunRicRetAddressStand dealEvent(GunRicGetAddressStand protocol);
 
 
+    GunRICCenterInlineStand dealEvent(GunRICCenterInlineStand protocol);
+
     /**
      * deal colse event
      */
@@ -105,7 +108,7 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @throws GunException kinds of exception
      */
     @Override
-    GunNetOutBound dealConnEvent(SocketAddress socketAddress) throws GunException;
+    GunNetOutbound dealConnEvent(SocketAddress socketAddress) throws GunException;
 
     /**
      * dealDataEvent

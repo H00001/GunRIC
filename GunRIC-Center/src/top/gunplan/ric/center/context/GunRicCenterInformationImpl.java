@@ -2,6 +2,7 @@ package top.gunplan.ric.center.context;
 
 import top.gunplan.netty.GunProperty;
 import top.gunplan.netty.anno.GunPropertyMap;
+import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 /**
  * GunRicCenterInformationImpl
@@ -17,6 +18,11 @@ public class GunRicCenterInformationImpl implements GunRicCenterInformation, Gun
     private String name;
     private GunRicCenterInformationAttachObject attach;
     private GunRicCenterRole role;
+    private String masterNode;
+
+    public String getMasterNode() {
+        return masterNode;
+    }
 
     public GunRicCenterInformationImpl() {
 
@@ -46,6 +52,11 @@ public class GunRicCenterInformationImpl implements GunRicCenterInformation, Gun
     @Override
     public GunRicCenterInformationAttachObject attach() {
         return attach;
+    }
+
+    @Override
+    public GunAddressItemInterface address() {
+        return null;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package top.gunplan.ric.stand;
 
-import top.gunplan.netty.impl.GunNetInputOutputInterface;
+import top.gunplan.netty.impl.GunNetInBoundOutBound;
 import top.gunplan.ric.protocol.GunRicNxInput;
 import top.gunplan.ric.protocol.RicProtocolCode;
 import top.gunplan.ric.protocol.RicProtocolType;
@@ -12,7 +12,7 @@ import top.gunplan.ric.protocol.RicProtocolType;
  * @version 0.0.0.1
  * @date 2019-07-18 23:42
  */
-public interface GunRicBaseStand extends GunNetInputOutputInterface, GunRicNxInput, Serialer, GunLinked<GunRicBaseStand> {
+public interface GunRicBaseStand extends GunNetInBoundOutBound, GunRicNxInput, Serialer, GunLinked<GunRicBaseStand> {
     /**
      * get  type
      *

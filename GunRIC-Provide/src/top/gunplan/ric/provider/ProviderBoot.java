@@ -52,4 +52,9 @@ public class ProviderBoot implements GunBootServerBase {
     public int stop() throws InterruptedException {
         return server.stop();
     }
+
+    @Override
+    public void setSyncType(boolean b) {
+
+    }
 }

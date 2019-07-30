@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * @author dosdrtt
  */
-public class GunRicCoreHeartTimer implements GunNettyTimer {
+public final class GunRicCoreHeartTimer implements GunNettyTimer {
     private static volatile GunRicConsumerManage consumerManage = new GunRicConsumerManageImpl();
     public static volatile GunRicProviderManage providerManage = new GunRicProviderManageImpl();
 

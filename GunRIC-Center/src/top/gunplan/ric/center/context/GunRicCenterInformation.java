@@ -1,5 +1,7 @@
 package top.gunplan.ric.center.context;
 
+import top.gunplan.ric.protocol.GunAddressItemInterface;
+
 /**
  * GunRicCenterInformation
  *
@@ -14,6 +16,9 @@ public interface GunRicCenterInformation {
     String name();
 
     GunRicCenterInformationAttachObject attach();
+
+
+    GunAddressItemInterface address();
 
     enum GunRicCenterRole {
         /**

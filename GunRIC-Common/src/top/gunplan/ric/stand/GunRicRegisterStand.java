@@ -1,6 +1,6 @@
 package top.gunplan.ric.stand;
 
-import top.gunplan.netty.impl.GunNetInputOutputInterface;
+import top.gunplan.netty.impl.GunNetInBoundOutBound;
 
 /**
  * GunRicRegisterStand
@@ -9,7 +9,7 @@ import top.gunplan.netty.impl.GunNetInputOutputInterface;
  * @version 0.0.0.1
  * @date 2019-07-19 00:03
  */
-public interface GunRicRegisterStand extends GunRicParamBaseStand, GunNetInputOutputInterface {
+public interface GunRicRegisterStand extends GunRicParamBaseStand, GunNetInBoundOutBound {
 
     String ipAddress();
 

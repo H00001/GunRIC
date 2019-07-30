@@ -1,6 +1,6 @@
 package top.gunplan.ric.protocol;
 
-import top.gunplan.netty.impl.GunNetInputOutputInterface;
+import top.gunplan.netty.impl.GunNetInBoundOutBound;
 import top.gunplan.utils.GunBytesUtil;
 
 import java.net.InetSocketAddress;
@@ -13,7 +13,7 @@ import java.net.InetSocketAddress;
  * @date 2019-06-12 21:44
  */
 
-public interface GunAddressItemInterface extends GunNetInputOutputInterface, GunRicOutputHelper,
+public interface GunAddressItemInterface extends GunNetInBoundOutBound, GunRicOutputHelper,
         GunRicNxInput {
 
     /**

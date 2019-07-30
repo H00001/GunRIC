@@ -21,4 +21,5 @@ public class GunRicProvideHandle extends AbstractGunRicBaseProviderHandle {
         return dealMuchEvent(handle::dealDataEvent, protocol);
     }
 
+
 }

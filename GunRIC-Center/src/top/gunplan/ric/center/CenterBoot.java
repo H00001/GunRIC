@@ -5,6 +5,7 @@ import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
+import top.gunplan.ric.center.cluster.GunRICClusterCheck;
 import top.gunplan.ric.center.context.GunRicCenterInformationImpl;
 import top.gunplan.ric.center.manage.check.GunRicCoreHeartTimer;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
@@ -47,7 +48,8 @@ public class CenterBoot implements GunBootServerBase {
                 addFilter(new GunRicStdPolymerisationFilter()).
                 //addTimer(new GunRicCoreTimer()).
                         addTimer(new GunRicCoreHeartTimer()).
-                setHandle(new GunRicCenterHandle());
+                addTimer(new GunRICClusterCheck()).
+                setHandle(new GunRICCenterHandle());
 
         return server.sync();
 
@@ -65,6 +67,6 @@ public class CenterBoot implements GunBootServerBase {
 
     @Override
     public void setSyncType(boolean b) {
-        
+
     }
 }

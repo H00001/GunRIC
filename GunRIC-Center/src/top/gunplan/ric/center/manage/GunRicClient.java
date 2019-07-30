@@ -28,5 +28,10 @@ public interface GunRicClient extends GunHandle, GunRICStateRecorder, Comparable
     }
 
 
+    /**
+     * address information
+     *
+     * @return information
+     */
     GunAddressItemInterface addressInformation();
 }

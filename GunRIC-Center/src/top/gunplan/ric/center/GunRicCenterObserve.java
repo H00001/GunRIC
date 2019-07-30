@@ -1,6 +1,6 @@
 package top.gunplan.ric.center;
 
-import top.gunplan.netty.impl.GunNettyDefaultObserveImpl;
+import top.gunplan.netty.impl.GunNettyDefaultObserve;
 import top.gunplan.netty.impl.propertys.GunNettyCoreProperty;
 import top.gunplan.ric.center.context.F;
 import top.gunplan.ric.center.record.*;
@@ -10,7 +10,7 @@ import top.gunplan.ric.center.record.*;
  *
  * @author dosdrtt
  */
-public class GunRicCenterObserve extends GunNettyDefaultObserveImpl {
+public class GunRicCenterObserve extends GunNettyDefaultObserve {
     private GunRICCenterRecordManager manage = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     @Override
