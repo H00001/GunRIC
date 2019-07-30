@@ -16,9 +16,9 @@ import java.lang.reflect.Method;
 public abstract class AbstractGunRicExecuteProtocol extends AbstractGunRicProtocol {
     String methodName;
     String interfaceName;
-    public static byte METHOD_LEN = 1;
-    public static byte INTERFACE_LEN = 1;
-    public static byte METHOD_LEN_AND_INTERFACE_LEN = 1;
+    private static byte METHOD_LEN = 1;
+    private static byte INTERFACE_LEN = 1;
+    static byte METHOD_LEN_AND_INTERFACE_LEN = (byte) (INTERFACE_LEN + METHOD_LEN);
 
 
     public String methodName() {

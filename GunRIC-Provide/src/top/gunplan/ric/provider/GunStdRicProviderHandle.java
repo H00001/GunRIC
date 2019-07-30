@@ -9,7 +9,6 @@ import top.gunplan.ric.stand.GunRicInvokeReqStand;
 import top.gunplan.ric.stand.GunRicInvokeResStand;
 import top.gunplan.utils.GunLogger;
 
-import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 
 import static top.gunplan.ric.protocol.RicProtocolCode.FAIL;
@@ -41,7 +40,7 @@ public class GunStdRicProviderHandle implements GunRicInvoker<GunRicInvokeReqSta
     @Override
     public AbstractGunRicExecuteProtocol.ParamHelper invokeMethod(GunRicInvokeReqStand inputProtocol) throws ReflectiveOperationException {
         AbstractGunRicExecuteProtocol.ParamHelper help = new AbstractGunRicExecuteProtocol.ParamHelper();
-        MethodType mt = MethodType.methodType(null, inputProtocol.paramTypes()[0], inputProtocol.paramTypes());
+        // MethodType mt = MethodType.methodType(null, inputProtocol.paramTypes()[0], inputProtocol.paramTypes());
 
         Class<?> inst = Class.forName(inputProtocol.interfaceName());
         Object rpcService = Class.forName(inst.getAnnotation(GunUseImpl.class).impl()).getDeclaredConstructor().newInstance();

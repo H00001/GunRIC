@@ -1,10 +1,7 @@
 package top.gunplan.ric.user;
 
 import org.junit.jupiter.api.Test;
-
-import top.gunplan.ric.apis.test.Find;
-import top.gunplan.ric.apis.test.ListQuestion;
-
+import top.gunplan.ric.apis.test.HelloServices;
 
 import java.io.IOException;
 
@@ -38,8 +35,9 @@ class JunitTest {
         int[] x = {1, 0, 2};
         int[] y = {0, 1, -3};
 //
-        Find services1 = UserBoot.iocObject(Find.class);
-        System.out.println(services1.findByBinaryDivide(lisg, 3));
+        HelloServices services1 = UserBoot.iocObject(HelloServices.class);
+        System.out.println(services1.sayGoodBye("hello"));
+        //System.out.println(services1.findByBinaryDivide(lisg, 3));
 //        TestObject o = new TestObject();
 //        o.x = 1;
 //        o.y = 2;

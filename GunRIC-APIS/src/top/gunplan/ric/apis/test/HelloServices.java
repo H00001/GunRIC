@@ -7,7 +7,7 @@ import top.gunplan.ric.apis.test.anno.GunUseImpl;
  * @date 2019/04/22
  * @author dosdrtt
  */
-@GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.HelloServicesImpl")
+@GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.RealSayHello")
 public interface HelloServices {
     /**
      * server will say theirs Hello
