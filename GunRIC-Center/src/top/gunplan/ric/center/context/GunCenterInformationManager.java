@@ -34,6 +34,12 @@ public final class GunCenterInformationManager {
         MANAGER_INSTANCE.iAmMaster = false;
     }
 
+
+    public static synchronized void updateMasterSelf(GunRicCenterInformation information) {
+        MANAGER_INSTANCE.updateMaster(information);
+        MANAGER_INSTANCE.iAmMaster = true;
+    }
+
     public static GunCenterInformationManager instance() {
         return MANAGER_INSTANCE;
     }

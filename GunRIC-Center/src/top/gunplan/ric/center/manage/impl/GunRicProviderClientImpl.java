@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.manage.impl;
 
-import top.gunplan.ric.center.common.GunRICChannels;
+import top.gunplan.ric.center.common.GunRICChannelUtil;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.common.F;
 import top.gunplan.ric.protocol.BaseGunRicServerInformation;
@@ -30,7 +30,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
     private int reTimes = 0;
 
 
-    public GunRicProviderClientImpl(GunAddressItemInterface address, BaseGunRicServerInformation cdt) {
+    GunRicProviderClientImpl(GunAddressItemInterface address, BaseGunRicServerInformation cdt) {
         this.address = address;
         this.cdt = new HashSet<>();
         this.cdt.add(cdt);
@@ -38,15 +38,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public int init() {
-        SocketChannel socketChannel;
-        try {
-            socketChannel = SocketChannel.open();
-            socketChannel.connect(address.getInet());
-        } catch (IOException e) {
-            logger.error(e);
-            return -2;
-        }
-        this.channel = socketChannel;
+        this.channel = GunRICChannelUtil.connect(address.getInet());
         return 0;
     }
 
@@ -96,9 +88,9 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public boolean doCheck() {
-        if (!GunRICChannels.channelAvailable(channel)) {
+        if (!GunRICChannelUtil.channelAvailable(channel)) {
             init();
-            if (!GunRICChannels.channelAvailable(channel)) {
+            if (!GunRICChannelUtil.channelAvailable(channel)) {
                 update();
                 return false;
             }
@@ -106,10 +98,11 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
         try {
             GunRicHelloStand hello = new GunRicHelloProtocol(true);
             short number = (short) hello.serialNumber();
-            if (!GunRICChannels.channelWrite(channel, hello.serialize())) {
+            if (!GunRICChannelUtil.channelWrite(channel, hello.serialize())) {
+                channel = null;
                 return false;
             }
-            byte[] b = GunRICChannels.channelRead(channel, 8);
+            byte[] b = GunRICChannelUtil.channelRead(channel, 8);
             if (b != null) {
                 hello.unSerialize(b);
                 if (number + 1 == hello.serialNumber()) {
@@ -119,6 +112,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
                 }
             } else {
                 channel = null;
+                return false;
             }
 
         } catch (IOException e) {

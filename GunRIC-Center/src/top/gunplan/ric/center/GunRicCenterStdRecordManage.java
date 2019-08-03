@@ -30,7 +30,7 @@ public class GunRicCenterStdRecordManage implements GunRICCenterRecordManager {
 
     @Override
     public void eraser(final GunAddressItemInterface address) {
-        F.LOG.urgency("infor ");
+        F.LOG.debug(String.format("remove node %s:%d", address.getAddress(), address.getPort()));
         firstList.parallelStream().forEach(one -> one.remove(address));
     }
 

@@ -37,14 +37,18 @@ public class CenterBoot implements GunBootServerBase {
     @Override
     public int sync() throws Exception {
         GunNettySystemServices.PROPERTY_MANAGER.setStrategy(new GunGetPropertyFromBaseFile(System.getProperty("config")));
-        server = GunBootServerFactory.getInstance();
-        server.registerObserve(new GunRicCenterObserve());
-
         GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicCenterServicesProperty());
         GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicCenterServiceUtilProperty());
         GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicCenterInformationImpl());
         GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicClientCheckProperty());
-        server.setExecutors(GunRicExecutors.newValueBufferExector(100, 100), GunRicExecutors.newValueBufferExector(100, 100)).pipeline().addFilter(new GunNettyStdFirstFilter()).
+
+        server = GunBootServerFactory.getInstance();
+        server.registerObserve(new GunRicCenterObserve());
+
+        server.setExecutors(GunRicExecutors.newValueBufferExector(100, 100),
+                GunRicExecutors.newValueBufferExector(100, 100)).
+                pipeline().
+                addFilter(new GunNettyStdFirstFilter()).
                 addFilter(new GunRicStdFilter()).
                 addFilter(new GunRicStdPolymerisationFilter()).
                 //addTimer(new GunRicCoreTimer()).

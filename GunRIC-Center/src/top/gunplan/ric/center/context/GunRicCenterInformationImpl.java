@@ -17,7 +17,7 @@ public class GunRicCenterInformationImpl implements GunRicCenterInformation, Gun
     private int id;
     private String name;
     private GunRicCenterInformationAttachObject attach;
-    private GunRicCenterRole role;
+    private GunRicCenterRole role = GunRicCenterRole.NONE;
     private String masterNode;
 
     public String getMasterNode() {
@@ -61,7 +61,10 @@ public class GunRicCenterInformationImpl implements GunRicCenterInformation, Gun
 
     @Override
     public GunRicCenterRole role() {
-        return role;
+        if ("self".equals(masterNode)) {
+            this.role = GunRicCenterRole.MASTER;
+        }
+        return this.role;
     }
 
     @Override
@@ -70,7 +73,15 @@ public class GunRicCenterInformationImpl implements GunRicCenterInformation, Gun
     }
 
     @Override
-    public boolean isAvailable() {
+    public boolean doRegex() {
         return true;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        if (role == GunRicCenterRole.MASTER) {
+            GunCenterInformationManager.updateMasterSelf(this);
+        }
+        return doRegex();
     }
 }
