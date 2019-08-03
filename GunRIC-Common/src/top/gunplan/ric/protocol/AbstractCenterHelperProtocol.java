@@ -53,7 +53,7 @@ public abstract class AbstractCenterHelperProtocol extends AbstractGunRicExecute
 
 
     public void setInameMnameAndParam(Method method) {
-        this.setInameMname(method);
+        this.setINameMName(method);
         this.pushParamTypes(method.getParameterTypes());
 
     }

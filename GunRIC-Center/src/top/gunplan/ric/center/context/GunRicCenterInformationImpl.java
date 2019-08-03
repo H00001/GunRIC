@@ -12,7 +12,7 @@ import top.gunplan.ric.protocol.GunAddressItemInterface;
  * @date 2019-07-19 19:54
  */
 
-@GunPropertyMap(name = "ric-center-node-information")
+@GunPropertyMap(name = "ric-center-node-master")
 public class GunRicCenterInformationImpl implements GunRicCenterInformation, GunProperty {
     private int id;
     private String name;

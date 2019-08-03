@@ -2,7 +2,7 @@ package top.gunplan.ric.center;
 
 import top.gunplan.ric.center.common.protocol.GunRICClusterInformation;
 import top.gunplan.ric.center.common.protocol.GunRICClusterSynchroizedInformation;
-import top.gunplan.ric.center.context.BaseInformation;
+import top.gunplan.ric.center.context.GunCenterInformationManager;
 import top.gunplan.ric.protocol.GunRicCommonRealDeal;
 
 /**
@@ -15,7 +15,8 @@ import top.gunplan.ric.protocol.GunRicCommonRealDeal;
 public class GunRicCenterClusterSyncEvent implements GunRicCommonRealDeal<GunRICClusterInformation, GunRICClusterSynchroizedInformation> {
     @Override
     public GunRICClusterSynchroizedInformation dealDataEvent(GunRICClusterInformation protocol) {
-        BaseInformation.slaves.setRelease(protocol.slave());
+        GunCenterInformationManager.updateInformation(protocol);
+
         return null;
     }
 }

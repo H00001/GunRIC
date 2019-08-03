@@ -23,6 +23,8 @@ public class GunRicCenterStdRecordManage implements GunRICCenterRecordManager {
     private List<AbstractGunRicProxyRecord> regexList = new CopyOnWriteArrayList<>();
 
     private GunRicCenterStdRecordManage() {
+        //ForkJoinPool pool = new ForkJoinPool();
+
 
     }
 

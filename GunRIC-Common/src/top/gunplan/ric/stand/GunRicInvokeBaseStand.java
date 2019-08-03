@@ -1,5 +1,8 @@
 package top.gunplan.ric.stand;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.reflect.Method;
+
 /**
  * GunRicInvokeBaseStand
  *
@@ -11,4 +14,11 @@ public interface GunRicInvokeBaseStand extends GunRicBaseStand {
     String methodName();
 
     String interfaceName();
+
+
+    default void setINameMName(MethodHandle handle) {
+
+    }
+
+    void setINameMName(Method method);
 }

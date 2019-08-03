@@ -14,7 +14,7 @@ public interface GunRicCenterRecord extends GunHandle {
     /**
      * when record first request
      *
-     * @param g       ric record from information
+     * @param g       ric record from master
      * @param address address info
      */
 
@@ -23,7 +23,7 @@ public interface GunRicCenterRecord extends GunHandle {
     /**
      * when record next request
      *
-     * @param g       ric record from information
+     * @param g       ric record from master
      * @param address address info
      */
     void nextAdd(BaseGunRicServerInformation g, GunAddressItemInterface address);

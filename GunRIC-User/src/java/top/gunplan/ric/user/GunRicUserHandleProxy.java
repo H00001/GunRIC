@@ -4,6 +4,7 @@ package top.gunplan.ric.user;
 import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.ric.protocol.GunRicInputProtocol;
 import top.gunplan.ric.protocol.exp.GunRicProtocolException;
+import top.gunplan.ric.stand.GunRicInvokeReqStand;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -21,8 +22,8 @@ public class GunRicUserHandleProxy extends AbstractGunRicUserHandleProxy {
     @Override
     public Object sendMessage(Method method, Object[] args) throws IOException {
         connection.getAddressItem(method);
-        GunRicInputProtocol input = new GunRicInputProtocol();
-        input.setInameMname(method);
+        GunRicInvokeReqStand input = new GunRicInputProtocol();
+        input.setINameMName(method);
         if (args != null) {
             try {
                 input.pushParams(args);

@@ -24,7 +24,7 @@ public abstract class AbstractGunRicProxyRecord implements GunRicCenterRecord {
     /**
      * firstAdd
      *
-     * @param g       ric record from information
+     * @param g       ric record from master
      * @param address address info
      */
     @Override
@@ -36,7 +36,7 @@ public abstract class AbstractGunRicProxyRecord implements GunRicCenterRecord {
      * <p>
      * this method invoke at next record
      *
-     * @param g       ric record from information
+     * @param g       ric record from master
      * @param address address info
      */
     @Override

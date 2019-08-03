@@ -5,7 +5,7 @@ import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
-import top.gunplan.ric.center.cluster.GunRICClusterCheck;
+import top.gunplan.netty.impl.propertys.GunGetPropertyFromBaseFile;
 import top.gunplan.ric.center.context.GunRicCenterInformationImpl;
 import top.gunplan.ric.center.manage.check.GunRicCoreHeartTimer;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
@@ -36,6 +36,7 @@ public class CenterBoot implements GunBootServerBase {
 
     @Override
     public int sync() throws Exception {
+        GunNettySystemServices.PROPERTY_MANAGER.setStrategy(new GunGetPropertyFromBaseFile(System.getProperty("config")));
         server = GunBootServerFactory.getInstance();
         server.registerObserve(new GunRicCenterObserve());
 
@@ -48,8 +49,8 @@ public class CenterBoot implements GunBootServerBase {
                 addFilter(new GunRicStdPolymerisationFilter()).
                 //addTimer(new GunRicCoreTimer()).
                         addTimer(new GunRicCoreHeartTimer()).
-                addTimer(new GunRICClusterCheck()).
-                setHandle(new GunRICCenterHandle());
+                //  addTimer(new GunRICClusterCheck()).
+                        setHandle(new GunRICCenterHandle());
 
         return server.sync();
 

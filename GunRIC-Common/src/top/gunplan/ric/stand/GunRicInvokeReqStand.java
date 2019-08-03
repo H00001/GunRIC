@@ -12,6 +12,7 @@ public interface GunRicInvokeReqStand extends GunRicParamBaseStand {
 
 
     Class<?> returnType();
+
     /**
      * get parameters
      *
@@ -20,4 +21,5 @@ public interface GunRicInvokeReqStand extends GunRicParamBaseStand {
     Object[] parameters();
 
 
+    void pushParams(Object[] args);
 }

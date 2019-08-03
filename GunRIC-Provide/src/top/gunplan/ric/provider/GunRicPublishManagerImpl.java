@@ -7,19 +7,19 @@ import top.gunplan.netty.common.GunNettyContext;
 import top.gunplan.ric.common.AbstractGunRicCommonProtocolSocket;
 import top.gunplan.ric.common.GunRicUserConnectionFactoryImpl;
 import top.gunplan.ric.protocol.GunAddressItem4;
+import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.ric.protocol.GunRicRegisterStatusProtocol;
-
 import top.gunplan.ric.protocol.SerizableCode;
 import top.gunplan.ric.protocol.util.GunClassPathUtil;
 import top.gunplan.ric.provider.property.GunRicProvideProperty;
-import top.gunplan.ric.protocol.GunRicRegisterProtocol;
 import top.gunplan.utils.GunLogger;
 
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,7 +94,7 @@ class GunRicPublishManagerImpl implements GunRicPublishManager {
     }
 
     private void constructProtocol(Class<?> clazz, Method md, GunRicRegisterProtocol protocol) {
-        protocol.setInameMname(md);
+        protocol.setINameMName(md);
         protocol.setItem(new GunAddressItem4(ppt.getPublishLocalIp(), ppt.getServerLocalPort()));
         SerizableCode serizableCode = SerizableCode.newInstance();
         final int v = serizableCode.getSerialNum32();
