@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.manage.impl;
 
-import top.gunplan.ric.center.common.GunRICChannelUtil;
+import top.gunplan.ric.center.common.ChannelUtil;
 import top.gunplan.ric.center.manage.GunRicProviderClient;
 import top.gunplan.ric.common.F;
 import top.gunplan.ric.protocol.BaseGunRicServerInformation;
@@ -38,7 +38,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public int init() {
-        this.channel = GunRICChannelUtil.connect(address.getInet());
+        this.channel = ChannelUtil.connect(address.getInet());
         return 0;
     }
 
@@ -88,9 +88,9 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
     @Override
     public boolean doCheck() {
-        if (!GunRICChannelUtil.channelAvailable(channel)) {
+        if (!ChannelUtil.channelAvailable(channel)) {
             init();
-            if (!GunRICChannelUtil.channelAvailable(channel)) {
+            if (!ChannelUtil.channelAvailable(channel)) {
                 update();
                 return false;
             }
@@ -98,11 +98,11 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
         try {
             GunRicHelloStand hello = new GunRicHelloProtocol(true);
             short number = (short) hello.serialNumber();
-            if (!GunRICChannelUtil.channelWrite(channel, hello.serialize())) {
+            if (!ChannelUtil.channelWrite(channel, hello.serialize())) {
                 channel = null;
                 return false;
             }
-            byte[] b = GunRICChannelUtil.channelRead(channel, 8);
+            byte[] b = ChannelUtil.channelRead(channel, 8);
             if (b != null) {
                 hello.unSerialize(b);
                 if (number + 1 == hello.serialNumber()) {

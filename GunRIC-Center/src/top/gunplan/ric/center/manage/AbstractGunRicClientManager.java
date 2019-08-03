@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  * AbstractGunRicClientManager
  *
  * @author frank albert
- * @version 0.0.0.3
+ * @version 0.0.0.4
  * @date 2019-07-20 08:25
  */
 public abstract class AbstractGunRicClientManager<S extends GunRicClient> implements GunRicClientManager<S> {

@@ -11,13 +11,13 @@ import java.nio.channels.Channel;
 import java.nio.channels.SocketChannel;
 
 /**
- * GunRICChannelUtil
+ * ChannelUtil
  *
  * @author frank albert
  * @version 0.0.0.1
  * @date 2019-07-19 21:18
  */
-public final class GunRICChannelUtil {
+public final class ChannelUtil {
 
     public static SocketChannel connect(final InetSocketAddress address) {
         SocketChannel socketChannel = null;
@@ -25,7 +25,7 @@ public final class GunRICChannelUtil {
             socketChannel = SocketChannel.open();
             socketChannel.connect(address);
         } catch (IOException e) {
-            F.LOG.error("connection " + address.getHostString() + " fail");
+            F.LOG.error(String.format("connection %s:%d fail", address.getHostString(), address.getPort()));
         }
         return socketChannel;
     }
