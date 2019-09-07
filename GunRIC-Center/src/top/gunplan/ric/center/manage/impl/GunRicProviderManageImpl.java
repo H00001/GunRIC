@@ -49,7 +49,7 @@ public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRic
         try {
             clients.parallelStream().forEach(GunRicProviderClient::doCheck);
             Stream<GunRicProviderClient> clientStream = clients.parallelStream().filter(who -> who.state() == LOSTCONECTION);
-            inforToRecorder(clientStream);
+            informToRecorder(clientStream);
             clients.removeIf(who -> who.state() == LOSTCONECTION);
 
         } catch (Exception x) {

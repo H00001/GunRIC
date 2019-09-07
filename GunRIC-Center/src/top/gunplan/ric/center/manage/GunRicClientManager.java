@@ -16,8 +16,17 @@ import java.util.stream.Stream;
 
 public interface GunRicClientManager<U extends GunRicClient> {
 
+    /**
+     * get client list
+     *
+     * @return list;client list
+     */
     Set<U> clientList();
 
+    /**
+     * normal size
+     * @return size
+     */
     int normalSize();
 
     GunProviderAliveCheckResult aliveCheck();
@@ -29,5 +38,5 @@ public interface GunRicClientManager<U extends GunRicClient> {
     void remove(U u);
 
 
-    void inforToRecorder(Stream<U> stream);
+    void informToRecorder(Stream<U> stream);
 }

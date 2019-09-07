@@ -17,7 +17,7 @@ public abstract class AbstractGunRicClientManager<S extends GunRicClient> implem
     protected Set<S> clients = new ConcurrentSkipListSet<>();
 
     @Override
-    public void inforToRecorder(Stream<S> stream) {
+    public void informToRecorder(Stream<S> stream) {
         stream.forEach(which -> GunRicCenterStdRecordManage.Instance.getHinstance().eraser(which.addressInformation()));
     }
 
