@@ -2,22 +2,20 @@ package top.gunplan.ric.common;
 
 import top.gunplan.netty.GunChannelException;
 import top.gunplan.netty.GunException;
-import top.gunplan.netty.GunNettyHandle;
+import top.gunplan.netty.GunNettyChildrenHandle;
 import top.gunplan.netty.common.GunNettyContext;
+import top.gunplan.netty.filter.GunNettyFilter;
 import top.gunplan.netty.protocol.GunNetInbound;
-import top.gunplan.netty.protocol.GunNetOutbound;
 import top.gunplan.ric.protocol.GunIllegalProtocolException;
 import top.gunplan.ric.protocol.GunRicCommonRealDealEvent;
 import top.gunplan.ric.protocol.RicProtocolCode;
 import top.gunplan.ric.stand.*;
 import top.gunplan.utils.GunLogger;
 
-import java.net.SocketAddress;
-
 /**
  * @author dosdrtt
  */
-public interface GunRicBaseHandle extends GunNettyHandle {
+public interface GunRicBaseHandle extends GunNettyChildrenHandle {
     GunLogger LOG = GunNettyContext.logger.setTAG(GunRicBaseHandle.class);
 
     /**
@@ -82,13 +80,6 @@ public interface GunRicBaseHandle extends GunNettyHandle {
 
     GunRICCenterInlineStand dealEvent(GunRICCenterInlineStand protocol);
 
-    /**
-     * deal colse event
-     */
-    @Override
-    default void dealCloseEvent() {
-        //do nothing
-    }
 
     /**
      * dealExceptionEvent
@@ -96,19 +87,11 @@ public interface GunRicBaseHandle extends GunNettyHandle {
      * @param e Exception
      */
     @Override
-    default void dealExceptionEvent(GunChannelException e) {
+    default GunNettyFilter.DealResult dealExceptionEvent(GunChannelException e) {
         LOG.error(e);
+        return GunNettyFilter.DealResult.CLOSED;
     }
 
-    /**
-     * connection happened
-     *
-     * @param socketAddress SocketAddress
-     * @return output
-     * @throws GunException kinds of exception
-     */
-    @Override
-    GunNetOutbound dealConnEvent(SocketAddress socketAddress) throws GunException;
 
     /**
      * dealDataEvent

@@ -24,7 +24,6 @@ public class LinearAlgebraImpl implements LinearAlgebra {
      * @param s det's size
      * @return calu resu
      */
-
     @Override
     public CalRes calDet(int[][] a, int s) {
         if (c(a, s)) {

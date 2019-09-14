@@ -27,8 +27,4 @@ public class StoreBoot implements GunBootServerBase {
         return 0;
     }
 
-    @Override
-    public void setSyncType(boolean b) {
-
-    }
 }

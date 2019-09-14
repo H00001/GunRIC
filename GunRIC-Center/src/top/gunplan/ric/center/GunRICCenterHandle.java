@@ -9,6 +9,8 @@ import top.gunplan.ric.stand.GunRicRegisterStand;
 import top.gunplan.ric.stand.GunRicRegisterStateStand;
 import top.gunplan.ric.stand.GunRicRetAddressStand;
 
+import java.net.SocketAddress;
+
 
 /**
  * @author dosdrtt
@@ -38,4 +40,8 @@ public class GunRICCenterHandle extends AbstractGunRicBaseCenterHandle {
     }
 
 
+    @Override
+    public void dealCloseEvent(SocketAddress socketAddress) {
+
+    }
 }

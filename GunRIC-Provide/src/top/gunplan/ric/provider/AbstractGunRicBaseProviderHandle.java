@@ -1,9 +1,7 @@
 package top.gunplan.ric.provider;
 
-import top.gunplan.netty.GunException;
-
 import top.gunplan.ric.common.GunRicBaseHandle;
-import top.gunplan.ric.protocol.*;
+import top.gunplan.ric.protocol.GunIllegalProtocolException;
 import top.gunplan.ric.stand.*;
 
 import java.net.SocketAddress;
@@ -48,7 +46,7 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
     }
 
     @Override
-    public GunRicBaseStand dealConnEvent(SocketAddress socketAddress) throws GunException {
-        return new GunRicHelloProtocol();
+    public void dealCloseEvent(SocketAddress socketAddress) {
+
     }
 }

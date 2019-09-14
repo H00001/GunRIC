@@ -1,8 +1,8 @@
 package top.gunplan.ric.common;
 
 import top.gunplan.netty.GunChannelException;
-import top.gunplan.netty.GunNettyFilter;
-import top.gunplan.netty.impl.GunNettyInputFilterChecker;
+import top.gunplan.netty.filter.GunNettyInboundFilter;
+import top.gunplan.netty.impl.checker.GunInboundChecker;
 
 /**
  * GunRicPolymerisationFilter
@@ -11,9 +11,10 @@ import top.gunplan.netty.impl.GunNettyInputFilterChecker;
  * @version 0.0.0.1
  * @date 2019-07-19 11:25
  */
-public interface GunRicPolymerisationFilter extends GunNettyFilter {
+public interface GunRicPolymerisationFilter extends GunNettyInboundFilter {
+
     @Override
-    default DealResult doInputFilter(GunNettyInputFilterChecker gunNettyInputFilterChecker) throws GunChannelException {
+    default DealResult doInputFilter(GunInboundChecker checker) throws GunChannelException {
         return DealResult.NEXT;
     }
 }

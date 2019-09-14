@@ -14,19 +14,14 @@ import java.util.Set;
  * @date 2019-07-25 23:53
  */
 public class GunRICClusterCheck implements GunNettyTimer {
-    @Override
-    public int interval() {
-        return 2;
-    }
 
-    @Override
-    public int runingTimes() {
-        return 0;
-    }
-
-    @Override
     public int doWork(Set<SelectionKey> set) {
         F.LOG.info("cluster check");
         return 0;
+    }
+
+    @Override
+    public boolean timeExecuteError(String s, ReflectiveOperationException e) {
+        return false;
     }
 }

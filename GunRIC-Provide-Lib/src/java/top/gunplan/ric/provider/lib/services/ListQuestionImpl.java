@@ -8,7 +8,6 @@ import top.gunplan.ric.apis.test.ListQuestion;
  */
 public class ListQuestionImpl implements ListQuestion {
 
-
     @Override
     public int[] moveZero(int[] list) {
         return moveVal(list, 0);

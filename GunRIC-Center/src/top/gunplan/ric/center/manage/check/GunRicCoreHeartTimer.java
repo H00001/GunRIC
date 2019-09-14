@@ -1,15 +1,12 @@
 package top.gunplan.ric.center.manage.check;
 
-import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.netty.GunNettyTimer;
+import top.gunplan.netty.anno.GunHandleTag;
+import top.gunplan.netty.anno.GunTimeExecutor;
 import top.gunplan.ric.center.manage.GunRicConsumerManage;
 import top.gunplan.ric.center.manage.GunRicProviderManage;
 import top.gunplan.ric.center.manage.impl.GunRicConsumerManageImpl;
 import top.gunplan.ric.center.manage.impl.GunRicProviderManageImpl;
-import top.gunplan.ric.center.property.GunRicClientCheckProperty;
-
-import java.nio.channels.SelectionKey;
-import java.util.Set;
 
 /**
  * @author dosdrtt
@@ -18,19 +15,15 @@ public final class GunRicCoreHeartTimer implements GunNettyTimer {
     private static volatile GunRicConsumerManage consumerManage = new GunRicConsumerManageImpl();
     public static volatile GunRicProviderManage providerManage = new GunRicProviderManageImpl();
 
-    @Override
-    public int interval() {
-        return GunNettySystemServices.PROPERTY_MANAGER.acquireProperty(GunRicClientCheckProperty.class).getInterval();
-    }
 
-    @Override
-    public int runingTimes() {
-        return 0;
-    }
-
-    @Override
-    public int doWork(Set<SelectionKey> set) {
+    @GunTimeExecutor(interval = 1, t = @GunHandleTag(name = "it", id = 3112))
+    public int doWork() {
         providerManage.aliveCheck();
         return 0;
+    }
+
+    @Override
+    public boolean timeExecuteError(String s, ReflectiveOperationException e) {
+        return false;
     }
 }

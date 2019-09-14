@@ -1,7 +1,6 @@
 package top.gunplan.ric.center;
 
 
-import top.gunplan.netty.GunException;
 import top.gunplan.ric.center.common.protocol.GunRICClusterInformation;
 import top.gunplan.ric.center.common.protocol.GunRICClusterSynchroizedInformation;
 import top.gunplan.ric.common.F;
@@ -9,8 +8,6 @@ import top.gunplan.ric.common.GunRicBaseHandle;
 import top.gunplan.ric.protocol.GunIllegalProtocolException;
 import top.gunplan.ric.protocol.GunRicInputProtocol;
 import top.gunplan.ric.stand.*;
-
-import java.net.SocketAddress;
 
 
 /**
@@ -53,8 +50,5 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
 
     public abstract GunRICClusterSynchroizedInformation dealEvent(GunRICClusterInformation protocol);
 
-    @Override
-    public GunRicBaseStand dealConnEvent(SocketAddress socketAddress) throws GunException {
-        return null;
-    }
+
 }

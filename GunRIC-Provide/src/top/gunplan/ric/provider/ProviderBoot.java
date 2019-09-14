@@ -1,18 +1,12 @@
 package top.gunplan.ric.provider;
 
+import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.GunNettySystemServices;
-import top.gunplan.netty.impl.GunNettyStdFirstFilter;
-
-import top.gunplan.ric.common.GunRicStdFilter;
-import top.gunplan.ric.common.GunRicThreadFactory;
-import top.gunplan.ric.provider.property.GunRicProvideProperty;
-import top.gunplan.netty.GunBootServer;
-
 import top.gunplan.netty.impl.GunBootServerFactory;
-
-
-import java.util.concurrent.*;
+import top.gunplan.netty.impl.GunNettyStdFirstFilter;
+import top.gunplan.ric.common.GunRicStdFilter;
+import top.gunplan.ric.provider.property.GunRicProvideProperty;
 
 /**
  * @author dosdrtt
@@ -31,30 +25,20 @@ public class ProviderBoot implements GunBootServerBase {
 
     @Override
     public int sync() throws Exception {
-        server = GunBootServerFactory.getInstance();
+        server = GunBootServerFactory.newInstance();
         server.registerObserve(new GunRicProviderObserve());
-        ExecutorService es0 = new ThreadPoolExecutor(100, 1000,
-                5L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(), new GunRicThreadFactory());
-        ExecutorService es1 = new ThreadPoolExecutor(100, 1000,
-                5L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(), new GunRicThreadFactory());
-        GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicProvideProperty());
-        server.setExecutors(es0, es1).pipeline().addFilter(new GunNettyStdFirstFilter()).
-                addFilter(new GunRicStdFilter()).
-                setHandle(new GunRicProvideHandle());
+        GunNettySystemServices.PROPERTY_MANAGER.
+                registerProperty(new GunRicProvideProperty());
+        server.setExecutors(100, 100).onHasChannel(c ->
+                c.addDataFilter(new GunNettyStdFirstFilter()).
+                        addDataFilter(new GunRicStdFilter()).
+                        setHandle(new GunRicProvideHandle())
+        );
         return server.sync();
-
-
     }
 
     @Override
     public int stop() throws InterruptedException {
         return server.stop();
-    }
-
-    @Override
-    public void setSyncType(boolean b) {
-
     }
 }

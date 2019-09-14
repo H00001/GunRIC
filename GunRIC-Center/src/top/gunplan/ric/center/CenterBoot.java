@@ -5,13 +5,12 @@ import top.gunplan.netty.GunBootServerBase;
 import top.gunplan.netty.GunNettySystemServices;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
-import top.gunplan.netty.impl.propertys.GunGetPropertyFromBaseFile;
+import top.gunplan.netty.impl.property.GunGetPropertyFromBaseFile;
 import top.gunplan.ric.center.context.GunRicCenterInformationImpl;
 import top.gunplan.ric.center.manage.check.GunRicCoreHeartTimer;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
 import top.gunplan.ric.center.property.GunRicCenterServicesProperty;
 import top.gunplan.ric.center.property.GunRicClientCheckProperty;
-import top.gunplan.ric.common.GunRicExecutors;
 import top.gunplan.ric.common.GunRicStdFilter;
 import top.gunplan.ric.common.GunRicStdPolymerisationFilter;
 
@@ -42,36 +41,22 @@ public class CenterBoot implements GunBootServerBase {
         GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicCenterInformationImpl());
         GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicClientCheckProperty());
 
-        server = GunBootServerFactory.getInstance();
+        server = GunBootServerFactory.newInstance();
         server.registerObserve(new GunRicCenterObserve());
-
-        server.setExecutors(GunRicExecutors.newValueBufferExector(100, 100),
-                GunRicExecutors.newValueBufferExector(100, 100)).
-                pipeline().
-                addFilter(new GunNettyStdFirstFilter()).
-                addFilter(new GunRicStdFilter()).
-                addFilter(new GunRicStdPolymerisationFilter()).
-                //addTimer(new GunRicCoreTimer()).
-                        addTimer(new GunRicCoreHeartTimer()).
-                //  addTimer(new GunRICClusterCheck()).
-                        setHandle(new GunRICCenterHandle());
-
+        server.useStealMode(true).
+                setExecutors(100, 100).
+                onHasChannel(ch -> ch.
+                        addDataFilter(new GunNettyStdFirstFilter()).
+                        addDataFilter(new GunRicStdFilter()).
+                        addDataFilter(new GunRicStdPolymerisationFilter()).
+                        addNettyTimer(new GunRicCoreHeartTimer()).
+                        setHandle(new GunRICCenterHandle())
+                );
         return server.sync();
-
     }
 
     @Override
     public int stop() throws InterruptedException {
         return server.stop();
-    }
-
-    @Override
-    public boolean isSync() {
-        return false;
-    }
-
-    @Override
-    public void setSyncType(boolean b) {
-
     }
 }
