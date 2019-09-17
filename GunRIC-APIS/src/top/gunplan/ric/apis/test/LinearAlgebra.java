@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * LinearAlgebra calculator class
  * @author dosdrtt
- * @date 1557231535
+ * #date 1557231535
  */
 @GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.LinearAlgebraImpl")
 public interface LinearAlgebra {

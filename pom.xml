@@ -10,13 +10,14 @@
     <artifactId>top.gunplan</artifactId>
     <packaging>pom</packaging>
     <groupId>gunplan-ric</groupId>
-    <version>tianchi.1.0.0</version>
 
     <modules>
         <module>ric-center</module>
         <module>ric-apis</module>
         <module>ric-common</module>
         <module>ric-provider</module>
+        <module>ric-store</module>
+        <module>ric-user</module>
         <module>ric-provider-lib</module>
     </modules>
 

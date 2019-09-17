@@ -10,7 +10,7 @@ import java.util.Set;
  *
  * @author frank albert
  * @version 0.0.2.1
- * @date 2019-08-03 21:53
+ * #date 2019-08-03 21:53
  */
 public final class GunCenterInformationManager {
 

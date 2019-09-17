@@ -7,7 +7,7 @@ import java.io.IOException;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-06-08 13:34
+ * #date 2019-06-08 13:34
  */
 public interface GunRicUserConnection {
     /**

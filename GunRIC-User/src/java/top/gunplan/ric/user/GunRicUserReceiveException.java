@@ -5,7 +5,7 @@ import top.gunplan.netty.GunExceptionType;
 
 /**
  * @author dosdrtt
- * @date 2019/05/28
+ * #date 2019/05/28
  */
 public class GunRicUserReceiveException extends GunException {
     public GunRicUserReceiveException(String why) {

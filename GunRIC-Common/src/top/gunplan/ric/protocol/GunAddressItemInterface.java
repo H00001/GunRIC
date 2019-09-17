@@ -10,7 +10,7 @@ import java.net.InetSocketAddress;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-06-12 21:44
+ * #date 2019-06-12 21:44
  */
 
 public interface GunAddressItemInterface extends GunNetInBoundOutBound, GunRicOutputHelper,

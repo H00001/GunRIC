@@ -13,6 +13,7 @@ public class ListQuestionImpl implements ListQuestion {
         return moveVal(list, 0);
     }
 
+
     @Override
     public Result27 removeVal(int[] list, int target) {
         int v = moveValWithFill(list, target, 0);

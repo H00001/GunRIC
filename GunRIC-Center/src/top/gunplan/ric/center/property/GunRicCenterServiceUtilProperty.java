@@ -8,7 +8,7 @@ import top.gunplan.netty.anno.GunPropertyMap;
  * stand is {@link GunProperty}
  *
  * @author dosdrtt
- * @date 2019/05/22
+ * #date 2019/05/22
  * @see top.gunplan.netty.GunProperty
  */
 @GunPropertyMap(name = "ric-center-services-util")

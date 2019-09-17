@@ -8,7 +8,7 @@ import top.gunplan.netty.anno.GunPropertyMap;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-21 10:56
+ * #date 2019-07-21 10:56
  */
 @GunPropertyMap(name = "ric-center-client-check")
 public class GunRicClientCheckProperty implements GunProperty {

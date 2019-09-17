@@ -16,7 +16,7 @@ import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtoco
 /**
  * @author dosdrtt
  * @version 0.0.0.0
- * @date
+ * #date
  */
 public abstract class AbstractGunRicProtocol implements GunRicNxInput {
 

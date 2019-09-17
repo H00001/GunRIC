@@ -7,7 +7,7 @@ import top.gunplan.ric.apis.test.NatureMath;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-06-09 12:20
+ * #date 2019-06-09 12:20
  */
 
 public class NatureMathImpl implements NatureMath {

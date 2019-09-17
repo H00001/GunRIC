@@ -6,7 +6,7 @@ package top.gunplan.ric.stand;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-18 23:37
+ * #date 2019-07-18 23:37
  */
 public interface GunRicInvokeReqStand extends GunRicParamBaseStand {
 

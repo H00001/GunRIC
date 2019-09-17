@@ -11,7 +11,7 @@ import java.util.Set;
  *
  * @author frank albert
  * @version 0.0.0.2
- * @date 2019-07-25 23:53
+ * #date 2019-07-25 23:53
  */
 public class GunRICClusterCheck implements GunNettyTimer {
 

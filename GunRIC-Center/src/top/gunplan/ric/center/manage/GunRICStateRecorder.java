@@ -5,7 +5,7 @@ package top.gunplan.ric.center.manage;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-20 21:54
+ * #date 2019-07-20 21:54
  */
 public interface GunRICStateRecorder {
     int reConnectionTimes();

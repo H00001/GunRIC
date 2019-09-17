@@ -7,7 +7,7 @@ package top.gunplan.ric.stand;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-20 08:55
+ * #date 2019-07-20 08:55
  */
 public interface GunLinked<N> {
     /**

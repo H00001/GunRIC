@@ -18,7 +18,7 @@ import top.gunplan.ric.common.GunRicStdPolymerisationFilter;
  * CenterBoot
  *
  * @author frank albert
- * @date 2019-06-08 08:42
+ * #date 2019-06-08 08:42
  */
 
 public class CenterBoot implements GunBootServerBase {

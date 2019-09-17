@@ -12,7 +12,7 @@ import java.nio.channels.Channel;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-19 20:14
+ * #date 2019-07-19 20:14
  */
 public interface GunRicClient extends GunHandle, GunRICStateRecorder, Comparable<GunRicClient> {
     /**

@@ -11,7 +11,7 @@ import java.util.Set;
  * GunRicCenterEhcachedRecord
  *
  * @author dosdrtt
- * @date 2019/05/35
+ * #date 2019/05/35
  * @see GunRicCenterRecord
  */
 public class GunRicCenterEhcachedRecord extends AbstractGunRicProxyRecord {

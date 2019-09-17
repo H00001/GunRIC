@@ -8,7 +8,7 @@ import top.gunplan.utils.GunBytesUtil;
  * this class is used do divide different package
  *
  * @author dosdrtt
- * @date 1557303969
+ * #date 1557303969
  */
 public final class GunRicTypeDividePacketManage {
     public static GunRicBaseStand findPackage(byte[] bytes) {

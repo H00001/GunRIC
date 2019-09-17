@@ -6,7 +6,7 @@ import top.gunplan.utils.GunBytesUtil;
  * this is a new way to organize the protocol
  *
  * @author frank
- * @date 2019-06-27
+ * #date 2019-06-27
  */
 public interface GunRicProtocolBody {
     /**

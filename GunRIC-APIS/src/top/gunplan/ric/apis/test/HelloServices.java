@@ -4,7 +4,7 @@ import top.gunplan.ric.apis.test.anno.GunUseImpl;
 
 /**
  * HelloServices (Test)
- * @date 2019/04/22
+ * #date 2019/04/22
  * @author dosdrtt
  */
 @GunUseImpl(impl = "top.gunplan.ric.provider.lib.services.RealSayHello")

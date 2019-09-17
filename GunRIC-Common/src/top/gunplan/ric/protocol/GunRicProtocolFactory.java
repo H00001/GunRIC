@@ -1,6 +1,5 @@
 package top.gunplan.ric.protocol;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -8,7 +7,7 @@ import java.util.Set;
  *
  * @author frank albert
  * @version 0.0.0.2
- * @date 2019-06-12 21:36
+ * #date 2019-06-12 21:36
  */
 public class GunRicProtocolFactory {
     static GunRicHelloProtocol newHelloProtocol() {

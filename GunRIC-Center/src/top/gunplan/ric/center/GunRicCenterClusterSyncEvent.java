@@ -10,7 +10,7 @@ import top.gunplan.ric.protocol.GunRicCommonRealDeal;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-26 00:18
+ * #date 2019-07-26 00:18
  */
 public class GunRicCenterClusterSyncEvent implements GunRicCommonRealDeal<GunRICClusterInformation, GunRICClusterSynchroizedInformation> {
     @Override

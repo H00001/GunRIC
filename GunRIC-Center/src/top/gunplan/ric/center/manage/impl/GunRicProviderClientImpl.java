@@ -20,7 +20,7 @@ import java.util.Set;
  *
  * @author frank albert
  * @version 0.0.0.4
- * @date 2019-07-19 20:02
+ * #date 2019-07-19 20:02
  */
 public class GunRicProviderClientImpl implements GunRicProviderClient {
     private static GunLogger logger = F.LOG.setTAG(GunRicProviderClientImpl.class);

@@ -25,7 +25,6 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRic
         BaseGunRicServerInformation interfaceInformation = new GunRicServerInformationImpl(protocol);
         GunRicRegisterStateStand o = new GunRicRegisterStatusProtocol(protocol.serialNumber());
         try {
-
             GunRicCoreHeartTimer.providerManage.register(ai, interfaceInformation);
             manage.doRegex(interfaceInformation, ai);
         } catch (GunRicCenterRecordFailException exp) {

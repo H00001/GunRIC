@@ -10,7 +10,7 @@ import top.gunplan.ric.provider.property.GunRicProvideProperty;
 
 /**
  * @author dosdrtt
- * @date 1557359009
+ * #date 1557359009
  */
 public class ProviderBoot implements GunBootServerBase {
     private volatile GunBootServer server;

@@ -8,7 +8,7 @@ import top.gunplan.ric.stand.GunRicParamBaseStand;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-06-13 09:30
+ * #date 2019-06-13 09:30
  */
 public class GunRicServerInformationImpl extends BaseGunRicServerInformation {
 

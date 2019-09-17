@@ -2,7 +2,7 @@ package top.gunplan.ric.protocol;
 
 /**
  * @author dosdrtt
- * @date 2019/05/25
+ * #date 2019/05/25
  */
 public interface SerizableCode {
 

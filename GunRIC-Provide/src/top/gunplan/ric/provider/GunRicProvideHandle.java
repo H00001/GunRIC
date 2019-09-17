@@ -9,7 +9,7 @@ import top.gunplan.ric.stand.GunRicInvokeResStand;
 /**
  * @author dosdrtt
  * @concurrent
- * @date 1518000000
+ * #date 1518000000
  */
 public class GunRicProvideHandle extends AbstractGunRicBaseProviderHandle {
 

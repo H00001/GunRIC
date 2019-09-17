@@ -14,7 +14,7 @@ import java.util.Set;
  * java inline record
  *
  * @author dosdrtt
- * @date 1558736830
+ * #date 1558736830
  * @see GunRicCenterRecord
  */
 public class GunRicCenterInlineBufferRecord extends AbstractGunRicProxyRecord {

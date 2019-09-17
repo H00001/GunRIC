@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  *
  * @author frank albert
  * @version 0.0.0.4
- * @date 2019-07-20 08:25
+ * #date 2019-07-20 08:25
  */
 public abstract class AbstractGunRicClientManager<S extends GunRicClient> implements GunRicClientManager<S> {
     protected Set<S> clients = new ConcurrentSkipListSet<>();

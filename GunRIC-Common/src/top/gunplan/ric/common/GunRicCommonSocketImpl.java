@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-06-14 11:43
+ * #date 2019-06-14 11:43
  */
 public class GunRicCommonSocketImpl extends AbstractGunRicCommonProtocolSocket {
     GunRicCommonSocketImpl(String addr, int port) throws IOException {

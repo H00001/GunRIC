@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author frank albert
  * @version 0.0.0.2
- * @date 2019-07-19 20:38
+ * #date 2019-07-19 20:38
  */
 public class GunRicConsumerManageImpl extends AbstractGunRicClientManager<GunRicConsumerClient> implements GunRicConsumerManage {
 

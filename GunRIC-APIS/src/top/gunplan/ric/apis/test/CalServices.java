@@ -4,7 +4,7 @@ import top.gunplan.ric.apis.test.anno.GunUseImpl;
 
 /**
  * CalServices (Test)
- * @date 2019/04/22
+ * #date 2019/04/22
  * @author dosdrtt
  * this interface must have {@link GunUseImpl} anno
  * @see GunUseImpl

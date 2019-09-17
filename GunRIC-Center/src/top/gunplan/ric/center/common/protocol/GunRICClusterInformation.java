@@ -11,7 +11,7 @@ import java.util.Set;
  *
  * @author frank albert
  * @version 0.0.0.2
- * @date 2019-06-14 17:57
+ * #date 2019-06-14 17:57
  */
 public interface GunRICClusterInformation extends GunRICCenterInlineStand {
 

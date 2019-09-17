@@ -10,7 +10,7 @@ import top.gunplan.ric.protocol.GunAddressItemInterface;
  * this class is used to record manage
  *
  * @author dosdrtt
- * @date 1558736561
+ * #date 1558736561
  */
 public interface GunRICCenterRecordManager {
     /**

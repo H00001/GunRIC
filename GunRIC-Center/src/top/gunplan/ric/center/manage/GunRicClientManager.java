@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  *
  * @author frank albert
  * @version 0.0.0.2
- * @date 2019-07-19 20:13
+ * #date 2019-07-19 20:13
  */
 
 public interface GunRicClientManager<U extends GunRicClient> {

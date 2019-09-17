@@ -18,7 +18,7 @@ import static top.gunplan.ric.center.manage.GunRICStateRecorder.ConnectionState.
  *
  * @author frank albert
  * @version 0.0.0.4
- * @date 2019-07-19 20:50
+ * #date 2019-07-19 20:50
  */
 public class GunRicProviderManageImpl extends AbstractGunRicClientManager<GunRicProviderClient> implements GunRicProviderManage {
 

@@ -11,7 +11,7 @@ import java.util.Set;
  * use redis to record
  *
  * @author dosdrtt
- * @date 1558736830
+ * #date 1558736830
  * @see GunRicCenterRecord
  */
 public class GunRicCenterRedisRecord extends AbstractGunRicProxyRecord {

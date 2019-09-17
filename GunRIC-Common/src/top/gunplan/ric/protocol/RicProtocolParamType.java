@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * @author dosdrtt
- * @date 1557304134
+ * #date 1557304134
  */
 public enum RicProtocolParamType {
     /**

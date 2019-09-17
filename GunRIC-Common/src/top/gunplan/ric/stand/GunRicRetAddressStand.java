@@ -9,7 +9,7 @@ import java.util.Set;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-19 00:30
+ * #date 2019-07-19 00:30
  */
 public interface GunRicRetAddressStand extends GunRicBaseStand {
 

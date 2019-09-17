@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-21 09:21
+ * #date 2019-07-21 09:21
  */
 public final class GunRicExecutors {
     public static ExecutorService newSignalExector() {

@@ -9,7 +9,7 @@ import top.gunplan.ric.protocol.GunAddressItemInterface;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-19 19:54
+ * #date 2019-07-19 19:54
  */
 
 @GunPropertyMap(name = "ric-center-node-master")

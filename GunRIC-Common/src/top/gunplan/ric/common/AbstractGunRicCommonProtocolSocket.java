@@ -1,18 +1,16 @@
 package top.gunplan.ric.common;
 
-import top.gunplan.ric.protocol.AbstractGunRicProtocol;
 import top.gunplan.ric.protocol.GunRicTypeDividePacketManage;
 import top.gunplan.ric.stand.GunRicBaseStand;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * AbstractGunRicCommonProtocolSocket
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-06-14 11:52
+ * #date 2019-06-14 11:52
  */
 public abstract class AbstractGunRicCommonProtocolSocket extends AbstractGunRicCommonSocket {
 

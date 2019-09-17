@@ -8,7 +8,7 @@ import top.gunplan.ric.protocol.GunAddressItemInterface;
  * GunRicCenterRecord
  *
  * @author dosdrtt
- * @date 2019/05/28
+ * #date 2019/05/28
  */
 public interface GunRicCenterRecord extends GunHandle {
     /**

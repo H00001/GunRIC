@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * @author dosdrtt
- * @date 2019/05/23
+ * #date 2019/05/23
  */
 public class GunRicCenterNewGetEvent implements GunRicCommonRealDeal<GunRicGetAddressStand, GunRicRetAddressStand> {
     private GunRICCenterRecordManager hinstance = GunRicCenterStdRecordManage.Instance.getHinstance();

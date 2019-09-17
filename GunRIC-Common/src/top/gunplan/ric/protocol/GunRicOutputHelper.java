@@ -4,7 +4,7 @@ import top.gunplan.utils.GunBytesUtil;
 
 /**
  * @author dosdrtt
- * @date
+ * #date
  */
 public interface GunRicOutputHelper {
     /**

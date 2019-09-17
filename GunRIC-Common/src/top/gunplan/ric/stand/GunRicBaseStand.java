@@ -10,7 +10,7 @@ import top.gunplan.ric.protocol.RicProtocolType;
  *
  * @author frank albert
  * @version 0.0.0.1
- * @date 2019-07-18 23:42
+ * #date 2019-07-18 23:42
  */
 public interface GunRicBaseStand extends GunNetInBoundOutBound, GunRicNxInput, Serialer, GunLinked<GunRicBaseStand> {
     /**
