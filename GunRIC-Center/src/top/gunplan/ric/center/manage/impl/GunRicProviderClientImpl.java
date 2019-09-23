@@ -61,11 +61,6 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
 
 
     @Override
-    public boolean equals(Object obj) {
-        return false;
-    }
-
-    @Override
     public Set<BaseGunRicServerInformation> cdt() {
         return cdt;
     }

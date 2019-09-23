@@ -1,13 +1,12 @@
 package top.gunplan.ric.common;
 
 
-
+import top.gunplan.netty.common.GunNettyExecutors;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,7 +18,7 @@ public class GunRicUserConnectionFactoryImpl implements GunRicConnectionFactory 
 
     private static volatile boolean isScan = false;
 
-    private static ScheduledExecutorService service = new ScheduledThreadPoolExecutor(1);
+    private final static ScheduledExecutorService SERVICE = GunNettyExecutors.newScheduleExecutorPool(1);
 
     static {
         scan();
@@ -50,12 +49,12 @@ public class GunRicUserConnectionFactoryImpl implements GunRicConnectionFactory 
 
     private static void stopScan() {
         isScan = false;
-        service.shutdown();
+        SERVICE.shutdown();
     }
 
 
     static void scan() {
-        service.scheduleAtFixedRate(() -> {
+        SERVICE.scheduleAtFixedRate(() -> {
             try {
 
                 AbstractGunRicCommonProtocolSocket take = SOCKETS.take();

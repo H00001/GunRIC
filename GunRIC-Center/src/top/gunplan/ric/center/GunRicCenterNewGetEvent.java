@@ -12,7 +12,7 @@ import java.util.Set;
  * #date 2019/05/23
  */
 public class GunRicCenterNewGetEvent implements GunRicCommonRealDeal<GunRicGetAddressStand, GunRicRetAddressStand> {
-    private GunRICCenterRecordManager hinstance = GunRicCenterStdRecordManage.Instance.getHinstance();
+    private GunRicCenterRecordManager hinstance = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     @Override
     public GunRicRetAddressStand dealDataEvent(GunRicGetAddressStand protocol) {

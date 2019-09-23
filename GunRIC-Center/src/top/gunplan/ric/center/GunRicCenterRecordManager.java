@@ -5,14 +5,14 @@ import top.gunplan.ric.protocol.BaseGunRicServerInformation;
 import top.gunplan.ric.protocol.GunAddressItemInterface;
 
 /**
- * GunRICCenterRecordManager
+ * GunRicCenterRecordManager
  * <p>
  * this class is used to record manage
  *
  * @author dosdrtt
  * #date 1558736561
  */
-public interface GunRICCenterRecordManager {
+public interface GunRicCenterRecordManager {
     /**
      * check it is first record
      *

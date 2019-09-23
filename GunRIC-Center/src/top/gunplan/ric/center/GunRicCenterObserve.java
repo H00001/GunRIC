@@ -11,7 +11,7 @@ import top.gunplan.ric.center.record.*;
  * @author dosdrtt
  */
 public class GunRicCenterObserve extends GunNettyDefaultObserve {
-    private GunRICCenterRecordManager manage = GunRicCenterStdRecordManage.Instance.getHinstance();
+    private GunRicCenterRecordManager manage = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     @Override
     public boolean onBooting(GunNettyCoreProperty gunProperty) {

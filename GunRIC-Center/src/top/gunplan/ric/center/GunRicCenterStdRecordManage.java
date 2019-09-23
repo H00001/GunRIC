@@ -19,7 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * #date 2019.05.27
  * @concurrent GunRicCenterStdRecordManage
  */
-public class GunRicCenterStdRecordManage implements GunRICCenterRecordManager {
+public class GunRicCenterStdRecordManage implements GunRicCenterRecordManager {
     private List<AbstractGunRicProxyRecord> regexList = new CopyOnWriteArrayList<>();
 
     private GunRicCenterStdRecordManage() {

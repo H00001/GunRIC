@@ -12,7 +12,7 @@ import top.gunplan.ric.stand.GunRicRegisterStateStand;
  * @author dosdrtt
  */
 public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRicRegisterStand, GunRicRegisterStateStand> {
-    private GunRICCenterRecordManager manage = GunRicCenterStdRecordManage.Instance.getHinstance();
+    private GunRicCenterRecordManager manage = GunRicCenterStdRecordManage.Instance.getHinstance();
 
     GunRicCenterNewRegisterEvent() {
 
