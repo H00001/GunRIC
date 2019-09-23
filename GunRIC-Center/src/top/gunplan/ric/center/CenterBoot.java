@@ -50,7 +50,7 @@ public class CenterBoot implements GunBootServerBase {
                         addDataFilter(new GunRicStdFilter()).
                         addDataFilter(new GunRicStdPolymerisationFilter()).
                         addNettyTimer(new GunRicCoreHeartTimer()).
-                        setHandle(new GunRICCenterHandle())
+                        setHandle(new GunRicCenterHandle())
                 );
         return server.sync();
     }

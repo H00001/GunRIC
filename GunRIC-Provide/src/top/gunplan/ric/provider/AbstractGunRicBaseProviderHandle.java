@@ -40,7 +40,7 @@ public abstract class AbstractGunRicBaseProviderHandle implements GunRicBaseHand
 
 
     @Override
-    public GunRICCenterInlineStand dealEvent(GunRICCenterInlineStand protocol) {
+    public GunRicCenterInlineStand dealEvent(GunRicCenterInlineStand protocol) {
         threwError(protocol);
         return null;
     }

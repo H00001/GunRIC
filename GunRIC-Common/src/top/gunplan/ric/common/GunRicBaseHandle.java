@@ -78,7 +78,7 @@ public interface GunRicBaseHandle extends GunNettyChildrenHandle {
     GunRicRetAddressStand dealEvent(GunRicGetAddressStand protocol);
 
 
-    GunRICCenterInlineStand dealEvent(GunRICCenterInlineStand protocol);
+    GunRicCenterInlineStand dealEvent(GunRicCenterInlineStand protocol);
 
 
     /**

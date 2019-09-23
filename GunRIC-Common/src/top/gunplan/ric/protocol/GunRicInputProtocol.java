@@ -5,7 +5,7 @@ import top.gunplan.ric.protocol.exp.GunRicProtocolException;
 import top.gunplan.ric.stand.GunRicInvokeReqStand;
 import top.gunplan.utils.GunBytesUtil;
 
-import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.NOTKNOW;
+import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.UNKNOWN;
 import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.WRITE_PARAM_ERROR;
 
 /**
@@ -49,7 +49,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         setParamLen((byte) args.length);
         for (Object arg : args) {
             if (!pushParam(arg)) {
-                throw new GunRicProtocolException("push parameters error", NOTKNOW);
+                throw new GunRicProtocolException("push parameters error", UNKNOWN);
 
             }
         }

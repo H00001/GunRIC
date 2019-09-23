@@ -1,6 +1,6 @@
 package top.gunplan.ric.center.common.protocol;
 
-import top.gunplan.ric.stand.GunRICCenterInlineStand;
+import top.gunplan.ric.stand.GunRicCenterInlineStand;
 
 /**
  * GunRICClusterSynchroizedInformation
@@ -10,5 +10,5 @@ import top.gunplan.ric.stand.GunRICCenterInlineStand;
  * #date 2019-07-26 00:11
  */
 
-public interface GunRICClusterSynchroizedInformation extends GunRICCenterInlineStand {
+public interface GunRICClusterSynchroizedInformation extends GunRicCenterInlineStand {
 }

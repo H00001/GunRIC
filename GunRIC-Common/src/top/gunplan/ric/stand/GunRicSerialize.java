@@ -1,13 +1,13 @@
 package top.gunplan.ric.stand;
 
 /**
- * Serialize
+ * GunRicSerialize
  *
  * @author frank
  * @version 0.0.0.1
  * #date 2019-07-20 08:45
  */
-public interface Serialize {
+public interface GunRicSerialize {
 
     /**
      * serializeNumber

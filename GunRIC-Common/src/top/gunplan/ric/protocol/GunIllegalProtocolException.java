@@ -3,7 +3,7 @@ package top.gunplan.ric.protocol;
 import top.gunplan.ric.protocol.exp.GunRicProtocolException;
 import top.gunplan.ric.stand.GunRicBaseStand;
 
-import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.PROROCOL_INVIDA;
+import static top.gunplan.ric.protocol.exp.GunRicProtocolException.GunRicProtocolErrorType.PROTOCOL_ILLEGAL;
 
 /**
  * @author dosdrtt
@@ -16,7 +16,7 @@ public class GunIllegalProtocolException extends GunRicProtocolException {
     private Class<? extends GunRicBaseStand> protocol;
 
     public <T extends GunRicBaseStand> GunIllegalProtocolException(Class<T> protocol, GunRicAcceptProtocolTypes accept) {
-        super(protocol.getName() + " is error", PROROCOL_INVIDA);
+        super(protocol.getName() + " is error", PROTOCOL_ILLEGAL);
         this.protocol = protocol;
         this.type = accept;
     }

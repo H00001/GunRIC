@@ -40,7 +40,7 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
 
 
     @Override
-    public GunRICCenterInlineStand dealEvent(GunRICCenterInlineStand protocol) {
+    public GunRicCenterInlineStand dealEvent(GunRicCenterInlineStand protocol) {
         if (protocol instanceof GunRICClusterInformation) {
             return dealEvent((GunRICClusterInformation) protocol);
         }
@@ -48,6 +48,12 @@ public abstract class AbstractGunRicBaseCenterHandle implements GunRicBaseHandle
     }
 
 
+    /**
+     * deal cluster information
+     *
+     * @param protocol information
+     * @return result
+     */
     public abstract GunRICClusterSynchroizedInformation dealEvent(GunRICClusterInformation protocol);
 
 

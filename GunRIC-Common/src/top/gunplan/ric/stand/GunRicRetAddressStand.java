@@ -13,9 +13,18 @@ import java.util.Set;
  */
 public interface GunRicRetAddressStand extends GunRicBaseStand {
 
+    /**
+     * get available address items
+     *
+     * @return address
+     */
     Set<GunAddressItemInterface> addressItems();
 
 
+    /**
+     * push address into stand
+     * @param ad address
+     */
     void pushAddress(GunAddressItemInterface ad);
 
 

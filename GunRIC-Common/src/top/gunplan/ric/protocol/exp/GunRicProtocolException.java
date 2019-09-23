@@ -28,7 +28,7 @@ public class GunRicProtocolException extends GunException {
          *
          */
         WRITE_PARAM_ERROR(-1), OUT_OF_BOUND(-2), WRITE_OBJECT(-3),
-        PROROCOL_INVIDA(-4), NOTKNOW(-4);
+        PROTOCOL_ILLEGAL(-4), UNKNOWN(-4);
         private int value;
 
         GunRicProtocolErrorType(int value) {

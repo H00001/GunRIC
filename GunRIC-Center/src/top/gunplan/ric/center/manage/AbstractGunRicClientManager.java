@@ -31,6 +31,11 @@ public abstract class AbstractGunRicClientManager<S extends GunRicClient> implem
         return clients.size();
     }
 
+    /**
+     * check node is alive
+     *
+     * @return check result
+     */
     @Override
     public abstract GunProviderAliveCheckResult aliveCheck();
 
