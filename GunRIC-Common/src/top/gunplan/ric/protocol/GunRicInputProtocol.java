@@ -44,6 +44,7 @@ public final class GunRicInputProtocol extends AbstractGunRicExecuteProtocol imp
         helpers = new ParamHelper[len];
     }
 
+    @Override
     public void pushParams(Object[] args) throws GunRicProtocolException {
         setParamLen((byte) args.length);
         for (Object arg : args) {

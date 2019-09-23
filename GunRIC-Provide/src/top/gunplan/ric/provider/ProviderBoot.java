@@ -2,7 +2,7 @@ package top.gunplan.ric.provider;
 
 import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunBootServerBase;
-import top.gunplan.netty.GunNettySystemServices;
+import top.gunplan.netty.GunNettySystemService;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
 import top.gunplan.ric.common.GunRicStdFilter;
@@ -27,7 +27,7 @@ public class ProviderBoot implements GunBootServerBase {
     public int sync() throws Exception {
         server = GunBootServerFactory.newInstance();
         server.registerObserve(new GunRicProviderObserve());
-        GunNettySystemServices.PROPERTY_MANAGER.
+        GunNettySystemService.PROPERTY_MANAGER.
                 registerProperty(new GunRicProvideProperty());
         server.setExecutors(100, 100).onHasChannel(c ->
                 c.addDataFilter(new GunNettyStdFirstFilter()).

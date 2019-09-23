@@ -11,8 +11,18 @@ import java.lang.reflect.Method;
  * #date 2019-07-18 23:43
  */
 public interface GunRicInvokeBaseStand extends GunRicBaseStand {
+    /**
+     * method name
+     *
+     * @return name
+     */
     String methodName();
 
+    /**
+     * interface name
+     *
+     * @return name
+     */
     String interfaceName();
 
 
@@ -20,5 +30,10 @@ public interface GunRicInvokeBaseStand extends GunRicBaseStand {
 
     }
 
+    /**
+     * set interface name and method name
+     *
+     * @param method method
+     */
     void setINameMName(Method method);
 }
