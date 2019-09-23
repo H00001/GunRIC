@@ -29,7 +29,7 @@ public interface GunRicBaseHandle extends GunNettyChildrenHandle {
         LOG.info("hello");
         if (protocol.code() == RicProtocolCode.HELLO_REQ) {
             protocol.setCode(RicProtocolCode.HELLO_RES);
-            protocol.incrSeq();
+            protocol.incrementalSeq();
             final GunRicBaseStand next = protocol.next();
             protocol.next(next == null ? null : dealDataEvent(next));
             return protocol;

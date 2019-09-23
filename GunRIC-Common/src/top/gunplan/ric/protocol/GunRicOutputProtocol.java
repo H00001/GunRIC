@@ -18,7 +18,7 @@ public class GunRicOutputProtocol extends AbstractGunRicExecuteProtocol implemen
 
     public GunRicOutputProtocol(GunRicInvokeReqStand request) {
         this();
-        setSerialnumber(request.serialNumber());
+        setSerialnumber(request.serializeNumber());
     }
 
     private ParamHelper returnValue;

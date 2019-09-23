@@ -12,7 +12,7 @@ import top.gunplan.ric.protocol.RicProtocolType;
  * @version 0.0.0.1
  * #date 2019-07-18 23:42
  */
-public interface GunRicBaseStand extends GunNetInBoundOutBound, GunRicNxInput, Serialer, GunLinked<GunRicBaseStand> {
+public interface GunRicBaseStand extends GunNetInBoundOutBound, GunRicNxInput, Serialize, GunLinked<GunRicBaseStand> {
     /**
      * get  type
      *
@@ -35,7 +35,7 @@ public interface GunRicBaseStand extends GunNetInBoundOutBound, GunRicNxInput, S
     void setType(RicProtocolType typer);
 
     /**
-     * @return serialNumber
+     * @return serializeNumber
      */
 
     @Override

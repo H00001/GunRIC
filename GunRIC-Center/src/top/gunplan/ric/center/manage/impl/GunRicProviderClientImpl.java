@@ -97,7 +97,7 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
         }
         try {
             GunRicHelloStand hello = new GunRicHelloProtocol(true);
-            short number = (short) hello.serialNumber();
+            short number = (short) hello.serializeNumber();
             if (!ChannelUtil.channelWrite(channel, hello.serialize())) {
                 channel = null;
                 return false;
@@ -105,10 +105,10 @@ public class GunRicProviderClientImpl implements GunRicProviderClient {
             byte[] b = ChannelUtil.channelRead(channel, 8);
             if (b != null) {
                 hello.unSerialize(b);
-                if (number + 1 == hello.serialNumber()) {
+                if (number + 1 == hello.serializeNumber()) {
                     logger.info("connect is normal now");
                 } else {
-                    logger.info("connect is not now " + number + " " + hello.serialNumber());
+                    logger.info("connect is not now " + number + " " + hello.serializeNumber());
                 }
             } else {
                 channel = null;

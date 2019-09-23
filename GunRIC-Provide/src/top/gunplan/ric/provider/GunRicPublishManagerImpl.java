@@ -63,7 +63,7 @@ class GunRicPublishManagerImpl implements GunRicPublishManager {
             GunRicRegisterStatusProtocol protocol = is.receiveProtocol(GunRicRegisterStatusProtocol.class);
             do {
                 nowcount++;
-                logger.debug(registerMapping.get((short) protocol.serialNumber()) + " register succeed", "[REGISTER]");
+                logger.debug(registerMapping.get((short) protocol.serializeNumber()) + " register succeed", "[REGISTER]");
                 protocol = (GunRicRegisterStatusProtocol) protocol.next();
             }
             while (protocol != null);

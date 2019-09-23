@@ -58,7 +58,7 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
         this.next = next;
     }
 
-    public int serialNumber() {
+    public int serializeNumber() {
         return serialnumber;
     }
 
@@ -132,6 +132,10 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
         this.serialnumber = stream.readInt();
     }
 
+    public void incrementalSeq() {
+        this.serialnumber++;
+    }
+
     static class Helper {
         private static final String LILLI = "[]";
         private static final String NULL_STR = "";
@@ -167,29 +171,29 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
         /**
          * reflect execute
          *
-         * @param parama write param
+         * @param param write param
          */
-        private void writeInteger(Integer parama) {
-            util.write32(parama);
+        private void writeInteger(Integer param) {
+            util.write32(param);
         }
 
         /**
          * reflect execute
          *
-         * @param parama write param
+         * @param param write param
          */
-        private void writeShort(Short parama) {
-            util.write(parama);
+        private void writeShort(Short param) {
+            util.write(param);
         }
 
 
         /**
          * reflect execute
          *
-         * @param parama write param
+         * @param param write param
          */
-        private void writeLong(Long parama) {
-            util.writeLong(parama);
+        private void writeLong(Long param) {
+            util.writeLong(param);
         }
 
 
@@ -253,10 +257,6 @@ public abstract class AbstractGunRicProtocol implements GunRicNxInput {
                 return -1;
             }
         }
-    }
-
-    public void incrSeq() {
-        this.serialnumber++;
     }
 
 }

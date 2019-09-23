@@ -10,7 +10,7 @@ package top.gunplan.ric.stand;
 public interface GunRicParamBaseStand extends GunRicInvokeBaseStand {
 
     /**
-     * get paramlen
+     * get parameters' length
      *
      * @return parameter length
      */
@@ -18,7 +18,7 @@ public interface GunRicParamBaseStand extends GunRicInvokeBaseStand {
 
 
     /**
-     * get parameter paramTypes
+     * get parameters' paramTypes
      *
      * @return paramTypes
      */

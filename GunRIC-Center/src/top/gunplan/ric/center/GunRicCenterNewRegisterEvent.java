@@ -23,7 +23,7 @@ public class GunRicCenterNewRegisterEvent implements GunRicCommonRealDeal<GunRic
     public GunRicRegisterStateStand dealDataEvent(GunRicRegisterStand protocol) {
         GunAddressItemInterface ai = new GunAddressItem4(protocol.ipAddress(), protocol.portNumber());
         BaseGunRicServerInformation interfaceInformation = new GunRicServerInformationImpl(protocol);
-        GunRicRegisterStateStand o = new GunRicRegisterStatusProtocol(protocol.serialNumber());
+        GunRicRegisterStateStand o = new GunRicRegisterStatusProtocol(protocol.serializeNumber());
         try {
             GunRicCoreHeartTimer.providerManage.register(ai, interfaceInformation);
             manage.doRegex(interfaceInformation, ai);
