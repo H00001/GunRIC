@@ -1,6 +1,6 @@
 package top.gunplan.ric.center;
 
-import top.gunplan.netty.GunNettySystemServices;
+import top.gunplan.netty.GunNettySystemService;
 import top.gunplan.ric.center.common.GunRicCenterStaticPath;
 import top.gunplan.ric.center.context.F;
 import top.gunplan.ric.center.property.GunRicCenterServiceUtilProperty;
@@ -17,8 +17,7 @@ public final class GunRicRegisterManage {
     private static GunRicCenterServiceUtilProperty property = null;
 
     public static boolean loadRegister() {
-        property = GunNettySystemServices.PROPERTY_MANAGER.acquireProperty(GunRicCenterServiceUtilProperty.class);
-        assert property != null;
+        property = GunNettySystemService.PROPERTY_MANAGER.acquireProperty(GunRicCenterServiceUtilProperty.class);
         try {
             findServices(Paths.get(GunRicCenterStaticPath.SERVICES_PATH));
         } catch (IOException exp) {

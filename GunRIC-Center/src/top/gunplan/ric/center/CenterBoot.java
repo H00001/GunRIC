@@ -2,7 +2,7 @@ package top.gunplan.ric.center;
 
 import top.gunplan.netty.GunBootServer;
 import top.gunplan.netty.GunBootServerBase;
-import top.gunplan.netty.GunNettySystemServices;
+import top.gunplan.netty.GunNettySystemService;
 import top.gunplan.netty.impl.GunBootServerFactory;
 import top.gunplan.netty.impl.GunNettyStdFirstFilter;
 import top.gunplan.netty.impl.property.GunGetPropertyFromBaseFile;
@@ -35,11 +35,11 @@ public class CenterBoot implements GunBootServerBase {
 
     @Override
     public int sync() throws Exception {
-        GunNettySystemServices.PROPERTY_MANAGER.setStrategy(new GunGetPropertyFromBaseFile(System.getProperty("config")));
-        GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicCenterServicesProperty());
-        GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicCenterServiceUtilProperty());
-        GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicCenterInformationImpl());
-        GunNettySystemServices.PROPERTY_MANAGER.registerProperty(new GunRicClientCheckProperty());
+        GunNettySystemService.PROPERTY_MANAGER.setStrategy(new GunGetPropertyFromBaseFile(System.getProperty("config")));
+        GunNettySystemService.PROPERTY_MANAGER.registerProperty(new GunRicCenterServicesProperty());
+        GunNettySystemService.PROPERTY_MANAGER.registerProperty(new GunRicCenterServiceUtilProperty());
+        GunNettySystemService.PROPERTY_MANAGER.registerProperty(new GunRicCenterInformationImpl());
+        GunNettySystemService.PROPERTY_MANAGER.registerProperty(new GunRicClientCheckProperty());
 
         server = GunBootServerFactory.newInstance();
         server.registerObserve(new GunRicCenterObserve());
