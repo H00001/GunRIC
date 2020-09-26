@@ -45,10 +45,10 @@ public class CalCulServicesImpl implements CalServices {
 
 
     @Override
-    public TestObject addObject(TestObject obj,TestObject obj2) {
+    public TestObject addObject(TestObject obj, TestObject obj2) {
         TestObject objc = new TestObject();
-        objc.x=obj.x+obj2.x;
-        objc.y=obj.y+obj2.y;
+        objc.x = obj.x + obj2.x;
+        objc.y = obj.y + obj2.y;
         return objc;
     }
 }

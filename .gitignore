@@ -1,2 +1,17 @@
 .idea
 out
+GunRIC-APIS/target/
+GunRIC-Center/target/
+GunRIC-Center/test-res/
+GunRIC-Common/target/
+GunRIC-Monitor/res/
+GunRIC-Monitor/src/test/
+GunRIC-Monitor/target/
+GunRIC-Provide-Lib/src/test/
+GunRIC-Provide-Lib/target/
+GunRIC-Provide/target/
+GunRIC-Store/res/
+GunRIC-Store/src/test/
+GunRIC-Store/target/
+GunRIC-Store/tres/
+GunRIC-User/target/

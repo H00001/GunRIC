@@ -3,22 +3,21 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <properties>
-    </properties>
+    <version>3.1.1</version>
 
     <artifactId>top.gunplan</artifactId>
     <packaging>pom</packaging>
     <groupId>gunplan-ric</groupId>
 
     <modules>
-        <module>ric-center</module>
-        <module>ric-apis</module>
-        <module>ric-common</module>
-        <module>ric-provider</module>
-        <module>ric-store</module>
-        <module>ric-user</module>
-        <module>ric-provider-lib</module>
+        <module>GunRIC-Center</module>
+        <module>GunRIC-APIS</module>
+        <module>GunRIC-Common</module>
+        <module>GunRIC-Provide</module>
+        <module>GunRIC-Store</module>
+        <module>GunRIC-User</module>
+        <module>GunRIC-Provide-Lib</module>
+        <module>GunRIC-Monitor</module>
     </modules>
 
 
@@ -29,8 +28,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>14</source>
+                    <target>14</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
