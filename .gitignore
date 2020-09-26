@@ -1,6 +1,8 @@
 .idea
 out
+GunRPC.iml
 GunRIC-APIS/target/
+GunRIC-APIS/GunRIC-APIS.iml
 GunRIC-Center/target/
 GunRIC-Center/test-res/
 GunRIC-Common/target/
